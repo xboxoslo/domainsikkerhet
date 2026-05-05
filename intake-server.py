@@ -41,7 +41,7 @@ ALLOWED_ORIGINS = {
     'https://www.data1.no',
 }
 
-PORT = 3001
+PORT = int(os.environ.get('PORT', 3001))
 
 # ─────── Load secrets from intake-secrets.env ───────
 def load_env():
