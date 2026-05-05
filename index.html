@@ -1436,7 +1436,9 @@ function copyText(text, btn) {
  *   2. Sende HTML-rapport via Mailgun til kontaktens e-post
  *   3. Returnere 200 OK ved suksess, 4xx/5xx ved feil
  */
-const INTAKE_ENDPOINT = 'http://localhost:3001/intake'; // lokal backend (intake-server.py)
+const INTAKE_ENDPOINT = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? 'http://localhost:3001/intake'
+    : 'http://data1.no:3001/intake';
 
 function emailReport(domain) {
     const modal = document.getElementById('haloModal');

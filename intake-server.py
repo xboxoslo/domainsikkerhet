@@ -35,6 +35,10 @@ MAILGUN_FROM   = 'DomainSikkerhet <noreply@micronet.no>'
 ALLOWED_ORIGINS = {
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+    'http://data1.no',
+    'https://data1.no',
+    'http://www.data1.no',
+    'https://www.data1.no',
 }
 
 PORT = 3001
