@@ -276,17 +276,37 @@ def create_halo_quote(b):
     """Opprett draft quote i Halo med item 516 (Mail SPF-DKIM-DMARC), template 29 (Tilbud Micronet)."""
     token = halo_token()
     client_id, user_id = halo_find_or_create_customer(b, token)
+    # Bygg adresse-linje fra BRREG-data hvis tilgjengelig
+    addr_parts = []
+    if b.get('address'): addr_parts.append(b['address'])
+    pc_city = ' '.join(filter(None, [b.get('postcode',''), b.get('city','')]))
+    if pc_city: addr_parts.append(pc_city)
+    if b.get('country') and b.get('country') != 'Norge': addr_parts.append(b['country'])
+    address_line = ', '.join(addr_parts) if addr_parts else '(ikke oppgitt)'
+
+    ehf_status = '✓ Ja (PEPPOL/EHF-mottak)' if b.get('ehf') else '✗ Nei (manuell faktura)' if 'ehf' in b else '(ikke sjekket)'
+    nace_line = f"{b.get('nace_code','')} {b.get('nace_text','')}".strip() or '(ikke oppgitt)'
+
     note = '\n'.join([
-        f"Domeneanalyse-resultat for {b.get('domain','')}:",
+        f"=== Domeneanalyse for {b.get('domain','')} ===",
         f"  Score: {b.get('score') or '?'}% ({b.get('grade') or '?'})",
         f"  Rapport: {b.get('reportUrl','')}",
         '',
-        f"Kontakt: {b.get('name','')} ({b.get('email','')})",
-        f"Telefon: {b.get('phone') or '(ikke oppgitt)'}",
-        f"Firma:   {b.get('company') or '(ikke oppgitt)'}",
-        f"Org.nr:  {b.get('orgnr') or '(ikke oppgitt)'}",
+        '=== Firma (auto-hentet fra BRREG) ===',
+        f"  Navn:           {b.get('company') or '(ikke oppgitt)'}",
+        f"  Org.nr:         {b.get('orgnr') or '(ikke oppgitt)'}",
+        f"  Daglig leder:   {b.get('daglig_leder') or '(ikke oppgitt)'}",
+        f"  Adresse:        {address_line}",
+        f"  Antall ansatte: {b.get('employees') if b.get('employees') is not None else '(ikke oppgitt)'}",
+        f"  NACE-bransje:   {nace_line}",
+        f"  EHF-mottak:     {ehf_status}",
         '',
-        '— Melding fra kunde —',
+        '=== Kontaktperson ===',
+        f"  Navn:    {b.get('name','')}",
+        f"  E-post:  {b.get('email','')}",
+        f"  Telefon: {b.get('phone') or '(ikke oppgitt)'}",
+        '',
+        '=== Melding fra kunde ===',
         b.get('message') or '(ingen)',
     ])
     payload = [{

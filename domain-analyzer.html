@@ -1467,8 +1467,11 @@ function emailReport(domain) {
 
 /* Brreg-oppslag — auto-fyll org.nr og firma fra domenenavn (.no) */
 const LEGAL_FORMS = new Set(['AS','ASA','NUF','ANS','DA','BA','SA','BBL','SE']);
+
+// Brukes ved submit til å sende ekstra info til backend (lagres i quote-note + Halo client)
+window._companyExtras = {};
+
 async function lookupCompanyFromDomain(domain) {
-    // Strip TLD, bytt - til mellomrom, og fjern legal-form-suffix (academica-as.no → "academica")
     let base = domain.toLowerCase().replace(/\.no$/, '').replace(/[-_]/g, ' ').trim();
     base = base.replace(/\s+(as|asa|ans|da|nuf|ba|sa)$/i, '').trim();
     if (base.length < 2) return;
@@ -1481,7 +1484,6 @@ async function lookupCompanyFromDomain(domain) {
             !e.slettedato && LEGAL_FORMS.has(e.organisasjonsform?.kode)
         );
         if (!items.length) return;
-        // Sorter: 1) eksakt prefix-match, 2) kortest navn (mer sannsynlig hovedselskap)
         const baseLower = base.toLowerCase();
         items.sort((a, b) => {
             const an = a.navn.toLowerCase(), bn = b.navn.toLowerCase();
@@ -1495,7 +1497,57 @@ async function lookupCompanyFromDomain(domain) {
         const companyEl = document.getElementById('intakeCompany');
         if (!orgnrEl.value.trim()) orgnrEl.value = pick.organisasjonsnummer;
         if (!companyEl.value.trim()) companyEl.value = pick.navn;
+
+        // Hent flere detaljer (adresse, daglig leder, EHF) parallelt
+        enrichCompanyData(pick.organisasjonsnummer);
     } catch {}
+}
+
+async function enrichCompanyData(orgnr) {
+    if (!/^\d{9}$/.test(orgnr)) return;
+    const extras = {};
+    // 1) Enhets-detaljer (adresse, ansatte, NACE)
+    const enhetP = fetch(`https://data.brreg.no/enhetsregisteret/api/enheter/${orgnr}`, { headers: { Accept: 'application/json' } })
+        .then(r => r.ok ? r.json() : null).catch(() => null);
+    // 2) Roller (daglig leder)
+    const rollerP = fetch(`https://data.brreg.no/enhetsregisteret/api/enheter/${orgnr}/roller`, { headers: { Accept: 'application/json' } })
+        .then(r => r.ok ? r.json() : null).catch(() => null);
+    // 3) PEPPOL Directory (EHF-mottak)
+    const peppolP = fetch(`https://directory.peppol.eu/search/1.0/json?q=0192%3A${orgnr}`, { headers: { Accept: 'application/json' } })
+        .then(r => r.ok ? r.json() : null).catch(() => null);
+
+    const [enhet, roller, peppol] = await Promise.all([enhetP, rollerP, peppolP]);
+
+    if (enhet) {
+        const fa = enhet.forretningsadresse || {};
+        extras.address = (fa.adresse || []).join(', ');
+        extras.postcode = fa.postnummer || '';
+        extras.city = fa.poststed || '';
+        extras.country = (fa.land || 'Norge');
+        extras.employees = enhet.antallAnsatte;
+        const nk = enhet.naeringskode1 || {};
+        extras.nace_code = nk.kode || '';
+        extras.nace_text = nk.beskrivelse || '';
+    }
+    if (roller) {
+        const dagl = (roller.rollegrupper || [])
+            .find(g => g.type?.kode === 'DAGL')?.roller?.[0];
+        if (dagl?.person?.navn) {
+            const n = dagl.person.navn;
+            extras.daglig_leder = `${n.fornavn || ''} ${n.mellomnavn || ''} ${n.etternavn || ''}`.replace(/\s+/g, ' ').trim();
+            // Foreslå daglig leder som kontakt-navn hvis feltet er tomt
+            const nameEl = document.getElementById('intakeName');
+            if (extras.daglig_leder && nameEl && !nameEl.value.trim()) {
+                nameEl.value = extras.daglig_leder;
+            }
+        }
+    }
+    if (peppol) {
+        const matches = peppol.matches || [];
+        const docTypes = matches[0]?.docTypes || [];
+        extras.ehf = docTypes.some(dt => /Invoice/i.test(dt.value || ''));
+    }
+    window._companyExtras = extras;
 }
 
 async function submitIntake(e) {
@@ -1517,6 +1569,8 @@ async function submitIntake(e) {
         grade:   window._lastScoreData?.grade ?? null,
         reportUrl: window.location.origin + window.location.pathname + '?domain=' + encodeURIComponent(document.getElementById('intakeDomainField').value.trim()),
         timestamp: new Date().toISOString(),
+        // Auto-hentet info fra BRREG/PEPPOL — lagres i Halo quote-note
+        ...(window._companyExtras || {}),
     };
 
     submitBtn.disabled = true;
