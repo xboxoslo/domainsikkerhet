@@ -564,15 +564,15 @@
 
                 <div class="intake-row">
                     <div class="intake-field">
-                        <label for="intakeCompany">Firma<span class="req">*</span></label>
-                        <input type="text" id="intakeCompany" name="company" required autocomplete="organization">
-                    </div>
-                    <div class="intake-field">
                         <label for="intakeOrgnr">Org.nr<span class="req">*</span></label>
                         <input type="text" id="intakeOrgnr" name="orgnr" required
                                inputmode="numeric" pattern="[0-9 ]{9,12}" maxlength="11"
-                               placeholder="9 siffer" autocomplete="off"
+                               placeholder="9 siffer (auto-fylles for .no-domener)" autocomplete="off"
                                oninput="lookupOrgnr(this.value)">
+                    </div>
+                    <div class="intake-field">
+                        <label for="intakeCompany">Firma<span class="req">*</span></label>
+                        <input type="text" id="intakeCompany" name="company" required autocomplete="organization">
                     </div>
                 </div>
 
@@ -1460,6 +1460,31 @@ function emailReport(domain) {
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
     setTimeout(() => document.getElementById('intakeName').focus(), 200);
+
+    // Auto-fyll org.nr og firma fra .no-domene via BRREG-søk
+    if (domain && /\.no$/i.test(domain)) lookupCompanyFromDomain(domain);
+}
+
+/* Brreg-oppslag — auto-fyll org.nr og firma fra domenenavn (.no) */
+async function lookupCompanyFromDomain(domain) {
+    // Strip TLD og bygg søkeord (academica-as.no → "academica as")
+    const base = domain.toLowerCase().replace(/\.no$/, '').replace(/[-_]/g, ' ').trim();
+    if (base.length < 2) return;
+    try {
+        const url = `https://data.brreg.no/enhetsregisteret/api/enheter?navn=${encodeURIComponent(base)}&size=10`;
+        const res = await fetch(url, { headers: { Accept: 'application/json' } });
+        if (!res.ok) return;
+        const j = await res.json();
+        const items = (j._embedded?.enheter || []).filter(e => !e.slettedato);
+        if (!items.length) return;
+        // Foretrekk eksakt match på "navn starter med base", ellers første treff
+        const exact = items.find(e => e.navn.toLowerCase().startsWith(base.toUpperCase().toLowerCase()));
+        const pick = exact || items[0];
+        const orgnrEl = document.getElementById('intakeOrgnr');
+        const companyEl = document.getElementById('intakeCompany');
+        if (!orgnrEl.value.trim()) orgnrEl.value = pick.organisasjonsnummer;
+        if (!companyEl.value.trim()) companyEl.value = pick.navn;
+    } catch {}
 }
 
 async function submitIntake(e) {
