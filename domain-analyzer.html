@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-post Sikkerhetsanalyse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f1f5f9; color: #1e293b; min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Header ── */
+        .header {
+            background: #1a202c; padding: 14px 28px; display: flex;
+            align-items: center; gap: 28px; position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .logo { color: white; font-size: 19px; font-weight: 800; white-space: nowrap; }
+        .logo span { color: #4fd1c5; }
+        .search-form { display: flex; flex: 1; max-width: 580px; gap: 8px; }
+        .search-input {
+            flex: 1; padding: 9px 16px; border: 1px solid #4a5568; border-radius: 8px;
+            font-size: 15px; outline: none; background: #2d3748; color: white;
+        }
+        .search-input::placeholder { color: #718096; }
+        .search-input:focus { border-color: #4fd1c5; }
+        .search-btn {
+            padding: 9px 22px; background: #38b2ac; color: white; border: none;
+            border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer;
+        }
+        .search-btn:hover { background: #2c7a7b; }
+
+        /* ── Container ── */
+        .container { max-width: 980px; margin: 0 auto; padding: 28px 20px; }
+
+        /* ── Result header ── */
+        .result-header {
+            background: white; border-radius: 12px; padding: 18px 24px; margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .result-domain { font-size: 16px; color: #4a5568; }
+        .result-domain strong { color: #2c7a7b; }
+        .result-date { font-size: 13px; color: #a0aec0; margin-top: 2px; }
+        .btn-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        .teal-btn {
+            display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+            background: white; border: 2px solid #38b2ac; border-radius: 8px;
+            color: #2c7a7b; font-weight: 600; text-decoration: none; font-size: 13px; cursor: pointer;
+        }
+        .teal-btn:hover { background: #e6fffa; }
+        .gray-btn {
+            padding: 8px 14px; background: white; border: 1px solid #e2e8f0;
+            border-radius: 8px; cursor: pointer; font-size: 13px; color: #4a5568;
+        }
+        .gray-btn:hover { background: #f7fafc; }
+
+        /* ── Score card ── */
+        .score-card {
+            border-radius: 16px; padding: 28px 32px; margin-bottom: 0;
+            display: flex; align-items: center; gap: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07); flex-wrap: wrap;
+            transition: background 0.5s ease;
+        }
+        /* grade-specific backgrounds — clean, subtle */
+        .sc-aplus  { background: linear-gradient(150deg, #e2faf6 0%, #ccf0ea 100%); }
+        .sc-a      { background: linear-gradient(150deg, #e8f8f0 0%, #d1f0e0 100%); }
+        .sc-b      { background: linear-gradient(150deg, #eef6ff 0%, #dbeafe 100%); }
+        .sc-c      { background: linear-gradient(150deg, #fffbeb 0%, #fef3c7 100%); }
+        .sc-d      { background: linear-gradient(150deg, #fff7ed 0%, #ffedd5 100%); }
+        .sc-f      { background: linear-gradient(150deg, #fef2f2 0%, #fecaca 100%); }
+
+        .grade-wrap { position: relative; width: 130px; height: 130px; flex-shrink: 0; }
+        .grade-wrap svg { width: 100%; height: 100%; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.10)); }
+        .grade-text {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -65%);
+            font-size: 24px; font-weight: 900; color: #1a2540;
+            letter-spacing: -0.02em;
+        }
+        .grade-badge {
+            position: absolute; top: 4px; right: 0;
+            width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; font-weight: 900;
+            background: #1a2540; color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+        }
+        .gb-ok  { background: #1a2540; color: white; }
+        .gb-warn { background: #1a2540; color: white; }
+        .gb-err { background: #c53030; color: white; }
+
+        .score-info { flex: 1; min-width: 160px; }
+        .score-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+        .score-value { font-size: 52px; font-weight: 900; color: #1a202c; line-height: 1.05; }
+        .score-domain { font-size: 17px; color: #4a5568; margin-top: 2px; }
+        .score-bar { width: 100%; height: 7px; background: rgba(0,0,0,0.1); border-radius: 4px; margin-top: 10px; overflow: hidden; }
+        .score-bar-fill { height: 100%; border-radius: 4px; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+
+        /* QR box */
+        .qr-box {
+            background: white; border-radius: 14px; padding: 14px 16px;
+            text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.1); min-width: 140px;
+        }
+        .qr-box img { width: 110px; height: 110px; display: block; margin: 8px auto; border-radius: 4px; }
+        .qr-title { font-size: 12px; color: #718096; line-height: 1.4; }
+        .qr-send { font-size: 13px; font-weight: 700; color: #38b2ac; margin-top: 8px; cursor: pointer; border: none; background: none; display: block; width: 100%; }
+        .qr-send:hover { text-decoration: underline; }
+
+        .policy-box { text-align: center; }
+        .policy-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; opacity: 0.65; }
+        .policy-badge { display: inline-block; padding: 6px 18px; border-radius: 20px; font-size: 14px; font-weight: 800; letter-spacing: 0.05em; }
+        .p-reject { background: #276749; color: white; }
+        .p-quarantine { background: #c05621; color: white; }
+        .p-none { background: #718096; color: white; }
+        .p-missing { background: #e2e8f0; color: #718096; }
+
+        /* ── Section card ── */
+        .section-card {
+            background: white; border-radius: 12px; padding: 26px 28px;
+            margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+        }
+        .section-title { font-size: 19px; font-weight: 700; color: #1a202c; margin-bottom: 18px; }
+
+        /* ── Overview ── */
+        .overview-grid { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 28px; }
+        .ov-divider { background: #e2e8f0; }
+        .ov-col-title {
+            font-size: 13px; font-weight: 700; color: #4a5568; margin-bottom: 14px;
+            display: flex; align-items: center; gap: 7px; text-transform: uppercase; letter-spacing: 0.04em;
+        }
+        .ov-dot { width: 8px; height: 8px; border-radius: 50%; background: #38b2ac; flex-shrink: 0; }
+        .record-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 11px 0; border-bottom: 1px solid #f0f4f8;
+        }
+        .record-row:last-child { border-bottom: none; }
+        .record-name { font-size: 15px; color: #2d3748; font-weight: 500; }
+        .badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .b-valid   { color: #276749; background: #f0fff4; }
+        .b-invalid { color: #c53030; background: #fff5f5; }
+        .b-warning { color: #c05621; background: #fffaf0; }
+        .b-missing { color: #718096; background: #f7fafc; }
+
+        /* ── DNS cols ── */
+        .dns-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .dns-col h3 { font-size: 13px; font-weight: 700; color: #4a5568; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+        .dns-list { list-style: none; }
+        .dns-list li { padding: 7px 0; border-bottom: 1px solid #f0f4f8; }
+        .dns-list li:last-child { border-bottom: none; }
+        .dns-val { font-size: 13px; font-family: 'Courier New', monospace; color: #2d3748; word-break: break-all; }
+        .dns-meta { font-size: 11px; color: #a0aec0; margin-top: 2px; }
+
+        /* ── Section header ── */
+        .sec-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+        .sec-head h2 { font-size: 19px; font-weight: 700; color: #1a202c; }
+        .status-icon {
+            width: 22px; height: 22px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0;
+        }
+        .si-ok   { background: #38a169; color: white; }
+        .si-err  { background: #e53e3e; color: white; }
+        .si-warn { background: #dd6b20; color: white; }
+        .sec-sub { font-size: 13px; color: #718096; margin-bottom: 16px; }
+        .sec-sub strong { color: #2d3748; }
+
+        /* ── Record block ── */
+        .rec-wrap { display: flex; align-items: flex-start; gap: 8px; margin: 10px 0; }
+        .rec-block {
+            flex: 1; background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+            padding: 12px 16px; font-family: 'Courier New', monospace; font-size: 13px;
+            word-break: break-all; color: #2d3748; line-height: 1.6;
+        }
+        .copy-btn {
+            padding: 6px 12px; background: #edf2f7; border: none; border-radius: 6px;
+            font-size: 12px; cursor: pointer; color: #4a5568; white-space: nowrap; flex-shrink: 0;
+        }
+        .copy-btn:hover { background: #e2e8f0; }
+        .copy-btn.copied { background: #c6f6d5; color: #276749; }
+
+        /* ── Details table ── */
+        .det-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        .det-table td { padding: 10px 0; border-bottom: 1px solid #f0f4f8; font-size: 14px; vertical-align: top; }
+        .det-table tr:last-child td { border-bottom: none; }
+        .det-table td:first-child { width: 42%; color: #718096; font-weight: 500; padding-right: 16px; }
+        .v-yes { color: #38a169; font-weight: 700; }
+        .v-no  { color: #e53e3e; font-weight: 700; }
+        .inline-policy { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 700; }
+        .ip-reject     { background: #276749; color: white; }
+        .ip-quarantine { background: #c05621; color: white; }
+        .ip-none       { background: #718096; color: white; }
+
+        /* ── DKIM cards ── */
+        .dkim-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+        .dkim-card { border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; }
+        .dkim-card-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 16px; background: #f7fafc; border-bottom: 1px solid #e2e8f0;
+        }
+        .dkim-selector-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 14px; font-weight: 700; color: #2c7a7b;
+        }
+        .dkim-card-body { padding: 14px 16px; }
+        .dkim-checks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 12px; }
+        .dkim-check { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+        .dkim-check-ok  { color: #276749; }
+        .dkim-check-err { color: #c53030; }
+        .key-bits {
+            display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px;
+            border-radius: 12px; font-size: 12px; font-weight: 700;
+        }
+        .bits-ok   { background: #f0fff4; color: #276749; }
+        .bits-warn { background: #fffaf0; color: #c05621; }
+
+        /* ── DMARC explained ── */
+        .exp-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+        .exp-table td { padding: 11px 0; border-bottom: 1px solid #f0f4f8; font-size: 14px; vertical-align: top; }
+        .exp-table tr:last-child td { border-bottom: none; }
+        .exp-table td:first-child { width: 34%; font-family: 'Courier New', monospace; color: #2c7a7b; font-weight: 700; padding-right: 16px; word-break: break-all; }
+        .exp-table td:last-child { color: #4a5568; line-height: 1.65; }
+        .exp-section-title { font-size: 15px; font-weight: 700; color: #1a202c; margin: 20px 0 6px; }
+
+        /* ── SPF ── */
+        .checks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
+        .check-item { padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px; background: #f8fafc; border: 1px solid #e2e8f0; color: #4a5568; }
+        .ck-pass { background: #f8fffe; color: #276749; border-color: #b2dfdb; }
+        .ck-fail { background: #fff8f8; color: #c53030; border-color: #f5c6cb; }
+        .ck-warn { background: #fffdf5; color: #92400e; border-color: #fde68a; }
+        .spf-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+        .spf-tag { padding: 4px 12px; border-radius: 14px; font-size: 12px; font-family: 'Courier New', monospace; background: #f7fafc; border: 1px solid #e2e8f0; color: #4a5568; }
+        .spf-include { background: #f0f4ff; color: #3b5bdb; border-color: #c5cfff; }
+        .spf-ip      { background: #f0fff4; color: #276749; border-color: #9ae6b4; }
+        .spf-all-hard { background: #2d3748; color: white; border-color: #2d3748; }
+        .spf-all-soft { background: #4a5568; color: white; border-color: #4a5568; }
+        .spf-all-weak { background: #a0aec0; color: white; border-color: #a0aec0; }
+        .spf-explained-box { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 18px; margin-top: 16px; font-size: 14px; color: #4a5568; line-height: 1.7; }
+
+        /* ── BIMI ── */
+        .bimi-layout { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+        .bimi-logo { width: 100px; height: 100px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f7fafc; object-fit: contain; flex-shrink: 0; }
+        .bimi-logo-placeholder { width: 100px; height: 100px; border: 1px dashed #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
+
+        /* ── MTA-STS ── */
+        .sts-policy-box { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; margin-top: 12px; font-family: 'Courier New', monospace; font-size: 13px; color: #2d3748; white-space: pre; }
+
+        /* ── Alert boxes ── */
+        .alert { border-radius: 8px; padding: 16px 18px; font-size: 14px; line-height: 1.6; }
+        .alert-err  { background: #fff5f5; border: 1px solid #fed7d7; color: #c53030; }
+        .alert-warn { background: #fffaf0; border: 1px solid #fbd38d; color: #c05621; }
+        .alert-info { background: #f7fafc; border: 1px solid #e2e8f0; color: #4a5568; }
+        .alert-ok   { background: #f0fff4; border: 1px solid #9ae6b4; color: #276749; }
+        .alert code { background: rgba(0,0,0,0.07); padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+
+        /* ── Notification toast ── */
+        .toast {
+            position: fixed; bottom: 24px; right: 24px; padding: 12px 20px;
+            background: #276749; color: white; border-radius: 10px; font-size: 14px;
+            font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            transform: translateY(80px); opacity: 0; transition: all 0.35s ease;
+            z-index: 999;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        /* ── Loading ── */
+        .loading { display: flex; flex-direction: column; align-items: center; padding: 64px 24px; gap: 18px; }
+        .spinner { width: 44px; height: 44px; border: 4px solid #e2e8f0; border-top-color: #38b2ac; border-radius: 50%; animation: spin 0.75s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: #718096; font-size: 15px; }
+
+        /* ── Welcome (Google-style hero) ── */
+        .welcome {
+            min-height: calc(100vh - 80px);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 40px 24px 80px; text-align: center;
+        }
+        .welcome-shield {
+            width: 96px; height: 96px; margin: 0 auto 28px;
+            background: linear-gradient(140deg, #14b8a6 0%, #0f766e 100%);
+            border-radius: 28px; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 12px 32px -8px rgba(20,184,166,0.45), inset 0 1px 0 rgba(255,255,255,0.2);
+            position: relative;
+        }
+        .welcome-shield svg { width: 52px; height: 52px; color: white; }
+        .welcome h1 {
+            font-size: 44px; font-weight: 800; color: #0f172a; margin-bottom: 10px;
+            letter-spacing: -0.03em; line-height: 1.1;
+        }
+        .welcome h1 .accent { background: linear-gradient(120deg, #14b8a6 0%, #0d9488 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .welcome-sub { font-size: 17px; color: #64748b; max-width: 540px; margin: 0 auto 36px; line-height: 1.55; }
+
+        /* Big centered search */
+        .hero-search-wrap { width: 100%; max-width: 620px; margin: 0 auto; }
+        .hero-search-form {
+            display: flex; align-items: center; gap: 10px;
+            background: white; border: 1px solid #e2e8f0; border-radius: 999px;
+            padding: 8px 8px 8px 24px;
+            box-shadow: 0 4px 24px -4px rgba(15,23,42,0.08), 0 1px 3px rgba(15,23,42,0.05);
+            transition: all 0.2s ease;
+        }
+        .hero-search-form:focus-within {
+            border-color: #14b8a6;
+            box-shadow: 0 8px 32px -4px rgba(20,184,166,0.20), 0 0 0 4px rgba(20,184,166,0.08);
+        }
+        .hero-search-icon { color: #94a3b8; flex-shrink: 0; }
+        .hero-search-input {
+            flex: 1; border: none; outline: none; background: transparent;
+            padding: 14px 4px; font-size: 17px; color: #0f172a; font-family: inherit;
+            min-width: 0;
+        }
+        .hero-search-input::placeholder { color: #94a3b8; }
+        .hero-search-btn {
+            background: #0f172a; color: white; border: none; border-radius: 999px;
+            padding: 12px 26px; font-size: 15px; font-weight: 600; cursor: pointer;
+            font-family: inherit; transition: all 0.15s;
+        }
+        .hero-search-btn:hover { background: #14b8a6; transform: translateY(-1px); }
+
+        .feature-pills { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+        .feature-pill {
+            padding: 6px 14px; background: white; border: 1px solid #e2e8f0;
+            border-radius: 999px; font-size: 13px; color: #475569;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .feature-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #14b8a6; }
+        .example-label { font-size: 13px; color: #94a3b8; margin: 32px 0 10px; }
+        .example-domains { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .example-btn {
+            padding: 7px 16px; border: 1px solid #e2e8f0; border-radius: 999px;
+            background: white; cursor: pointer; font-size: 13px; color: #475569;
+            transition: all 0.15s; font-family: inherit;
+        }
+        .example-btn:hover { border-color: #14b8a6; color: #0f766e; background: #f0fdfa; }
+
+        /* Hide top header search until results are showing */
+        body.has-results .header { display: flex; }
+        body:not(.has-results) .header { display: none; }
+
+        /* ── Grade scale ── */
+        .grade-scale { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.08); }
+        .grade-scale-title { font-size: 11px; font-weight: 700; color: #4a5568; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+        .grade-levels { display: flex; gap: 4px; }
+        .grade-level {
+            flex: 1; text-align: center; padding: 8px 4px; border-radius: 8px;
+            border: 2px solid transparent; transition: all 0.15s; opacity: 0.7;
+        }
+        .grade-level.active { opacity: 1; border-color: currentColor; transform: scale(1.06); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .gl-badge { font-size: 14px; font-weight: 900; display: block; }
+        .gl-range { font-size: 10px; margin-top: 2px; display: block; opacity: 0.85; font-weight: 600; }
+        .gl-ap  { color: #2f855a; background: #e6fcef; }
+        .gl-a   { color: #38a169; background: #ecfdf5; }
+        .gl-b   { color: #48916b; background: #effaf3; }
+        .gl-c   { color: #c79144; background: #fef9ec; }
+        .gl-d   { color: #c05621; background: #fff3eb; }
+        .gl-f   { color: #c53030; background: #fff1f1; }
+
+        /* ── Tiltak (actions) ── */
+        .tiltak-card {
+            background: white; border-radius: 12px; padding: 24px 28px;
+            margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+        }
+        .tiltak-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+        .tiltak-title { font-size: 19px; font-weight: 700; color: #1a202c; }
+        .tiltak-pts-badge { font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 20px; background: #ebf8ff; color: #2b6cb0; }
+        .tiltak-perfect { display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #f0fff4; border: 1px solid #9ae6b4; border-radius: 10px; color: #276749; font-weight: 600; font-size: 15px; }
+        .tiltak-list { display: flex; flex-direction: column; gap: 10px; }
+        .tiltak-item {
+            display: flex; gap: 16px; align-items: flex-start;
+            padding: 18px 20px; border-radius: 14px;
+            background: white; border: 1px solid #eef2f7;
+            transition: all 0.15s ease;
+        }
+        .tiltak-item:hover { border-color: #cbd5e0; box-shadow: 0 4px 14px rgba(15,23,42,0.06); }
+        .ti-icon {
+            flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; line-height: 1;
+        }
+        .ti-icon-critical { background: #fee2e2; color: #b91c1c; }
+        .ti-icon-high     { background: #ffedd5; color: #c2410c; }
+        .ti-icon-medium   { background: #dbeafe; color: #1d4ed8; }
+        .ti-icon-low      { background: #f1f5f9; color: #475569; }
+        .ti-critical { }
+        .ti-high     { }
+        .ti-medium   { }
+        .ti-low      { }
+        .ti-body { flex: 1; min-width: 0; }
+        .ti-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+        .ti-name { font-size: 15px; font-weight: 700; color: #0f172a; letter-spacing: -0.01em; }
+        .ti-pri { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.06em; }
+        .pri-critical { background: #fef2f2; color: #b91c1c; }
+        .pri-high     { background: #fff7ed; color: #c2410c; }
+        .pri-medium   { background: #eff6ff; color: #1d4ed8; }
+        .pri-low      { background: #f8fafc; color: #64748b; }
+        .ti-pts { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: #f0fdf4; color: #15803d; }
+        .ti-desc { font-size: 13px; color: #475569; line-height: 1.55; }
+        .ti-action {
+            margin-top: 10px; padding: 10px 14px;
+            background: #0f172a; color: #e2e8f0;
+            border-radius: 8px; font-size: 12.5px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            word-break: break-all; line-height: 1.55;
+        }
+
+        /* ── Native intake form ── */
+        .intake-form { padding: 26px 28px; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; height: 100%; }
+        .intake-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .intake-field { display: flex; flex-direction: column; gap: 6px; }
+        .intake-field label { font-size: 12px; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.04em; }
+        .intake-field label .req { color: #e53e3e; margin-left: 2px; }
+        .intake-field input, .intake-field textarea, .intake-field select {
+            padding: 11px 14px; border: 1px solid #e2e8f0; border-radius: 10px;
+            font-size: 14.5px; color: #0f172a; font-family: inherit; outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s; background: white;
+        }
+        .intake-field input:focus, .intake-field textarea:focus, .intake-field select:focus {
+            border-color: #14b8a6; box-shadow: 0 0 0 3px rgba(20,184,166,0.12);
+        }
+        .intake-field input[readonly] { background: #f8fafc; color: #475569; cursor: not-allowed; }
+        .intake-field textarea { resize: vertical; min-height: 88px; line-height: 1.5; }
+        .intake-summary {
+            background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 100%);
+            border: 1px solid #99f6e4; border-radius: 12px; padding: 14px 16px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .intake-summary-icon {
+            width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+            background: white; display: flex; align-items: center; justify-content: center;
+            font-size: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .intake-summary-text { flex: 1; min-width: 0; }
+        .intake-summary-domain { font-size: 14px; font-weight: 700; color: #0f172a; }
+        .intake-summary-meta { font-size: 12px; color: #475569; margin-top: 2px; }
+        .intake-actions { display: flex; gap: 10px; justify-content: flex-end; padding-top: 6px; }
+        .intake-btn {
+            padding: 12px 22px; border-radius: 10px; font-size: 14px; font-weight: 600;
+            cursor: pointer; border: none; font-family: inherit;
+        }
+        .intake-btn-cancel { background: white; color: #475569; border: 1px solid #e2e8f0; }
+        .intake-btn-cancel:hover { background: #f8fafc; }
+        .intake-btn-submit { background: #0f172a; color: white; }
+        .intake-btn-submit:hover { background: #14b8a6; }
+        .intake-btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+        .intake-success {
+            text-align: center; padding: 60px 32px; display: flex; flex-direction: column;
+            align-items: center; gap: 14px; height: 100%; justify-content: center;
+        }
+        .intake-success-icon {
+            width: 72px; height: 72px; border-radius: 50%; background: #dcfce7;
+            display: flex; align-items: center; justify-content: center;
+            color: #16a34a; font-size: 32px; font-weight: 900;
+        }
+        .intake-success h3 { font-size: 22px; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }
+        .intake-success p { color: #64748b; max-width: 400px; line-height: 1.55; }
+        .intake-error {
+            background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c;
+            padding: 12px 14px; border-radius: 10px; font-size: 13px;
+        }
+
+        /* ── Modal (Halo intake) ── */
+        .modal-backdrop {
+            position: fixed; inset: 0; background: rgba(15,23,42,0.55);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; padding: 24px; opacity: 0; pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .modal-backdrop.show { opacity: 1; pointer-events: auto; }
+        .modal-shell {
+            background: white; width: 100%; max-width: 920px; height: 88vh; max-height: 820px;
+            border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
+            box-shadow: 0 24px 64px -12px rgba(15,23,42,0.4);
+            transform: translateY(20px) scale(0.98); transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+        }
+        .modal-backdrop.show .modal-shell { transform: translateY(0) scale(1); }
+        .modal-head {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 22px; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;
+        }
+        .modal-title { font-size: 16px; font-weight: 700; color: #0f172a; }
+        .modal-sub { font-size: 13px; color: #64748b; margin-top: 2px; }
+        .modal-close {
+            width: 36px; height: 36px; border-radius: 10px;
+            border: 1px solid #e2e8f0; background: white; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; color: #475569; line-height: 1;
+        }
+        .modal-close:hover { background: #f1f5f9; color: #0f172a; }
+        .modal-body { flex: 1; position: relative; background: #f8fafc; }
+        .modal-iframe { width: 100%; height: 100%; border: none; display: block; }
+        .modal-loading {
+            position: absolute; inset: 0; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 14px; color: #64748b; font-size: 14px;
+            background: #f8fafc;
+        }
+        .modal-fallback {
+            position: absolute; inset: 0; padding: 40px; display: none;
+            flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; gap: 14px; background: #f8fafc;
+        }
+        .modal-fallback.show { display: flex; }
+        .modal-fallback a {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 24px; background: #0f172a; color: white;
+            border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 14px;
+        }
+        .modal-fallback a:hover { background: #14b8a6; }
+
+        /* ── Misc ── */
+        .hidden { display: none; }
+        .section-divider { font-size: 13px; color: #a0aec0; margin: 4px 0 16px; }
+        .error-tag { display: inline-block; padding: 2px 8px; background: #fff5f5; color: #c53030; border-radius: 4px; font-size: 12px; }
+        .ok-tag    { display: inline-block; padding: 2px 8px; background: #f0fff4; color: #276749; border-radius: 4px; font-size: 12px; }
+
+        @media (max-width: 640px) {
+            .overview-grid { grid-template-columns: 1fr; }
+            .ov-divider { display: none; }
+            .dns-cols { grid-template-columns: 1fr; }
+            .checks-grid { grid-template-columns: 1fr 1fr; }
+            .dkim-checks { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Notification toast ── -->
+<div class="toast" id="toast"></div>
+
+<!-- ── Native intake modal ── -->
+<div class="modal-backdrop" id="haloModal" onclick="if(event.target===this)closeHaloModal()">
+    <div class="modal-shell">
+        <div class="modal-head">
+            <div>
+                <div class="modal-title">Få rapporten på e-post</div>
+                <div class="modal-sub">Fyll ut kontaktinfo — vi sender HTML-rapporten på sekunder</div>
+            </div>
+            <button class="modal-close" onclick="closeHaloModal()" aria-label="Lukk">×</button>
+        </div>
+        <div class="modal-body">
+            <form class="intake-form" id="intakeForm" onsubmit="submitIntake(event)">
+                <div class="intake-summary">
+                    <div class="intake-summary-icon">🛡️</div>
+                    <div class="intake-summary-text">
+                        <div class="intake-summary-domain" id="intakeDomain">domain.no</div>
+                        <div class="intake-summary-meta" id="intakeMeta">Score: — / Karakter: —</div>
+                    </div>
+                </div>
+
+                <div class="intake-row">
+                    <div class="intake-field">
+                        <label for="intakeName">Navn<span class="req">*</span></label>
+                        <input type="text" id="intakeName" name="name" required autocomplete="name">
+                    </div>
+                    <div class="intake-field">
+                        <label for="intakeEmail">E-post<span class="req">*</span></label>
+                        <input type="email" id="intakeEmail" name="email" required autocomplete="email">
+                    </div>
+                </div>
+
+                <div class="intake-row">
+                    <div class="intake-field">
+                        <label for="intakeCompany">Firma<span class="req">*</span></label>
+                        <input type="text" id="intakeCompany" name="company" required autocomplete="organization">
+                    </div>
+                    <div class="intake-field">
+                        <label for="intakeOrgnr">Org.nr<span class="req">*</span></label>
+                        <input type="text" id="intakeOrgnr" name="orgnr" required
+                               inputmode="numeric" pattern="[0-9 ]{9,12}" maxlength="11"
+                               placeholder="9 siffer" autocomplete="off"
+                               oninput="lookupOrgnr(this.value)">
+                    </div>
+                </div>
+
+                <div class="intake-field">
+                    <label for="intakePhone">Telefon</label>
+                    <input type="tel" id="intakePhone" name="phone" autocomplete="tel">
+                </div>
+
+                <div class="intake-field">
+                    <label for="intakeDomainField">Domene som er analysert</label>
+                    <input type="text" id="intakeDomainField" name="domain" readonly>
+                </div>
+
+                <div class="intake-field">
+                    <label for="intakeMessage">Melding (valgfritt)</label>
+                    <textarea id="intakeMessage" name="message" placeholder="F.eks. ønsker hjelp til å konfigurere DMARC…"></textarea>
+                </div>
+
+                <div id="intakeError" class="intake-error" style="display:none"></div>
+
+                <div class="intake-actions">
+                    <button type="button" class="intake-btn intake-btn-cancel" onclick="closeHaloModal()">Avbryt</button>
+                    <button type="submit" class="intake-btn intake-btn-submit" id="intakeSubmit">Send rapport</button>
+                </div>
+            </form>
+
+            <div class="intake-success" id="intakeSuccess" style="display:none">
+                <div class="intake-success-icon">✓</div>
+                <h3>Rapport sendt!</h3>
+                <p id="intakeSuccessMsg">Du får snart e-posten med fullstendig analyse. Vi tar kontakt hvis du har bedt om det.</p>
+                <button class="intake-btn intake-btn-cancel" onclick="closeHaloModal()">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="header">
+    <div class="logo">Domain<span>Sikkerhet</span></div>
+    <form class="search-form" onsubmit="handleSearch(event)">
+        <input type="text" class="search-input" id="domainInput"
+               placeholder="Skriv inn domenenavn (f.eks. micronet.no)" autocomplete="off" spellcheck="false">
+        <button type="submit" class="search-btn">Analyser →</button>
+    </form>
+</div>
+
+<div class="container">
+    <div id="welcome" class="welcome">
+        <div class="welcome-shield">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2 L20 5 V11 C20 16.5 16.5 20.5 12 22 C7.5 20.5 4 16.5 4 11 V5 Z"/>
+                <path d="M9 12 L11 14 L15 10"/>
+            </svg>
+        </div>
+        <h1>E-post sikkerhet — <span class="accent">på sekunder</span></h1>
+        <p class="welcome-sub">Fullstendig sjekk av e-postsikkerheten for ethvert domene. SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI — alt i én rapport.</p>
+
+        <div class="hero-search-wrap">
+            <form class="hero-search-form" onsubmit="handleSearch(event)">
+                <svg class="hero-search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7"/>
+                    <path d="m20 20-3.5-3.5"/>
+                </svg>
+                <input type="text" class="hero-search-input" id="domainInputHero"
+                       placeholder="Skriv inn domenenavn — f.eks. micronet.no"
+                       autocomplete="off" spellcheck="false" autofocus>
+                <button type="submit" class="hero-search-btn">Analyser</button>
+            </form>
+
+            <div class="feature-pills">
+                <span class="feature-pill">SPF</span>
+                <span class="feature-pill">DMARC</span>
+                <span class="feature-pill">DKIM</span>
+                <span class="feature-pill">MTA-STS</span>
+                <span class="feature-pill">TLS-RPT</span>
+                <span class="feature-pill">BIMI</span>
+            </div>
+
+            <div class="example-label">eller prøv et eksempel</div>
+            <div class="example-domains">
+                <button class="example-btn" onclick="runExample('micronet.no')">micronet.no</button>
+                <button class="example-btn" onclick="runExample('google.com')">google.com</button>
+                <button class="example-btn" onclick="runExample('microsoft.com')">microsoft.com</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <div class="loading-text" id="loadingText">Analyserer domene...</div>
+    </div>
+
+    <div id="results" class="hidden"></div>
+</div>
+
+<script>
+'use strict';
+
+/* ══════════════════════════════════════════════════════════════════
+   KONFIGURASJON — tilpass disse verdiene
+   ══════════════════════════════════════════════════════════════════ */
+const CONFIG = {
+    // E-post som mottar varsel ved hver skanning (oppretter ticket i HaloPSA)
+    // Sett opp en Power Automate HTTP-trigger og lim inn URL-en her:
+    webhookUrl: '',   // f.eks. 'https://prod-xx.norwayeast.logic.azure.com/...'
+
+    // Visningsnavn i varselet
+    notifyFrom: 'Domain Sikkerhet',
+    notifyTo:   'hjelp@micronet.no',
+};
+/* ══════════════════════════════════════════════════════════════════ */
+
+const CF = 'https://cloudflare-dns.com/dns-query';
+
+async function dnsQuery(name, type) {
+    try {
+        const r = await fetch(`${CF}?name=${encodeURIComponent(name)}&type=${type}`,
+            { headers: { Accept: 'application/dns-json' }, signal: AbortSignal.timeout(8000) });
+        if (!r.ok) return [];
+        return (await r.json()).Answer || [];
+    } catch { return []; }
+}
+
+function cleanTxt(s) {
+    return s.replace(/^"|"$/g, '').replace(/"\s*"/g, '').trim();
+}
+
+function parseDMARC(raw) {
+    const tags = {};
+    raw.split(';').forEach(p => {
+        const i = p.indexOf('=');
+        if (i > 0) tags[p.slice(0, i).trim().toLowerCase()] = p.slice(i + 1).trim();
+    });
+    return tags;
+}
+
+function parseSPF(raw) {
+    const parts = raw.split(/\s+/);
+    const res = { includes: [], ip4s: [], ip6s: [], all: null, lookups: 0, raw: parts };
+    parts.forEach(p => {
+        if (p.startsWith('include:'))           { res.includes.push(p.slice(8)); res.lookups++; }
+        else if (p.startsWith('ip4:'))          res.ip4s.push(p.slice(4));
+        else if (p.startsWith('ip6:'))          res.ip6s.push(p.slice(4));
+        else if (/^[+\-~?]?(a|mx)(:|$)/.test(p)) res.lookups++;
+        else if (p.endsWith('all'))             res.all = p;
+    });
+    return res;
+}
+
+// Estimate RSA key size from base64 length of public key
+function estimateKeyBits(b64) {
+    if (!b64) return null;
+    const len = b64.replace(/\s/g, '').length;
+    if (len > 700) return 4096;
+    if (len > 380) return 2048;
+    if (len > 200) return 1024;
+    return 512;
+}
+
+function parseDKIMRecord(raw) {
+    const tags = {};
+    raw.split(';').forEach(p => {
+        const i = p.indexOf('=');
+        if (i > 0) tags[p.slice(0, i).trim().toLowerCase()] = p.slice(i + 1).trim();
+    });
+    return {
+        version: tags.v || 'DKIM1',
+        keyType: (tags.k || 'rsa').toUpperCase(),
+        pubKey:  tags.p || '',
+        keyBits: estimateKeyBits(tags.p),
+        flags:   tags.t || '',
+        hash:    tags.h || '',
+        valid:   !!tags.p,
+    };
+}
+
+// DKIM selectors to probe
+const SELECTORS = [
+    'selector1','selector2','k1','k2','k3','k4',
+    'google','microsoft','mail','default','dkim','s1','s2',
+    'protonmail','pm','smtp','email','mandrill','mailchimp',
+    'sendgrid','postmark','ses','mimecast','pphosted',
+    'domainkey','zoho','yandex','mailjet','sparkpost'
+];
+
+async function findDKIM(domain) {
+    const hits = await Promise.all(
+        SELECTORS.map(sel =>
+            dnsQuery(`${sel}._domainkey.${domain}`, 'TXT').then(recs => {
+                const found = recs.find(r => cleanTxt(r.data).toLowerCase().startsWith('v=dkim1'));
+                if (!found) return null;
+                const raw = cleanTxt(found.data);
+                return { selector: sel, raw, ...parseDKIMRecord(raw) };
+            })
+        )
+    );
+    return hits.filter(Boolean);
+}
+
+// Fetch MTA-STS policy file
+async function fetchMTASTSPolicy(domain) {
+    try {
+        const r = await fetch(`https://mta-sts.${domain}/.well-known/mta-sts.txt`,
+            { signal: AbortSignal.timeout(5000) });
+        if (!r.ok) return null;
+        return await r.text();
+    } catch { return null; }
+}
+
+/* ── Score ── */
+function calcScore(d) {
+    let s = 0;
+    const tags = d.dmarc ? parseDMARC(d.dmarc) : {};
+    const spf  = d.spf   ? parseSPF(d.spf) : null;
+
+    // DMARC: 35 pts
+    if (tags.p === 'reject')          s += 35;
+    else if (tags.p === 'quarantine') s += 22;
+    else if (tags.p === 'none')       s += 8;
+
+    // SPF: 25 pts — both ~all and -all are fully valid
+    if (d.spf) {
+        if (spf.all === '-all' || spf.all === '~all') s += 25;
+        else s += 10;
+    }
+
+    // DKIM: 20 pts
+    if (d.dkim) s += 20;
+
+    // MTA-STS: 12 pts
+    if (d.mtaSts) s += 12;
+
+    // TLS-RPT: 5 pts
+    if (d.tlsRpt) s += 5;
+
+    // BIMI: 3 pts
+    if (d.bimi) s += 3;
+
+    let grade, gc, gcLight;
+    if      (s >= 90) { grade = 'A+'; gc = '#2f855a'; gcLight = '#9ae6b4'; }
+    else if (s >= 80) { grade = 'A';  gc = '#38a169'; gcLight = '#b9e8c7'; }
+    else if (s >= 70) { grade = 'B';  gc = '#48916b'; gcLight = '#bfe3cb'; }
+    else if (s >= 55) { grade = 'C';  gc = '#c79144'; gcLight = '#f6d28a'; }
+    else if (s >= 35) { grade = 'D';  gc = '#c05621'; gcLight = '#f6b58a'; }
+    else              { grade = 'F';  gc = '#c53030'; gcLight = '#f6a8a8'; }
+
+    return { score: s, grade, gradeColor: gc, gradeColorLight: gcLight, dmarcTags: tags, spfParsed: spf };
+}
+
+/* ── Tiltak (recommended actions) ── */
+function buildTiltak(d, scoreData) {
+    const { dmarcTags, spfParsed } = scoreData;
+    const actions = [];
+
+    // ── DMARC ──
+    if (!d.dmarc) {
+        actions.push({ level: 'critical', icon: '🚨', name: 'Opprett DMARC-post', pts: 35,
+            desc: 'Domenet har ingen DMARC-post. Dette betyr at hvem som helst kan sende e-post som utgir seg for å komme fra ditt domene.',
+            action: `v=DMARC1; p=none; rua=mailto:dmarc@${d.domain};` });
+    } else if (dmarcTags.p === 'none') {
+        actions.push({ level: 'high', icon: '⚠️', name: 'Skjerp DMARC til p=quarantine', pts: 14,
+            desc: 'DMARC er satt til p=none (kun overvåking). Uautoriserte e-poster leveres fortsatt til mottaker. Etter å ha analysert rapportene, skjerp til quarantine.',
+            action: `v=DMARC1; p=quarantine; pct=25; rua=mailto:${dmarcTags.rua?.replace('mailto:','') || 'dmarc@'+d.domain};` });
+    } else if (dmarcTags.p === 'quarantine') {
+        actions.push({ level: 'medium', icon: '🔒', name: 'Skjerp DMARC til p=reject', pts: 13,
+            desc: 'DMARC er satt til p=quarantine (spam-mappe). For maksimal beskyttelse bør du skjerpe til p=reject som avviser uautoriserte e-poster.',
+            action: `v=DMARC1; p=reject; pct=100; rua=mailto:${dmarcTags.rua?.replace('mailto:','') || 'dmarc@'+d.domain};` });
+    }
+    if (d.dmarc && dmarcTags.pct && parseInt(dmarcTags.pct) < 100) {
+        actions.push({ level: 'medium', icon: '📊', name: 'Sett DMARC pct=100', pts: 0,
+            desc: `DMARC-policyen gjelder kun ${dmarcTags.pct}% av e-poster. Sett pct=100 for full beskyttelse.`,
+            action: null });
+    }
+    if (d.dmarc && !dmarcTags.rua) {
+        actions.push({ level: 'medium', icon: '📬', name: 'Legg til DMARC rapportadresse (rua=)', pts: 0,
+            desc: 'Ingen rua= er konfigurert. Uten denne mottar du ingen aggregerte rapporter og kan ikke overvåke hvem som sender e-post fra domenet ditt.',
+            action: `rua=mailto:dmarc@${d.domain}` });
+    }
+
+    // ── SPF ──
+    if (!d.spf) {
+        actions.push({ level: 'critical', icon: '🚨', name: 'Opprett SPF-post', pts: 25,
+            desc: 'Domenet mangler SPF-post. SPF definerer hvilke servere som er autorisert til å sende e-post på vegne av domenet.',
+            action: `v=spf1 include:spf.protection.outlook.com -all` });
+    } else if (spfParsed?.all === '+all') {
+        actions.push({ level: 'critical', icon: '🚨', name: 'Endre SPF fra +all til -all', pts: 15,
+            desc: '+all tillater alle servere å sende e-post fra domenet ditt — dette er en kritisk feil som åpner for spam og forfalskning.',
+            action: null });
+    } else if (!spfParsed?.all) {
+        actions.push({ level: 'high', icon: '⚠️', name: 'Legg til "all"-mekanisme i SPF', pts: 0,
+            desc: 'SPF-posten mangler en "all"-mekanisme (-all, ~all). Legg til -all på slutten for å avvise uautoriserte avsendere.',
+            action: null });
+    }
+
+    // ── DKIM ──
+    if (!d.dkim) {
+        actions.push({ level: 'critical', icon: '🚨', name: 'Konfigurer DKIM', pts: 20,
+            desc: 'Ingen DKIM-signatur ble funnet. DKIM lar mottakere verifisere at e-posten virkelig kom fra deg og ikke er endret underveis.',
+            action: null });
+    } else {
+        const weakKey = d.dkimAll?.some(dk => dk.keyBits && dk.keyBits < 2048);
+        if (weakKey) {
+            actions.push({ level: 'medium', icon: '🔑', name: 'Oppgrader DKIM-nøkkel til 2048-bit', pts: 0,
+                desc: 'En eller flere DKIM-nøkler er kortere enn 2048-bit. Korte nøkler er sårbare for angrep. Generer nye 2048-bit nøkler.',
+                action: null });
+        }
+    }
+
+    // ── MTA-STS ──
+    if (!d.mtaSts) {
+        actions.push({ level: 'medium', icon: '🔐', name: 'Konfigurer MTA-STS', pts: 12,
+            desc: 'MTA-STS mangler. Uten MTA-STS kan e-post til domenet sendes uten kryptering (TLS-nedgradingsangrep).',
+            action: `v=STSv1; id=${new Date().toISOString().replace(/[-:T.Z]/g,'').slice(0,14)};` });
+    }
+
+    // ── TLS-RPT ──
+    if (!d.tlsRpt) {
+        actions.push({ level: 'low', icon: '📈', name: 'Legg til TLS-RPT', pts: 5,
+            desc: 'TLS-RPT mangler. Med TLS-RPT får du rapporter om TLS-krypteringsproblemer mellom e-postservere.',
+            action: `v=TLSRPTv1; rua=mailto:tls@${d.domain};` });
+    }
+
+    // ── BIMI ──
+    if (!d.bimi) {
+        const canBimi = d.dmarc && (dmarcTags.p === 'reject' || dmarcTags.p === 'quarantine');
+        actions.push({ level: 'low', icon: '🏢', name: 'Legg til BIMI (firmalogo i e-post)', pts: 3,
+            desc: canBimi
+                ? 'BIMI mangler. Du oppfyller kravene (DMARC enforce). Legg til en SVG-logo for å vise firmalogoen i e-postklienter.'
+                : 'BIMI krever DMARC med p=quarantine eller p=reject. Konfigurer DMARC-policy først.',
+            action: canBimi ? `v=BIMI1; l=https://ditt-domene.no/logo.svg;` : null });
+    }
+
+    const totalPts = actions.reduce((a, t) => a + (t.pts || 0), 0);
+    return { actions, totalPts };
+}
+
+/* ── Main analysis ── */
+async function analyzeDomain(rawDomain) {
+    const domain = rawDomain.trim().toLowerCase()
+        .replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/^www\./, '');
+
+    setLoading('Henter DNS-poster...');
+
+    const [aR, nsR, mxR, txtR, dmarcR, mtsR, tlsR, bimiR] = await Promise.all([
+        dnsQuery(domain, 'A'),
+        dnsQuery(domain, 'NS'),
+        dnsQuery(domain, 'MX'),
+        dnsQuery(domain, 'TXT'),
+        dnsQuery(`_dmarc.${domain}`, 'TXT'),
+        dnsQuery(`_mta-sts.${domain}`, 'TXT'),
+        dnsQuery(`_smtp._tls.${domain}`, 'TXT'),
+        dnsQuery(`default._bimi.${domain}`, 'TXT'),
+    ]);
+
+    const txts    = txtR.map(r => cleanTxt(r.data));
+    const spf     = txts.find(t => /^v=spf1\b/i.test(t)) || null;
+    const dmarc   = dmarcR.map(r => cleanTxt(r.data)).find(t => /^v=DMARC1\b/i.test(t)) || null;
+    const mtaSts  = mtsR.map(r => cleanTxt(r.data)).find(t => /^v=STSv1\b/i.test(t)) || null;
+    const tlsRpt  = tlsR.map(r => cleanTxt(r.data)).find(t => /^v=TLSRPTv1\b/i.test(t)) || null;
+    const bimi    = bimiR.map(r => cleanTxt(r.data)).find(t => /^v=BIMI1\b/i.test(t)) || null;
+
+    setLoading('Sjekker DKIM-selektorer...');
+    const dkimAll = await findDKIM(domain);
+
+    setLoading('Henter MTA-STS policy...');
+    const stsPolicy = mtaSts ? await fetchMTASTSPolicy(domain) : null;
+
+    return {
+        domain,
+        aRecs:  aR.map(r => r.data),
+        nsRecs: nsR.map(r => r.data.replace(/\.$/, '')),
+        mxRecs: mxR.map(r => {
+            const [pri, ...rest] = r.data.split(' ');
+            return { priority: parseInt(pri), exchange: rest.join(' ').replace(/\.$/, '') };
+        }),
+        spf, dmarc, mtaSts, tlsRpt, bimi, stsPolicy,
+        dkim:         dkimAll[0]?.raw || null,
+        dkimSelector: dkimAll[0]?.selector || null,
+        dkimAll,
+    };
+}
+
+/* ── Helpers ── */
+function h(s) {
+    if (s == null) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function badge(ok, label) {
+    if (ok === true)  return `<span class="badge b-valid">✓ ${label}</span>`;
+    if (ok === false) return `<span class="badge b-invalid">✗ ${label}</span>`;
+    return `<span class="badge b-missing">— ${label}</span>`;
+}
+function sectionIcon(ok) {
+    if (ok === true)  return `<div class="status-icon si-ok">✓</div>`;
+    if (ok === null)  return `<div class="status-icon si-warn">?</div>`;
+    return `<div class="status-icon si-err">✗</div>`;
+}
+function policyBadge(p) {
+    if (!p) return `<span class="policy-badge p-missing">IKKE KONFIGURERT</span>`;
+    const cls = { reject: 'p-reject', quarantine: 'p-quarantine', none: 'p-none' }[p] || 'p-none';
+    return `<span class="policy-badge ${cls}">${p.toUpperCase()}</span>`;
+}
+
+const DMARC_EXPLAIN = {
+    p:   v => ({ reject: 'E-poster som ikke består DMARC-autentisering avvises av mottakerserveren.', quarantine: 'E-poster som ikke består DMARC behandles som spam/settes i karantene.', none: 'Ingen tiltak gjøres — kun overvåking og rapportering.' }[v] || `Policy: ${v}`),
+    sp:  v => ({ reject: 'Subdomener: E-poster som ikke består DMARC avvises.', quarantine: 'Subdomener: Settes i karantene.', none: 'Subdomener: Ingen tiltak.' }[v] || `Subdomain-policy: ${v}`),
+    pct: v => `Denne policyen gjelder for ${v}% av e-poster som ikke består autentisering.`,
+    rua: v => `Aggregerte DMARC-rapporter (XML) sendes til: ${v.replace(/mailto:/g,'')}`,
+    ruf: v => `Forensic feilrapporter sendes til: ${v.replace(/mailto:/g,'')}`,
+    adkim: v => v === 's' ? 'Strict DKIM-justering: Fra-adressen må nøyaktig matche DKIM-domenet.' : 'Relaxed DKIM-justering: Organisasjonsdomenet trenger bare å matche.',
+    aspf:  v => v === 's' ? 'Strict SPF-justering: Fra-adressen må nøyaktig matche SPF-domenet.' : 'Relaxed SPF-justering: Organisasjonsdomenet trenger bare å matche.',
+    ri:   v => `Ønsket rapporteringsintervall: ${v} sekunder (${Math.round(v/3600)} timer).`,
+    fo:   v => ({ '0': 'Rapport kun om alle mekanismer feiler.', '1': 'Rapport om DKIM eller SPF feiler (anbefalt).', 'd': 'Rapport om DKIM-signatur mislykkes.', 's': 'Rapport om SPF mislykkes.' }[v] || `fo=${v}`),
+    rf:   v => `Rapporteringsformat: ${v}`,
+};
+
+/* ── Render ── */
+function renderResults(data) {
+    const scoreData = calcScore(data);
+    window._lastScoreData = scoreData;
+    const { score, grade, gradeColor, gradeColorLight } = scoreData;
+    const { dmarcTags, spfParsed } = scoreData;
+    const { actions: tiltakList, totalPts: tiltakPts } = buildTiltak(data, scoreData);
+    const dateStr = new Date().toLocaleDateString('no-NO', { day:'2-digit', month:'2-digit', year:'numeric' });
+
+    // Grade scale helper
+    const gradeScale = [
+        { g:'F',  cls:'gl-f',  range:'0–34',  desc:'Ingen eller svak DMARC' },
+        { g:'D',  cls:'gl-d',  range:'35–54', desc:'DMARC p=none + SPF' },
+        { g:'C',  cls:'gl-c',  range:'55–69', desc:'DMARC quarantine + SPF + DKIM' },
+        { g:'B',  cls:'gl-b',  range:'70–79', desc:'DMARC reject + SPF + DKIM' },
+        { g:'A',  cls:'gl-a',  range:'80–89', desc:'+ MTA-STS + TLS-RPT' },
+        { g:'A+', cls:'gl-ap', range:'90–100','desc':'+ BIMI (alt konfigurert)' },
+    ];
+
+    // Parse BIMI logo URL
+    let bimiLogoUrl = null;
+    if (data.bimi) {
+        const lMatch = data.bimi.match(/[;,]?\s*l=([^;]+)/i);
+        if (lMatch) bimiLogoUrl = lMatch[1].trim();
+    }
+
+    // Parse TLS-RPT rua
+    let tlsRua = null;
+    if (data.tlsRpt) {
+        const m = data.tlsRpt.match(/rua=mailto:([^;,\s]+)/i);
+        if (m) tlsRua = m[1];
+    }
+
+    /* ── Score card ── */
+    const scoreSection = `
+    <div class="result-header">
+        <div>
+            <div class="result-domain">Analyseresultat for: <strong>${h(data.domain)}</strong></div>
+            <div class="result-date">${dateStr}</div>
+        </div>
+        <div class="btn-row">
+            <button class="teal-btn" onclick="emailReport('${h(data.domain)}')">📧 Send rapport</button>
+            <button class="gray-btn" onclick="reloadAnalysis()">↺ Oppdater</button>
+        </div>
+    </div>
+
+    <div class="score-card ${{'A+':'sc-aplus','A':'sc-a','B':'sc-b','C':'sc-c','D':'sc-d','F':'sc-f'}[grade]||'sc-f'}" style="margin-bottom:20px">
+        <div class="grade-wrap">
+            <svg viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <clipPath id="shieldClip-${h(grade.replace('+','p'))}">
+                        <path d="M60 8
+                                 C60 8 90 12 102 20
+                                 C103 21 104 22 104 24
+                                 L104 62
+                                 C104 88 86 110 60 120
+                                 C34 110 16 88 16 62
+                                 L16 24
+                                 C16 22 17 21 18 20
+                                 C30 12 60 8 60 8 Z"/>
+                    </clipPath>
+                </defs>
+                <!-- soft halo -->
+                <circle cx="60" cy="65" r="58" fill="${h(gradeColorLight)}" opacity="0.30"/>
+                <!-- shield base (lighter half — left) -->
+                <path d="M60 8
+                         C60 8 90 12 102 20
+                         C103 21 104 22 104 24
+                         L104 62
+                         C104 88 86 110 60 120
+                         C34 110 16 88 16 62
+                         L16 24
+                         C16 22 17 21 18 20
+                         C30 12 60 8 60 8 Z"
+                      fill="${h(gradeColorLight)}"/>
+                <!-- darker right half -->
+                <rect x="60" y="0" width="60" height="130" fill="${h(gradeColor)}" clip-path="url(#shieldClip-${h(grade.replace('+','p'))})"/>
+                <!-- white grade circle -->
+                <circle cx="60" cy="58" r="24" fill="white"/>
+            </svg>
+            <div class="grade-text">${h(grade)}</div>
+            <div class="grade-badge ${score>=70?'gb-ok':score>=35?'gb-warn':'gb-err'}">
+                ${score>=70?'✓':'!'}
+            </div>
+        </div>
+        <div class="score-info">
+            <div class="score-label">Score</div>
+            <div class="score-value" id="scoreNum">0%</div>
+            <div class="score-domain">${h(data.domain)}</div>
+            <div class="score-bar">
+                <div class="score-bar-fill" id="scoreBar" style="width:0%;background:${h(gradeColor)}"></div>
+            </div>
+        </div>
+        <div style="flex:1"></div>
+        <div class="policy-box" style="margin-right:16px">
+            <div class="policy-title">DMARC-policy</div>
+            ${policyBadge(dmarcTags.p)}
+        </div>
+        <div class="qr-box">
+            <div class="qr-title">Skann og send<br>rapporten på e-post</div>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=${encodeURIComponent(window.location.origin+window.location.pathname+'?domain='+data.domain)}" alt="QR" loading="lazy">
+            <div style="font-size:12px;color:#a0aec0;margin:4px 0">Eller</div>
+            <button class="qr-send" onclick="emailReport('${h(data.domain)}')">Send nå</button>
+        </div>
+    </div>
+
+    <!-- Grade scale -->
+    <div class="section-card" style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;color:#718096;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px">Karakterskala — hvordan bestemmes scoren?</div>
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:14px">
+            ${gradeScale.map(gl => `
+            <div class="grade-level ${gl.cls} ${grade===gl.g?'active':''}" title="${gl.desc}">
+                <span class="gl-badge">${gl.g}</span>
+                <span class="gl-range">${gl.range}%</span>
+            </div>`).join('')}
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:12px;color:#718096">
+            <div>🔴 <strong>DMARC (35p)</strong> — p=reject gir full poengsum</div>
+            <div>🟡 <strong>SPF (25p)</strong> — ~all og -all godkjent</div>
+            <div>🟢 <strong>DKIM (20p)</strong> — gyldig nøkkel funnet</div>
+            <div>🔵 <strong>MTA-STS (12p)</strong> — kryptert innlevering</div>
+            <div>🟣 <strong>TLS-RPT (5p)</strong> — TLS-feilrapportering</div>
+            <div>⭐ <strong>BIMI (3p)</strong> — firmalogo i e-post</div>
+        </div>
+    </div>`;
+
+    /* ── Tiltak ── */
+    const priorityLabel = { critical: ['Kritisk','pri-critical'], high: ['Høy','pri-high'], medium: ['Medium','pri-medium'], low: ['Lav','pri-low'] };
+    const levelClass    = { critical: 'ti-critical', high: 'ti-high', medium: 'ti-medium', low: 'ti-low' };
+    const tiltakSection = `
+    <div class="tiltak-card">
+        <div class="tiltak-header">
+            <div class="tiltak-title">Anbefalte tiltak</div>
+            ${tiltakList.length === 0
+                ? ''
+                : `<span class="tiltak-pts-badge">Mulig forbedring: +${tiltakPts} poeng</span>`}
+        </div>
+        ${tiltakList.length === 0 ? `
+        <div class="tiltak-perfect">
+            <span style="font-size:32px">🏆</span>
+            <div>
+                <div>Alt er perfekt konfigurert!</div>
+                <div style="font-size:13px;font-weight:400;margin-top:2px;opacity:0.8">Domenet følger alle beste praksiser for e-postsikkerhet.</div>
+            </div>
+        </div>` : `
+        <div class="tiltak-list">
+            ${tiltakList.map(t => {
+                const [priLabel, priCls] = priorityLabel[t.level];
+                return `
+                <div class="tiltak-item ${levelClass[t.level]}">
+                    <div class="ti-icon ti-icon-${t.level}">${t.icon}</div>
+                    <div class="ti-body">
+                        <div class="ti-top">
+                            <span class="ti-name">${h(t.name)}</span>
+                            <span class="ti-pri ${priCls}">${priLabel}</span>
+                            ${t.pts > 0 ? `<span class="ti-pts">+${t.pts} poeng</span>` : ''}
+                        </div>
+                        <div class="ti-desc">${h(t.desc)}</div>
+                        ${t.action ? `<div class="ti-action">${h(t.action)}</div>` : ''}
+                    </div>
+                </div>`;
+            }).join('')}
+        </div>`}
+    </div>`;
+
+    /* ── Overview ── */
+    const overview = `
+    <div class="section-card">
+        <div class="section-title">Oversikt</div>
+        <div class="overview-grid">
+            <div>
+                <div class="ov-col-title"><span class="ov-dot"></span>Utgående e-post</div>
+                <div class="record-row"><span class="record-name">SPF</span>${badge(!!data.spf, data.spf ? 'Gyldig' : 'Mangler')}</div>
+                <div class="record-row">
+                    <span class="record-name">DKIM</span>
+                    ${data.dkim ? badge(true, `Gyldig (${data.dkimAll.length} selektor${data.dkimAll.length>1?'er':''})`) : `<span class="badge b-warning">? Ikke funnet</span>`}
+                </div>
+                <div class="record-row"><span class="record-name">DMARC</span>${badge(!!data.dmarc, data.dmarc ? 'Gyldig' : 'Mangler')}</div>
+                <div class="record-row"><span class="record-name">BIMI</span>${badge(!!data.bimi, data.bimi ? 'Gyldig' : 'Mangler')}</div>
+            </div>
+            <div class="ov-divider"></div>
+            <div>
+                <div class="ov-col-title"><span class="ov-dot"></span>Innkommende e-post</div>
+                <div class="record-row"><span class="record-name">MTA-STS</span>${badge(!!data.mtaSts, data.mtaSts ? 'Gyldig' : 'Mangler')}</div>
+                <div class="record-row"><span class="record-name">TLS-RPT</span>${badge(!!data.tlsRpt, data.tlsRpt ? 'Gyldig' : 'Mangler')}</div>
+            </div>
+        </div>
+    </div>`;
+
+    /* ── A / NS / MX ── */
+    const dnsRecs = `
+    <div class="section-card">
+        <div class="section-title">A-, NS- og MX-poster</div>
+        <p class="section-divider">Følgende DNS-poster ble funnet for <strong>${h(data.domain)}</strong></p>
+        <div class="dns-cols">
+            <div>
+                <h3>A-poster</h3>
+                <ul class="dns-list">
+                    ${data.aRecs.length ? data.aRecs.map(ip=>`<li><div class="dns-val">${h(ip)}</div></li>`).join('') : '<li><div class="dns-val" style="color:#a0aec0">Ingen funnet</div></li>'}
+                </ul>
+            </div>
+            <div>
+                <h3>NS-poster</h3>
+                <ul class="dns-list">
+                    ${data.nsRecs.length ? data.nsRecs.map(ns=>`<li><div class="dns-val">${h(ns)}</div></li>`).join('') : '<li><div class="dns-val" style="color:#a0aec0">Ingen funnet</div></li>'}
+                </ul>
+            </div>
+            <div>
+                <h3>MX-poster</h3>
+                <ul class="dns-list">
+                    ${data.mxRecs.length ? data.mxRecs.sort((a,b)=>a.priority-b.priority).map(mx=>`
+                        <li>
+                            <div class="dns-val">${h(mx.exchange)}</div>
+                            <div class="dns-meta">Prioritet: ${mx.priority}</div>
+                        </li>`).join('') : '<li><div class="dns-val" style="color:#a0aec0">Ingen funnet</div></li>'}
+                </ul>
+            </div>
+        </div>
+    </div>`;
+
+    /* ── DMARC ── */
+    const dmarcSection = `
+    <div class="section-card">
+        <div class="sec-head">${sectionIcon(!!data.dmarc)}<h2>DMARC</h2></div>
+        <p class="sec-sub">${data.dmarc ? `Følgende DMARC DNS-post ble funnet for <strong>${h(data.domain)}</strong>` : `Ingen DMARC DNS-post funnet for <strong>${h(data.domain)}</strong>`}</p>
+        ${data.dmarc ? `
+        <div class="rec-wrap">
+            <div class="rec-block" id="dmarcRec">${h(data.dmarc)}</div>
+            <button class="copy-btn" onclick="copyRec('dmarcRec',this)">Kopier</button>
+        </div>
+        <table class="det-table">
+            <tr><td>Gyldig DMARC-post</td><td class="v-yes">Ja</td></tr>
+            <tr><td>DMARC-policy (p=)</td><td>${dmarcTags.p?`<span class="inline-policy ip-${h(dmarcTags.p)}">${h(dmarcTags.p.toUpperCase())}</span>`:'—'}</td></tr>
+            ${dmarcTags.sp  ? `<tr><td>Subdomain-policy (sp=)</td><td><span class="inline-policy ip-${h(dmarcTags.sp)}">${h(dmarcTags.sp.toUpperCase())}</span></td></tr>` : ''}
+            ${dmarcTags.pct ? `<tr><td>Prosent (pct=)</td><td>${h(dmarcTags.pct)}%</td></tr>` : ''}
+            ${dmarcTags.rua ? `<tr><td>Aggregert rapport (rua=)</td><td style="word-break:break-all">${h(dmarcTags.rua.replace(/mailto:/g,''))}</td></tr>` : ''}
+            ${dmarcTags.ruf ? `<tr><td>Forensic rapport (ruf=)</td><td style="word-break:break-all">${h(dmarcTags.ruf.replace(/mailto:/g,''))}</td></tr>` : ''}
+            ${dmarcTags.adkim ? `<tr><td>DKIM-justering (adkim=)</td><td>${dmarcTags.adkim==='s'?'Strict':'Relaxed'}</td></tr>` : ''}
+            ${dmarcTags.aspf  ? `<tr><td>SPF-justering (aspf=)</td><td>${dmarcTags.aspf==='s'?'Strict':'Relaxed'}</td></tr>` : ''}
+            <tr><td>Feilopplysninger</td><td class="v-yes">Ingen feil funnet</td></tr>
+        </table>
+
+        <div class="exp-section-title">DMARC Forklart</div>
+        <p style="font-size:13px;color:#718096;margin-bottom:8px">Konfigurerte tagger i DMARC-posten:</p>
+        <table class="exp-table">
+            ${Object.entries(dmarcTags).map(([k,v]) => {
+                const exp = DMARC_EXPLAIN[k] ? DMARC_EXPLAIN[k](v) : `${k}=${v}`;
+                return `<tr><td>${h(k)}= ${h(v)}</td><td>${h(exp)}</td></tr>`;
+            }).join('')}
+        </table>
+
+        <div class="exp-section-title" style="margin-top:16px">Standardverdier (ikke eksplisitt konfigurert)</div>
+        <table class="exp-table">
+            ${!dmarcTags.adkim ? '<tr><td>adkim= R</td><td>Relaxed DKIM-justering: Organisasjonsdomenet trenger bare å matche (standard).</td></tr>' : ''}
+            ${!dmarcTags.aspf  ? '<tr><td>aspf= R</td><td>Relaxed SPF-justering: Organisasjonsdomenet trenger bare å matche (standard).</td></tr>' : ''}
+            ${!dmarcTags.rf    ? '<tr><td>rf= Afrf</td><td>Rapporter i AFRF-format (RFC 6591).</td></tr>' : ''}
+            ${!dmarcTags.sp    ? `<tr><td>sp= ${h(dmarcTags.p||'Reject')}</td><td>Arver policy fra hoved-policy (p=) for subdomener.</td></tr>` : ''}
+        </table>
+        ` : `
+        <div class="alert alert-err">
+            <strong>⚠ Ingen DMARC-post funnet.</strong> DMARC er avgjørende for å beskytte domenet mot e-postforfalskning.<br><br>
+            <strong>Anbefalt startpost:</strong> <code>v=DMARC1; p=none; rua=mailto:dmarc@${h(data.domain)};</code>
+        </div>`}
+    </div>`;
+
+    /* ── SPF ── */
+    const spfSection = `
+    <div class="section-card">
+        <div class="sec-head">${sectionIcon(!!data.spf)}<h2>SPF</h2></div>
+        <p class="sec-sub">${data.spf ? `Følgende SPF DNS-post ble funnet for <strong>${h(data.domain)}</strong>` : `Ingen SPF DNS-post funnet for <strong>${h(data.domain)}</strong>`}</p>
+        ${data.spf && spfParsed ? `
+        <div class="rec-wrap">
+            <div class="rec-block" id="spfRec">${h(data.spf)}</div>
+            <button class="copy-btn" onclick="copyRec('spfRec',this)">Kopier</button>
+        </div>
+        <div class="checks-grid">
+            <div class="check-item ck-pass">✓ Syntaks og formatering</div>
+            <div class="check-item ${spfParsed.all&&spfParsed.all!=='+all'?'ck-pass':'ck-warn'}">${spfParsed.all&&spfParsed.all!=='+all'?'✓':'⚠'} Konfigurasjonsfeil</div>
+            <div class="check-item ${spfParsed.lookups<=10?'ck-pass':'ck-fail'}">${spfParsed.lookups<=10?'✓':'✗'} Ressursbegrensninger</div>
+            <div class="check-item ${spfParsed.all!=='+all'?'ck-pass':'ck-fail'}">${spfParsed.all!=='+all'?'✓':'✗'} Autorisering og omfang</div>
+            <div class="check-item ck-pass">✓ Tredjeparts avhengigheter</div>
+        </div>
+        <div style="margin-top:10px;font-size:13px;color:#718096">${spfParsed.lookups} DNS-oppslag brukt (maks 10)</div>
+        ${(spfParsed.includes.length||spfParsed.ip4s.length) ? `
+        <div style="margin-top:14px;font-size:14px;font-weight:600;color:#4a5568;margin-bottom:6px">SPF-mekanismer</div>
+        <div class="spf-tags">
+            ${spfParsed.raw.filter(p=>p!=='v=spf1').map(p => {
+                if (p.startsWith('include:'))  return `<span class="spf-tag spf-include">↩ ${h(p)}</span>`;
+                if (p.startsWith('ip4:'))      return `<span class="spf-tag spf-ip">${h(p)}</span>`;
+                if (p.startsWith('ip6:'))      return `<span class="spf-tag spf-ip">${h(p)}</span>`;
+                if (p==='-all')                return `<span class="spf-tag spf-all-hard">${h(p)}</span>`;
+                if (p==='~all')                return `<span class="spf-tag spf-all-soft">${h(p)}</span>`;
+                if (p.endsWith('all'))         return `<span class="spf-tag spf-all-weak">${h(p)}</span>`;
+                return `<span class="spf-tag" style="background:#f0f4f8;color:#4a5568">${h(p)}</span>`;
+            }).join('')}
+        </div>` : ''}
+        <div class="spf-explained-box">
+            Når en e-postserver mottar en e-post med <strong>${h(data.domain)}</strong> i Mail From-adressen, sjekkes det om avsenderens IP er autorisert i SPF-posten.
+            ${spfParsed.all==='~all' ? ' <strong>~all</strong> (soft fail) betyr at uautoriserte e-poster aksepteres men merkes som mistenkelige.' : ''}
+            ${spfParsed.all==='-all' ? ' <strong>-all</strong> (hard fail) betyr at uautoriserte e-poster avvises.' : ''}
+        </div>
+        ` : `<div class="alert alert-err"><strong>⚠ Ingen SPF-post funnet.</strong> SPF hindrer e-postforfalskning.</div>`}
+    </div>`;
+
+    /* ── DKIM ── */
+    const dkimSection = `
+    <div class="section-card">
+        <div class="sec-head">${sectionIcon(data.dkim?true:null)}<h2>DKIM</h2></div>
+        <p class="sec-sub">
+            ${data.dkim
+                ? `${data.dkimAll.length} DKIM-selektor${data.dkimAll.length>1?'er':''} funnet for <strong>${h(data.domain)}</strong>`
+                : `Ingen DKIM-post funnet med vanlige selektorer for <strong>${h(data.domain)}</strong>`}
+        </p>
+        ${data.dkim ? `
+        <div class="dkim-cards">
+            ${data.dkimAll.map((dk, i) => `
+            <div class="dkim-card">
+                <div class="dkim-card-header">
+                    <div class="dkim-selector-badge">
+                        <span class="status-icon si-ok" style="width:18px;height:18px;font-size:10px">✓</span>
+                        Selektor: <strong>${h(dk.selector)}</strong>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px">
+                        <span class="key-bits ${dk.keyBits>=2048?'bits-ok':'bits-warn'}">${h(dk.keyType)} ${dk.keyBits?dk.keyBits+'-bit':''}</span>
+                        <button class="copy-btn" onclick="copyText(${JSON.stringify(dk.raw)},this)">Kopier</button>
+                    </div>
+                </div>
+                <div class="dkim-card-body">
+                    <div class="rec-block" style="margin:0">${h(dk.raw.length>120?dk.raw.slice(0,120)+'…':dk.raw)}</div>
+                    <div class="dkim-checks">
+                        <div class="dkim-check dkim-check-ok">✓ Gyldig DKIM-post</div>
+                        <div class="dkim-check dkim-check-ok">✓ Offentlig nøkkel funnet</div>
+                        <div class="dkim-check dkim-check-ok">✓ Nøkkelalgoritme: ${h(dk.keyType)}</div>
+                        <div class="dkim-check ${dk.keyBits>=2048?'dkim-check-ok':'dkim-check-err'}">
+                            ${dk.keyBits>=2048?'✓':'⚠'} Nøkkellengde: ${dk.keyBits?h(String(dk.keyBits))+'-bit':'ukjent'}
+                            ${dk.keyBits>=2048?' (anbefalt: sikker)':' (anbefalt: oppgrader til 2048-bit)'}
+                        </div>
+                        <div class="dkim-check dkim-check-ok">✓ Ingen feil funnet</div>
+                    </div>
+                </div>
+            </div>`).join('')}
+        </div>
+        ` : `
+        <div class="alert alert-warn">
+            <strong>ℹ DKIM ikke funnet</strong> med vanlige selektorer. DKIM kan være konfigurert med en egendefinert selektor.<br>
+            <span style="font-size:12px;margin-top:4px;display:block">Prøvde: ${SELECTORS.slice(0,14).join(', ')}...</span>
+        </div>`}
+    </div>`;
+
+    /* ── BIMI ── */
+    const bimiSection = `
+    <div class="section-card">
+        <div class="sec-head">${sectionIcon(!!data.bimi)}<h2>BIMI</h2></div>
+        <p class="sec-sub">BIMI (Brand Indicators for Message Identification) viser firmalogoen i støttede e-postklienter.</p>
+        ${data.bimi ? `
+        <div class="bimi-layout">
+            ${bimiLogoUrl
+                ? `<img src="${h(bimiLogoUrl)}" class="bimi-logo" alt="BIMI logo" onerror="this.parentNode.innerHTML='<div class=bimi-logo-placeholder>🏢</div>'+this.parentNode.innerHTML.replace(this.outerHTML,'')">`
+                : '<div class="bimi-logo-placeholder">🏢</div>'}
+            <div style="flex:1">
+                <div class="rec-wrap">
+                    <div class="rec-block" id="bimiRec">${h(data.bimi)}</div>
+                    <button class="copy-btn" onclick="copyRec('bimiRec',this)">Kopier</button>
+                </div>
+                <table class="det-table">
+                    <tr><td>Gyldig BIMI-post</td><td class="v-yes">Ja</td></tr>
+                    ${bimiLogoUrl ? `<tr><td>BIMI Logo URL</td><td style="word-break:break-all;font-size:13px">${h(bimiLogoUrl)}</td></tr>` : ''}
+                    <tr><td>VMC-sertifikat</td><td style="color:#718096">Ikke konfigurert</td></tr>
+                    <tr><td>Feilopplysninger</td><td class="v-yes">Ingen feil funnet</td></tr>
+                </table>
+            </div>
+        </div>
+        ` : `<div class="alert alert-info">ℹ Ingen BIMI-post funnet for <strong>default._bimi.${h(data.domain)}</strong>. Krever DMARC med p=quarantine eller p=reject.</div>`}
+    </div>`;
+
+    /* ── MTA-STS ── */
+    const stsMode = data.stsPolicy?.match(/mode:\s*(\S+)/i)?.[1] || null;
+    const stsMx   = [...(data.stsPolicy?.matchAll(/mx:\s*(\S+)/gi)||[])].map(m=>m[1]);
+    const mtaStsSection = `
+    <div class="section-card">
+        <div class="sec-head">${sectionIcon(!!data.mtaSts)}<h2>MTA-STS</h2></div>
+        <p class="sec-sub">MTA-STS (Mail Transfer Agent Strict Transport Security) sikrer kryptert e-postoverføring.</p>
+        ${data.mtaSts ? `
+        <div class="rec-wrap">
+            <div class="rec-block" id="mtsRec">${h(data.mtaSts)}</div>
+            <button class="copy-btn" onclick="copyRec('mtsRec',this)">Kopier</button>
+        </div>
+        <table class="det-table">
+            <tr><td>Gyldig MTA-STS-post</td><td class="v-yes">Ja</td></tr>
+            ${stsMode ? `<tr><td>Modus</td><td><span class="inline-policy ${stsMode==='enforce'?'ip-reject':'ip-none'}">${h(stsMode)}</span></td></tr>` : ''}
+            <tr><td>Policy-fil tilgjengelig</td><td class="${data.stsPolicy?'v-yes':'v-no'}">${data.stsPolicy?'Ja':'Ikke verifisert'}</td></tr>
+            ${data.stsPolicy ? `<tr><td>Policy Host</td><td style="font-size:13px">https://mta-sts.${h(data.domain)}/.well-known/mta-sts.txt</td></tr>` : ''}
+            ${stsMx.length ? `<tr><td>MX-poster (policy)</td><td>${stsMx.map(m=>`<div style="font-family:monospace;font-size:13px">${h(m)}</div>`).join('')}</td></tr>` : ''}
+            <tr><td>Feilopplysninger</td><td class="v-yes">Ingen feil funnet</td></tr>
+        </table>
+        ${data.stsPolicy ? `
+        <div style="margin-top:14px;font-size:14px;font-weight:600;color:#4a5568;margin-bottom:6px">Policy-fil innhold</div>
+        <div class="sts-policy-box">${h(data.stsPolicy.trim())}</div>` : ''}
+        ` : `<div class="alert alert-err"><strong>⚠ Ingen MTA-STS-post funnet</strong> for <strong>_mta-sts.${h(data.domain)}</strong></div>`}
+    </div>`;
+
+    /* ── TLS-RPT ── */
+    const tlsRptSection = `
+    <div class="section-card">
+        <div class="sec-head">${sectionIcon(!!data.tlsRpt)}<h2>TLS-RPT</h2></div>
+        <p class="sec-sub">TLS-RPT (TLS Reporting) lar e-postleverandører rapportere TLS-krypteringsproblemer.</p>
+        ${data.tlsRpt ? `
+        <div class="rec-wrap">
+            <div class="rec-block" id="tlsRec">${h(data.tlsRpt)}</div>
+            <button class="copy-btn" onclick="copyRec('tlsRec',this)">Kopier</button>
+        </div>
+        <table class="det-table">
+            <tr><td>Gyldig TLS-RPT-post</td><td class="v-yes">Ja</td></tr>
+            ${tlsRua ? `<tr><td>Aggregert rapport (rua=)</td><td>${h(tlsRua)}</td></tr>` : ''}
+            <tr><td>Feilopplysninger</td><td class="v-yes">Ingen feil funnet</td></tr>
+        </table>
+        ` : `<div class="alert alert-err"><strong>⚠ Ingen TLS-RPT-post funnet</strong> for <strong>_smtp._tls.${h(data.domain)}</strong></div>`}
+    </div>`;
+
+    document.getElementById('results').innerHTML =
+        scoreSection + tiltakSection + overview + dnsRecs + dmarcSection + spfSection + dkimSection + bimiSection + mtaStsSection + tlsRptSection;
+    document.getElementById('results').classList.remove('hidden');
+    document.getElementById('loading').classList.add('hidden');
+
+    // Animate score counter
+    setTimeout(() => {
+        document.getElementById('scoreNum').textContent = score + '%';
+        document.getElementById('scoreBar').style.width = score + '%';
+    }, 80);
+}
+
+/* ── Copy helpers ── */
+function copyRec(id, btn) {
+    copyText(document.getElementById(id)?.textContent || '', btn);
+}
+function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+        if (btn) { btn.textContent = 'Kopiert!'; btn.classList.add('copied'); setTimeout(()=>{ btn.textContent='Kopier'; btn.classList.remove('copied'); }, 1800); }
+    });
+}
+
+/* ── Email report ── */
+/* ── Native intake modal ──
+ * Backend (Cloudflare Worker / Power Automate) skal:
+ *   1. Opprette kunde i Halo via Halo API
+ *   2. Sende HTML-rapport via Mailgun til kontaktens e-post
+ *   3. Returnere 200 OK ved suksess, 4xx/5xx ved feil
+ */
+const INTAKE_ENDPOINT = 'http://localhost:3001/intake'; // lokal backend (intake-server.py)
+
+function emailReport(domain) {
+    const modal = document.getElementById('haloModal');
+    const form = document.getElementById('intakeForm');
+    const success = document.getElementById('intakeSuccess');
+    const error = document.getElementById('intakeError');
+
+    form.style.display = 'flex';
+    success.style.display = 'none';
+    error.style.display = 'none';
+    form.reset();
+
+    document.getElementById('intakeDomain').textContent = domain;
+    document.getElementById('intakeDomainField').value = domain;
+
+    const score = window._lastScoreData;
+    document.getElementById('intakeMeta').textContent = score
+        ? `Score: ${score.score}% · Karakter: ${score.grade}`
+        : `Analyse: ${new Date().toLocaleDateString('no-NO')}`;
+
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('intakeName').focus(), 200);
+}
+
+async function submitIntake(e) {
+    e.preventDefault();
+    const form = document.getElementById('intakeForm');
+    const submitBtn = document.getElementById('intakeSubmit');
+    const error = document.getElementById('intakeError');
+    error.style.display = 'none';
+
+    const data = {
+        name:    document.getElementById('intakeName').value.trim(),
+        company: document.getElementById('intakeCompany').value.trim(),
+        orgnr:   document.getElementById('intakeOrgnr').value.replace(/\s/g, '').trim(),
+        email:   document.getElementById('intakeEmail').value.trim(),
+        phone:   document.getElementById('intakePhone').value.trim(),
+        domain:  document.getElementById('intakeDomainField').value.trim(),
+        message: document.getElementById('intakeMessage').value.trim(),
+        score:   window._lastScoreData?.score ?? null,
+        grade:   window._lastScoreData?.grade ?? null,
+        reportUrl: window.location.origin + window.location.pathname + '?domain=' + encodeURIComponent(document.getElementById('intakeDomainField').value.trim()),
+        timestamp: new Date().toISOString(),
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sender…';
+
+    try {
+        if (!INTAKE_ENDPOINT) {
+            // Dev/preview: log payload, simulate success
+            console.log('[intake payload]', data);
+            await new Promise(r => setTimeout(r, 800));
+        } else {
+            const res = await fetch(INTAKE_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            if (!res.ok) throw new Error(`Server svarte ${res.status}`);
+        }
+
+        form.style.display = 'none';
+        document.getElementById('intakeSuccessMsg').textContent =
+            `Vi sender rapporten til ${data.email} og oppretter kontakten i Halo.`;
+        document.getElementById('intakeSuccess').style.display = 'flex';
+    } catch (err) {
+        error.textContent = `Kunne ikke sende: ${err.message}. Prøv igjen, eller kontakt oss direkte.`;
+        error.style.display = 'block';
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send rapport';
+    }
+}
+
+/* Brreg-oppslag — auto-fyll firmanavn fra org.nr */
+let _orgnrTimer = null;
+async function lookupOrgnr(raw) {
+    const orgnr = raw.replace(/\s/g, '');
+    if (!/^\d{9}$/.test(orgnr)) return;
+    clearTimeout(_orgnrTimer);
+    _orgnrTimer = setTimeout(async () => {
+        try {
+            const res = await fetch(`https://data.brreg.no/enhetsregisteret/api/enheter/${orgnr}`);
+            if (!res.ok) return;
+            const j = await res.json();
+            const companyEl = document.getElementById('intakeCompany');
+            if (j.navn && !companyEl.value.trim()) companyEl.value = j.navn;
+        } catch {}
+    }, 350);
+}
+
+function closeHaloModal() {
+    const modal = document.getElementById('haloModal');
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('haloModal')?.classList.contains('show')) {
+        closeHaloModal();
+    }
+});
+
+/* ── Webhook notification ── */
+async function sendNotification(data, score, grade) {
+    if (!CONFIG.webhookUrl) return;
+    try {
+        await fetch(CONFIG.webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                domain:    data.domain,
+                score,
+                grade,
+                dmarc:    !!data.dmarc,
+                spf:      !!data.spf,
+                dkim:     !!data.dkim,
+                mtaSts:   !!data.mtaSts,
+                tlsRpt:   !!data.tlsRpt,
+                bimi:     !!data.bimi,
+                dkimSelectors: data.dkimAll?.map(d=>d.selector) || [],
+                timestamp: new Date().toISOString(),
+                reportUrl: `${window.location.origin}${window.location.pathname}?domain=${data.domain}`,
+            }),
+        });
+    } catch (e) { console.warn('Webhook failed:', e); }
+}
+
+/* ── Toast ── */
+function showToast(msg, duration = 3500) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), duration);
+}
+
+/* ── Loading ── */
+function setLoading(msg) { document.getElementById('loadingText').textContent = msg; }
+
+/* ── Run analysis ── */
+let currentDomain = null;
+
+function getDomainInput() {
+    const hero = document.getElementById('domainInputHero');
+    const top  = document.getElementById('domainInput');
+    return ((hero && hero.value) || (top && top.value) || '').trim();
+}
+function setDomainInput(v) {
+    const hero = document.getElementById('domainInputHero');
+    const top  = document.getElementById('domainInput');
+    if (hero) hero.value = v;
+    if (top)  top.value  = v;
+}
+
+async function handleSearch(e) {
+    if (e) e.preventDefault();
+    const raw = getDomainInput();
+    if (!raw) return;
+    currentDomain = raw;
+    setDomainInput(raw);
+
+    document.body.classList.add('has-results');
+    document.getElementById('welcome').classList.add('hidden');
+    document.getElementById('results').classList.add('hidden');
+    document.getElementById('loading').classList.remove('hidden');
+    setLoading('Analyserer domene...');
+
+    try {
+        const data = await analyzeDomain(raw);
+        const { score, grade } = calcScore(data);
+        renderResults(data);
+
+        // Send notification webhook
+        await sendNotification(data, score, grade);
+        if (CONFIG.webhookUrl) showToast(`📧 Varsel sendt til ${CONFIG.notifyTo}`);
+
+        const url = new URL(window.location.href);
+        url.searchParams.set('domain', data.domain);
+        history.pushState({}, '', url);
+    } catch (err) {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('results').innerHTML =
+            `<div class="section-card"><div class="alert alert-err">Feil: ${h(err.message)}</div></div>`;
+        document.getElementById('results').classList.remove('hidden');
+    }
+}
+
+function reloadAnalysis() {
+    if (currentDomain) { setDomainInput(currentDomain); handleSearch(); }
+}
+function runExample(d) { setDomainInput(d); handleSearch(); }
+
+window.addEventListener('DOMContentLoaded', () => {
+    const p = new URLSearchParams(location.search).get('domain');
+    if (p) { setDomainInput(p); handleSearch(); }
+});
+</script>
+</body>
+</html>

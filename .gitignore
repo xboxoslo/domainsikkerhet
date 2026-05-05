@@ -1,0 +1,24 @@
+# Hemmeligheter — ALDRI commit
+intake-secrets.env
+*.env
+!*.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Generert / test-output
+shield_test_*.png
+demo_payload.json
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
