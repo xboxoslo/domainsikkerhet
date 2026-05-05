@@ -47,7 +47,7 @@ PORT = int(os.environ.get('PORT', 3001))
 def load_env():
     env_path = Path(__file__).parent / 'intake-secrets.env'
     if not env_path.exists():
-        sys.exit(f'FEIL: {env_path} mangler. Kopier intake-secrets.env.example og fyll inn nøkler.')
+        return  # Railway: secrets are already in environment variables
     for line in env_path.read_text(encoding='utf-8').splitlines():
         line = line.strip()
         if not line or line.startswith('#') or '=' not in line:
