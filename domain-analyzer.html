@@ -1466,20 +1466,31 @@ function emailReport(domain) {
 }
 
 /* Brreg-oppslag — auto-fyll org.nr og firma fra domenenavn (.no) */
+const LEGAL_FORMS = new Set(['AS','ASA','NUF','ANS','DA','BA','SA','BBL','SE']);
 async function lookupCompanyFromDomain(domain) {
-    // Strip TLD og bygg søkeord (academica-as.no → "academica as")
-    const base = domain.toLowerCase().replace(/\.no$/, '').replace(/[-_]/g, ' ').trim();
+    // Strip TLD, bytt - til mellomrom, og fjern legal-form-suffix (academica-as.no → "academica")
+    let base = domain.toLowerCase().replace(/\.no$/, '').replace(/[-_]/g, ' ').trim();
+    base = base.replace(/\s+(as|asa|ans|da|nuf|ba|sa)$/i, '').trim();
     if (base.length < 2) return;
     try {
-        const url = `https://data.brreg.no/enhetsregisteret/api/enheter?navn=${encodeURIComponent(base)}&size=10`;
+        const url = `https://data.brreg.no/enhetsregisteret/api/enheter?navn=${encodeURIComponent(base)}&size=20`;
         const res = await fetch(url, { headers: { Accept: 'application/json' } });
         if (!res.ok) return;
         const j = await res.json();
-        const items = (j._embedded?.enheter || []).filter(e => !e.slettedato);
+        let items = (j._embedded?.enheter || []).filter(e =>
+            !e.slettedato && LEGAL_FORMS.has(e.organisasjonsform?.kode)
+        );
         if (!items.length) return;
-        // Foretrekk eksakt match på "navn starter med base", ellers første treff
-        const exact = items.find(e => e.navn.toLowerCase().startsWith(base.toUpperCase().toLowerCase()));
-        const pick = exact || items[0];
+        // Sorter: 1) eksakt prefix-match, 2) kortest navn (mer sannsynlig hovedselskap)
+        const baseLower = base.toLowerCase();
+        items.sort((a, b) => {
+            const an = a.navn.toLowerCase(), bn = b.navn.toLowerCase();
+            const aExact = an === baseLower || an.startsWith(baseLower + ' ');
+            const bExact = bn === baseLower || bn.startsWith(baseLower + ' ');
+            if (aExact !== bExact) return aExact ? -1 : 1;
+            return an.length - bn.length;
+        });
+        const pick = items[0];
         const orgnrEl = document.getElementById('intakeOrgnr');
         const companyEl = document.getElementById('intakeCompany');
         if (!orgnrEl.value.trim()) orgnrEl.value = pick.organisasjonsnummer;
