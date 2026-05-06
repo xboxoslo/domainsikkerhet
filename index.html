@@ -3,16 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <meta name="description" content="Sjekk e-postsikkerhet for ethvert domene — SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI på sekunder.">
+    <meta name="theme-color" content="#1a202c">
     <title>E-post Sikkerhetsanalyse</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
     <style>
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400 900;
+            font-display: swap;
+            src: url('/fonts/inter-latin.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Inter Fallback';
+            src: local('Arial');
+            size-adjust: 107%;
+            ascent-override: 90%;
+            descent-override: 22%;
+            line-gap-override: 0%;
+        }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #f1f5f9; color: #1e293b; min-height: 100vh;
             -webkit-font-smoothing: antialiased;
         }
@@ -295,7 +309,7 @@
             letter-spacing: -0.03em; line-height: 1.1;
         }
         .welcome h1 .accent { background: linear-gradient(120deg, #14b8a6 0%, #0d9488 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .welcome-sub { font-size: 17px; color: #64748b; max-width: 540px; margin: 0 auto 36px; line-height: 1.55; }
+        .welcome-sub { font-size: 17px; color: #475569; max-width: 540px; margin: 0 auto 36px; line-height: 1.55; }
 
         /* Big centered search */
         .hero-search-wrap { width: 100%; max-width: 620px; margin: 0 auto; }
@@ -331,7 +345,7 @@
             display: inline-flex; align-items: center; gap: 6px;
         }
         .feature-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #14b8a6; }
-        .example-label { font-size: 13px; color: #94a3b8; margin: 32px 0 10px; }
+        .example-label { font-size: 13px; color: #64748b; margin: 32px 0 10px; }
         .example-domains { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
         .example-btn {
             padding: 7px 16px; border: 1px solid #e2e8f0; border-radius: 999px;
@@ -621,7 +635,7 @@
     </form>
 </div>
 
-<div class="container">
+<main class="container">
     <div id="welcome" class="welcome">
         <div class="welcome-shield">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -640,7 +654,7 @@
                 </svg>
                 <input type="text" class="hero-search-input" id="domainInputHero"
                        placeholder="Skriv inn domenenavn — f.eks. micronet.no"
-                       autocomplete="off" spellcheck="false" autofocus>
+                       autocomplete="off" spellcheck="false">
                 <button type="submit" class="hero-search-btn">Analyser</button>
             </form>
 
@@ -668,7 +682,7 @@
     </div>
 
     <div id="results" class="hidden"></div>
-</div>
+</main>
 
 <script>
 'use strict';
