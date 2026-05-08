@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Slik setter du opp DMARC i Google Workspace / Gmail steg for steg. Oppfyll Googles 2024-krav for masseutsendelse og beskytt domenet ditt mot phishing.">
+<meta name="keywords" content="dmarc google workspace, dmarc gmail, gmail dmarc oppsett, google workspace dmarc, dmarc google 2024, dmarc bulk sender">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/blogg/dmarc-google-workspace/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/blogg/dmarc-google-workspace/">
+<meta property="og:title" content="DMARC i Google Workspace: Komplett guide">
+<meta property="og:description" content="Steg-for-steg DMARC-oppsett for Gmail / Google Workspace. Oppfyll Googles 2024-krav.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>DMARC i Google Workspace: Komplett guide | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Slik setter du opp DMARC i Google Workspace","datePublished":"2026-05-08","author":{"@type":"Organization","name":"Micronet"},"step":[{"@type":"HowToStep","name":"SPF","text":"Legg til Google i SPF."},{"@type":"HowToStep","name":"DKIM","text":"Generer og aktiver DKIM-nøkkel i Google Admin."},{"@type":"HowToStep","name":"DMARC p=none","text":"Opprett DMARC-record med p=none."},{"@type":"HowToStep","name":"Overvåk","text":"Les rapporter i 2-4 uker."},{"@type":"HowToStep","name":"Skjerp policy","text":"Trinnvis fra none → quarantine → reject."}]}</script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/blogg/">Blogg</a> › DMARC i Google Workspace</nav>
+  <h1>DMARC i Google Workspace: Komplett guide</h1>
+  <p class="meta">Publisert 8. mai 2026 · Av Micronet · 8 min lesetid</p>
+  <p class="lead">Siden februar 2024 krever Google og Yahoo at alle bulk-avsendere (5000+ e-poster/dag) har DMARC. Men selv om du er under denne grensen, er DMARC kritisk for å beskytte domenet mot misbruk. Denne guiden viser deg hele oppsettet i Google Workspace.</p>
+
+  <div class="toc">
+    <h2>Innhold</h2>
+    <ol>
+      <li><a href="#krav">Forutsetninger</a></li>
+      <li><a href="#spf">Steg 1: SPF for Google</a></li>
+      <li><a href="#dkim">Steg 2: DKIM i Google Admin</a></li>
+      <li><a href="#dmarc">Steg 3: Opprett DMARC-record</a></li>
+      <li><a href="#bulk">Spesielt: Googles bulk-avsenderkrav (2024)</a></li>
+      <li><a href="#feil">Vanlige feil i Google Workspace-oppsett</a></li>
+    </ol>
+  </div>
+
+  <h2 id="krav">Forutsetninger</h2>
+  <ul>
+    <li>Du bruker Google Workspace (Gmail) for utgående e-post.</li>
+    <li>Du har Super Admin-tilgang i Google Admin Console.</li>
+    <li>Du har tilgang til DNS-en for domenet.</li>
+  </ul>
+
+  <h2 id="spf">Steg 1: SPF-record for Google</h2>
+  <p>Standard SPF for Google Workspace:</p>
+  <pre><code>v=spf1 include:_spf.google.com -all</code></pre>
+
+  <p>Hvis du sender også via tredjeparter:</p>
+  <pre><code>v=spf1 include:_spf.google.com include:servers.mcsv.net -all</code></pre>
+
+  <h2 id="dkim">Steg 2: DKIM i Google Admin</h2>
+  <ol>
+    <li>Logg inn på <a href="https://admin.google.com" rel="nofollow">admin.google.com</a>.</li>
+    <li>Gå til <strong>Apper → Google Workspace → Gmail → Autentisering</strong>.</li>
+    <li>Velg domenet ditt fra dropdown-menyen øverst.</li>
+    <li>Klikk <strong>Generate new record</strong>. Velg <em>2048-bit</em> nøkkel — ikke 1024.</li>
+    <li>Google viser en TXT-record som ser slik ut:
+      <pre><code>google._domainkey  TXT  "v=DKIM1; k=rsa; p=MIIBIjANBgkqhk..."</code></pre>
+    </li>
+    <li>Legg recordet inn hos DNS-leverandøren. Vent 30-60 minutter.</li>
+    <li>Tilbake i Google Admin: klikk <strong>Start authentication</strong>.</li>
+  </ol>
+
+  <p>Test med <a href="/?utm_source=blog&utm_medium=dmarc-google">data1.no</a> — du skal se ett grønt sjekkmerke for <code>google</code>-selektoren.</p>
+
+  <h2 id="dmarc">Steg 3: Opprett DMARC-record</h2>
+  <p>Start alltid med <code>p=none</code>:</p>
+  <pre><code>_dmarc  TXT  "v=DMARC1; p=none; rua=mailto:dmarc@dittfirma.no; pct=100;"</code></pre>
+
+  <p>Etter 2-4 uker overvåking: skjerp til quarantine, og deretter reject.</p>
+
+  <p>Detaljert overgangsplan: se vår <a href="/blogg/dmarc-microsoft-365/#quarantine">guide for M365</a> — prosedyren er identisk for Google Workspace.</p>
+
+  <h2 id="bulk">Spesielt: Googles bulk-avsenderkrav (2024)</h2>
+  <p>Hvis du sender mer enn 5000 e-poster per dag til Gmail-mottakere, krever Google at du:</p>
+  <ol>
+    <li>Har gyldig SPF</li>
+    <li>Har gyldig DKIM (2048-bit anbefales)</li>
+    <li>Har DMARC-record på minst <code>p=none</code></li>
+    <li>Har "alignment" mellom From-domenet og DKIM/SPF</li>
+    <li>Tilbyr enkelt avmeldingslenke (RFC 8058)</li>
+    <li>Holder spam-rapporteringsraten under 0,3 %</li>
+  </ol>
+
+  <div class="callout warn">
+    <p><strong>Viktig:</strong> Selv om du er under 5000 e-poster/dag, vil Google straffe avsendere uten DMARC i økende grad. Sett opp DMARC nå.</p>
+  </div>
+
+  <h2 id="feil">Vanlige feil i Google Workspace-oppsett</h2>
+  <ol>
+    <li><strong>Brukt 1024-bit DKIM-nøkkel.</strong> Google støtter 2048 — bruk det. Eldre nøkler bør roteres.</li>
+    <li><strong>Glemt å klikke "Start authentication" etter at TXT-recorden er på plass.</strong> DKIM forblir inaktiv.</li>
+    <li><strong>Glemt at <code>noreply@gmail.com</code> i Reply-To ikke er det samme som <code>From:</code>.</strong> DMARC sjekker From-headeren.</li>
+    <li><strong>Tredjepartstjenester (Mailchimp, HubSpot) glemt i SPF.</strong> De bruker sin egen sender-IP og fanges ikke opp av Googles SPF.</li>
+  </ol>
+
+  <div class="cta-box">
+    <h3>Sjekk DMARC-status for ditt Workspace-domene</h3>
+    <p>Få full validering på 10 sekunder.</p>
+    <a href="/?utm_source=blog&utm_medium=dmarc-google">Sjekk eget domene →</a>
+  </div>
+
+  <h2>Lese mer</h2>
+  <ul>
+    <li><a href="/blogg/dmarc-microsoft-365/">DMARC i Microsoft 365</a></li>
+    <li><a href="/blogg/dmarc/">DMARC forklart fra grunnen</a></li>
+    <li><a href="/verktoy/dmarc-generator/">DMARC-generator</a></li>
+  </ul>
+
+  <div class="author-card">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Micronet</div>
+      <div class="author-meta">Norsk IT-konsulenttjeneste — DMARC, e-post sikkerhet og Google Workspace. <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

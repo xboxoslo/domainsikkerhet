@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Gratis SPF record-generator. Velg leverandørene du sender e-post fra (Microsoft 365, Google, Mailchimp, etc.) — få en gyldig SPF-record du kan kopiere rett inn i DNS.">
+<meta name="keywords" content="spf generator, spf record generator, lag spf record, spf TXT generator, spf oppsett verktøy">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/verktoy/spf-generator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/verktoy/spf-generator/">
+<meta property="og:title" content="SPF-generator — gratis verktøy fra data1.no">
+<meta property="og:description" content="Velg leverandørene dine, få en gyldig SPF-record på sekunder.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<title>SPF-generator | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Inter";font-weight:400 900;font-display:optional;src:url(/fonts/inter-latin.woff2)format("woff2");unicode-range:U+0000-00FF}
+@font-face{font-family:"Inter Fallback";src:local("Arial");size-adjust:107.4%;ascent-override:90%;descent-override:22.48%;line-gap-override:0%}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Inter","Inter Fallback",-apple-system,BlinkMacSystemFont,sans-serif;background:#f1f5f9;color:#1e293b;-webkit-font-smoothing:antialiased;line-height:1.55}
+.header{background:#1a202c;padding:14px 28px;display:flex;align-items:center;gap:18px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.logo{color:#fff;font-size:19px;font-weight:800;text-decoration:none}.logo span{color:#4fd1c5}
+.spacer{flex:1}.nav-link{color:#cbd5e0;text-decoration:none;font-size:14px}.nav-link:hover{color:#fff}
+main{max-width:880px;margin:0 auto;padding:36px 22px 80px}
+.crumbs{font-size:13px;color:#94a3b8;margin-bottom:16px}.crumbs a{color:#0f766e;text-decoration:none}
+h1{font-size:36px;font-weight:900;color:#0f172a;letter-spacing:-.025em;line-height:1.1;margin-bottom:14px}
+.intro{font-size:17px;color:#475569;max-width:680px;margin-bottom:28px;line-height:1.6}
+.layout{display:grid;grid-template-columns:1.05fr .95fr;gap:24px}
+.card{background:#fff;border-radius:14px;padding:26px 28px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.card h2{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:18px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:700;color:#475569;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.field-help{font-size:12px;color:#64748b;margin-top:4px;line-height:1.45}
+.field input,.field select{width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14.5px;color:#0f172a;font-family:inherit;background:#fff;outline:0;transition:border-color .15s,box-shadow .15s}
+.field input:focus,.field select:focus{border-color:#14b8a6;box-shadow:0 0 0 3px rgba(20,184,166,.12)}
+.section-title{font-size:14px;font-weight:700;color:#475569;margin:18px 0 8px;text-transform:uppercase;letter-spacing:.04em}
+.providers{display:grid;gap:8px}
+.prov{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;cursor:pointer;transition:all .15s}
+.prov:hover{border-color:#cbd5e0}
+.prov input{accent-color:#14b8a6}
+.prov:has(input:checked){border-color:#14b8a6;background:#f0fdfa}
+.prov-name{font-weight:600;color:#0f172a;font-size:14px}
+.prov-include{font-size:11px;color:#64748b;font-family:ui-monospace,monospace;margin-left:auto}
+.lookups{font-size:11px;color:#94a3b8;background:#f1f5f9;padding:2px 8px;border-radius:999px;margin-left:6px;font-weight:700}
+.ip-list{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.ip-item{display:flex;gap:6px}
+.ip-item input{flex:1}
+.ip-item button{padding:6px 12px;background:#fff;border:1px solid #e2e8f0;color:#dc2626;border-radius:8px;cursor:pointer;font-size:13px}
+.add-ip{padding:8px 14px;background:#f1f5f9;border:1px dashed #cbd5e0;color:#475569;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;width:100%;margin-top:6px}
+.radio-group{display:grid;gap:8px;margin-top:6px}
+.radio-opt{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1px solid #e2e8f0;border-radius:10px;cursor:pointer;transition:all .15s}
+.radio-opt input{margin-top:2px;flex-shrink:0;accent-color:#14b8a6}
+.radio-opt:has(input:checked){border-color:#14b8a6;background:#f0fdfa}
+.ro-name{font-weight:700;color:#0f172a;font-size:14px}
+.ro-desc{font-size:12.5px;color:#64748b;margin-top:2px;line-height:1.4}
+.output-card{position:sticky;top:20px}
+.record-box{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:20px 22px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;line-height:1.7;word-break:break-all;margin-bottom:14px;min-height:80px}
+.record-box .lbl{color:#64748b;font-size:11px;font-family:"Inter",sans-serif;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:6px;font-weight:600}
+.record-box .v{color:#5eead4}
+.record-box .k{color:#fcd34d}
+.record-box .a{color:#fda4af}
+.copy-btn{display:flex;width:100%;align-items:center;justify-content:center;gap:8px;padding:13px 22px;background:#14b8a6;color:#fff;border:0;border-radius:10px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s}
+.copy-btn:hover{background:#0d9488}
+.copy-btn.copied{background:#16a34a}
+.dns-meta{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin-top:18px;font-size:13px}
+.dns-meta dt{color:#64748b;font-weight:600}
+.dns-meta dd{color:#0f172a;font-family:ui-monospace,monospace}
+.lookup-warn{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;padding:12px 14px;border-radius:10px;font-size:13px;margin-top:12px;display:none}
+.lookup-warn.show{display:block}
+.lookup-ok{background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:10px 14px;border-radius:10px;font-size:13px;margin-top:12px}
+.cta-box{background:linear-gradient(135deg,#0f172a,#1a2540);color:#fff;border-radius:14px;padding:26px 28px;margin-top:30px;text-align:center}
+.cta-box h3{font-size:20px;font-weight:900;margin-bottom:8px}
+.cta-box p{color:#94a3b8;margin-bottom:14px;font-size:14px}
+.cta-box a{display:inline-block;padding:11px 22px;background:#14b8a6;color:#fff;border-radius:999px;text-decoration:none;font-weight:700}
+.related{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.related a{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px 18px;text-decoration:none;color:inherit}
+.related a:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(15,23,42,.07)}
+.related strong{display:block;color:#0f172a;font-size:14px;margin-bottom:4px}
+.related span{color:#64748b;font-size:13px}
+@media(max-width:880px){.layout{grid-template-columns:1fr}.output-card{position:static}}
+@media(max-width:640px){h1{font-size:26px}main{padding:24px 16px 60px}}
+</style>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/verktoy/">Verktøy</a> › SPF-generator</nav>
+  <h1>SPF-generator</h1>
+  <p class="intro">Velg hvilke tjenester du sender e-post fra. Vi bygger SPF-recorden, teller DNS-oppslag og advarer om 10-lookup-grensen. Kopier rett inn i DNS-en din.</p>
+
+  <div class="layout">
+    <div class="card">
+      <h2>Konfigurer din SPF-record</h2>
+
+      <div class="field">
+        <label for="domain">Ditt domene</label>
+        <input type="text" id="domain" placeholder="dittfirma.no" autocomplete="off" spellcheck="false">
+        <div class="field-help">Bare hoveddomene — uten www eller protokoll.</div>
+      </div>
+
+      <div class="section-title">Leverandører</div>
+      <div class="providers" id="providers"></div>
+
+      <div class="section-title">Egne IP-adresser (valgfritt)</div>
+      <div class="ip-list" id="ipList"></div>
+      <button type="button" class="add-ip" id="addIp">+ Legg til IP-adresse</button>
+
+      <div class="section-title">Avslutning (all-mekanisme)</div>
+      <div class="radio-group">
+        <label class="radio-opt"><input type="radio" name="all" value="-all" checked><div><div class="ro-name">-all (hard fail) — anbefalt</div><div class="ro-desc">Avvis all e-post fra alle andre IP-adresser. Maks beskyttelse.</div></div></label>
+        <label class="radio-opt"><input type="radio" name="all" value="~all"><div><div class="ro-name">~all (soft fail)</div><div class="ro-desc">Marker som mistenkelig, men ikke avvis. Brukes ofte i overgangsfasen.</div></div></label>
+        <label class="radio-opt"><input type="radio" name="all" value="?all"><div><div class="ro-name">?all (neutral)</div><div class="ro-desc">Ingen håndhevelse. Ikke anbefalt — gir ingen reell beskyttelse.</div></div></label>
+      </div>
+    </div>
+
+    <div class="output-card">
+      <div class="card">
+        <h2>Din SPF-record</h2>
+        <div class="record-box" id="output">
+          <span class="lbl">TXT-record verdi</span>
+          <span id="recordValue"><span class="v">v=spf1</span> <span class="a">-all</span></span>
+        </div>
+        <button class="copy-btn" id="copyBtn">📋 Kopier record</button>
+        <dl class="dns-meta">
+          <dt>Type</dt><dd>TXT</dd>
+          <dt>Navn / vert</dt><dd id="hostname">@</dd>
+          <dt>TTL</dt><dd>3600</dd>
+          <dt>DNS-oppslag</dt><dd><span id="lookupCount">0</span> / 10</dd>
+        </dl>
+        <div class="lookup-warn" id="lookupWarn">⚠ <strong>For mange DNS-oppslag.</strong> SPF har en grense på 10 lookups. Fjern noen <code>include:</code>-direktiver eller bruk SPF flattening.</div>
+        <div class="lookup-ok" id="lookupOk">✓ Innenfor 10-lookup grensen.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h3>Test SPF-recorden din etter publisering</h3>
+    <p>Vi validerer syntaks og teller lookups automatisk.</p>
+    <a href="/?utm_source=verktoy">Sjekk eget domene →</a>
+  </div>
+
+  <div class="related">
+    <a href="/verktoy/dmarc-generator/"><strong>DMARC-generator →</strong><span>Lag DMARC-record på 30 sek</span></a>
+    <a href="/blogg/spf/"><strong>SPF forklart</strong><span>Komplett guide</span></a>
+    <a href="/blogg/spf-microsoft-365/"><strong>SPF i M365</strong><span>Steg-for-steg</span></a>
+    <a href="/rapport-2026/"><strong>Topp 100 rapport →</strong><span>Hvem har riktig SPF?</span></a>
+  </div>
+</main>
+
+<script>
+'use strict';
+const PROVIDERS = [
+  { id: 'm365', name: 'Microsoft 365 / Exchange Online', include: 'spf.protection.outlook.com', lookups: 3 },
+  { id: 'google', name: 'Google Workspace / Gmail', include: '_spf.google.com', lookups: 4 },
+  { id: 'mailchimp', name: 'Mailchimp', include: 'servers.mcsv.net', lookups: 1 },
+  { id: 'sendgrid', name: 'SendGrid', include: 'sendgrid.net', lookups: 2 },
+  { id: 'mailgun', name: 'Mailgun', include: 'mailgun.org', lookups: 1 },
+  { id: 'hubspot', name: 'HubSpot', include: '_spf.hubspot.com', lookups: 1 },
+  { id: 'salesforce', name: 'Salesforce', include: '_spf.salesforce.com', lookups: 1 },
+  { id: 'zendesk', name: 'Zendesk', include: 'mail.zendesk.com', lookups: 1 },
+  { id: 'postmark', name: 'Postmark', include: 'spf.mtasv.net', lookups: 1 },
+  { id: 'mailerlite', name: 'MailerLite', include: '_spf.mlsend.com', lookups: 1 },
+  { id: 'amazonses', name: 'Amazon SES', include: 'amazonses.com', lookups: 1 },
+  { id: 'domeneshop', name: 'Domeneshop e-post', include: '_spf.domeneshop.no', lookups: 1 },
+];
+
+const $ = id => document.getElementById(id);
+const provHost = $('providers');
+
+provHost.innerHTML = PROVIDERS.map(p =>
+  '<label class="prov"><input type="checkbox" data-id="' + p.id + '" data-include="' + p.include + '" data-lookups="' + p.lookups + '">' +
+  '<span class="prov-name">' + p.name + '</span>' +
+  '<span class="prov-include">' + p.include + '</span>' +
+  '<span class="lookups">' + p.lookups + ' lookup' + (p.lookups>1?'s':'') + '</span></label>'
+).join('');
+
+function addIpInput(val = '') {
+  const row = document.createElement('div');
+  row.className = 'ip-item';
+  row.innerHTML = '<input type="text" placeholder="185.x.x.x eller 2a01:..." class="ip-input" value="' + val + '"><button type="button">Fjern</button>';
+  row.querySelector('button').addEventListener('click', () => { row.remove(); buildRecord(); });
+  row.querySelector('input').addEventListener('input', buildRecord);
+  $('ipList').appendChild(row);
+}
+$('addIp').addEventListener('click', () => { addIpInput(); });
+
+function escHtml(s) { return String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+function buildRecord() {
+  const includes = [...document.querySelectorAll('.prov input:checked')].map(c => ({ inc: c.dataset.include, lk: parseInt(c.dataset.lookups) }));
+  const ips = [...document.querySelectorAll('.ip-input')].map(i => i.value.trim()).filter(Boolean);
+  const allMech = document.querySelector('input[name="all"]:checked').value;
+  const domain = $('domain').value.trim().toLowerCase().replace(/^https?:\/\//,'').replace(/\/.*$/,'').replace(/^www\./,'');
+
+  const parts = ['v=spf1'];
+  const htmlParts = ['<span class="v">v=spf1</span>'];
+  let lookups = 0;
+
+  for (const inc of includes) {
+    parts.push('include:' + inc.inc);
+    htmlParts.push('<span class="k">include:</span><span class="v">' + escHtml(inc.inc) + '</span>');
+    lookups += inc.lk;
+  }
+  for (const ip of ips) {
+    const isV6 = ip.includes(':');
+    parts.push((isV6 ? 'ip6:' : 'ip4:') + ip);
+    htmlParts.push('<span class="k">' + (isV6 ? 'ip6:' : 'ip4:') + '</span><span class="v">' + escHtml(ip) + '</span>');
+  }
+  parts.push(allMech);
+  htmlParts.push('<span class="a">' + allMech + '</span>');
+
+  $('recordValue').innerHTML = htmlParts.join(' ');
+  $('recordValue').dataset.raw = parts.join(' ');
+  $('hostname').textContent = domain || '@';
+  $('lookupCount').textContent = lookups;
+
+  if (lookups > 10) { $('lookupWarn').classList.add('show'); $('lookupOk').style.display = 'none'; }
+  else { $('lookupWarn').classList.remove('show'); $('lookupOk').style.display = 'block'; }
+}
+
+document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', buildRecord));
+document.querySelectorAll('input[type="radio"]').forEach(el => el.addEventListener('change', buildRecord));
+
+$('copyBtn').addEventListener('click', () => {
+  const raw = $('recordValue').dataset.raw || $('recordValue').textContent;
+  navigator.clipboard.writeText(raw).then(() => {
+    $('copyBtn').textContent = '✓ Kopiert!';
+    $('copyBtn').classList.add('copied');
+    setTimeout(() => {
+      $('copyBtn').textContent = '📋 Kopier record';
+      $('copyBtn').classList.remove('copied');
+    }, 2000);
+  });
+});
+
+buildRecord();
+</script>
+</body>
+</html>

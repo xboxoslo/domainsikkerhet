@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hvor godt beskytter norske banker sine kunder mot phishing? Live analyse av DMARC, SPF og DKIM hos 25 norske banker — oppdatert direkte fra DNS.">
+<meta name="keywords" content="bank phishing, dmarc bank, spf bank, e-post sikkerhet bank, norske banker phishing, dnb dmarc, nordea dmarc">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/rapport-2026/banker/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/rapport-2026/banker/">
+<meta property="og:title" content="Norske banker — e-post sikkerhet 2026 (live rapport)">
+<meta property="og:description" content="Hvor godt beskytter norske banker sine kunder mot phishing? Live DMARC/SPF/DKIM-analyse av 25 banker.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Norske banker — e-post sikkerhet 2026 | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/rapport-2026/_assets/report.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Norske banker — e-post sikkerhet 2026","datePublished":"2026-05-08","author":{"@type":"Organization","name":"Micronet","url":"https://micronet.no/"},"publisher":{"@type":"Organization","name":"data1.no","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"}},"description":"Live analyse av e-post sikkerhet (SPF, DMARC, DKIM) hos 25 norske banker.","mainEntityOfPage":"https://data1.no/rapport-2026/banker/","inLanguage":"nb-NO"}</script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main class="container">
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/rapport-2026/">Rapport 2026</a> › Banker</nav>
+  <h1>Norske banker — e-post sikkerhet 2026</h1>
+  <p class="intro">Banker er et yndet mål for phishing. Vi sjekker live om norske banker har konfigurert DMARC, SPF og DKIM riktig — slik at kriminelle ikke kan sende e-post som utgir seg for å komme fra banken din. <strong>Dataene oppdateres direkte fra DNS i nettleseren din.</strong></p>
+
+  <div class="progress-card" id="progressCard">
+    <h2>Analyserer norske banker…</h2>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-meta" id="progressMeta">Klargjør…</div>
+  </div>
+
+  <section class="summary" id="summary" hidden></section>
+  <section class="grade-bars" id="gradeBars" hidden></section>
+
+  <div class="controls" id="controls" hidden>
+    <button data-filter="all" class="active">Alle banker</button>
+    <button data-filter="enforce">Håndhever DMARC</button>
+    <button data-filter="failing">Karakter F</button>
+    <button data-filter="missing-dmarc">Mangler DMARC</button>
+  </div>
+
+  <section id="rankWrap" hidden>
+    <h2 style="margin-bottom:14px;font-size:18px;font-weight:800">Rangering</h2>
+    <div style="overflow-x:auto"><table id="rankTable">
+      <thead><tr>
+        <th>#</th><th>Bank</th><th>Karakter</th><th>Score</th>
+        <th>DMARC</th><th>SPF</th><th>DKIM</th><th>MTA-STS</th><th>TLS-RPT</th><th>BIMI</th>
+      </tr></thead>
+      <tbody id="rankBody"></tbody>
+    </table></div>
+  </section>
+
+  <div class="cta">
+    <h3>Driver du en bank, eller jobber med IT-sikkerhet i finans?</h3>
+    <p>Få samme analyse for ditt domene på under 10 sekunder — eller kontakt Micronet for en full DMARC-implementering.</p>
+    <a href="/?utm_source=rapport-banker">Sjekk eget domene →</a>
+  </div>
+
+  <div class="cross-links">
+    <a href="/rapport-2026/" class="cross-link"><strong>← Topp 100 oversikt</strong><span>Alle bransjer i én rapport</span></a>
+    <a href="/rapport-2026/kommuner/" class="cross-link"><strong>Kommuner →</strong><span>30 norske kommuner</span></a>
+    <a href="/rapport-2026/e-handel/" class="cross-link"><strong>E-handel →</strong><span>Nettbutikker og phishing-risiko</span></a>
+    <a href="/rapport-2026/medier/" class="cross-link"><strong>Medier →</strong><span>Aviser, TV og radio</span></a>
+  </div>
+
+  <section class="method">
+    <h2>Slik er rapporten laget</h2>
+    <p><strong>Live data fra DNS:</strong> 25 norske banker sjekkes live mot Cloudflare DoH når du laster siden. Resultatene caches lokalt i 6 timer.</p>
+    <p><strong>Hvorfor er DMARC kritisk for banker?</strong> Phishing er en av de største svindelmetodene rettet mot bankkunder. Uten DMARC med p=reject kan kriminelle sende e-post som ser ut til å komme fra banken, helt uten å hackes. <a href="/blogg/dmarc/">Les mer om DMARC</a>.</p>
+  </section>
+
+  <p class="footer">Laget av Micronet · data1.no · Sist oppdatert <span id="lastUpdate">—</span></p>
+</main>
+
+<script>
+window.REPORT_CONFIG = {
+  slug: 'rapport2026-banker-v1',
+  domains: [
+    "dnb.no","nordea.no","sbanken.no","sparebank1.no","handelsbanken.no","danskebank.no",
+    "storebrand.no","obos.no","eika.no","spv.no","sparebankensor.no","klp.no",
+    "gjensidige.no","tryg.no","fremtind.no","if.no",
+    "banknorwegian.no","instabank.no","komplettbank.no","pareto.no",
+    "kbn.no","bnbank.no","resursbank.no","santander.no","helgeland-sparebank.no"
+  ]
+};
+</script>
+<script src="/rapport-2026/_assets/report.js" defer></script>
+</body>
+</html>

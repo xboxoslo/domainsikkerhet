@@ -20,69 +20,7 @@
 <meta name="twitter:image" content="https://data1.no/og-image.png">
 <title>Norges 100 største nettsteder — e-post sikkerhetsrapport 2026 | data1.no</title>
 <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<style>
-@font-face{font-family:"Inter";font-weight:400 900;font-display:optional;src:url(/fonts/inter-latin.woff2)format("woff2");unicode-range:U+0000-00FF}
-@font-face{font-family:"Inter Fallback";src:local("Arial");size-adjust:107.4%;ascent-override:90%;descent-override:22.48%;line-gap-override:0%}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Inter","Inter Fallback",-apple-system,BlinkMacSystemFont,sans-serif;background:#f1f5f9;color:#1e293b;-webkit-font-smoothing:antialiased;line-height:1.55}
-.header{background:#1a202c;padding:14px 28px;display:flex;align-items:center;gap:18px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.logo{color:#fff;font-size:19px;font-weight:800;text-decoration:none}.logo span{color:#4fd1c5}
-.spacer{flex:1}.nav-link{color:#cbd5e0;text-decoration:none;font-size:14px}.nav-link:hover{color:#fff}
-.container{max-width:1080px;margin:0 auto;padding:36px 22px 80px}
-h1{font-size:36px;font-weight:900;color:#0f172a;letter-spacing:-.025em;line-height:1.1;margin-bottom:14px}
-.intro{font-size:17px;color:#475569;max-width:760px;margin-bottom:28px}
-.intro strong{color:#0f172a}
-.progress-card{background:#fff;border-radius:14px;padding:28px 32px;margin-bottom:26px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
-.progress-card h2{font-size:18px;font-weight:800;margin-bottom:10px;color:#0f172a}
-.progress-bar{height:10px;background:#f1f5f9;border-radius:5px;overflow:hidden;margin:14px 0 8px}
-.progress-fill{height:100%;background:linear-gradient(90deg,#14b8a6 0%,#0d9488 100%);border-radius:5px;transition:width .3s ease}
-.progress-meta{font-size:13px;color:#64748b}
-.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:0 0 28px}
-.stat{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
-.stat-num{font-size:32px;font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.05}
-.stat-label{font-size:13px;color:#64748b;margin-top:4px}
-.grade-bars{background:#fff;border-radius:12px;padding:22px 24px;margin-bottom:28px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
-.grade-bars h2{font-size:18px;font-weight:800;margin-bottom:14px;color:#0f172a}
-.gb-row{display:flex;align-items:center;gap:12px;margin:8px 0}
-.gb-label{width:42px;font-weight:800;font-size:14px}
-.gb-bar{flex:1;height:24px;background:#f1f5f9;border-radius:6px;overflow:hidden}
-.gb-fill{height:100%;border-radius:6px}
-.gb-count{font-size:13px;color:#475569;width:80px;text-align:right}
-.controls{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.controls button{padding:8px 14px;background:#fff;border:1px solid #e2e8f0;color:#475569;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit}
-.controls button.active{background:#0f172a;color:#fff;border-color:#0f172a}
-.controls button:hover{border-color:#cbd5e0}
-table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.07);font-size:14px}
-th{background:#f8fafc;text-align:left;padding:12px 14px;font-size:12px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #e2e8f0}
-td{padding:11px 14px;border-bottom:1px solid #f1f5f9}
-tr:last-child td{border-bottom:0}
-tr:hover td{background:#f8fafc}
-.rank{color:#94a3b8;font-weight:700;width:48px}
-td a{color:#0f766e;text-decoration:none;font-weight:600}
-td a:hover{text-decoration:underline}
-.score{font-weight:700;color:#0f172a}
-.muted{color:#94a3b8;font-size:11px;margin-left:4px}
-.grade-pill{display:inline-block;padding:4px 12px;border-radius:999px;font-weight:900;font-size:13px;letter-spacing:-.01em}
-.gl-ap{background:#dcfce7;color:#166534}.gl-a{background:#d1fae5;color:#065f46}.gl-b{background:#dbeafe;color:#1e40af}.gl-c{background:#fef3c7;color:#854d0e}.gl-d{background:#fed7aa;color:#9a3412}.gl-f{background:#fee2e2;color:#991b1b}
-.cta{background:linear-gradient(135deg,#0f172a 0%,#1a2540 100%);color:#fff;border-radius:16px;padding:36px;margin-top:32px;text-align:center}
-.cta h3{font-size:24px;font-weight:900;letter-spacing:-.02em;margin-bottom:8px}
-.cta p{color:#94a3b8;margin-bottom:18px}
-.cta a{display:inline-block;padding:14px 28px;background:#14b8a6;color:#fff;border-radius:999px;text-decoration:none;font-weight:700}
-.cta a:hover{background:#0d9488}
-.method{background:#fff;border-radius:12px;padding:24px 28px;margin-top:28px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
-.method h2{font-size:18px;font-weight:800;margin-bottom:10px;color:#0f172a}
-.method p{font-size:14px;color:#475569;margin-bottom:8px}
-.footer{margin-top:32px;font-size:13px;color:#94a3b8;text-align:center}
-.check{color:#16a34a;font-weight:700}.cross{color:#dc2626;font-weight:700}
-@media(max-width:760px){
-  h1{font-size:26px}
-  th,td{padding:9px 8px;font-size:12px}
-  .container{padding:24px 14px 60px}
-  .stat-num{font-size:22px}
-  .controls{margin-bottom:8px}
-  td .muted{display:none}
-}
-</style>
+<link rel="stylesheet" href="/rapport-2026/_assets/report.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Norges 100 største nettsteder — e-post sikkerhetsrapport 2026","datePublished":"2026-05-07","author":{"@type":"Organization","name":"Micronet","url":"https://micronet.no/"},"publisher":{"@type":"Organization","name":"data1.no","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"}},"description":"Live analyse av e-post sikkerhet (SPF, DMARC, DKIM, MTA-STS, TLS-RPT, BIMI) på 100 av Norges største nettsteder.","image":"https://data1.no/og-image.png","mainEntityOfPage":"https://data1.no/rapport-2026/","inLanguage":"nb-NO"}</script>
 </head>
 <body>
@@ -91,10 +29,16 @@ td a:hover{text-decoration:underline}
   <div class="spacer"></div>
   <a href="/" class="nav-link">Sjekk eget domene →</a>
 </header>
-
 <main class="container">
   <h1>Norges 100 største nettsteder — e-post sikkerhetsrapport 2026</h1>
   <p class="intro">Vi sjekker SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI for 100 av Norges største nettsteder — fra mediene og bankene til universitetene og det offentlige. <strong>Resultatene oppdateres live i nettleseren din</strong> — ingen cachede tall, alltid fersk DNS-data fra Cloudflare.</p>
+
+  <div class="cross-links" style="margin-top:0;margin-bottom:28px">
+    <a href="/rapport-2026/banker/" class="cross-link"><strong>Bare banker →</strong><span>Hvor godt beskytter norske banker sine kunder?</span></a>
+    <a href="/rapport-2026/kommuner/" class="cross-link"><strong>Bare kommuner →</strong><span>30 norske kommuner og e-post sikkerhet</span></a>
+    <a href="/rapport-2026/e-handel/" class="cross-link"><strong>Bare e-handel →</strong><span>Hvilke nettbutikker kan misbrukes til phishing?</span></a>
+    <a href="/rapport-2026/medier/" class="cross-link"><strong>Bare medier →</strong><span>Aviser, TV og e-post forfalskning</span></a>
+  </div>
 
   <div class="progress-card" id="progressCard">
     <h2>Analyserer 100 norske domener…</h2>
@@ -131,232 +75,36 @@ td a:hover{text-decoration:underline}
 
   <section class="method">
     <h2>Slik er rapporten laget</h2>
-    <p><strong>Live data:</strong> Når du laster denne siden, gjør nettleseren din direkte DNS-oppslag mot Cloudflare DoH. Resultatene caches lokalt i 6 timer for å spare båndbredde.</p>
+    <p><strong>Live data:</strong> Når du laster denne siden, gjør nettleseren din direkte DNS-oppslag mot Cloudflare DoH. Resultatene caches lokalt i 6 timer.</p>
     <p><strong>Sjekker per domene:</strong> SPF (TXT), DMARC (_dmarc TXT), DKIM (14 vanlige selektorer), MTA-STS (_mta-sts TXT), TLS-RPT (_smtp._tls TXT), BIMI (default._bimi TXT).</p>
-    <p><strong>Score:</strong> Samme algoritme som hovedverktøyet på data1.no. DMARC p=reject gir 35 poeng, p=quarantine 22, p=none 8. SPF gir 10-25 poeng. DKIM 20, MTA-STS 12, TLS-RPT 5, BIMI 3.</p>
-    <p><strong>Disclaimer:</strong> En lav score betyr ikke at e-post fra domenet faktisk er kompromittert — kun at det tekniske sikkerhetslaget ikke er optimalt. DKIM-sjekken bruker 22 vanlige selektor-navn og kan gi falske negativer for selskaper med egendefinerte selektorer.</p>
+    <p><strong>Score:</strong> Samme algoritme som hovedverktøyet. DMARC p=reject 35p, p=quarantine 22p, p=none 8p. SPF 10-25p. DKIM 20p, MTA-STS 12p, TLS-RPT 5p, BIMI 3p.</p>
+    <p><strong>Disclaimer:</strong> En lav score betyr ikke at e-post fra domenet faktisk er kompromittert — kun at det tekniske sikkerhetslaget ikke er optimalt. DKIM-sjekken kan gi falske negativer for selskaper med egendefinerte selektorer.</p>
   </section>
 
   <p class="footer">Laget av Micronet · data1.no · Sist oppdatert <span id="lastUpdate">—</span></p>
 </main>
 
 <script>
-'use strict';
-const DOMAINS = [
-  "nrk.no","vg.no","tv2.no","aftenposten.no","dagbladet.no","dn.no","nettavisen.no",
-  "ba.no","bt.no","fvn.no","adressa.no","vl.no","klassekampen.no","nationen.no",
-  "dnb.no","nordea.no","sbanken.no","sparebank1.no","handelsbanken.no","danskebank.no","storebrand.no","obos.no",
-  "telenor.no","telia.no","ice.no","altibox.no","get.no","onecall.no",
-  "elkjop.no","komplett.no","power.no","kiwi.no","meny.no","obs.no","europris.no","biltema.no","jysk.no","ikea.no","clas-ohlson.no","jernia.no","vinmonopolet.no","posten.no","zalando.no","finn.no","prisjakt.no",
-  "nav.no","skatteetaten.no","altinn.no","regjeringen.no","politiet.no","ssb.no","helsenorge.no","brreg.no","domstol.no","udi.no","helsedirektoratet.no","oslo.kommune.no","bergen.kommune.no","trondheim.kommune.no","stavanger.kommune.no",
-  "uio.no","uib.no","ntnu.no","uia.no","nmbu.no","oslomet.no","bi.no",
-  "equinor.no","statkraft.no","hafslund.no","aker.no","yara.no","norskhydro.no","elvia.no",
-  "tryg.no","gjensidige.no","if.no","fremtind.no",
-  "schibsted.no","visma.no","opera.no","kongsberg.no","tomra.no",
-  "sas.no","norwegian.no","ruter.no","vy.no","color-line.no","hurtigruten.no",
-  "abelia.no","virke.no","nho.no","lo.no",
-  "domeneshop.no","proisp.no",
-  "ks.no","tine.no","nortura.no","rema1000.no","coop.no"
-];
-
-const DKIM_SELECTORS = ["selector1","selector2","google","k1","k2","mail","default","dkim","s1","s2","mxvault","fm1","fm2","fm3"];
-const DOH = 'https://cloudflare-dns.com/dns-query';
-const CACHE_KEY = 'data1-rapport2026-v1';
-const CACHE_HOURS = 6;
-
-async function dohQuery(name, type) {
-  try {
-    const r = await fetch(`${DOH}?name=${encodeURIComponent(name)}&type=${type}`, {
-      headers: { Accept: 'application/dns-json' }, signal: AbortSignal.timeout(7000)
-    });
-    if (!r.ok) return [];
-    return (await r.json()).Answer || [];
-  } catch { return []; }
-}
-const clean = s => (s||'').replace(/^"|"$/g,'').replace(/"\s*"/g,'').trim();
-function findRec(arr, prefix) {
-  for (const a of arr) {
-    const d = clean(a.data);
-    if (d.toLowerCase().startsWith(prefix.toLowerCase())) return d;
-  }
-  return null;
-}
-async function findDkim(domain) {
-  const probes = DKIM_SELECTORS.map(sel => dohQuery(`${sel}._domainkey.${domain}`, 'TXT').then(ans => {
-    for (const a of ans) {
-      if (clean(a.data).toLowerCase().startsWith('v=dkim1')) return sel;
-    }
-    return null;
-  }));
-  const out = await Promise.all(probes);
-  return out.find(Boolean) || null;
-}
-async function analyze(domain) {
-  const [txt, dmarcA, mtaA, tlsA, bimiA] = await Promise.all([
-    dohQuery(domain, 'TXT'),
-    dohQuery(`_dmarc.${domain}`, 'TXT'),
-    dohQuery(`_mta-sts.${domain}`, 'TXT'),
-    dohQuery(`_smtp._tls.${domain}`, 'TXT'),
-    dohQuery(`default._bimi.${domain}`, 'TXT'),
-  ]);
-  const spf = findRec(txt, 'v=spf1');
-  const dmarc = findRec(dmarcA, 'v=DMARC1');
-  const mta = findRec(mtaA, 'v=STSv1');
-  const tls = findRec(tlsA, 'v=TLSRPTv1');
-  const bimi = findRec(bimiA, 'v=BIMI1');
-  const dkim = await findDkim(domain);
-
-  let score = 0, dmarc_p = null;
-  if (dmarc) {
-    const m = dmarc.match(/p=([a-z]+)/i);
-    if (m) dmarc_p = m[1].toLowerCase();
-    if (dmarc_p === 'reject') score += 35;
-    else if (dmarc_p === 'quarantine') score += 22;
-    else if (dmarc_p === 'none') score += 8;
-  }
-  if (spf) score += /[-~]all\b/.test(spf) ? 25 : 10;
-  if (dkim) score += 20;
-  if (mta) score += 12;
-  if (tls) score += 5;
-  if (bimi) score += 3;
-  let grade;
-  if (score >= 90) grade='A+'; else if (score>=80) grade='A'; else if (score>=70) grade='B';
-  else if (score>=55) grade='C'; else if (score>=35) grade='D'; else grade='F';
-  return { domain, score, grade, dmarc:!!dmarc, dmarc_p, spf:!!spf, dkim:!!dkim, mta_sts:!!mta, tls_rpt:!!tls, bimi:!!bimi };
-}
-
-async function runAll() {
-  const cached = loadCache();
-  if (cached) { renderAll(cached); return; }
-  const results = [];
-  let done = 0;
-  const queue = [...DOMAINS];
-  const updateProg = (current) => {
-    const pct = (done / DOMAINS.length) * 100;
-    document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressMeta').textContent = `${done} av ${DOMAINS.length} ferdig${current ? ' · sjekker ' + current : ''}`;
-  };
-  updateProg();
-  const concurrency = 8;
-  const workers = Array(concurrency).fill(0).map(async () => {
-    while (queue.length) {
-      const d = queue.shift();
-      if (!d) break;
-      try {
-        const r = await analyze(d);
-        results.push(r);
-      } catch (e) {
-        results.push({ domain: d, score: 0, grade: 'F', dmarc:false, dmarc_p:null, spf:false, dkim:false, mta_sts:false, tls_rpt:false, bimi:false });
-      }
-      done++;
-      updateProg(d);
-    }
-  });
-  await Promise.all(workers);
-  saveCache(results);
-  renderAll(results);
-}
-
-function loadCache() {
-  try {
-    const raw = localStorage.getItem(CACHE_KEY);
-    if (!raw) return null;
-    const obj = JSON.parse(raw);
-    const ageHrs = (Date.now() - obj.savedAt) / 1000 / 3600;
-    if (ageHrs > CACHE_HOURS) return null;
-    return obj.results;
-  } catch { return null; }
-}
-function saveCache(results) {
-  try { localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), results })); } catch {}
-}
-
-function gradeClass(g) { return ({'A+':'gl-ap','A':'gl-a','B':'gl-b','C':'gl-c','D':'gl-d','F':'gl-f'})[g] || 'gl-f'; }
-function check(v) { return v ? '<span class="check">✓</span>' : '<span class="cross">✗</span>'; }
-function htmlEscape(s) { return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-
-let currentResults = null;
-let currentFilter = 'all';
-
-function renderAll(results) {
-  currentResults = results;
-  document.getElementById('progressCard').hidden = true;
-  document.getElementById('summary').hidden = false;
-  document.getElementById('gradeBars').hidden = false;
-  document.getElementById('controls').hidden = false;
-  document.getElementById('rankWrap').hidden = false;
-  document.getElementById('lastUpdate').textContent = new Date().toLocaleString('no-NO');
-  renderSummary(results);
-  renderGradeBars(results);
-  renderTable(results);
-}
-
-function renderSummary(results) {
-  const total = results.length;
-  const avg = Math.round(results.reduce((s,r) => s+r.score, 0) / total);
-  const noDmarc = results.filter(r => !r.dmarc).length;
-  const weakDmarc = results.filter(r => r.dmarc_p === 'none').length;
-  const enforce = results.filter(r => r.dmarc_p === 'reject' || r.dmarc_p === 'quarantine').length;
-  const failing = results.filter(r => r.grade === 'F').length;
-  const aGrade = results.filter(r => r.grade === 'A+' || r.grade === 'A').length;
-  const stats = [
-    [avg+'%', 'Snittscore'],
-    [noDmarc, 'Uten DMARC'],
-    [weakDmarc, 'DMARC p=none (kun overvåking)'],
-    [enforce, 'Håndhever DMARC'],
-    [failing, 'Karakter F'],
-    [aGrade, 'Karakter A / A+'],
-  ];
-  document.getElementById('summary').innerHTML = stats.map(([n, l]) =>
-    `<div class="stat"><div class="stat-num">${n}</div><div class="stat-label">${l}</div></div>`
-  ).join('');
-}
-function renderGradeBars(results) {
-  const total = results.length;
-  const counts = {'A+':0,'A':0,'B':0,'C':0,'D':0,'F':0};
-  results.forEach(r => counts[r.grade]++);
-  const html = ['A+','A','B','C','D','F'].map(g => {
-    const pct = (counts[g]/total)*100;
-    return `<div class="gb-row"><span class="gb-label">${g}</span><div class="gb-bar"><div class="gb-fill ${gradeClass(g)}" style="width:${pct.toFixed(1)}%"></div></div><span class="gb-count">${counts[g]} (${pct.toFixed(0)}%)</span></div>`;
-  }).join('');
-  document.getElementById('gradeBars').innerHTML = '<h2>Karakterfordeling</h2>' + html;
-  document.querySelector('.controls button[data-filter="all"]').textContent = `Alle (${total})`;
-  document.querySelector('.controls button[data-filter="enforce"]').textContent = `Håndhever DMARC (${results.filter(r => r.dmarc_p === 'reject' || r.dmarc_p === 'quarantine').length})`;
-  document.querySelector('.controls button[data-filter="failing"]').textContent = `Karakter F (${counts['F']})`;
-  document.querySelector('.controls button[data-filter="missing-dmarc"]').textContent = `Mangler DMARC (${results.filter(r => !r.dmarc).length})`;
-}
-function renderTable(results) {
-  let filtered = results.slice();
-  if (currentFilter === 'enforce') filtered = filtered.filter(r => r.dmarc_p === 'reject' || r.dmarc_p === 'quarantine');
-  else if (currentFilter === 'failing') filtered = filtered.filter(r => r.grade === 'F');
-  else if (currentFilter === 'missing-dmarc') filtered = filtered.filter(r => !r.dmarc);
-  filtered.sort((a,b) => b.score - a.score || a.domain.localeCompare(b.domain));
-  document.getElementById('rankBody').innerHTML = filtered.map((r, i) => `
-    <tr>
-      <td class="rank">${i+1}</td>
-      <td><a href="/?domain=${encodeURIComponent(r.domain)}" rel="nofollow">${htmlEscape(r.domain)}</a></td>
-      <td><span class="grade-pill ${gradeClass(r.grade)}">${r.grade}</span></td>
-      <td class="score">${r.score}%</td>
-      <td>${check(r.dmarc)}<span class="muted">${r.dmarc_p || ''}</span></td>
-      <td>${check(r.spf)}</td>
-      <td>${check(r.dkim)}</td>
-      <td>${check(r.mta_sts)}</td>
-      <td>${check(r.tls_rpt)}</td>
-      <td>${check(r.bimi)}</td>
-    </tr>
-  `).join('');
-}
-
-document.querySelectorAll('.controls button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    if (currentResults) renderTable(currentResults);
-  });
-});
-
-window.addEventListener('DOMContentLoaded', runAll);
+window.REPORT_CONFIG = {
+  slug: 'rapport2026-v1',
+  domains: [
+    "nrk.no","vg.no","tv2.no","aftenposten.no","dagbladet.no","dn.no","nettavisen.no",
+    "ba.no","bt.no","fvn.no","adressa.no","vl.no","klassekampen.no","nationen.no",
+    "dnb.no","nordea.no","sbanken.no","sparebank1.no","handelsbanken.no","danskebank.no","storebrand.no","obos.no",
+    "telenor.no","telia.no","ice.no","altibox.no","get.no","onecall.no",
+    "elkjop.no","komplett.no","power.no","kiwi.no","meny.no","obs.no","europris.no","biltema.no","jysk.no","ikea.no","clas-ohlson.no","jernia.no","vinmonopolet.no","posten.no","zalando.no","finn.no","prisjakt.no",
+    "nav.no","skatteetaten.no","altinn.no","regjeringen.no","politiet.no","ssb.no","helsenorge.no","brreg.no","domstol.no","udi.no","helsedirektoratet.no","oslo.kommune.no","bergen.kommune.no","trondheim.kommune.no","stavanger.kommune.no",
+    "uio.no","uib.no","ntnu.no","uia.no","nmbu.no","oslomet.no","bi.no",
+    "equinor.no","statkraft.no","hafslund.no","aker.no","yara.no","norskhydro.no","elvia.no",
+    "tryg.no","gjensidige.no","if.no","fremtind.no",
+    "schibsted.no","visma.no","opera.no","kongsberg.no","tomra.no",
+    "sas.no","norwegian.no","ruter.no","vy.no","color-line.no","hurtigruten.no",
+    "abelia.no","virke.no","nho.no","lo.no",
+    "domeneshop.no","proisp.no",
+    "ks.no","tine.no","nortura.no","rema1000.no","coop.no"
+  ]
+};
 </script>
+<script src="/rapport-2026/_assets/report.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Embedbart sikkerhetsmerke for ditt nettsted — vis at du har ren bordliste på e-post sikkerhet. Gratis SVG-badge for nettsteder med karakter A eller A+.">
+<meta name="keywords" content="sikkerhetsmerke nettsted, dmarc badge, e-post sikkerhet badge, sertifikat domene, secure email badge norge">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/sertifikat/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/sertifikat/">
+<meta property="og:title" content="Få et sikkerhetsmerke til nettstedet ditt | data1.no">
+<meta property="og:description" content="Vis at ditt domene har god e-post sikkerhet med et gratis embedbart badge.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<title>Sikkerhetsmerke — data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Inter";font-weight:400 900;font-display:optional;src:url(/fonts/inter-latin.woff2)format("woff2");unicode-range:U+0000-00FF}
+@font-face{font-family:"Inter Fallback";src:local("Arial");size-adjust:107.4%;ascent-override:90%;descent-override:22.48%;line-gap-override:0%}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Inter","Inter Fallback",-apple-system,BlinkMacSystemFont,sans-serif;background:#f1f5f9;color:#1e293b;-webkit-font-smoothing:antialiased;line-height:1.6}
+.header{background:#1a202c;padding:14px 28px;display:flex;align-items:center;gap:18px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.logo{color:#fff;font-size:19px;font-weight:800;text-decoration:none}.logo span{color:#4fd1c5}
+.spacer{flex:1}.nav-link{color:#cbd5e0;text-decoration:none;font-size:14px}.nav-link:hover{color:#fff}
+main{max-width:880px;margin:0 auto;padding:36px 22px 80px}
+.crumbs{font-size:13px;color:#94a3b8;margin-bottom:16px}.crumbs a{color:#0f766e;text-decoration:none}
+h1{font-size:38px;font-weight:900;color:#0f172a;letter-spacing:-.025em;line-height:1.15;margin-bottom:14px}
+h2{font-size:22px;font-weight:800;color:#0f172a;margin:32px 0 12px}
+.lead{font-size:18px;color:#475569;max-width:680px;margin-bottom:36px;line-height:1.55}
+.badge-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-bottom:32px}
+.badge-card{background:#fff;border-radius:14px;padding:22px;box-shadow:0 1px 3px rgba(0,0,0,.07);text-align:center}
+.badge-preview{margin:8px auto 14px;display:block}
+.badge-card h3{font-size:14px;font-weight:700;color:#0f172a;margin-bottom:8px}
+.badge-card p{font-size:13px;color:#64748b;line-height:1.5;margin-bottom:14px}
+.copy-row{display:flex;gap:8px;justify-content:center}
+.copy-row button{padding:7px 14px;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;border-radius:8px;cursor:pointer;font-size:12.5px;font-family:inherit;font-weight:600;transition:all .15s}
+.copy-row button:hover{border-color:#14b8a6;color:#0f766e}
+.copy-row button.copied{background:#dcfce7;border-color:#86efac;color:#166534}
+.embed-card{background:#fff;border-radius:14px;padding:28px 32px;box-shadow:0 1px 3px rgba(0,0,0,.07);margin-bottom:24px}
+.embed-card h3{font-size:16px;font-weight:800;color:#0f172a;margin-bottom:14px}
+.embed-card p{color:#475569;margin-bottom:14px}
+.code-block{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:16px 18px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.6;overflow-x:auto;position:relative}
+.code-block button{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.1);color:#cbd5e0;border:0;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:12px;font-family:inherit}
+.code-block button:hover{background:rgba(255,255,255,.18)}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:700;color:#475569;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.field input{width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14.5px;color:#0f172a;font-family:inherit;outline:0;transition:border-color .15s}
+.field input:focus{border-color:#14b8a6;box-shadow:0 0 0 3px rgba(20,184,166,.12)}
+.cta-box{background:linear-gradient(135deg,#0f172a,#1a2540);color:#fff;border-radius:14px;padding:28px;margin-top:32px;text-align:center}
+.cta-box h3{font-size:22px;font-weight:900;margin-bottom:8px}
+.cta-box p{color:#94a3b8;margin-bottom:14px}
+.cta-box a{display:inline-block;padding:12px 24px;background:#14b8a6;color:#fff;border-radius:999px;text-decoration:none;font-weight:700}
+@media(max-width:640px){h1{font-size:28px}main{padding:24px 16px 60px}}
+</style>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › Sikkerhetsmerke</nav>
+  <h1>Få et sikkerhetsmerke til nettstedet ditt</h1>
+  <p class="lead">Har domenet ditt karakter A eller A+ på <a href="/">data1.no</a>? Vis det frem. Embed et gratis SVG-badge på nettsiden eller signaturen din — det viser kunder at du tar e-post sikkerhet på alvor og bygger tillit.</p>
+
+  <div class="embed-card">
+    <h3>1. Sjekk domenet ditt</h3>
+    <p>Du må først ha en analyse fra <a href="/" style="color:#0f766e;font-weight:700;text-decoration:none">data1.no</a> som viser karakter A eller A+. Vi viser ikke badge for lavere karakter — målet er at det skal bety noe.</p>
+    <div class="field">
+      <label for="badgeDomain">Ditt domene</label>
+      <input type="text" id="badgeDomain" placeholder="dittfirma.no" autocomplete="off" spellcheck="false">
+    </div>
+  </div>
+
+  <h2>Velg ditt badge</h2>
+
+  <div class="badge-grid">
+    <div class="badge-card">
+      <img src="/badge/a-plus.svg" width="180" height="48" class="badge-preview" alt="A+ badge">
+      <h3>A+ — perfekt</h3>
+      <p>Alle 6 sikkerhetslag konfigurert (DMARC reject, SPF, DKIM, MTA-STS, TLS-RPT, BIMI).</p>
+      <div class="copy-row">
+        <button data-grade="a-plus" data-format="html">HTML</button>
+        <button data-grade="a-plus" data-format="md">Markdown</button>
+      </div>
+    </div>
+    <div class="badge-card">
+      <img src="/badge/a.svg" width="180" height="48" class="badge-preview" alt="A badge">
+      <h3>A — utmerket</h3>
+      <p>Sterk DMARC-håndhevelse, SPF, DKIM og MTA-STS på plass.</p>
+      <div class="copy-row">
+        <button data-grade="a" data-format="html">HTML</button>
+        <button data-grade="a" data-format="md">Markdown</button>
+      </div>
+    </div>
+  </div>
+
+  <h2>Hvordan embed</h2>
+  <div class="embed-card">
+    <h3>HTML-versjon</h3>
+    <p>Lim inn der du vil at badge skal vises (f.eks. footer på nettsiden, signatur, om-oss-side):</p>
+    <div class="code-block">
+      <button data-copy="htmlSnippet">Kopier</button>
+      <pre id="htmlSnippet">&lt;a href="https://data1.no/?domain=dittfirma.no" target="_blank" rel="noopener"&gt;
+  &lt;img src="https://data1.no/badge/a-plus.svg" alt="A+ e-post sikkerhet — data1.no" width="180" height="48"&gt;
+&lt;/a&gt;</pre>
+    </div>
+  </div>
+
+  <div class="embed-card">
+    <h3>Markdown-versjon (GitHub README, blogg)</h3>
+    <div class="code-block">
+      <button data-copy="mdSnippet">Kopier</button>
+      <pre id="mdSnippet">[![A+ e-post sikkerhet — data1.no](https://data1.no/badge/a-plus.svg)](https://data1.no/?domain=dittfirma.no)</pre>
+    </div>
+  </div>
+
+  <div class="embed-card">
+    <h3>E-postsignatur</h3>
+    <p>De fleste e-postklienter (Gmail, Outlook) lar deg legge til HTML i signaturen. Bruk samme HTML-snippet som over.</p>
+  </div>
+
+  <h2>Hvorfor embed et badge?</h2>
+  <ul style="color:#334155;line-height:1.65">
+    <li><strong>Bygger tillit hos kunder.</strong> Tegn på at du tar IT-sikkerhet på alvor.</li>
+    <li><strong>Reduserer svindel.</strong> Færre vil prøve å spoofe et domene som åpenbart har sikret seg.</li>
+    <li><strong>Synlig konkurranseforsprang.</strong> Få konkurrenter har dette på plass.</li>
+    <li><strong>Lenker til en automatisert verifikasjon.</strong> Klikk på badge → automatisk sjekk hos data1.no.</li>
+  </ul>
+
+  <div class="cta-box">
+    <h3>Sjekk din score først</h3>
+    <p>Du må ha karakter A eller A+ for at badge skal være meningsfullt.</p>
+    <a href="/?utm_source=sertifikat">Sjekk eget domene →</a>
+  </div>
+</main>
+
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+function getDomain() {
+  return $('badgeDomain').value.trim().toLowerCase().replace(/^https?:\/\//,'').replace(/\/.*$/,'').replace(/^www\./,'') || 'dittfirma.no';
+}
+function updateSnippets() {
+  const d = getDomain();
+  $('htmlSnippet').textContent = `<a href="https://data1.no/?domain=${d}" target="_blank" rel="noopener">
+  <img src="https://data1.no/badge/a-plus.svg" alt="A+ e-post sikkerhet — data1.no" width="180" height="48">
+</a>`;
+  $('mdSnippet').textContent = `[![A+ e-post sikkerhet — data1.no](https://data1.no/badge/a-plus.svg)](https://data1.no/?domain=${d})`;
+}
+$('badgeDomain').addEventListener('input', updateSnippets);
+
+document.querySelectorAll('.badge-grid button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const grade = btn.dataset.grade;
+    const fmt = btn.dataset.format;
+    const d = getDomain();
+    const text = fmt === 'html'
+      ? `<a href="https://data1.no/?domain=${d}" target="_blank" rel="noopener"><img src="https://data1.no/badge/${grade}.svg" alt="${grade.toUpperCase()} e-post sikkerhet — data1.no" width="180" height="48"></a>`
+      : `[![${grade.toUpperCase()} e-post sikkerhet — data1.no](https://data1.no/badge/${grade}.svg)](https://data1.no/?domain=${d})`;
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✓ Kopiert';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1800);
+    });
+  });
+});
+
+document.querySelectorAll('.code-block button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.copy;
+    navigator.clipboard.writeText($(id).textContent).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = 'Kopiert!';
+      setTimeout(() => { btn.textContent = orig; }, 1500);
+    });
+  });
+});
+
+updateSnippets();
+</script>
+</body>
+</html>

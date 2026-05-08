@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="48" viewBox="0 0 180 48" role="img" aria-label="data1.no | C">
+<title>data1.no E-post sikkerhet: C</title>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2540"/><stop offset="100%" stop-color="#0f172a"/></linearGradient>
+<linearGradient id="grade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fde68a"/><stop offset="100%" stop-color="#ca8a04"/></linearGradient>
+</defs>
+<rect width="180" height="48" rx="6" fill="url(#bg)"/>
+<path d="M118 0 L180 0 L180 48 L118 48 Z" fill="url(#grade)"/>
+<text x="14" y="20" fill="#fff" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="0.04em">DATA1.NO</text>
+<text x="14" y="36" fill="#cbd5e0" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="10" font-weight="500">E-post sikkerhet</text>
+<text x="149" y="32" fill="#fff" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="22" font-weight="900" text-anchor="middle" letter-spacing="-0.02em">C</text>
+</svg>

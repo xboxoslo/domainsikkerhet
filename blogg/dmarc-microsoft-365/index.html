@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Steg-for-steg guide til å sette opp DMARC i Microsoft 365 / Exchange Online — fra første TXT-record til full p=reject med rapportering. Med Norge-spesifikke tips.">
+<meta name="keywords" content="dmarc microsoft 365, dmarc exchange online, dmarc office 365, sett opp dmarc m365, microsoft 365 dmarc oppsett, dmarc outlook">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/blogg/dmarc-microsoft-365/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/blogg/dmarc-microsoft-365/">
+<meta property="og:title" content="DMARC i Microsoft 365: Komplett guide for norske bedrifter">
+<meta property="og:description" content="Steg-for-steg fra p=none til p=reject — uten å miste viktig e-post.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>DMARC i Microsoft 365: Komplett guide | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Slik setter du opp DMARC i Microsoft 365","description":"Komplett guide for å implementere DMARC på et domene som bruker Microsoft 365 / Exchange Online.","totalTime":"PT45M","datePublished":"2026-05-08","author":{"@type":"Organization","name":"Micronet"},"step":[{"@type":"HowToStep","name":"Verifiser SPF","text":"Sjekk at domenet har korrekt SPF-record som inkluderer Microsoft."},{"@type":"HowToStep","name":"Aktiver DKIM","text":"Slå på DKIM-signering i Microsoft Defender."},{"@type":"HowToStep","name":"Opprett DMARC-record","text":"Legg til TXT-record på _dmarc med p=none initialt."},{"@type":"HowToStep","name":"Overvåk rapporter","text":"Analyser DMARC-rapporter i 2-4 uker."},{"@type":"HowToStep","name":"Skjerp til p=quarantine","text":"Når SPF og DKIM-pass er over 99%, skjerp policy."},{"@type":"HowToStep","name":"Skjerp til p=reject","text":"Etter ytterligere 2-4 uker, sett p=reject for full beskyttelse."}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Trenger jeg en betalt DMARC-tjeneste for Microsoft 365?","acceptedAnswer":{"@type":"Answer","text":"Nei, DMARC i seg selv er gratis (kun en DNS-record). For å lese rapportene anbefales en visualiseringstjeneste, men flere er gratis for små volumer."}},{"@type":"Question","name":"Hvor lang tid tar implementeringen?","acceptedAnswer":{"@type":"Answer","text":"Selve oppsettet tar 30-60 minutter. Anbefalt full overgang fra p=none til p=reject tar 4-8 uker for å sikre at alle legitime avsendere er identifisert."}},{"@type":"Question","name":"Hva om jeg har flere domener?","acceptedAnswer":{"@type":"Answer","text":"Hvert domene trenger sin egen DMARC-record. For subdomener arves policyen om sp= ikke er satt eksplisitt."}}]}</script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/blogg/">Blogg</a> › DMARC i Microsoft 365</nav>
+  <h1>DMARC i Microsoft 365: Komplett guide for norske bedrifter</h1>
+  <p class="meta">Publisert 8. mai 2026 · Av Micronet · 9 min lesetid</p>
+  <p class="lead">Microsoft 365 / Exchange Online dekker ca. 70 % av norske bedriftsmail. Denne guiden tar deg fra "ingen DMARC" til full <code>p=reject</code> uten at en eneste legitim e-post går tapt.</p>
+
+  <div class="toc">
+    <h2>Innhold</h2>
+    <ol>
+      <li><a href="#krav">Forutsetninger</a></li>
+      <li><a href="#spf">Steg 1: Verifiser SPF</a></li>
+      <li><a href="#dkim">Steg 2: Slå på DKIM</a></li>
+      <li><a href="#dmarc-none">Steg 3: DMARC p=none (overvåking)</a></li>
+      <li><a href="#rapporter">Steg 4: Les rapportene</a></li>
+      <li><a href="#quarantine">Steg 5: Skjerp til p=quarantine</a></li>
+      <li><a href="#reject">Steg 6: Skjerp til p=reject</a></li>
+      <li><a href="#feil">Vanlige feil i M365-oppsett</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </div>
+
+  <h2 id="krav">Forutsetninger</h2>
+  <ul>
+    <li>Du bruker Microsoft 365 / Exchange Online for utgående e-post.</li>
+    <li>Du har Global Admin-tilgang i Microsoft 365 admin center.</li>
+    <li>Du har tilgang til DNS-en for domenet (Domeneshop, Cloudflare, GoDaddy osv.).</li>
+    <li>Bruker du tredjepartstjenester (Mailchimp, Halo, ServiceNow, Salesforce)? Lag en liste — alle må inkluderes i SPF.</li>
+  </ul>
+
+  <h2 id="spf">Steg 1: Verifiser SPF</h2>
+  <p>SPF må være korrekt før DMARC har noen effekt. Standard for M365:</p>
+  <pre><code>v=spf1 include:spf.protection.outlook.com -all</code></pre>
+  <p>Hvis du sender e-post fra andre tjenester også (Mailchimp, Halo, etc.), legg dem til:</p>
+  <pre><code>v=spf1 include:spf.protection.outlook.com include:servers.mcsv.net include:halo.example.com -all</code></pre>
+  <div class="callout warn">
+    <p><strong>Pass på 10-lookup grensen!</strong> SPF har en hard grense på 10 DNS-oppslag. Hver <code>include:</code> teller. Bruk <a href="/?utm_source=blog&utm_medium=dmarc-m365">data1.no</a> for å telle automatisk.</p>
+  </div>
+
+  <h2 id="dkim">Steg 2: Slå på DKIM i Microsoft 365</h2>
+  <p>Microsoft genererer DKIM-nøklene automatisk. Du må aktivere dem:</p>
+  <ol>
+    <li>Logg inn på <a href="https://security.microsoft.com" rel="nofollow">security.microsoft.com</a> (Microsoft Defender).</li>
+    <li>Gå til <strong>E-post & samarbeid → Policyer & regler → Trusler → DKIM</strong>.</li>
+    <li>Velg domenet ditt fra listen.</li>
+    <li>Microsoft viser to CNAME-records:
+      <pre><code>selector1._domainkey.dittfirma.no  CNAME  selector1-dittfirma-no._domainkey.dittfirma.onmicrosoft.com
+selector2._domainkey.dittfirma.no  CNAME  selector2-dittfirma-no._domainkey.dittfirma.onmicrosoft.com</code></pre>
+    </li>
+    <li>Legg disse to CNAME-records inn hos DNS-leverandøren din.</li>
+    <li>Vent 30-60 minutter.</li>
+    <li>Gå tilbake til DKIM-siden og klikk <strong>Enable</strong>. Hvis Microsoft fortsatt klager: vent enda 30 min og prøv igjen.</li>
+  </ol>
+
+  <p>Test DKIM-statusen din med <a href="/?utm_source=blog&utm_medium=dmarc-m365">data1.no</a> — vi skal se to grønne sjekkmerker for selector1 og selector2.</p>
+
+  <h2 id="dmarc-none">Steg 3: Opprett DMARC med p=none</h2>
+  <p><strong>Aldri</strong> start med <code>p=reject</code>. Du må først bruke 2-4 uker i overvåkingsmodus for å verifisere at all legitim e-post består DMARC.</p>
+
+  <p>Legg til denne TXT-recorden hos DNS-leverandøren din:</p>
+  <table>
+    <tr><th>Felt</th><th>Verdi</th></tr>
+    <tr><td>Type</td><td>TXT</td></tr>
+    <tr><td>Navn / vert</td><td><code>_dmarc</code></td></tr>
+    <tr><td>Verdi</td><td><code>v=DMARC1; p=none; rua=mailto:dmarc@dittfirma.no; pct=100; adkim=r; aspf=r;</code></td></tr>
+    <tr><td>TTL</td><td>3600</td></tr>
+  </table>
+
+  <div class="callout">
+    <p><strong>Tips:</strong> Bruk en dedikert e-post for <code>rua</code> — f.eks. <code>dmarc@dittfirma.no</code>. Du kommer til å motta en del XML-rapporter.</p>
+  </div>
+
+  <h2 id="rapporter">Steg 4: Les og tolk DMARC-rapportene</h2>
+  <p>Etter 24-48 timer begynner du å motta XML-rapporter på <code>rua</code>-adressen. Disse er vanskelige å lese manuelt. Anbefalte verktøy:</p>
+  <ul>
+    <li><strong>Postmark DMARC Monitoring</strong> — gratis for små volumer, fint dashboard.</li>
+    <li><strong>Valimail Monitor</strong> — gratis for grunnfunksjoner.</li>
+    <li><strong>dmarcian</strong> — populært verktøy.</li>
+    <li><strong>Halo IT Service Management</strong> — om du allerede er kunde.</li>
+  </ul>
+
+  <p>Det du leter etter i rapportene:</p>
+  <ul>
+    <li>Hvilke IP-adresser sender e-post i ditt navn?</li>
+    <li>Består de SPF og DKIM?</li>
+    <li>Er det noen <em>legitime</em> avsendere (f.eks. en CRM eller faktureringssystem) som ikke er i SPF?</li>
+    <li>Er det noen <em>illegitime</em> avsendere (svindlere som forsøker å bruke ditt domene)?</li>
+  </ul>
+
+  <h2 id="quarantine">Steg 5: Skjerp til p=quarantine</h2>
+  <p>Når du har bekreftet i 2-3 uker at:</p>
+  <ul>
+    <li>Mer enn 99 % av legitime e-poster består både SPF og DKIM</li>
+    <li>Du har lagt til alle saksbehandlersystemer i SPF</li>
+    <li>Du har aktivert DKIM for alle tredjeparts utsendere</li>
+  </ul>
+
+  <p>Da er det trygt å skjerpe til quarantine. Først med <code>pct=25</code> for gradvis utrulling:</p>
+  <pre><code>v=DMARC1; p=quarantine; pct=25; rua=mailto:dmarc@dittfirma.no; adkim=r; aspf=r;</code></pre>
+
+  <p>Etter 1 uke uten klager: oppgrader til <code>pct=50</code>. Etter ytterligere 1 uke: <code>pct=100</code>.</p>
+
+  <h2 id="reject">Steg 6: Skjerp til p=reject</h2>
+  <p>Når quarantine ved pct=100 har gått problemfritt i 2 uker, kan du sette p=reject:</p>
+  <pre><code>v=DMARC1; p=reject; pct=100; rua=mailto:dmarc@dittfirma.no; adkim=r; aspf=r;</code></pre>
+
+  <p>Da er du i mål. Alle illegitime e-poster med ditt domene som From-adresse blir <em>avvist</em> hos mottakeren.</p>
+
+  <h2 id="feil">Vanlige feil i M365-oppsett</h2>
+  <ol>
+    <li><strong>Glemt å legge til Mailchimp/Halo/etc. i SPF</strong> — sender deres e-post til spam når DMARC strammes.</li>
+    <li><strong>Glemt SPF for tilbakehoppsadresse (bounce-domain)</strong> — vanlig hos brukere av masseutsendelse.</li>
+    <li><strong>Aktivert DKIM før CNAME-recordene var i DNS</strong> — Microsoft klager. Vent og prøv igjen.</li>
+    <li><strong>Brukt <code>adkim=s; aspf=s</code> (strict alignment)</strong> — sjelden nødvendig og bryter ofte legitime avsendere.</li>
+    <li><strong>Glemt subdomener</strong> — <code>nyhetsbrev.dittfirma.no</code> trenger sin egen DKIM eller eksplisitt <code>sp=reject</code>.</li>
+  </ol>
+
+  <h2 id="faq">FAQ</h2>
+  <details class="faq"><summary>Trenger jeg en betalt DMARC-tjeneste?</summary><p>Nei. DMARC er bare en DNS-record. Du trenger imidlertid et verktøy for å lese de aggregerte XML-rapportene — flere er gratis for små volumer.</p></details>
+  <details class="faq"><summary>Hvor lang tid tar full implementering?</summary><p>30-60 minutter for selve oppsettet. 4-8 uker for trygg overgang fra p=none til p=reject.</p></details>
+  <details class="faq"><summary>Hva med subdomener?</summary><p>Hvert subdomene trenger egen DMARC eller eksplisitt <code>sp=</code>-policy på hovedrecord. Hvis ikke <code>sp=</code> er satt, arves <code>p=</code>.</p></details>
+  <details class="faq"><summary>Hvorfor ikke bare hoppe rett til p=reject?</summary><p>Du risikerer å avvise dine egne legitime e-poster (f.eks. fra CRM eller faktureringssystem) hvis de ikke er korrekt i SPF/DKIM. Overvåkingsmodus avdekker dette først.</p></details>
+
+  <div class="cta-box">
+    <h3>Sjekk DMARC-statusen din nå</h3>
+    <p>Få full validering på 10 sekunder.</p>
+    <a href="/?utm_source=blog&utm_medium=dmarc-m365">Sjekk eget domene →</a>
+  </div>
+
+  <h2>Lese mer</h2>
+  <ul>
+    <li><a href="/blogg/dmarc-google-workspace/">DMARC i Google Workspace</a></li>
+    <li><a href="/blogg/spf-microsoft-365/">SPF-oppsett i Microsoft 365</a></li>
+    <li><a href="/blogg/dmarc/">DMARC forklart fra grunnen</a></li>
+    <li><a href="/verktoy/dmarc-generator/">DMARC-generator</a></li>
+  </ul>
+
+  <div class="author-card">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Micronet</div>
+      <div class="author-meta">Norsk IT-konsulenttjeneste — DMARC, e-post sikkerhet og Microsoft 365. <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

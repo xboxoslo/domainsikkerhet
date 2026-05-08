@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Norske aviser, TV-kanaler og nyhetsbyråer — har de god nok e-post sikkerhet til at journalister og redaksjoner ikke blir utsatt for spear phishing? Live DMARC/SPF/DKIM-analyse.">
+<meta name="keywords" content="medier dmarc, journalist phishing, presse e-post sikkerhet, nrk dmarc, vg dmarc, schibsted dmarc">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/rapport-2026/medier/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/rapport-2026/medier/">
+<meta property="og:title" content="Norske medier — e-post sikkerhet 2026 (live rapport)">
+<meta property="og:description" content="Norske medier sjekket: DMARC, SPF og DKIM hos 25 redaksjoner.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Norske medier — e-post sikkerhet 2026 | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/rapport-2026/_assets/report.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Norske medier — e-post sikkerhet 2026","datePublished":"2026-05-08","author":{"@type":"Organization","name":"Micronet","url":"https://micronet.no/"},"publisher":{"@type":"Organization","name":"data1.no","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"}},"description":"Live analyse av e-post sikkerhet hos 25 norske medier.","mainEntityOfPage":"https://data1.no/rapport-2026/medier/","inLanguage":"nb-NO"}</script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main class="container">
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/rapport-2026/">Rapport 2026</a> › Medier</nav>
+  <h1>Norske medier — e-post sikkerhet 2026</h1>
+  <p class="intro">Journalister er attraktive mål for spear phishing — både fra økonomisk motiverte kriminelle og fra statlige aktører. Vi sjekker live om de største norske mediene har god nok e-post sikkerhet til å beskytte redaksjonelle kilder, ansatte og lesere mot identitetsforfalskning.</p>
+
+  <div class="progress-card" id="progressCard">
+    <h2>Analyserer norske medier…</h2>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-meta" id="progressMeta">Klargjør…</div>
+  </div>
+
+  <section class="summary" id="summary" hidden></section>
+  <section class="grade-bars" id="gradeBars" hidden></section>
+
+  <div class="controls" id="controls" hidden>
+    <button data-filter="all" class="active">Alle</button>
+    <button data-filter="enforce">Håndhever DMARC</button>
+    <button data-filter="failing">Karakter F</button>
+    <button data-filter="missing-dmarc">Mangler DMARC</button>
+  </div>
+
+  <section id="rankWrap" hidden>
+    <h2 style="margin-bottom:14px;font-size:18px;font-weight:800">Rangering</h2>
+    <div style="overflow-x:auto"><table id="rankTable">
+      <thead><tr>
+        <th>#</th><th>Medie</th><th>Karakter</th><th>Score</th>
+        <th>DMARC</th><th>SPF</th><th>DKIM</th><th>MTA-STS</th><th>TLS-RPT</th><th>BIMI</th>
+      </tr></thead>
+      <tbody id="rankBody"></tbody>
+    </table></div>
+  </section>
+
+  <div class="cta">
+    <h3>Jobber du i media eller forlag?</h3>
+    <p>Beskytt kildene dine, journalistene dine og leserne dine mot e-post-spoofing. Få analyse av eget domene på 10 sekunder.</p>
+    <a href="/?utm_source=rapport-medier">Sjekk eget domene →</a>
+  </div>
+
+  <div class="cross-links">
+    <a href="/rapport-2026/" class="cross-link"><strong>← Topp 100 oversikt</strong><span>Alle bransjer</span></a>
+    <a href="/rapport-2026/banker/" class="cross-link"><strong>Banker →</strong><span>25 norske banker</span></a>
+    <a href="/rapport-2026/kommuner/" class="cross-link"><strong>Kommuner →</strong><span>30 norske kommuner</span></a>
+    <a href="/rapport-2026/e-handel/" class="cross-link"><strong>E-handel →</strong><span>Nettbutikker</span></a>
+  </div>
+
+  <section class="method">
+    <h2>Hvorfor er dette viktig for medier?</h2>
+    <p>Spear phishing er en av de største truslene mot norske journalister og redaksjoner. Når en redaksjon mangler DMARC, kan en angriper sende e-post som ser ut til å komme fra redaktøren eller en kollega — og overlevere falske dokumenter, lenker eller forespørsler om kildemateriale.</p>
+    <p>Medier som håndhever DMARC bidrar også til å beskytte sine egne lesere — som ofte mottar nyhetsbrev fra avisen.</p>
+  </section>
+
+  <p class="footer">Laget av Micronet · data1.no · Sist oppdatert <span id="lastUpdate">—</span></p>
+</main>
+
+<script>
+window.REPORT_CONFIG = {
+  slug: 'rapport2026-medier-v1',
+  domains: [
+    "nrk.no","vg.no","tv2.no","aftenposten.no","dagbladet.no","dn.no","nettavisen.no",
+    "ba.no","bt.no","fvn.no","adressa.no","vl.no","klassekampen.no","nationen.no","morgenbladet.no",
+    "smaalenene.no","stavangeraftenblad.no","nordlys.no","finansavisen.no","abc.no",
+    "ntb.no","kampanje.no","journalisten.no","medier24.no","schibsted.no"
+  ]
+};
+</script>
+<script src="/rapport-2026/_assets/report.js" defer></script>
+</body>
+</html>

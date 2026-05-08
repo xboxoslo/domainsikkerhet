@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Gratis DMARC record-generator. Velg policy, rapport-adresser og prosent — få en gyldig DMARC TXT-record du kan kopiere rett inn i DNS-en din.">
+<meta name="keywords" content="dmarc generator, dmarc record generator, dmarc oppsett verktøy, lag dmarc record, dmarc TXT generator">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/verktoy/dmarc-generator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/verktoy/dmarc-generator/">
+<meta property="og:title" content="DMARC-generator — gratis verktøy fra data1.no">
+<meta property="og:description" content="Lag en gyldig DMARC-record på 30 sekunder. Norsk grensesnitt, kopier rett til DNS.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<title>DMARC-generator | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Inter";font-weight:400 900;font-display:optional;src:url(/fonts/inter-latin.woff2)format("woff2");unicode-range:U+0000-00FF}
+@font-face{font-family:"Inter Fallback";src:local("Arial");size-adjust:107.4%;ascent-override:90%;descent-override:22.48%;line-gap-override:0%}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Inter","Inter Fallback",-apple-system,BlinkMacSystemFont,sans-serif;background:#f1f5f9;color:#1e293b;-webkit-font-smoothing:antialiased;line-height:1.55}
+.header{background:#1a202c;padding:14px 28px;display:flex;align-items:center;gap:18px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.logo{color:#fff;font-size:19px;font-weight:800;text-decoration:none}.logo span{color:#4fd1c5}
+.spacer{flex:1}.nav-link{color:#cbd5e0;text-decoration:none;font-size:14px}.nav-link:hover{color:#fff}
+main{max-width:880px;margin:0 auto;padding:36px 22px 80px}
+.crumbs{font-size:13px;color:#94a3b8;margin-bottom:16px}.crumbs a{color:#0f766e;text-decoration:none}
+h1{font-size:36px;font-weight:900;color:#0f172a;letter-spacing:-.025em;line-height:1.1;margin-bottom:14px}
+.intro{font-size:17px;color:#475569;max-width:680px;margin-bottom:28px;line-height:1.6}
+.layout{display:grid;grid-template-columns:1.05fr .95fr;gap:24px}
+.card{background:#fff;border-radius:14px;padding:26px 28px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.card h2{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:18px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:700;color:#475569;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.field label .req{color:#dc2626;margin-left:2px}
+.field-help{font-size:12px;color:#64748b;margin-top:4px;line-height:1.45}
+.field input,.field select{width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14.5px;color:#0f172a;font-family:inherit;background:#fff;outline:0;transition:border-color .15s,box-shadow .15s}
+.field input:focus,.field select:focus{border-color:#14b8a6;box-shadow:0 0 0 3px rgba(20,184,166,.12)}
+.radio-group{display:grid;gap:8px}
+.radio-opt{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1px solid #e2e8f0;border-radius:10px;cursor:pointer;transition:all .15s}
+.radio-opt:hover{border-color:#cbd5e0}
+.radio-opt input{margin-top:2px;flex-shrink:0;accent-color:#14b8a6}
+.radio-opt input:checked + div .ro-name{color:#0f766e}
+.radio-opt:has(input:checked){border-color:#14b8a6;background:#f0fdfa}
+.ro-name{font-weight:700;color:#0f172a;font-size:14px}
+.ro-desc{font-size:12.5px;color:#64748b;margin-top:2px;line-height:1.4}
+.advanced-toggle{font-size:13px;color:#0f766e;background:none;border:0;cursor:pointer;padding:8px 0;font-weight:600;font-family:inherit}
+.advanced{display:none;border-top:1px solid #f1f5f9;padding-top:16px;margin-top:8px}
+.advanced.show{display:block}
+.output-card{position:sticky;top:20px}
+.record-box{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:20px 22px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;line-height:1.7;word-break:break-all;margin-bottom:14px;min-height:80px}
+.record-box .lbl{color:#64748b;font-size:11px;font-family:"Inter",sans-serif;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:6px;font-weight:600}
+.record-box .v{color:#5eead4}
+.record-box .k{color:#fcd34d}
+.copy-btn{display:flex;width:100%;align-items:center;justify-content:center;gap:8px;padding:13px 22px;background:#14b8a6;color:#fff;border:0;border-radius:10px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s}
+.copy-btn:hover{background:#0d9488}
+.copy-btn.copied{background:#16a34a}
+.dns-meta{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin-top:18px;font-size:13px}
+.dns-meta dt{color:#64748b;font-weight:600}
+.dns-meta dd{color:#0f172a;font-family:ui-monospace,monospace;word-break:break-all}
+.preset-row{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.preset-btn{padding:8px 14px;background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;font-weight:600;transition:all .15s}
+.preset-btn:hover{border-color:#14b8a6;color:#0f766e}
+.preset-btn.active{background:#0f172a;color:#fff;border-color:#0f172a}
+.tips{background:#f0fdfa;border:1px solid #99f6e4;border-radius:10px;padding:14px 18px;margin-top:18px;font-size:13.5px;color:#134e4a;line-height:1.55}
+.tips strong{color:#0f766e}
+.cta-box{background:linear-gradient(135deg,#0f172a,#1a2540);color:#fff;border-radius:14px;padding:26px 28px;margin-top:30px;text-align:center}
+.cta-box h3{font-size:20px;font-weight:900;margin-bottom:8px}
+.cta-box p{color:#94a3b8;margin-bottom:14px;font-size:14px}
+.cta-box a{display:inline-block;padding:11px 22px;background:#14b8a6;color:#fff;border-radius:999px;text-decoration:none;font-weight:700}
+.related{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.related a{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px 18px;text-decoration:none;color:inherit}
+.related a:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(15,23,42,.07)}
+.related strong{display:block;color:#0f172a;font-size:14px;margin-bottom:4px}
+.related span{color:#64748b;font-size:13px}
+@media(max-width:880px){.layout{grid-template-columns:1fr}.output-card{position:static}}
+@media(max-width:640px){h1{font-size:26px}main{padding:24px 16px 60px}}
+</style>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/verktoy/">Verktøy</a> › DMARC-generator</nav>
+  <h1>DMARC-generator</h1>
+  <p class="intro">Lag en gyldig DMARC-record på 30 sekunder. Velg policy, rapport-adresse og prosent — vi genererer TXT-recorden du kan kopiere rett inn i DNS-en din. Ingen registrering. Norsk grensesnitt.</p>
+
+  <div class="layout">
+    <div class="card">
+      <h2>Konfigurer din DMARC-record</h2>
+
+      <div class="preset-row">
+        <button class="preset-btn active" data-preset="monitor">Overvåking (start her)</button>
+        <button class="preset-btn" data-preset="quarantine">Karantene</button>
+        <button class="preset-btn" data-preset="reject">Maks beskyttelse</button>
+      </div>
+
+      <div class="field">
+        <label for="domain">Ditt domene<span class="req">*</span></label>
+        <input type="text" id="domain" placeholder="dittfirma.no" autocomplete="off" spellcheck="false">
+        <div class="field-help">Bare hoveddomene — uten www eller protokoll.</div>
+      </div>
+
+      <div class="field">
+        <label>Policy (p=)<span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="policy" value="none" checked><div><div class="ro-name">none — kun overvåking</div><div class="ro-desc">Ingen e-post avvises. Du får rapporter for å se hva som skjer. <strong>Start alltid her.</strong></div></div></label>
+          <label class="radio-opt"><input type="radio" name="policy" value="quarantine"><div><div class="ro-name">quarantine — sett i spam</div><div class="ro-desc">Mistenkelig e-post settes i mottakers spam-mappe. Trygt mellomsteg.</div></div></label>
+          <label class="radio-opt"><input type="radio" name="policy" value="reject"><div><div class="ro-name">reject — avvis helt</div><div class="ro-desc">Mistenkelig e-post avvises før den når mottaker. Maks beskyttelse mot phishing.</div></div></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="rua">Rapport-adresse (rua=)</label>
+        <input type="email" id="rua" placeholder="dmarc@dittfirma.no" autocomplete="off">
+        <div class="field-help">Hvor aggregerte XML-rapporter skal sendes. Anbefalt: en dedikert e-post.</div>
+      </div>
+
+      <div class="field">
+        <label for="pct">Prosent (pct=)</label>
+        <select id="pct">
+          <option value="100" selected>100 % — gjelder alle e-poster</option>
+          <option value="50">50 % — halvparten</option>
+          <option value="25">25 % — fjerdedel (gradvis utrulling)</option>
+          <option value="10">10 % — forsiktig start</option>
+        </select>
+        <div class="field-help">Brukes ved overgang til quarantine/reject for gradvis utrulling.</div>
+      </div>
+
+      <button type="button" class="advanced-toggle" id="advBtn">Vis avanserte felter ▾</button>
+      <div class="advanced" id="adv">
+        <div class="field">
+          <label for="ruf">Forensic-rapport (ruf=)</label>
+          <input type="email" id="ruf" placeholder="dmarc-forensic@dittfirma.no" autocomplete="off">
+          <div class="field-help">Detaljerte feilrapporter for hver e-post som feiler. Få leverandører støtter dette.</div>
+        </div>
+
+        <div class="field">
+          <label for="sp">Subdomain-policy (sp=)</label>
+          <select id="sp">
+            <option value="" selected>Arve fra p= (standard)</option>
+            <option value="none">none</option>
+            <option value="quarantine">quarantine</option>
+            <option value="reject">reject</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="adkim">DKIM-justering (adkim=)</label>
+          <select id="adkim">
+            <option value="r" selected>Relaxed (anbefalt)</option>
+            <option value="s">Strict</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="aspf">SPF-justering (aspf=)</label>
+          <select id="aspf">
+            <option value="r" selected>Relaxed (anbefalt)</option>
+            <option value="s">Strict</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="output-card">
+      <div class="card">
+        <h2>Din DMARC-record</h2>
+        <div class="record-box" id="output">
+          <span class="lbl">TXT-record verdi</span>
+          <span id="recordValue"><span class="v">v=DMARC1</span>; <span class="k">p</span>=<span class="v">none</span>; <span class="k">pct</span>=<span class="v">100</span>; <span class="k">adkim</span>=<span class="v">r</span>; <span class="k">aspf</span>=<span class="v">r</span>;</span>
+        </div>
+        <button class="copy-btn" id="copyBtn">📋 Kopier record</button>
+        <dl class="dns-meta">
+          <dt>Type</dt><dd>TXT</dd>
+          <dt>Navn / vert</dt><dd id="hostname">_dmarc</dd>
+          <dt>TTL</dt><dd>3600</dd>
+        </dl>
+        <div class="tips">
+          <strong>Tips:</strong> Etter at recorden er publisert, vent 30 minutter på DNS-propagering. Test med <a href="/?utm_source=verktoy">data1.no</a> for å bekrefte at den virker.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h3>Sjekk om recorden din virker</h3>
+    <p>Få full DMARC-validering på 10 sekunder.</p>
+    <a href="/?utm_source=verktoy">Sjekk eget domene →</a>
+  </div>
+
+  <div class="related">
+    <a href="/verktoy/spf-generator/"><strong>SPF-generator →</strong><span>Lag SPF-record på 30 sek</span></a>
+    <a href="/blogg/dmarc/"><strong>DMARC forklart</strong><span>Komplett guide</span></a>
+    <a href="/blogg/dmarc-microsoft-365/"><strong>DMARC i M365</strong><span>Steg-for-steg</span></a>
+    <a href="/rapport-2026/"><strong>Topp 100 rapport →</strong><span>Hvem håndhever DMARC?</span></a>
+  </div>
+</main>
+
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const PRESETS = {
+  monitor: { policy: 'none', pct: '100', adv: false },
+  quarantine: { policy: 'quarantine', pct: '25', adv: false },
+  reject: { policy: 'reject', pct: '100', adv: false }
+};
+
+function escHtml(s) { return String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+function buildRecord() {
+  const policy = document.querySelector('input[name="policy"]:checked').value;
+  const rua = $('rua').value.trim();
+  const ruf = $('ruf').value.trim();
+  const pct = $('pct').value;
+  const sp = $('sp').value;
+  const adkim = $('adkim').value;
+  const aspf = $('aspf').value;
+  const domain = $('domain').value.trim().toLowerCase().replace(/^https?:\/\//,'').replace(/\/.*$/,'').replace(/^www\./,'');
+
+  const parts = [['v','DMARC1'], ['p', policy]];
+  if (pct && pct !== '100') parts.push(['pct', pct]);
+  else if (pct === '100' && policy !== 'none') parts.push(['pct', '100']);
+  if (rua) parts.push(['rua', 'mailto:' + rua]);
+  if (ruf) parts.push(['ruf', 'mailto:' + ruf]);
+  if (sp) parts.push(['sp', sp]);
+  parts.push(['adkim', adkim]);
+  parts.push(['aspf', aspf]);
+
+  const record = parts.map(([k, v]) => k + '=' + v).join('; ') + ';';
+  const html = parts.map(([k, v]) => '<span class="k">' + escHtml(k) + '</span>=<span class="v">' + escHtml(v) + '</span>').join('; ') + ';';
+
+  $('recordValue').innerHTML = html;
+  $('hostname').textContent = domain ? '_dmarc.' + domain : '_dmarc';
+  $('recordValue').dataset.raw = record;
+}
+
+document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', buildRecord));
+document.querySelectorAll('input[type="radio"]').forEach(el => el.addEventListener('change', buildRecord));
+
+document.querySelectorAll('.preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const p = PRESETS[btn.dataset.preset];
+    document.querySelector('input[name="policy"][value="' + p.policy + '"]').checked = true;
+    $('pct').value = p.pct;
+    buildRecord();
+  });
+});
+
+$('advBtn').addEventListener('click', () => {
+  const adv = $('adv');
+  adv.classList.toggle('show');
+  $('advBtn').textContent = adv.classList.contains('show') ? 'Skjul avanserte felter ▴' : 'Vis avanserte felter ▾';
+});
+
+$('copyBtn').addEventListener('click', () => {
+  const raw = $('recordValue').dataset.raw || $('recordValue').textContent;
+  navigator.clipboard.writeText(raw).then(() => {
+    $('copyBtn').textContent = '✓ Kopiert!';
+    $('copyBtn').classList.add('copied');
+    setTimeout(() => {
+      $('copyBtn').textContent = '📋 Kopier record';
+      $('copyBtn').classList.remove('copied');
+    }, 2000);
+  });
+});
+
+buildRecord();
+</script>
+</body>
+</html>

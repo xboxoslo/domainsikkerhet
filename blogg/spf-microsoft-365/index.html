@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Komplett guide til SPF-oppsett for Microsoft 365 / Exchange Online. Inkluderer 10-lookup grensen, hybrid-oppsett og alle vanlige tredjepartstjenester.">
+<meta name="keywords" content="spf microsoft 365, spf exchange online, spf office 365, spf m365, spf protection outlook, spf 10 lookup grense">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/blogg/spf-microsoft-365/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/blogg/spf-microsoft-365/">
+<meta property="og:title" content="SPF-oppsett i Microsoft 365 — komplett guide">
+<meta property="og:description" content="Slik setter du opp riktig SPF for M365 — inkluderer 10-lookup-grensen og tredjeparter.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>SPF-oppsett i Microsoft 365 | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SPF-oppsett i Microsoft 365","datePublished":"2026-05-08","author":{"@type":"Organization","name":"Micronet"},"publisher":{"@type":"Organization","name":"data1.no","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"}},"mainEntityOfPage":"https://data1.no/blogg/spf-microsoft-365/","inLanguage":"nb-NO"}</script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/blogg/">Blogg</a> › SPF i Microsoft 365</nav>
+  <h1>SPF-oppsett i Microsoft 365</h1>
+  <p class="meta">Publisert 8. mai 2026 · Av Micronet · 7 min lesetid</p>
+  <p class="lead">Microsoft 365 / Exchange Online er Norges mest brukte forretnings-e-post. SPF er den enkleste delen av e-postsikkerhet å sette opp — men også den hvor flest gjør feil. Her er hele oppskriften.</p>
+
+  <div class="toc">
+    <h2>Innhold</h2>
+    <ol>
+      <li><a href="#standard">Standard SPF for Microsoft 365</a></li>
+      <li><a href="#tredjepart">Med tredjepartstjenester</a></li>
+      <li><a href="#10lookup">10-lookup grensen</a></li>
+      <li><a href="#flatten">SPF flattening — løs lookup-problemet</a></li>
+      <li><a href="#hybrid">Hybrid Exchange (lokal + sky)</a></li>
+      <li><a href="#test">Test SPF</a></li>
+      <li><a href="#feil">Vanlige feil</a></li>
+    </ol>
+  </div>
+
+  <h2 id="standard">Standard SPF for Microsoft 365</h2>
+  <p>Hvis du <em>kun</em> bruker M365 til å sende e-post:</p>
+  <pre><code>v=spf1 include:spf.protection.outlook.com -all</code></pre>
+
+  <p>Det er det. Legg det inn som TXT-record på rotnivå (<code>@</code> eller blankt navn). Dette inkluderer alle Microsofts utgående servere over hele verden.</p>
+
+  <h2 id="tredjepart">Med tredjepartstjenester</h2>
+  <p>De fleste norske bedrifter bruker minst én tredjepart i tillegg. Her er vanlige <code>include:</code>-direktiver:</p>
+  <table>
+    <tr><th>Tjeneste</th><th>SPF include</th></tr>
+    <tr><td>Microsoft 365</td><td><code>include:spf.protection.outlook.com</code></td></tr>
+    <tr><td>Mailchimp</td><td><code>include:servers.mcsv.net</code></td></tr>
+    <tr><td>SendGrid</td><td><code>include:sendgrid.net</code></td></tr>
+    <tr><td>Mailgun</td><td><code>include:mailgun.org</code></td></tr>
+    <tr><td>HubSpot</td><td><code>include:_spf.hubspot.com</code></td></tr>
+    <tr><td>Salesforce</td><td><code>include:_spf.salesforce.com</code></td></tr>
+    <tr><td>Zendesk</td><td><code>include:mail.zendesk.com</code></td></tr>
+    <tr><td>Postmark</td><td><code>include:spf.mtasv.net</code></td></tr>
+    <tr><td>Halo</td><td>Avhenger av tenant — sjekk dokumentasjon</td></tr>
+  </table>
+
+  <p>Eksempel på kombinert oppsett (M365 + Mailchimp + SendGrid):</p>
+  <pre><code>v=spf1 include:spf.protection.outlook.com include:servers.mcsv.net include:sendgrid.net -all</code></pre>
+
+  <h2 id="10lookup">10-lookup grensen</h2>
+  <p>SPF har en hard grense på <strong>10 DNS-oppslag</strong>. Hver <code>include:</code>, <code>a</code>, <code>mx</code>, <code>exists</code> og <code>redirect</code> teller. Hvis du går over, er hele SPF-recorden ugyldig (PermError) og DMARC vil <em>aldri</em> bestå SPF-validering.</p>
+
+  <p>Hvor mange lookups bruker hver tjeneste?</p>
+  <ul>
+    <li><code>include:spf.protection.outlook.com</code> = 3 lookups (kjedet)</li>
+    <li><code>include:_spf.google.com</code> = 4 lookups</li>
+    <li><code>include:servers.mcsv.net</code> = 1 lookup</li>
+    <li><code>include:sendgrid.net</code> = 2 lookups</li>
+  </ul>
+
+  <p>Med M365 + Google + Mailchimp + SendGrid er du oppe i 10. <strong>Bruk <a href="/?utm_source=blog&utm_medium=spf-m365">data1.no</a></strong> for å telle automatisk.</p>
+
+  <h2 id="flatten">SPF flattening — løs lookup-problemet</h2>
+  <p>Hvis du har for mange tjenester, finnes flere strategier:</p>
+  <ol>
+    <li><strong>Erstatt <code>include:</code> med <code>ip4:</code>.</strong> Slå opp IP-rangene manuelt og lim dem inn. Krever oppdatering når leverandøren endrer IP.</li>
+    <li><strong>Bruk en SPF flattening-tjeneste.</strong> Tjenester som <em>EasyDMARC</em>, <em>Halon</em>, eller <em>Easymail</em> automatiserer dette og oppdaterer recordene dine.</li>
+    <li><strong>Bruk subdomener.</strong> Send markedsmail fra <code>nyhetsbrev.dittfirma.no</code> med egen SPF, slik at hovedrecord forblir slank.</li>
+  </ol>
+
+  <h2 id="hybrid">Hybrid Exchange (lokal + sky)</h2>
+  <p>Hvis du har både Exchange On-Premises og Exchange Online (hybrid), trenger SPF-recorden å dekke begge:</p>
+  <pre><code>v=spf1 ip4:185.x.x.x include:spf.protection.outlook.com -all</code></pre>
+
+  <p>Hvor <code>185.x.x.x</code> er den faste utgående IP-adressen til din lokale Exchange-server.</p>
+
+  <h2 id="test">Test SPF</h2>
+  <p>Etter at SPF er publisert (vent 5-30 minutter på DNS-propagering):</p>
+  <ol>
+    <li>Bruk <a href="/?utm_source=blog&utm_medium=spf-m365">data1.no</a> for syntakssjekk + lookup-telling.</li>
+    <li>Send en test-e-post til <code>check-auth@verifier.port25.com</code> — du får en rapport tilbake.</li>
+    <li>Send en test til en Gmail-konto, åpne meldingen og klikk "Show original" — du ser SPF-resultatet i headeren.</li>
+  </ol>
+
+  <h2 id="feil">Vanlige feil</h2>
+  <ol>
+    <li><strong>To SPF-records på samme domene.</strong> Begge blir ugyldige. Slå sammen til én.</li>
+    <li><strong>Glemt <code>-all</code> eller <code>~all</code>.</strong> Uten dette har SPF ingen håndhevelse.</li>
+    <li><strong>Brukt <code>+all</code>.</strong> Tillater alle å sende — verre enn ingen SPF.</li>
+    <li><strong>10-lookup grensen brutt.</strong> Bruk flattening eller subdomener.</li>
+    <li><strong>SPF satt på subdomenet, ikke rotdomenet.</strong> Hvis e-post sendes fra <code>noreply@dittfirma.no</code>, må SPF være på <code>dittfirma.no</code> — ikke <code>mail.dittfirma.no</code>.</li>
+  </ol>
+
+  <div class="cta-box">
+    <h3>Sjekk SPF-statusen din</h3>
+    <p>Vi teller lookups, validerer syntaks og foreslår fix.</p>
+    <a href="/?utm_source=blog&utm_medium=spf-m365">Sjekk eget domene →</a>
+  </div>
+
+  <h2>Lese mer</h2>
+  <ul>
+    <li><a href="/blogg/dmarc-microsoft-365/">DMARC i Microsoft 365</a></li>
+    <li><a href="/blogg/spf/">SPF forklart fra grunnen</a></li>
+    <li><a href="/verktoy/spf-generator/">SPF-generator</a></li>
+  </ul>
+
+  <div class="author-card">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Micronet</div>
+      <div class="author-meta">Norsk IT-konsulenttjeneste — Microsoft 365, e-post sikkerhet og infrastruktur. <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

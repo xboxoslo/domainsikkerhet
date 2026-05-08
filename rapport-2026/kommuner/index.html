@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kan kriminelle sende e-post som utgir seg for å komme fra kommunen din? Live DMARC/SPF/DKIM-analyse av 30 av Norges største kommuner — oppdatert direkte fra DNS.">
+<meta name="keywords" content="kommune phishing, dmarc kommune, e-post sikkerhet kommune, oslo kommune dmarc, bergen kommune dmarc, offentlig sektor dmarc">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/rapport-2026/kommuner/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/rapport-2026/kommuner/">
+<meta property="og:title" content="Norske kommuner — e-post sikkerhet 2026 (live rapport)">
+<meta property="og:description" content="Kan kriminelle utgi seg for kommunen din? Live DMARC-analyse av 30 norske kommuner.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Norske kommuner — e-post sikkerhet 2026 | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/rapport-2026/_assets/report.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Norske kommuner — e-post sikkerhet 2026","datePublished":"2026-05-08","author":{"@type":"Organization","name":"Micronet","url":"https://micronet.no/"},"publisher":{"@type":"Organization","name":"data1.no","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"}},"description":"Live analyse av e-post sikkerhet hos 30 norske kommuner.","mainEntityOfPage":"https://data1.no/rapport-2026/kommuner/","inLanguage":"nb-NO"}</script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main class="container">
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/rapport-2026/">Rapport 2026</a> › Kommuner</nav>
+  <h1>Norske kommuner — e-post sikkerhet 2026</h1>
+  <p class="intro">Innbyggere stoler på e-post fra kommunen — om innkalling til møter, helsetjenester, skole og barnehage. Vi sjekker live om 30 av Norges største kommuner har konfigurert DMARC, SPF og DKIM, og om det dermed er mulig for kriminelle å sende e-post i kommunens navn. <strong>All data er hentet i sanntid fra DNS i nettleseren din.</strong></p>
+
+  <div class="progress-card" id="progressCard">
+    <h2>Analyserer norske kommuner…</h2>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-meta" id="progressMeta">Klargjør…</div>
+  </div>
+
+  <section class="summary" id="summary" hidden></section>
+  <section class="grade-bars" id="gradeBars" hidden></section>
+
+  <div class="controls" id="controls" hidden>
+    <button data-filter="all" class="active">Alle kommuner</button>
+    <button data-filter="enforce">Håndhever DMARC</button>
+    <button data-filter="failing">Karakter F</button>
+    <button data-filter="missing-dmarc">Mangler DMARC</button>
+  </div>
+
+  <section id="rankWrap" hidden>
+    <h2 style="margin-bottom:14px;font-size:18px;font-weight:800">Rangering</h2>
+    <div style="overflow-x:auto"><table id="rankTable">
+      <thead><tr>
+        <th>#</th><th>Kommune</th><th>Karakter</th><th>Score</th>
+        <th>DMARC</th><th>SPF</th><th>DKIM</th><th>MTA-STS</th><th>TLS-RPT</th><th>BIMI</th>
+      </tr></thead>
+      <tbody id="rankBody"></tbody>
+    </table></div>
+  </section>
+
+  <div class="cta">
+    <h3>Jobber du med IT i offentlig sektor?</h3>
+    <p>NSM anbefaler at alle offentlige virksomheter har DMARC med p=reject. Få analyse av eget domene gratis — eller kontakt Micronet for full implementering.</p>
+    <a href="/?utm_source=rapport-kommuner">Sjekk egen kommune →</a>
+  </div>
+
+  <div class="cross-links">
+    <a href="/rapport-2026/" class="cross-link"><strong>← Topp 100 oversikt</strong><span>Alle bransjer</span></a>
+    <a href="/rapport-2026/banker/" class="cross-link"><strong>Banker →</strong><span>25 norske banker</span></a>
+    <a href="/rapport-2026/e-handel/" class="cross-link"><strong>E-handel →</strong><span>Nettbutikker</span></a>
+    <a href="/rapport-2026/medier/" class="cross-link"><strong>Medier →</strong><span>Aviser, TV og radio</span></a>
+  </div>
+
+  <section class="method">
+    <h2>Hvorfor er dette viktig for kommuner?</h2>
+    <p>Innbyggerne mottar viktige meldinger på e-post — om barnehageopptak, eiendomsskatt, helse og krisevarsler. Hvis kommunen ikke har DMARC, kan en svindler i prinsippet sende falske SMS- eller e-postvarsler som ser ut til å komme fra <em>din</em> kommune.</p>
+    <p><strong>NSM (Nasjonal sikkerhetsmyndighet)</strong> anbefaler eksplisitt at offentlige virksomheter setter <code>p=reject</code>. <a href="/blogg/dmarc/">Les vår guide om DMARC →</a></p>
+  </section>
+
+  <p class="footer">Laget av Micronet · data1.no · Sist oppdatert <span id="lastUpdate">—</span></p>
+</main>
+
+<script>
+window.REPORT_CONFIG = {
+  slug: 'rapport2026-kommuner-v1',
+  domains: [
+    "oslo.kommune.no","bergen.kommune.no","trondheim.kommune.no","stavanger.kommune.no",
+    "baerum.kommune.no","kristiansand.kommune.no","drammen.kommune.no","fredrikstad.kommune.no",
+    "sandnes.kommune.no","asker.kommune.no","alesund.kommune.no","sandefjord.kommune.no",
+    "lillestrom.kommune.no","sarpsborg.kommune.no","larvik.kommune.no","skien.kommune.no",
+    "tonsberg.kommune.no","bodo.kommune.no","arendal.kommune.no","ullensaker.kommune.no",
+    "halden.kommune.no","moss.kommune.no","lorenskog.kommune.no","hamar.kommune.no",
+    "gjovik.kommune.no","tromso.kommune.no","ringerike.kommune.no","porsgrunn.kommune.no",
+    "molde.kommune.no","haugesund.kommune.no"
+  ]
+};
+</script>
+<script src="/rapport-2026/_assets/report.js" defer></script>
+</body>
+</html>
