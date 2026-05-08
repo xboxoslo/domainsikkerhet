@@ -831,6 +831,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
+        if parsed.path == '/track':
+            self._handle_track_get(parsed.query)
+            return
         if parsed.path == '/admin/stats':
             qs = urllib.parse.parse_qs(parsed.query)
             token = (qs.get('token') or [''])[0]
@@ -847,6 +850,24 @@ class Handler(BaseHTTPRequestHandler):
             self.wfile.write(b'ok')
             return
         self.send_response(404); self._cors(); self.end_headers()
+
+    def _handle_track_get(self, query):
+        qs = urllib.parse.parse_qs(query)
+        log_event('pageview',
+                  path=(qs.get('p') or [''])[0][:200],
+                  referrer=(qs.get('r') or [''])[0][:200],
+                  utm_source=(qs.get('s') or [''])[0][:40],
+                  utm_medium=(qs.get('m') or [''])[0][:40],
+                  utm_campaign=(qs.get('c') or [''])[0][:40],
+                  ua_short=(self.headers.get('User-Agent','')[:80]),
+                  iph=_hash_ip(self._client_ip()))
+        gif = b'GIF89a\x01\x00\x01\x00\x80\x00\x00\xff\xff\xff\x00\x00\x00!\xf9\x04\x01\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;'
+        self.send_response(200); self._cors()
+        self.send_header('Content-Type', 'image/gif')
+        self.send_header('Cache-Control', 'no-store, max-age=0')
+        self.send_header('Content-Length', str(len(gif)))
+        self.end_headers()
+        self.wfile.write(gif)
 
     def do_POST(self):
         if self.path == '/track':
