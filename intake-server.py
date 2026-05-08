@@ -12,13 +12,17 @@ Kjør:
 
 Krever kun Python 3.8+ (ingen pip install).
 """
+import hashlib
 import json
 import os
 import sys
+import time
 import urllib.parse
 import urllib.request
 import urllib.error
 import uuid
+from collections import Counter, defaultdict
+from datetime import datetime, timezone
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
@@ -42,6 +46,25 @@ ALLOWED_ORIGINS = {
 }
 
 PORT = int(os.environ.get('PORT', 3001))
+
+# ─────── Stats logging ───────
+STATS_LOG_PATH = os.environ.get('STATS_LOG_PATH', '/tmp/data1-stats.jsonl')
+ADMIN_TOKEN    = os.environ.get('ADMIN_TOKEN', '')
+IP_SALT        = os.environ.get('IP_SALT', 'data1-default-salt-change-me')
+
+def _hash_ip(ip):
+    if not ip:
+        return ''
+    return hashlib.sha256((IP_SALT + ip).encode()).hexdigest()[:12]
+
+def log_event(kind, **fields):
+    """Append a JSON event to STATS_LOG_PATH. Best-effort, never raises."""
+    try:
+        rec = {'t': datetime.now(timezone.utc).isoformat(), 'kind': kind, **fields}
+        with open(STATS_LOG_PATH, 'a', encoding='utf-8') as f:
+            f.write(json.dumps(rec, ensure_ascii=False) + '\n')
+    except Exception as e:
+        sys.stderr.write(f'  [stats log fail] {e}\n')
 
 # ─────── Load secrets from intake-secrets.env ───────
 def load_env():
@@ -793,7 +816,7 @@ class Handler(BaseHTTPRequestHandler):
         origin = self.headers.get('Origin', '')
         allowed = origin if origin in ALLOWED_ORIGINS else next(iter(ALLOWED_ORIGINS))
         self.send_header('Access-Control-Allow-Origin', allowed)
-        self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
 
     def do_OPTIONS(self):
@@ -801,7 +824,34 @@ class Handler(BaseHTTPRequestHandler):
         self._cors()
         self.end_headers()
 
+    def _client_ip(self):
+        return (self.headers.get('CF-Connecting-IP')
+                or self.headers.get('X-Forwarded-For', '').split(',')[0].strip()
+                or self.client_address[0])
+
+    def do_GET(self):
+        parsed = urllib.parse.urlparse(self.path)
+        if parsed.path == '/admin/stats':
+            qs = urllib.parse.parse_qs(parsed.query)
+            token = (qs.get('token') or [''])[0]
+            if not ADMIN_TOKEN or token != ADMIN_TOKEN:
+                self.send_response(401); self._cors()
+                self.send_header('Content-Type', 'text/plain'); self.end_headers()
+                self.wfile.write(b'Unauthorized')
+                return
+            self._render_stats()
+            return
+        if parsed.path == '/healthz':
+            self.send_response(200); self._cors()
+            self.send_header('Content-Type', 'text/plain'); self.end_headers()
+            self.wfile.write(b'ok')
+            return
+        self.send_response(404); self._cors(); self.end_headers()
+
     def do_POST(self):
+        if self.path == '/track':
+            self._handle_track()
+            return
         if self.path != '/intake':
             self.send_response(404); self._cors(); self.end_headers()
             return
@@ -815,9 +865,7 @@ class Handler(BaseHTTPRequestHandler):
             if not body.get(f):
                 self._send_json({'error': f'Mangler felt: {f}'}, 400); return
 
-        client_ip = (self.headers.get('CF-Connecting-IP')
-                     or self.headers.get('X-Forwarded-For', '').split(',')[0].strip()
-                     or self.client_address[0])
+        client_ip = self._client_ip()
         ts_ok, ts_reason = verify_turnstile(body.get('turnstileToken', ''), client_ip)
         if not ts_ok:
             print(f'  [BLOCKED] Turnstile failed for {client_ip}: {ts_reason}')
@@ -841,7 +889,122 @@ class Handler(BaseHTTPRequestHandler):
             print(f'    [FAIL] Halo: {e}')
             result['halo'] = {'error': str(e)}
 
+        log_event('conversion',
+                  domain=(body.get('domain') or '').lower()[:80],
+                  utm_source=(body.get('utm_source') or '')[:40],
+                  utm_medium=(body.get('utm_medium') or '')[:40],
+                  utm_campaign=(body.get('utm_campaign') or '')[:40],
+                  referrer=(body.get('referrer') or '')[:140],
+                  iph=_hash_ip(client_ip))
         self._send_json(result, 200)
+
+    def _handle_track(self):
+        length = int(self.headers.get('Content-Length') or 0)
+        if length > 4096:
+            self.send_response(413); self._cors(); self.end_headers(); return
+        try:
+            body = json.loads(self.rfile.read(length).decode('utf-8')) if length else {}
+        except Exception:
+            body = {}
+        log_event('pageview',
+                  path=(body.get('path') or '')[:200],
+                  referrer=(body.get('referrer') or '')[:200],
+                  utm_source=(body.get('utm_source') or '')[:40],
+                  utm_medium=(body.get('utm_medium') or '')[:40],
+                  utm_campaign=(body.get('utm_campaign') or '')[:40],
+                  ua_short=(self.headers.get('User-Agent','')[:80]),
+                  iph=_hash_ip(self._client_ip()))
+        self.send_response(204); self._cors(); self.end_headers()
+
+    def _render_stats(self):
+        events = []
+        try:
+            with open(STATS_LOG_PATH, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if not line: continue
+                    try: events.append(json.loads(line))
+                    except: pass
+        except FileNotFoundError:
+            pass
+
+        now_ts = time.time()
+        def within(ev, hours):
+            try:
+                t = datetime.fromisoformat(ev['t'].replace('Z','+00:00')).timestamp()
+                return (now_ts - t) <= hours*3600
+            except: return False
+
+        def bucket(events, hours):
+            evs = [e for e in events if within(e, hours)]
+            return {
+                'pageviews': sum(1 for e in evs if e.get('kind')=='pageview'),
+                'unique_visitors': len({e.get('iph') for e in evs if e.get('kind')=='pageview' and e.get('iph')}),
+                'conversions': sum(1 for e in evs if e.get('kind')=='conversion'),
+                'top_paths': Counter(e.get('path','') for e in evs if e.get('kind')=='pageview').most_common(15),
+                'top_sources': Counter((e.get('utm_source') or '(direct)') for e in evs).most_common(15),
+                'top_referrers': Counter((e.get('referrer') or '(none)')[:60] for e in evs if e.get('kind')=='pageview').most_common(15),
+                'conversion_by_source': Counter((e.get('utm_source') or '(direct)') for e in evs if e.get('kind')=='conversion').most_common(15),
+                'top_domains': Counter(e.get('domain','') for e in evs if e.get('kind')=='conversion').most_common(15),
+            }
+
+        d24 = bucket(events, 24)
+        d7  = bucket(events, 24*7)
+        d30 = bucket(events, 24*30)
+
+        def fmt_table(title, rows):
+            if not rows:
+                return f'<h3>{title}</h3><p style="color:#94a3b8">(ingen data)</p>'
+            tr = ''.join(f'<tr><td>{esc(k)}</td><td style="text-align:right">{v}</td></tr>' for k,v in rows)
+            return f'<h3>{title}</h3><table>{tr}</table>'
+
+        def section(label, b):
+            return f'''
+<section>
+  <h2>{label}</h2>
+  <div class="kpis">
+    <div class="kpi"><div class="n">{b["pageviews"]}</div><div class="l">Pageviews</div></div>
+    <div class="kpi"><div class="n">{b["unique_visitors"]}</div><div class="l">Unike (hashet IP)</div></div>
+    <div class="kpi"><div class="n">{b["conversions"]}</div><div class="l">Konverteringer</div></div>
+  </div>
+  <div class="grid">
+    {fmt_table('Top sider', b['top_paths'])}
+    {fmt_table('Top kilder (utm_source)', b['top_sources'])}
+    {fmt_table('Top referrers', b['top_referrers'])}
+    {fmt_table('Konverteringer per kilde', b['conversion_by_source'])}
+    {fmt_table('Top domener (sjekket)', b['top_domains'])}
+  </div>
+</section>'''
+
+        html = f'''<!doctype html>
+<html lang="no"><head><meta charset="utf-8"><title>data1.no — stats</title>
+<meta name="robots" content="noindex">
+<style>
+*{{box-sizing:border-box}}body{{font:14px/1.5 -apple-system,BlinkMacSystemFont,sans-serif;background:#f1f5f9;color:#1e293b;margin:0;padding:24px}}
+h1{{font-size:24px;margin:0 0 18px;color:#0f172a}}
+h2{{font-size:18px;margin:28px 0 12px;color:#0f172a}}
+h3{{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:#64748b;margin:14px 0 6px}}
+.kpis{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}}
+.kpi{{background:#fff;border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}}
+.kpi .n{{font-size:24px;font-weight:800;color:#0f172a}}
+.kpi .l{{font-size:12px;color:#64748b}}
+.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}}
+.grid > *{{background:#fff;border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}}
+table{{width:100%;border-collapse:collapse;font-size:13px}}
+td{{padding:5px 0;border-bottom:1px solid #f1f5f9;word-break:break-all}}
+section{{background:#fafbfc;padding:16px 20px;border-radius:14px;margin-bottom:18px}}
+.meta{{color:#64748b;font-size:13px;margin-bottom:18px}}
+</style></head><body>
+<h1>data1.no — analytics</h1>
+<p class="meta">Logfile: {esc(STATS_LOG_PATH)} · {len(events)} events totalt · oppdatert {datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")}</p>
+{section("Siste 24 timer", d24)}
+{section("Siste 7 dager", d7)}
+{section("Siste 30 dager", d30)}
+</body></html>'''
+
+        self.send_response(200); self._cors()
+        self.send_header('Content-Type', 'text/html; charset=utf-8'); self.end_headers()
+        self.wfile.write(html.encode('utf-8'))
 
     def _send_json(self, obj, status):
         self.send_response(status)
