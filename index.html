@@ -40,9 +40,10 @@
 <style>
 /* ── DRAMATIC AI HERO — dark navy with glowing AI cube ── */
 body:not(.has-results){background:#020617 !important}
-body:not(.has-results) main.container{background:radial-gradient(ellipse 70% 50% at 50% 30%,rgba(56,189,248,.15) 0%,rgba(15,23,42,0) 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(168,85,247,.12) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 20% 70%,rgba(20,184,166,.1) 0%,transparent 60%),linear-gradient(180deg,#020617 0%,#0c1428 100%);min-height:100vh;position:relative;overflow:hidden;max-width:none;padding:0}
-body:not(.has-results) main.container::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(56,189,248,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.06) 1px,transparent 1px);background-size:48px 48px;mask:radial-gradient(ellipse 100% 80% at 50% 0%,#000 30%,transparent 80%);-webkit-mask:radial-gradient(ellipse 100% 80% at 50% 0%,#000 30%,transparent 80%);pointer-events:none}
-body:not(.has-results) main.container::after{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:1000px;height:600px;background:radial-gradient(ellipse at center,rgba(56,189,248,.18) 0%,transparent 60%);pointer-events:none;filter:blur(40px)}
+body:not(.has-results) main.container{background:radial-gradient(ellipse 80% 60% at 50% 20%,rgba(168,85,247,.25) 0%,rgba(15,23,42,0) 50%),radial-gradient(ellipse 60% 50% at 80% 70%,rgba(56,189,248,.2) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 15% 60%,rgba(168,85,247,.18) 0%,transparent 60%),linear-gradient(180deg,#020617 0%,#0c1428 100%);min-height:100vh;position:relative;overflow:hidden;max-width:none;padding:0}
+body:not(.has-results) main.container::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(168,85,247,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.08) 1px,transparent 1px);background-size:48px 48px;mask:radial-gradient(ellipse 100% 80% at 50% 0%,#000 20%,transparent 80%);-webkit-mask:radial-gradient(ellipse 100% 80% at 50% 0%,#000 20%,transparent 80%);pointer-events:none}
+body:not(.has-results) main.container::after{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:1200px;height:800px;background:radial-gradient(ellipse at center,rgba(168,85,247,.3) 0%,rgba(56,189,248,.15) 30%,transparent 70%);pointer-events:none;filter:blur(60px);animation:bg-glow-shift 8s ease-in-out infinite}
+@keyframes bg-glow-shift{0%,100%{opacity:.8;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.1)}}
 body:not(.has-results) .welcome{position:relative;z-index:2;padding:60px 24px 80px}
 
 /* AI Badge */
@@ -52,26 +53,52 @@ body:not(.has-results) .welcome{position:relative;z-index:2;padding:60px 24px 80
 .ai-badge-text{color:#e0f2fe}
 .ai-badge-tag{background:linear-gradient(135deg,#06b6d4,#3b82f6);color:#fff;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
 
-/* 3D AI CUBE — replaces welcome-shield */
-.welcome-shield{background:transparent !important;width:180px !important;height:180px !important;perspective:1000px;box-shadow:none !important;border-radius:0 !important;margin-bottom:48px !important}
+/* 3D AI CUBE — INTENSE GLOW like reference image */
+.welcome-shield{background:transparent !important;width:240px !important;height:240px !important;perspective:1200px;box-shadow:none !important;border-radius:0 !important;margin:0 auto 56px !important;position:relative}
 .welcome-shield svg{display:none !important}
-.ai-cube{position:relative;width:140px;height:140px;transform-style:preserve-3d;animation:ai-cube-rotate 12s linear infinite;margin:20px auto}
-@keyframes ai-cube-rotate{0%{transform:rotateX(-25deg) rotateY(0deg)}100%{transform:rotateX(-25deg) rotateY(360deg)}}
-.ai-cube-face{position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,23,42,.95) 0%,rgba(30,58,138,.95) 100%);border:2px solid rgba(56,189,248,.5);box-shadow:0 0 40px rgba(56,189,248,.6),inset 0 0 20px rgba(56,189,248,.2);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
-.ai-cube-face::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent 30%,rgba(56,189,248,.3) 50%,transparent 70%);opacity:.6}
-.ai-cube-text{position:relative;font-size:42px;font-weight:900;color:#fff;letter-spacing:.04em;text-shadow:0 0 12px #38bdf8,0 0 24px #38bdf8,0 0 48px #06b6d4;font-family:'Inter',sans-serif;line-height:1;z-index:2}
-.ai-cube-front{transform:translateZ(70px)}
-.ai-cube-back{transform:rotateY(180deg) translateZ(70px)}
-.ai-cube-right{transform:rotateY(90deg) translateZ(70px)}
-.ai-cube-left{transform:rotateY(-90deg) translateZ(70px)}
-.ai-cube-top{transform:rotateX(90deg) translateZ(70px)}
-.ai-cube-bottom{transform:rotateX(-90deg) translateZ(70px)}
-.ai-cube-glow{position:absolute;inset:-40px;background:radial-gradient(circle,rgba(56,189,248,.4) 0%,transparent 70%);filter:blur(30px);z-index:-1;animation:ai-glow-pulse 3s ease-in-out infinite}
-@keyframes ai-glow-pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
 
-/* HERO TYPOGRAPHY — large dramatic white text */
-.welcome h1{font-size:72px !important;font-weight:900 !important;color:#fff !important;letter-spacing:-.04em !important;line-height:1.05 !important;margin-bottom:20px !important;text-shadow:0 0 80px rgba(56,189,248,.4)}
-.welcome h1 .accent{background:linear-gradient(120deg,#38bdf8 0%,#06b6d4 40%,#a855f7 100%) !important;-webkit-background-clip:text !important;background-clip:text !important;color:transparent !important;-webkit-text-fill-color:transparent !important;filter:drop-shadow(0 0 20px rgba(56,189,248,.5))}
+/* Light beams shooting out behind the cube */
+.welcome-shield::before{content:'';position:absolute;inset:-150px;background:conic-gradient(from 0deg at 50% 50%,transparent 0deg,rgba(168,85,247,.4) 30deg,transparent 60deg,transparent 90deg,rgba(56,189,248,.5) 120deg,transparent 150deg,transparent 180deg,rgba(168,85,247,.4) 210deg,transparent 240deg,transparent 270deg,rgba(56,189,248,.5) 300deg,transparent 330deg);filter:blur(20px);animation:ai-beams-rotate 18s linear infinite;z-index:0;mask:radial-gradient(circle,transparent 30%,#000 50%,transparent 90%);-webkit-mask:radial-gradient(circle,transparent 30%,#000 50%,transparent 90%)}
+@keyframes ai-beams-rotate{to{transform:rotate(360deg)}}
+
+/* Massive radial glow halo */
+.welcome-shield::after{content:'';position:absolute;inset:-80px;background:radial-gradient(circle,rgba(168,85,247,.5) 0%,rgba(56,189,248,.4) 30%,transparent 70%);filter:blur(60px);animation:ai-mega-pulse 3s ease-in-out infinite;z-index:0}
+@keyframes ai-mega-pulse{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}
+
+.ai-cube{position:relative;width:160px;height:160px;transform-style:preserve-3d;animation:ai-cube-rotate 14s linear infinite;margin:40px auto;z-index:2}
+@keyframes ai-cube-rotate{0%{transform:rotateX(-15deg) rotateY(0deg)}100%{transform:rotateX(-15deg) rotateY(360deg)}}
+
+.ai-cube-face{position:absolute;inset:0;background:linear-gradient(135deg,rgba(30,27,75,.95) 0%,rgba(76,29,149,.85) 50%,rgba(30,58,138,.95) 100%);border:2px solid rgba(168,85,247,.7);box-shadow:0 0 50px rgba(168,85,247,.7),0 0 100px rgba(56,189,248,.5),inset 0 0 30px rgba(168,85,247,.3),inset 0 1px 0 rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+.ai-cube-face::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent 20%,rgba(255,255,255,.15) 50%,transparent 80%);opacity:.8}
+.ai-cube-face::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(168,85,247,.2) 100%);pointer-events:none}
+
+/* MEGA GLOWING AI TEXT */
+.ai-cube-text{position:relative;font-size:64px;font-weight:900;color:#fff;letter-spacing:.02em;font-family:'Inter',sans-serif;line-height:1;z-index:3;background:linear-gradient(180deg,#fff 0%,#e9d5ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 8px #c084fc) drop-shadow(0 0 16px #a855f7) drop-shadow(0 0 32px #8b5cf6) drop-shadow(0 0 60px #38bdf8);animation:ai-text-flicker 4s ease-in-out infinite}
+@keyframes ai-text-flicker{0%,100%{filter:drop-shadow(0 0 8px #c084fc) drop-shadow(0 0 16px #a855f7) drop-shadow(0 0 32px #8b5cf6) drop-shadow(0 0 60px #38bdf8)}50%{filter:drop-shadow(0 0 12px #c084fc) drop-shadow(0 0 24px #a855f7) drop-shadow(0 0 48px #8b5cf6) drop-shadow(0 0 80px #38bdf8)}}
+
+.ai-cube-front{transform:translateZ(80px)}
+.ai-cube-back{transform:rotateY(180deg) translateZ(80px)}
+.ai-cube-right{transform:rotateY(90deg) translateZ(80px)}
+.ai-cube-left{transform:rotateY(-90deg) translateZ(80px)}
+.ai-cube-top{transform:rotateX(90deg) translateZ(80px);background:linear-gradient(180deg,rgba(168,85,247,.4) 0%,rgba(30,27,75,.95) 100%) !important}
+.ai-cube-bottom{transform:rotateX(-90deg) translateZ(80px);background:linear-gradient(0deg,rgba(168,85,247,.4) 0%,rgba(30,27,75,.95) 100%) !important}
+
+.ai-cube-glow{display:none}
+
+/* Floating particles around the cube */
+.welcome-shield .particle{position:absolute;width:4px;height:4px;border-radius:50%;background:#a855f7;box-shadow:0 0 12px #a855f7,0 0 24px #a855f7;pointer-events:none;animation:ai-float 6s ease-in-out infinite;z-index:1}
+.welcome-shield .particle:nth-child(2){background:#38bdf8;box-shadow:0 0 12px #38bdf8,0 0 24px #38bdf8;top:20%;left:10%;animation-delay:0s}
+.welcome-shield .particle:nth-child(3){background:#c084fc;box-shadow:0 0 12px #c084fc,0 0 24px #c084fc;top:30%;right:5%;animation-delay:1s}
+.welcome-shield .particle:nth-child(4){background:#7dd3fc;box-shadow:0 0 12px #7dd3fc,0 0 24px #7dd3fc;bottom:15%;left:15%;animation-delay:2s}
+.welcome-shield .particle:nth-child(5){background:#e9d5ff;box-shadow:0 0 12px #e9d5ff,0 0 24px #e9d5ff;bottom:25%;right:10%;animation-delay:3s}
+.welcome-shield .particle:nth-child(6){background:#a855f7;box-shadow:0 0 12px #a855f7,0 0 24px #a855f7;top:50%;left:0;animation-delay:1.5s}
+.welcome-shield .particle:nth-child(7){background:#38bdf8;box-shadow:0 0 12px #38bdf8,0 0 24px #38bdf8;top:60%;right:0;animation-delay:2.5s}
+@keyframes ai-float{0%,100%{transform:translateY(0) translateX(0);opacity:.4}25%{transform:translateY(-20px) translateX(10px);opacity:1}50%{transform:translateY(0) translateX(20px);opacity:.6}75%{transform:translateY(20px) translateX(-10px);opacity:1}}
+
+/* HERO TYPOGRAPHY — large dramatic white text with INTENSE GLOW */
+.welcome h1{font-size:80px !important;font-weight:900 !important;color:#fff !important;letter-spacing:-.04em !important;line-height:1.02 !important;margin-bottom:24px !important;text-shadow:0 0 60px rgba(168,85,247,.4),0 0 120px rgba(56,189,248,.3)}
+.welcome h1 .accent{background:linear-gradient(120deg,#a855f7 0%,#c084fc 25%,#38bdf8 60%,#06b6d4 100%) !important;-webkit-background-clip:text !important;background-clip:text !important;color:transparent !important;-webkit-text-fill-color:transparent !important;filter:drop-shadow(0 0 20px rgba(168,85,247,.6)) drop-shadow(0 0 40px rgba(56,189,248,.4));animation:ai-title-glow 4s ease-in-out infinite;display:inline-block;background-size:200% 200%}
+@keyframes ai-title-glow{0%,100%{background-position:0% 50%;filter:drop-shadow(0 0 20px rgba(168,85,247,.6)) drop-shadow(0 0 40px rgba(56,189,248,.4))}50%{background-position:100% 50%;filter:drop-shadow(0 0 30px rgba(168,85,247,.8)) drop-shadow(0 0 60px rgba(56,189,248,.6))}}
 .welcome-sub{color:#94a3b8 !important;font-size:19px !important;max-width:620px !important;line-height:1.6 !important;margin-bottom:40px !important}
 
 /* Hero stats — light text on dark bg */
@@ -253,8 +280,14 @@ body:not(.has-results) .faq-a code{background:rgba(56,189,248,.1) !important;col
             <span class="ai-badge-tag">100% gratis</span>
         </div>
         <div class="welcome-shield">
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
             <div class="ai-cube">
-                <div class="ai-cube-glow"></div>
                 <div class="ai-cube-face ai-cube-front"><span class="ai-cube-text">AI</span></div>
                 <div class="ai-cube-face ai-cube-back"><span class="ai-cube-text">AI</span></div>
                 <div class="ai-cube-face ai-cube-right"><span class="ai-cube-text">AI</span></div>
@@ -263,7 +296,7 @@ body:not(.has-results) .faq-a code{background:rgba(56,189,248,.1) !important;col
                 <div class="ai-cube-face ai-cube-bottom"></div>
             </div>
         </div>
-        <h1>E-post sikkerhet — <span class="accent">drevet av AI</span></h1>
+        <h1><span class="accent">AI-drevet</span><br>e-post sikkerhet</h1>
         <h2 class="welcome-sub">Gratis sjekk av SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI for ethvert domene. Karakter A+ til F og konkrete tiltak — analysert av AI på sekunder.</h2>
 
         <div class="hero-stats">
