@@ -70,25 +70,47 @@ body:not(.has-results) .welcome{position:relative;z-index:2;padding:60px 24px 80
 @keyframes ai-envelope-float{0%,100%{transform:rotateX(8deg) rotateY(-6deg) translateY(0)}50%{transform:rotateX(8deg) rotateY(-6deg) translateY(-10px)}}
 
 /* Envelope body — back layer */
-.ai-envelope-body{position:absolute;inset:0;background:linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#1e3a8a 100%);border:2px solid rgba(168,85,247,.7);border-radius:14px;box-shadow:0 0 60px rgba(168,85,247,.6),0 0 120px rgba(56,189,248,.4),inset 0 0 40px rgba(168,85,247,.2),inset 0 1px 0 rgba(255,255,255,.15);overflow:hidden}
-.ai-envelope-body::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.08) 50%,transparent 70%);pointer-events:none}
+.ai-envelope-body{position:absolute;inset:0;background:linear-gradient(135deg,#0a0524 0%,#1e1b4b 50%,#0a1428 100%);border:2px solid rgba(168,85,247,.7);border-radius:14px;box-shadow:0 0 60px rgba(168,85,247,.6),0 0 120px rgba(56,189,248,.4),inset 0 0 40px rgba(168,85,247,.2),inset 0 1px 0 rgba(255,255,255,.15);overflow:hidden}
+.ai-envelope-body::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.08) 50%,transparent 70%);pointer-events:none;z-index:5}
 
-/* Address lines on envelope */
-.ai-envelope-line{position:absolute;height:6px;border-radius:3px;background:linear-gradient(90deg,rgba(168,85,247,.6) 0%,rgba(56,189,248,.6) 100%);box-shadow:0 0 8px rgba(168,85,247,.5);opacity:.6}
-.ai-envelope-line.l1{top:50px;left:24px;width:140px}
-.ai-envelope-line.l2{top:66px;left:24px;width:100px}
-.ai-envelope-line.l3{top:82px;left:24px;width:120px;opacity:.4}
+/* Matrix-style code rain INSIDE envelope */
+.ai-envelope-code{position:absolute;inset:0;overflow:hidden;font-family:'Courier New',monospace;font-size:9px;line-height:1.1;color:#5eead4;padding:8px 14px;text-align:left}
+.ai-envelope-code-col{position:absolute;top:0;width:auto;white-space:pre;font-weight:700;text-shadow:0 0 4px currentColor,0 0 8px currentColor;animation:ai-code-rain 4s linear infinite;opacity:0}
+.ai-envelope-code-col:nth-child(1){left:8px;color:#5eead4;animation-delay:0s;animation-duration:3.5s}
+.ai-envelope-code-col:nth-child(2){left:50px;color:#a855f7;animation-delay:.5s;animation-duration:4.2s}
+.ai-envelope-code-col:nth-child(3){left:92px;color:#38bdf8;animation-delay:1s;animation-duration:3.8s}
+.ai-envelope-code-col:nth-child(4){left:134px;color:#c084fc;animation-delay:1.5s;animation-duration:4.5s}
+.ai-envelope-code-col:nth-child(5){left:176px;color:#5eead4;animation-delay:2s;animation-duration:3.2s}
+.ai-envelope-code-col:nth-child(6){left:218px;color:#7dd3fc;animation-delay:.8s;animation-duration:4s}
+@keyframes ai-code-rain{0%{transform:translateY(-100%);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(220px);opacity:0}}
+
+/* DNS-record snippet that "AI is reading" */
+.ai-envelope-dns{position:absolute;left:14px;right:80px;top:60px;font-family:'Courier New',monospace;font-size:10px;color:#fff;background:rgba(15,23,42,.6);padding:6px 10px;border-radius:6px;border:1px solid rgba(56,189,248,.3);z-index:4;overflow:hidden;text-shadow:0 0 4px rgba(56,189,248,.6);box-shadow:0 0 12px rgba(56,189,248,.2)}
+.ai-envelope-dns-line{display:block;white-space:nowrap;animation:ai-dns-type 8s steps(40) infinite;overflow:hidden;height:14px}
+.ai-envelope-dns-line:nth-child(1){animation-delay:0s;color:#5eead4}
+.ai-envelope-dns-line:nth-child(2){animation-delay:2s;color:#a855f7}
+.ai-envelope-dns-line:nth-child(3){animation-delay:4s;color:#7dd3fc}
+@keyframes ai-dns-type{0%{width:0}30%,60%{width:100%}90%,100%{width:0}}
+
+/* Hex bytes scrolling at bottom */
+.ai-envelope-hex{position:absolute;left:14px;right:14px;bottom:14px;font-family:'Courier New',monospace;font-size:8.5px;color:rgba(168,85,247,.7);font-weight:700;letter-spacing:.05em;overflow:hidden;height:12px;z-index:4;text-shadow:0 0 4px rgba(168,85,247,.5)}
+.ai-envelope-hex-track{display:inline-block;white-space:nowrap;animation:ai-hex-scroll 12s linear infinite;padding-left:100%}
+@keyframes ai-hex-scroll{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 
 /* @ icon on envelope */
-.ai-envelope-at{position:absolute;top:38px;right:24px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(168,85,247,.3),rgba(56,189,248,.3));border:2px solid rgba(168,85,247,.7);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#fff;box-shadow:0 0 20px rgba(168,85,247,.6),inset 0 0 12px rgba(168,85,247,.3);text-shadow:0 0 8px #c084fc,0 0 16px #a855f7}
+.ai-envelope-at{position:absolute;top:30px;right:14px;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,rgba(168,85,247,.4),rgba(56,189,248,.4));border:2px solid rgba(168,85,247,.8);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#fff;box-shadow:0 0 24px rgba(168,85,247,.7),inset 0 0 12px rgba(168,85,247,.3);text-shadow:0 0 8px #c084fc,0 0 16px #a855f7;z-index:4;backdrop-filter:blur(4px)}
 
 /* Envelope flap (triangle on top, opening) */
-.ai-envelope-flap{position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,#312e81 0%,#1e1b4b 100%);clip-path:polygon(0 0,100% 0,50% 100%);border-bottom:2px solid rgba(168,85,247,.5);box-shadow:inset 0 -10px 20px rgba(168,85,247,.2);transform-origin:top;animation:ai-flap-open 8s ease-in-out infinite}
+.ai-envelope-flap{position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,#1e1b4b 0%,#0a0524 100%);clip-path:polygon(0 0,100% 0,50% 100%);border-bottom:2px solid rgba(168,85,247,.5);box-shadow:inset 0 -10px 20px rgba(168,85,247,.2);transform-origin:top;animation:ai-flap-open 10s ease-in-out infinite;z-index:6}
 @keyframes ai-flap-open{0%,100%{transform:rotateX(0deg)}40%,60%{transform:rotateX(-180deg)}}
 
-/* Animated scan beam — sweeps across the envelope */
-.ai-envelope-scan{position:absolute;top:0;bottom:0;width:80px;background:linear-gradient(90deg,transparent 0%,rgba(56,189,248,.6) 40%,rgba(168,85,247,.8) 50%,rgba(56,189,248,.6) 60%,transparent 100%);box-shadow:0 0 40px rgba(56,189,248,.8),0 0 80px rgba(168,85,247,.6);animation:ai-scan-sweep 3s ease-in-out infinite;z-index:3;mix-blend-mode:screen}
-@keyframes ai-scan-sweep{0%{left:-80px}50%{left:calc(100% + 0px)}100%{left:-80px}}
+/* Animated scan beam with cyan glow + horizontal lines */
+.ai-envelope-scan{position:absolute;top:0;bottom:0;width:60px;background:linear-gradient(90deg,transparent 0%,rgba(56,189,248,.5) 35%,rgba(168,85,247,.9) 50%,rgba(56,189,248,.5) 65%,transparent 100%);box-shadow:0 0 60px rgba(56,189,248,1),0 0 120px rgba(168,85,247,.7);animation:ai-scan-sweep 2.5s ease-in-out infinite;z-index:7;mix-blend-mode:screen}
+@keyframes ai-scan-sweep{0%{left:-60px}50%{left:calc(100% + 0px)}100%{left:-60px}}
+
+/* Horizontal scan lines (CRT effect) */
+.ai-envelope-body::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0px,transparent 2px,rgba(56,189,248,.04) 2px,rgba(56,189,248,.04) 3px);pointer-events:none;z-index:5;animation:ai-crt-flicker 8s ease-in-out infinite}
+@keyframes ai-crt-flicker{0%,100%{opacity:.5}50%{opacity:.8}}
 
 /* AI badge/seal on envelope */
 .ai-envelope-seal{position:absolute;bottom:-15px;right:-15px;width:60px;height:60px;background:radial-gradient(circle,#a855f7 0%,#7c3aed 70%);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:900;letter-spacing:.04em;box-shadow:0 0 30px rgba(168,85,247,.9),0 0 60px rgba(168,85,247,.5),inset 0 2px 0 rgba(255,255,255,.3);border:2px solid rgba(255,255,255,.2);text-shadow:0 0 8px rgba(255,255,255,.6);z-index:4;animation:ai-seal-pulse 2s ease-in-out infinite}
@@ -299,9 +321,89 @@ body:not(.has-results) .faq-a code{background:rgba(56,189,248,.1) !important;col
             <span class="particle"></span>
             <div class="ai-envelope">
                 <div class="ai-envelope-body">
-                    <div class="ai-envelope-line l1"></div>
-                    <div class="ai-envelope-line l2"></div>
-                    <div class="ai-envelope-line l3"></div>
+                    <div class="ai-envelope-code">
+                        <div class="ai-envelope-code-col">v=DMARC1
+p=reject
+SPF=PASS
+DKIM=OK
+0xA1F3
+TLS=v1.3
+HMAC-256
+sha512
+SUBJECT
+FROM:@
+TO:noreply
+RFC5322
+0x4ABE</div>
+                        <div class="ai-envelope-code-col">01001010
+11010110
+00111100
+10101011
+11001110
+01100011
+10111001
+00110100
+01111010
+10010101
+01010110
+01101110</div>
+                        <div class="ai-envelope-code-col">A1F3:9C
+B7:24:8E
+0xCAFE
+0xBABE
+A2:B5:1D
+0xFEED
+DD:33:C7
+6F:1E:90
+0x4242
+3B:8E:11
+0xDEAD
+9F:0A:55</div>
+                        <div class="ai-envelope-code-col">DNS-TXT
+DMARC?
+SPF-CHK
+RR-A:OK
+TXT-OK
+MX-PRIO
+v=spf1
+p=quar
+RUF=OK
+RUA=OK
+ASPF=R
+ADKIM=S</div>
+                        <div class="ai-envelope-code-col">256-BIT
+ENCRYPT
+SHA-512
+RSA-4K
+ED25519
+HMAC-OK
+TLS1.3
+HSTS-ON
+CAA-OK
+MTA-STS
+TLS-RPT
+DANE-OK</div>
+                        <div class="ai-envelope-code-col">scan...
+verify..
+hash:OK
+auth:OK
+deliver
+reject!
+quaran.
+forward
+inbox..
+spam?..
+trust++
+match++</div>
+                    </div>
+                    <div class="ai-envelope-dns">
+                        <span class="ai-envelope-dns-line">v=DMARC1; p=reject; rua=mailto:dmarc@</span>
+                        <span class="ai-envelope-dns-line">SPF: include:_spf.google.com -all</span>
+                        <span class="ai-envelope-dns-line">DKIM: 2048-bit RSA · valid signature</span>
+                    </div>
+                    <div class="ai-envelope-hex">
+                        <span class="ai-envelope-hex-track">FF A1 3C 9E 2B C4 5D 8F 7A 12 EE 0B C5 38 91 4D · DMARC=PASS · SPF=PASS · DKIM=PASS · 256-bit · 0xCAFEBABE · sha-512 · v=DMARC1; p=reject; pct=100 · TLS-1.3 · MTA-STS · 4A B7 1F 2D 8E 90 6C 51 · scanning... · ED25519 · HMAC · 0xDEADBEEF · ASPF=relaxed · trust++ ·</span>
+                    </div>
                     <div class="ai-envelope-at">@</div>
                     <div class="ai-envelope-scan"></div>
                 </div>
@@ -383,8 +485,8 @@ body:not(.has-results) .faq-a code{background:rgba(56,189,248,.1) !important;col
 <section class="ai-section" aria-label="AI-funksjoner">
     <div class="ai-section-head">
         <span class="ai-section-tag">🤖 Slik jobber AI-en</span>
-        <h2 class="ai-section-title">Norges første AI-drevne sikkerhetsplattform</h2>
-        <p class="ai-section-sub">data1.no kombinerer automatisk DNS-skanning med Claude AI for å gi deg de mest oppdaterte og presise innsiktene om norsk e-postsikkerhet — uten manuell innblanding.</p>
+        <h2 class="ai-section-title">Helautomatisk AI-analyse av e-postsikkerhet</h2>
+        <p class="ai-section-sub">data1.no kombinerer automatisk DNS-skanning med Claude AI for å gi deg ferske, presise innsikter om norsk e-postsikkerhet — uten manuell innblanding.</p>
     </div>
 
     <div class="ai-grid">
