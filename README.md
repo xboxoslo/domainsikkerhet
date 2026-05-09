@@ -50,7 +50,7 @@ hvis serveren deployes utad).
 Default IDs som brukes i `intake-server.py`:
 
 - **Item** `516` (`MAI001`) — Mail (SPF-DKIM-DMARC), kr 295/mnd
-- **Item** `735` (`EST003`) — Estimert Service Bedrift, kr 2080 engangs
+- **Item** `735` (`EST003`) — Estimert Service Bedrift, kr 1990 etablering (engangs)
 - **PDF Template** `29` — Tilbud Micronet
 - **Agent (eier)** `23` — API-bruker
 - **Agent (assigned)** `3` — Terje Otterlei (review)
