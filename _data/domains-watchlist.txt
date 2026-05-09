@@ -1,0 +1,109 @@
+# Domener som overvåkes daglig av automasjons-jobben.
+# Format: ett domene per linje. Linjer som starter med # er kommentarer.
+# Domenet bør være rot-domenet (uten www, uten http://).
+
+# Banker
+dnb.no
+nordea.no
+sparebank1.no
+storebrand.no
+handelsbanken.no
+santander.no
+sbanken.no
+gjensidige.no
+fremtind.no
+if.no
+
+# Telecom
+telenor.no
+telia.no
+ice.no
+get.no
+
+# Offentlig sektor
+nav.no
+skatteetaten.no
+helsenorge.no
+altinn.no
+politiet.no
+posten.no
+regjeringen.no
+stortinget.no
+udi.no
+nbim.no
+
+# Energi
+equinor.no
+hydro.no
+statkraft.no
+yara.no
+
+# Medier
+nrk.no
+vg.no
+dagbladet.no
+tv2.no
+aftenposten.no
+bt.no
+dn.no
+e24.no
+nettavisen.no
+itavisen.no
+digi.no
+tu.no
+
+# E-handel
+elkjop.no
+komplett.no
+power.no
+xxl.no
+clas-ohlson.no
+jernia.no
+biltema.no
+ikea.com
+zalando.no
+
+# Reise/hotell
+sas.no
+norwegian.no
+flytoget.no
+nsb.no
+ruter.no
+vy.no
+strawberry.no
+
+# Shipping/logistikk
+posten.no
+bring.no
+
+# Tech/SaaS
+visma.com
+opera.com
+schibsted.com
+finn.no
+hjemla.no
+
+# Universiteter
+uio.no
+ntnu.no
+uib.no
+uit.no
+nmbu.no
+
+# Forsikring
+tryg.no
+codan.no
+
+# IT-konsulenter
+sopra-steria.no
+accenture.com
+capgemini.com
+atea.no
+tietoevry.com
+advania.no
+
+# Konkurrenter / sammenlignbare
+mxtoolbox.com
+easydmarc.com
+dmarcian.com
+powerdmarc.com
