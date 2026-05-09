@@ -37,6 +37,50 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Hva er DMARC?","acceptedAnswer":{"@type":"Answer","text":"DMARC (Domain-based Message Authentication, Reporting and Conformance) er en e-postsikkerhetsstandard som hindrer at andre kan sende falske e-poster fra ditt domene. DMARC bygger på SPF og DKIM og forteller mottakere hva de skal gjøre med e-poster som ikke består autentisering — typisk avvis (p=reject) eller karantene (p=quarantine)."}},{"@type":"Question","name":"Er data1.no gratis?","acceptedAnswer":{"@type":"Answer","text":"Ja, data1.no er helt gratis å bruke. Du trenger ikke registrere deg eller oppgi e-post for å få full rapport. Tjenesten drives av Micronet AS som et åpent verktøy for norsk e-postsikkerhet."}},{"@type":"Question","name":"Hvordan sjekker jeg om mitt domene er beskyttet mot e-postspoofing?","acceptedAnswer":{"@type":"Answer","text":"Skriv inn domenenavnet (f.eks. eksempel.no) på data1.no. På cirka 10 sekunder får du en analyse av SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI med karakter fra A+ til F og konkrete forbedringstiltak. For full beskyttelse bør du ha gyldig SPF, aktiv DKIM-signering, og DMARC med p=reject."}},{"@type":"Question","name":"Hva er forskjellen på SPF, DKIM og DMARC?","acceptedAnswer":{"@type":"Answer","text":"SPF (Sender Policy Framework) lister opp hvilke servere som har lov å sende e-post fra ditt domene. DKIM (DomainKeys Identified Mail) signerer hver e-post kryptografisk så mottakeren kan verifisere at innholdet ikke er endret. DMARC binder SPF og DKIM sammen, krever at From-adressen samsvarer (alignment), og forteller mottakeren hva som skal skje hvis autentiseringen feiler."}},{"@type":"Question","name":"Hvilken DMARC-policy bør jeg starte med?","acceptedAnswer":{"@type":"Answer","text":"Start alltid med p=none for å overvåke i 2-4 uker uten å påvirke leveringen. Les rapportene (rua-adresse), identifiser alle legitime avsendere, og sørg for at de består SPF og DKIM. Skjerp deretter til p=quarantine med pct=25, opp til pct=100, og til slutt p=reject for full beskyttelse. Hele overgangen tar typisk 4-8 uker."}},{"@type":"Question","name":"Hva betyr karakter A+ til F på data1.no?","acceptedAnswer":{"@type":"Answer","text":"Karakteren reflekterer en sammenlagt score (0-100) basert på DMARC (35p), SPF (25p), DKIM (20p), MTA-STS (12p), TLS-RPT (5p) og BIMI (3p). A+ (90-100) betyr full beskyttelse med p=reject. A (80-89) er sterk. B (70-79) god men ikke optimal. C (55-69) middels. D (35-54) svak. F (0-34) er praktisk talt ubeskyttet — domenet er åpent for spoofing."}},{"@type":"Question","name":"Lagrer data1.no mine data?","acceptedAnswer":{"@type":"Answer","text":"Nei. Vi setter ingen cookies, sporer ikke individuelle brukere, og lagrer ikke domenehistorikk knyttet til deg. Vi loggfører kun anonymiserte aggregerte besøkstall (sidesti, hashet IP, UTM-parametere) for å se generell trafikkutvikling — i tråd med GDPR uten samtykkekrav."}},{"@type":"Question","name":"Hvor lang tid tar det å implementere DMARC?","acceptedAnswer":{"@type":"Answer","text":"Selve oppsettet av SPF, DKIM og initial DMARC-record tar 30-60 minutter. Trygg overgang fra p=none til p=reject tar 4-8 uker, fordi du må verifisere at all legitim e-post består autentiseringen før du strammer policyen."}}]}</script>
 <script src="/_assets/tracker.js" defer></script>
 <style>.faq-section{max-width:760px;margin:48px auto 64px;padding:0 20px}.has-results .faq-section{display:none}.faq-heading{font-size:22px;font-weight:800;color:#0f172a;margin-bottom:24px;text-align:center}.faq-list{display:flex;flex-direction:column;gap:10px}.faq-item{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden}.faq-item[open]{box-shadow:0 4px 16px rgba(0,0,0,.07)}.faq-q{padding:16px 20px;font-size:15px;font-weight:600;color:#0f172a;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}.faq-q::-webkit-details-marker{display:none}.faq-q::after{content:'+';font-size:20px;color:#14b8a6;font-weight:400;flex-shrink:0;margin-left:12px}.faq-item[open] .faq-q::after{content:'−'}.faq-a{padding:0 20px 16px;font-size:14px;color:#475569;line-height:1.65}.faq-a code{background:#f1f5f9;padding:1px 6px;border-radius:4px;font-family:monospace;font-size:13px;color:#0f766e}</style>
+<style>
+/* ── Modern AI-driven look ── */
+body:not(.has-results) main.container{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(20,184,166,.08) 0%,rgba(15,23,42,0) 60%),linear-gradient(180deg,#fafcff 0%,#f1f5f9 100%);min-height:100vh}
+body:not(.has-results) main.container::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(20,184,166,.08) 1px,transparent 0);background-size:32px 32px;pointer-events:none;z-index:0;mask:linear-gradient(180deg,#000 0,transparent 60%);-webkit-mask:linear-gradient(180deg,#000 0,transparent 60%)}
+body:not(.has-results) main.container{position:relative}
+body:not(.has-results) .welcome{position:relative;z-index:1}
+.ai-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#0f172a 0%,#1a2540 100%);color:#fff;padding:7px 16px 7px 10px;border-radius:999px;font-size:12.5px;font-weight:600;margin-bottom:24px;box-shadow:0 4px 16px -4px rgba(20,184,166,.4),inset 0 1px 0 rgba(255,255,255,.1);position:relative;overflow:hidden}
+.ai-badge::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(20,184,166,.2),transparent);transform:translateX(-100%);animation:ai-shine 3s infinite}
+@keyframes ai-shine{50%,100%{transform:translateX(100%)}}
+.ai-badge-dot{width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981;animation:ai-pulse 2s infinite}
+@keyframes ai-pulse{0%,100%{opacity:1;box-shadow:0 0 8px #10b981}50%{opacity:.4;box-shadow:0 0 16px #10b981}}
+.ai-badge-text{display:inline-flex;align-items:center;gap:6px}
+.ai-badge-tag{background:rgba(20,184,166,.2);color:#5eead4;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em}
+.welcome-shield{background:linear-gradient(140deg,#0f172a 0%,#1a2540 50%,#0f766e 100%) !important;box-shadow:0 12px 40px -8px rgba(20,184,166,.5),0 0 0 1px rgba(20,184,166,.2),inset 0 2px 0 rgba(255,255,255,.15) !important;position:relative;overflow:hidden}
+.welcome-shield::before{content:'';position:absolute;inset:-50%;background:conic-gradient(from 0deg,transparent 0deg,rgba(20,184,166,.4) 60deg,transparent 120deg);animation:ai-rotate 4s linear infinite;opacity:.5}
+.welcome-shield::after{content:'';position:absolute;inset:3px;border-radius:25px;background:linear-gradient(140deg,#0f172a 0%,#1a2540 50%,#134e4a 100%)}
+.welcome-shield svg{position:relative;z-index:1}
+@keyframes ai-rotate{to{transform:rotate(360deg)}}
+.welcome h1{font-size:48px !important}
+.welcome h1 .accent{background:linear-gradient(120deg,#06b6d4 0%,#14b8a6 50%,#10b981 100%) !important}
+.hero-stats{display:flex;gap:24px;justify-content:center;margin:32px 0 8px;flex-wrap:wrap}
+.hero-stat{display:flex;align-items:center;gap:8px;font-size:13px;color:#64748b}
+.hero-stat-icon{width:18px;height:18px;color:#14b8a6;flex-shrink:0}
+.hero-stat strong{color:#0f172a;font-weight:700}
+.ai-section{max-width:1080px;margin:24px auto 48px;padding:0 20px}
+.has-results .ai-section{display:none}
+.ai-section-head{text-align:center;margin-bottom:32px}
+.ai-section-tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#0f766e;background:#ccfbf1;padding:5px 12px;border-radius:999px;margin-bottom:12px}
+.ai-section-title{font-size:28px;font-weight:800;color:#0f172a;letter-spacing:-.02em;line-height:1.2;margin-bottom:8px}
+.ai-section-sub{font-size:16px;color:#64748b;max-width:560px;margin:0 auto;line-height:1.55}
+.ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ai-card{background:linear-gradient(160deg,#0f172a 0%,#1a2540 100%);color:#fff;padding:28px 24px;border-radius:16px;position:relative;overflow:hidden;border:1px solid rgba(20,184,166,.15);box-shadow:0 4px 24px -8px rgba(15,23,42,.2)}
+.ai-card::before{content:'';position:absolute;top:-40%;right:-20%;width:70%;height:140%;background:radial-gradient(circle,rgba(20,184,166,.18) 0%,transparent 70%);pointer-events:none}
+.ai-card-icon{width:44px;height:44px;background:linear-gradient(135deg,#14b8a6 0%,#0f766e 100%);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 4px 16px -4px rgba(20,184,166,.6);position:relative;z-index:1}
+.ai-card-icon svg{width:22px;height:22px;color:#fff}
+.ai-card-title{font-size:17px;font-weight:700;margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:1}
+.ai-card-desc{font-size:14px;color:#cbd5e0;line-height:1.6;position:relative;z-index:1}
+.ai-card-stat{margin-top:16px;font-size:24px;font-weight:900;background:linear-gradient(120deg,#06b6d4 0%,#14b8a6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.02em;position:relative;z-index:1}
+.ai-footer{margin:40px auto 0;text-align:center;padding:24px;max-width:680px;border-top:1px solid #e2e8f0}
+.ai-footer-text{font-size:13px;color:#64748b;line-height:1.65}
+.ai-footer-text strong{color:#0f172a}
+.ai-powered{display:inline-flex;align-items:center;gap:6px;background:#0f172a;color:#5eead4;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em;margin-top:8px}
+@media(max-width:760px){.ai-grid{grid-template-columns:1fr}.welcome h1{font-size:34px !important}.ai-section-title{font-size:22px}}
+</style>
 </head>
 <body>
 
@@ -134,14 +178,34 @@
 
 <main class="container">
     <div id="welcome" class="welcome">
+        <div class="ai-badge">
+            <span class="ai-badge-dot"></span>
+            <span class="ai-badge-text">AI-drevet · Live data</span>
+            <span class="ai-badge-tag">100% gratis</span>
+        </div>
         <div class="welcome-shield">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:#5eead4">
                 <path d="M12 2 L20 5 V11 C20 16.5 16.5 20.5 12 22 C7.5 20.5 4 16.5 4 11 V5 Z"/>
                 <path d="M9 12 L11 14 L15 10"/>
             </svg>
         </div>
-        <h1>E-post sikkerhetsanalyse — <span class="accent">på sekunder</span></h1>
-        <h2 class="welcome-sub">Gratis sjekk av SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI for ethvert domene. Få karakter A+ til F og konkrete tiltak i én rapport.</h2>
+        <h1>E-post sikkerhet — <span class="accent">drevet av AI</span></h1>
+        <h2 class="welcome-sub">Gratis sjekk av SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI for ethvert domene. Karakter A+ til F og konkrete tiltak — analysert av AI på sekunder.</h2>
+
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <svg class="hero-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                <span><strong>Daglig</strong> AI-skanning av norske domener</span>
+            </div>
+            <div class="hero-stat">
+                <svg class="hero-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                <span><strong>Ukentlig</strong> nye AI-genererte rapporter</span>
+            </div>
+            <div class="hero-stat">
+                <svg class="hero-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                <span><strong>Live trender</strong> oppdatert kontinuerlig</span>
+            </div>
+        </div>
 
         <div class="hero-search-wrap">
             <form class="hero-search-form" onsubmit="handleSearch(event, document.getElementById('domainInputHero').value)">
@@ -195,6 +259,48 @@
 
     <div id="results" class="hidden"></div>
 </main>
+
+<section class="ai-section" aria-label="AI-funksjoner">
+    <div class="ai-section-head">
+        <span class="ai-section-tag">🤖 Slik jobber AI-en</span>
+        <h2 class="ai-section-title">Norges første AI-drevne sikkerhetsplattform</h2>
+        <p class="ai-section-sub">data1.no kombinerer automatisk DNS-skanning med Claude AI for å gi deg de mest oppdaterte og presise innsiktene om norsk e-postsikkerhet — uten manuell innblanding.</p>
+    </div>
+
+    <div class="ai-grid">
+        <div class="ai-card">
+            <div class="ai-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="ai-card-title">Automatisk DNS-skanning</div>
+            <div class="ai-card-desc">Hver natt analyserer botene våre alle store norske domener for SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI — så dataen alltid er fersk når du trenger den.</div>
+            <div class="ai-card-stat">79+ domener / dag</div>
+        </div>
+
+        <div class="ai-card">
+            <div class="ai-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L2 7 L12 12 L22 7 Z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="ai-card-title">AI-skrevne analyser</div>
+            <div class="ai-card-desc">Claude AI analyserer ukens DNS-data og skriver originale, datadrevne artikler om hva som faktisk skjer i norsk e-postsikkerhet — uten copy-paste eller mal-tekst.</div>
+            <div class="ai-card-stat">Ny artikkel hver uke</div>
+        </div>
+
+        <div class="ai-card">
+            <div class="ai-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+            </div>
+            <div class="ai-card-title">Live trendsporing</div>
+            <div class="ai-card-desc">Se hvilke norske domener som har forbedret eller forverret e-postsikkerheten siste uke. Algoritmene oppdager mønstre du ellers ville gått glipp av.</div>
+            <div class="ai-card-stat">Oppdatert 06:00 hver dag</div>
+        </div>
+    </div>
+
+    <div class="ai-footer">
+        <p class="ai-footer-text">data1.no drives av <strong>Micronet AS</strong> og kombinerer åpen DNS-data med <strong>Claude Sonnet 4.6</strong> fra Anthropic. Hele plattformen kjører på automatiserte arbeidsflyter — ingen manuell oppdatering, ingen utgått innhold.</p>
+        <span class="ai-powered">⚡ POWERED BY CLAUDE AI</span>
+    </div>
+</section>
 
 <section id="faqSection" class="faq-section" aria-label="Vanlige spørsmål">
     <h2 class="faq-heading">Vanlige spørsmål om e-postsikkerhet</h2>
