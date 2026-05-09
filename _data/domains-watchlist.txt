@@ -2,7 +2,7 @@
 # Format: ett domene per linje. Linjer som starter med # er kommentarer.
 # Domenet bør være rot-domenet (uten www, uten http://).
 
-# Banker
+# Banker (storbank + sparebanker)
 dnb.no
 nordea.no
 sparebank1.no
@@ -10,15 +10,29 @@ storebrand.no
 handelsbanken.no
 santander.no
 sbanken.no
+sparebanken-vest.no
+sparebanken-sor.no
+sparebanken-ost.no
+nordnet.no
+finanstilsynet.no
+
+# Forsikring
 gjensidige.no
 fremtind.no
 if.no
+tryg.no
+codan.no
+knif.no
+frende.no
+eika.no
 
 # Telecom
 telenor.no
 telia.no
 ice.no
 get.no
+altibox.no
+talkmore.no
 
 # Offentlig sektor
 nav.no
@@ -31,15 +45,34 @@ regjeringen.no
 stortinget.no
 udi.no
 nbim.no
+brreg.no
+ssb.no
+nho.no
+lo.no
+forsvaret.no
+nrk.no
+norsk-helsenett.no
+mattilsynet.no
 
-# Energi
+# Helse
+oslo-universitetssykehus.no
+helse-bergen.no
+sthf.no
+helse-fonna.no
+sykehuspartner.no
+apotek1.no
+boots.no
+
+# Energi / olje
 equinor.no
 hydro.no
 statkraft.no
 yara.no
+aker-solutions.no
+elkem.no
+nyfosse.no
 
 # Medier
-nrk.no
 vg.no
 dagbladet.no
 tv2.no
@@ -51,6 +84,9 @@ nettavisen.no
 itavisen.no
 digi.no
 tu.no
+adressa.no
+faedrelandsvennen.no
+sa.no
 
 # E-handel
 elkjop.no
@@ -62,8 +98,12 @@ jernia.no
 biltema.no
 ikea.com
 zalando.no
+hm.com
+cubus.com
+boozt.com
+fjordkraft.no
 
-# Reise/hotell
+# Reise / hotell / transport
 sas.no
 norwegian.no
 flytoget.no
@@ -71,39 +111,83 @@ nsb.no
 ruter.no
 vy.no
 strawberry.no
+choice.no
+scandichotels.no
+tide.no
+kolumbus.no
 
-# Shipping/logistikk
-posten.no
+# Logistikk / shipping
 bring.no
+postnord.no
+schenker.no
+bilforsikring.no
 
-# Tech/SaaS
+# Tech / SaaS
 visma.com
 opera.com
 schibsted.com
 finn.no
 hjemla.no
+amedia.no
+mojang.com
+funcom.com
+remarkable.com
 
-# Universiteter
+# Universiteter og høyskoler
 uio.no
 ntnu.no
 uib.no
 uit.no
 nmbu.no
+hvl.no
+oslomet.no
+inn.no
+nord.no
+khio.no
+nhh.no
+bi.no
+ks.no
 
-# Forsikring
-tryg.no
-codan.no
+# Kommuner (de største)
+oslo.kommune.no
+bergen.kommune.no
+trondheim.kommune.no
+stavanger.kommune.no
+baerum.kommune.no
+kristiansand.kommune.no
+fredrikstad.kommune.no
+drammen.kommune.no
+tromso.kommune.no
+asker.kommune.no
+sandnes.kommune.no
+sarpsborg.kommune.no
+larvik.kommune.no
+sandefjord.kommune.no
+tonsberg.kommune.no
 
-# IT-konsulenter
+# IT-konsulenter / store leverandører
 sopra-steria.no
 accenture.com
 capgemini.com
 atea.no
 tietoevry.com
 advania.no
+nordlo.no
+crayon.com
+itera.no
 
-# Konkurrenter / sammenlignbare
+# DMARC-konkurrenter / sammenlignbare
 mxtoolbox.com
 easydmarc.com
 dmarcian.com
 powerdmarc.com
+valimail.com
+agari.com
+
+# Frivillig sektor / interesseorg
+redcross.no
+norad.no
+unicef.no
+kreftforeningen.no
+nakk.no
+lhl.no
