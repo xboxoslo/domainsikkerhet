@@ -373,7 +373,7 @@ def create_halo_quote(b):
         'pdftemplate_id': 29,    # Tilbud Micronet
         'note':           note,
         'lines': [
-            halo_item_line(516, 1, token),  # Mail (SPF-DKIM-DMARC) — recurring kr 195/mnd
+            halo_item_line(516, 1, token),  # Mail (SPF-DKIM-DMARC) — recurring kr 295/mnd
             halo_item_line(735, 1, token),  # Estimert Service Bedrift — engangs kr 2080
         ],
     }]
@@ -715,7 +715,7 @@ def render_email_html(b):
           <tr>
             <td style="padding:16px 18px">
               <div style="font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Pris</div>
-              <div style="font-size:24px;font-weight:900;color:#0f172a;margin-top:2px">kr 195 / mnd</div>
+              <div style="font-size:24px;font-weight:900;color:#0f172a;margin-top:2px">kr 295 / mnd</div>
               <div style="font-size:13px;color:#64748b;margin-top:2px">eks. mva &middot; ingen bindingstid</div>
             </td>
           </tr>

@@ -49,7 +49,7 @@ hvis serveren deployes utad).
 
 Default IDs som brukes i `intake-server.py`:
 
-- **Item** `516` (`MAI001`) — Mail (SPF-DKIM-DMARC), kr 195/mnd
+- **Item** `516` (`MAI001`) — Mail (SPF-DKIM-DMARC), kr 295/mnd
 - **Item** `735` (`EST003`) — Estimert Service Bedrift, kr 2080 engangs
 - **PDF Template** `29` — Tilbud Micronet
 - **Agent (eier)** `23` — API-bruker
@@ -60,7 +60,7 @@ Default IDs som brukes i `intake-server.py`:
 - Inline PNG-skjold rendret med Pillow (drop-shadow, halo, hake-badge på A+/A/B)
 - Karakterskala (F→A+) med aktiv karakter ringet inn
 - Komponent-liste (DMARC, SPF, DKIM, MTA-STS, TLS-RPT, BIMI) med beskrivelser
-- Pris kr 195/mnd vist inline
+- Pris kr 295/mnd vist inline
 - Personlig signatur
 
 Bygger full RFC822 MIME via `email.mime` og sender via Mailgun
