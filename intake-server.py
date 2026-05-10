@@ -640,7 +640,7 @@ def render_shield_png(grade, gc, gc_light):
     tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
     tx = cx - tw / 2 - bbox[0]
     ty = cy - th / 2 - bbox[1]
-    draw.text((tx, ty), grade, fill=(15, 23, 42, 255), font=font)
+    draw.text((tx, ty), grade, fill=(0, 0, 0, 255), font=font)
 
     # 8. Hake-badge i øvre høyre hjørne (kun på høye grades, slik portalen har)
     if grade in ('A+', 'A', 'B'):
