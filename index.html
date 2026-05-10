@@ -352,88 +352,10 @@ body:not(.has-results) .faq-a code{background:rgba(56,189,248,.1) !important;col
             <span class="particle"></span>
             <div class="ai-envelope">
                 <div class="ai-envelope-body">
-                    <div class="ai-envelope-code">
-                        <div class="ai-envelope-code-col">v=DMARC1
-p=reject
-SPF=PASS
-DKIM=OK
-0xA1F3
-TLS=v1.3
-HMAC-256
-sha512
-SUBJECT
-FROM:@
-TO:noreply
-RFC5322
-0x4ABE</div>
-                        <div class="ai-envelope-code-col">01001010
-11010110
-00111100
-10101011
-11001110
-01100011
-10111001
-00110100
-01111010
-10010101
-01010110
-01101110</div>
-                        <div class="ai-envelope-code-col">A1F3:9C
-B7:24:8E
-0xCAFE
-0xBABE
-A2:B5:1D
-0xFEED
-DD:33:C7
-6F:1E:90
-0x4242
-3B:8E:11
-0xDEAD
-9F:0A:55</div>
-                        <div class="ai-envelope-code-col">DNS-TXT
-DMARC?
-SPF-CHK
-RR-A:OK
-TXT-OK
-MX-PRIO
-v=spf1
-p=quar
-RUF=OK
-RUA=OK
-ASPF=R
-ADKIM=S</div>
-                        <div class="ai-envelope-code-col">256-BIT
-ENCRYPT
-SHA-512
-RSA-4K
-ED25519
-HMAC-OK
-TLS1.3
-HSTS-ON
-CAA-OK
-MTA-STS
-TLS-RPT
-DANE-OK</div>
-                        <div class="ai-envelope-code-col">scan...
-verify..
-hash:OK
-auth:OK
-deliver
-reject!
-quaran.
-forward
-inbox..
-spam?..
-trust++
-match++</div>
-                    </div>
                     <div class="ai-envelope-dns">
-                        <span class="ai-envelope-dns-line">v=DMARC1; p=reject; rua=mailto:dmarc@</span>
+                        <span class="ai-envelope-dns-line">v=DMARC1; p=reject</span>
                         <span class="ai-envelope-dns-line">SPF: include:_spf.google.com -all</span>
                         <span class="ai-envelope-dns-line">DKIM: 2048-bit RSA · valid signature</span>
-                    </div>
-                    <div class="ai-envelope-hex">
-                        <span class="ai-envelope-hex-track">FF A1 3C 9E 2B C4 5D 8F 7A 12 EE 0B C5 38 91 4D · DMARC=PASS · SPF=PASS · DKIM=PASS · 256-bit · 0xCAFEBABE · sha-512 · v=DMARC1; p=reject; pct=100 · TLS-1.3 · MTA-STS · 4A B7 1F 2D 8E 90 6C 51 · scanning... · ED25519 · HMAC · 0xDEADBEEF · ASPF=relaxed · trust++ ·</span>
                     </div>
                     <div class="ai-envelope-at">@</div>
                     <div class="ai-envelope-scan"></div>
@@ -573,9 +495,9 @@ match++</div>
             <div class="ai-card-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             </div>
-            <div class="ai-card-title">Automatisk DNS-skanning</div>
-            <div class="ai-card-desc">Hver natt analyserer botene våre alle store norske domener for SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI — så dataen alltid er fersk når du trenger den.</div>
-            <div class="ai-card-stat">150+ domener / dag</div>
+            <div class="ai-card-title">Topp 100 norske domener</div>
+            <div class="ai-card-desc">Vi rangerer Norges 100 største nettsteder etter e-postsikkerhet — bank, kommune, e-handel, medier — med karakter A+ til F oppdatert hver uke.</div>
+            <div class="ai-card-stat">100 domener · ukentlig</div>
             <div class="ai-card-cta">Se topp 100-rapporten →</div>
         </a>
 
@@ -593,9 +515,9 @@ match++</div>
             <div class="ai-card-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
             </div>
-            <div class="ai-card-title">Live trendsporing</div>
-            <div class="ai-card-desc">Se hvilke norske domener som har forbedret eller forverret e-postsikkerheten siste uke. Algoritmene oppdager mønstre du ellers ville gått glipp av.</div>
-            <div class="ai-card-stat">Oppdatert 06:00 hver dag</div>
+            <div class="ai-card-title">Daglig trendsporing</div>
+            <div class="ai-card-desc">158 norske domener skannes hver natt. Vi viser hvem som har forbedret eller forverret e-postsikkerheten — så du fanger endringer og spoofing-forsøk.</div>
+            <div class="ai-card-stat">158 domener · daglig</div>
             <div class="ai-card-cta">Åpne trender →</div>
         </a>
     </div>
@@ -742,6 +664,12 @@ if (typeof window.emailReport === 'function') {
     if (flag) flag.value = '';
     const mf = document.getElementById('intakeMessage');
     if (mf && mf.value === 'Bestilling: DMARC-oppsett (1 990 kr engangs) + overvåking (295 kr/mnd).') mf.value = '';
+    const submitBtn = document.getElementById('intakeSubmit');
+    if (submitBtn) submitBtn.textContent = 'Send rapport';
+    const successMsg = document.getElementById('intakeSuccessMsg');
+    const successHeading = document.querySelector('#intakeSuccess h3');
+    if (successHeading) successHeading.textContent = 'Rapport sendt!';
+    if (successMsg) successMsg.textContent = 'Du får snart e-posten med fullstendig analyse. Vi tar kontakt hvis du har bedt om det.';
     return _origEmailReport.call(this, domain);
   };
 }
@@ -760,9 +688,9 @@ function openServiceOrder() {
   const titleEl = modal.querySelector('.modal-title');
   const subEl = modal.querySelector('.modal-sub');
   if (titleEl) titleEl.textContent = 'Bestill DMARC-oppsett og overvåking';
-  if (subEl) subEl.textContent = '1 990 kr engangs + 295 kr/mnd · Sendes som tilbud i Halo';
+  if (subEl) subEl.textContent = 'Du får bekreftelse på e-post · Et eget tilbud kommer i en separat e-post';
 
-  document.getElementById('intakeDomain').textContent = 'DMARC-tjeneste';
+  document.getElementById('intakeDomain').textContent = 'DMARC-pakke';
   document.getElementById('intakeMeta').textContent = '1 990 kr engangs + 295 kr/mnd · eks. mva';
 
   const domainField = document.getElementById('intakeDomainField');
@@ -793,6 +721,14 @@ function openServiceOrder() {
   if (msgField && !msgField.value) {
     msgField.value = 'Bestilling: DMARC-oppsett (1 990 kr engangs) + overvåking (295 kr/mnd).';
   }
+
+  // Update submit button + success messages
+  const submitBtn = document.getElementById('intakeSubmit');
+  if (submitBtn) submitBtn.textContent = 'Send bestilling';
+  const successMsg = document.getElementById('intakeSuccessMsg');
+  const successHeading = document.querySelector('#intakeSuccess h3');
+  if (successHeading) successHeading.textContent = 'Bestilling mottatt!';
+  if (successMsg) successMsg.textContent = 'Du får bekreftelse på e-post med en gang. Et eget tilbud kommer i løpet av samme dag.';
 
   modal.classList.add('show');
   document.body.style.overflow = 'hidden';
