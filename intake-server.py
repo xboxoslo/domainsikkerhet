@@ -625,6 +625,7 @@ def render_shield_png(grade, gc, gc_light):
     font_size = 36*SCALE if len(grade) == 1 else 28*SCALE
     font = None
     for path in [
+        str(Path(__file__).parent / 'fonts' / 'DejaVuSans-Bold.ttf'),
         '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
         '/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf',
         '/usr/share/fonts/TTF/DejaVuSans-Bold.ttf',
