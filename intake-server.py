@@ -612,7 +612,7 @@ def render_shield_png(grade, gc, gc_light):
     draw = ImageDraw.Draw(img)
 
     # 6. Hvit sirkel med myk drop-shadow (gir letter-badge løftet 3D-følelse)
-    cx, cy, r = 60*SCALE, 58*SCALE, 24*SCALE
+    cx, cy, r = 60*SCALE, 58*SCALE, 30*SCALE
     circle_shadow = Image.new('RGBA', (iw, ih), (0, 0, 0, 0))
     csd = ImageDraw.Draw(circle_shadow)
     csd.ellipse((cx-r, cy-r+2*SCALE, cx+r, cy+r+2*SCALE), fill=(0, 0, 0, 60))
@@ -622,7 +622,7 @@ def render_shield_png(grade, gc, gc_light):
     draw.ellipse((cx-r, cy-r, cx+r, cy+r), fill=(255, 255, 255, 255))
 
     # 7. Grade-bokstaven
-    font_size = 36*SCALE if len(grade) == 1 else 28*SCALE
+    font_size = 56*SCALE if len(grade) == 1 else 44*SCALE
     font = None
     for path in [
         str(Path(__file__).parent / 'fonts' / 'DejaVuSans-Bold.ttf'),
