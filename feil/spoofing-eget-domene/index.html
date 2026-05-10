@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hvis kunder eller kolleger får e-post som hevder å komme fra dittfirma.no men ikke er det, er domenet sårbart for spoofing. Permanent fix med DMARC reject.">
+<meta name="keywords" content="spoofing eget domene, falsk e-post fra domenet, e-post i mitt navn">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/feil/spoofing-eget-domene/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/feil/spoofing-eget-domene/">
+<meta property="og:title" content="Noen sender e-post i ditt navn — slik stopper du det | data1.no">
+<meta property="og:description" content="Hvis kunder eller kolleger får e-post som hevder å komme fra dittfirma.no men ikke er det, er domenet sårbart for spoofing. Permanent fix med DMARC reject.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Noen sender e-post i ditt navn — slik stopper du det | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<style>
+.error-box{background:#fff5f5;border-left:4px solid #c53030;padding:14px 18px;border-radius:8px;margin:18px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;color:#742a2a}
+.cause{background:#fff;border-radius:10px;padding:18px 22px;margin:22px 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.cause h3{margin-top:0}
+.fix-step{display:flex;gap:14px;margin:12px 0;align-items:flex-start}
+.fix-step-num{width:32px;height:32px;background:#0f766e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-size:14px}
+.fix-step-body{flex:1}
+.fix-step-body strong{display:block;color:#0f172a;font-size:15px;margin-bottom:4px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Noen sender e-post i ditt navn — slik stopper du det", "description": "Hvis kunder eller kolleger får e-post som hevder å komme fra dittfirma.no men ikke er det, er domenet sårbart for spoofing. Permanent fix med DMARC reject.", "datePublished": "2026-05-10", "dateModified": "2026-05-10", "author": {"@type": "Organization", "name": "Micronet", "url": "https://micronet.no/"}, "publisher": {"@type": "Organization", "name": "data1.no", "logo": {"@type": "ImageObject", "url": "https://data1.no/og-image.png"}}, "mainEntityOfPage": "https://data1.no/feil/spoofing-eget-domene/", "inLanguage": "nb-NO"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://data1.no/"}, {"@type": "ListItem", "position": 2, "name": "Feil og fixes", "item": "https://data1.no/feil/"}, {"@type": "ListItem", "position": 3, "name": "Spoofing av eget domene", "item": "https://data1.no/feil/spoofing-eget-domene/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Noen sender e-post i ditt navn — slik stopper du det", "step": [{"@type": "HowToStep", "name": "Start med p=none i 2-4 uker", "text": "Overvåk uten påvirkning."}, {"@type": "HowToStep", "name": "Skjerp til p=quarantine", "text": "Gradvis pct=25 → 100."}, {"@type": "HowToStep", "name": "Sett p=reject permanent", "text": "Full beskyttelse mot spoofing av ditt eksakte domene."}]}</script>
+<script src="/_assets/tracker.js" defer></script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/feil/">Feil</a> › Spoofing av eget domene</nav>
+  <h1>Noen sender e-post som ser ut til å komme fra ditt domene</h1>
+  <p class="meta">Sist oppdatert 10. mai 2026 · Av Micronet</p>
+
+  <div class="error-box">Inbox shows sender as 'kollega@dittfirma.no' but it's a phishing attempt</div>
+
+  <p class="lead">Phishing-e-poster som ser ut til å komme fra ditt eget domene er ofte starten på direktørsvindel og fakturasvindel. Den eneste robuste løsningen er DMARC med p=reject.</p>
+
+  <h2>Hvorfor skjer dette?</h2>
+<div class="cause">
+<p>SMTP-protokollen tillater hvem som helst å sette en hvilken som helst From-adresse på en e-post. Uten DMARC har mottakerservere ingen måte å vite om e-posten faktisk kommer fra deg.</p>
+<p>Med DMARC og <code>p=reject</code> stopper mottakerservere meldingen før den når innboksen.</p>
+</div>
+
+<h2>Permanent fix — 3-fasers utrulling</h2>
+
+<div class="fix-step">
+<div class="fix-step-num">1</div>
+<div class="fix-step-body">
+<strong>Fase 1: p=none (overvåking, 2-4 uker)</strong>
+Legg til <code>v=DMARC1; p=none; rua=mailto:dmarc@dittfirma.no</code>. Du får XML-rapporter som viser ALLE som sender i ditt navn — både legitime tredjeparter du har glemt, og spoofing-forsøk.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">2</div>
+<div class="fix-step-body">
+<strong>Fase 2: p=quarantine (2-4 uker)</strong>
+Når du har bekreftet at all legitim post består SPF/DKIM, skjerp til <code>p=quarantine; pct=25</code> → 50 → 100. Uautentisert post havner i mottakers spam-mappe.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">3</div>
+<div class="fix-step-body">
+<strong>Fase 3: p=reject (permanent)</strong>
+<code>v=DMARC1; p=reject; pct=100; sp=reject;</code>. Spoofing-e-poster blir nå <em>avvist</em> hos mottakerservere før de leveres. Permanent beskyttelse.
+</div>
+</div>
+
+<h2>Hva dette IKKE stopper</h2>
+<p>DMARC stopper ikke lookalike-domener (<code>dittfirrma.no</code> med to r-er) eller display-name-spoofing (avsender-navn er "Direktør" men domenet er ukjent). For komplett beskyttelse: kombiner DMARC med brand-monitoring og ansatte-trening.</p>
+
+  <div class="cta-box">
+    <h3>Sjekk om dette er fikset på domenet ditt</h3>
+    <p>Gratis. Ingen registrering. Karakter A+ til F på 10 sekunder.</p>
+    <a href="/?utm_source=feil-spoofing-eget-domene">Sjekk eget domene →</a>
+  </div>
+
+  <h2>Lese mer</h2>
+  <ul>
+    <li><a href="/feil/">Alle vanlige feil og fixes</a></li>
+    <li><a href="/blogg/dmarc/">DMARC forklart fra grunnen</a></li>
+    <li><a href="/blogg/spf/">SPF forklart fra grunnen</a></li>
+    <li><a href="/ordbok/">Ordbok: e-postsikkerhet fra A til Å</a></li>
+  </ul>
+
+  <div class="author-card">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Micronet</div>
+      <div class="author-meta">Norsk IT-konsulenttjeneste — DMARC, e-postsikkerhet og infrastruktur. <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

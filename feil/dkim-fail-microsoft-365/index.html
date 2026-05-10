@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vanlig årsak: CNAME-records mangler eller DKIM ikke aktivert i Microsoft Defender. Steg-for-steg-fix.">
+<meta name="keywords" content="dkim fail microsoft 365, dkim m365 oppsett, dkim outlook signerer ikke">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/feil/dkim-fail-microsoft-365/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/feil/dkim-fail-microsoft-365/">
+<meta property="og:title" content="DKIM signerer ikke i Microsoft 365 — slik fikser du det | data1.no">
+<meta property="og:description" content="Vanlig årsak: CNAME-records mangler eller DKIM ikke aktivert i Microsoft Defender. Steg-for-steg-fix.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>DKIM signerer ikke i Microsoft 365 — slik fikser du det | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<style>
+.error-box{background:#fff5f5;border-left:4px solid #c53030;padding:14px 18px;border-radius:8px;margin:18px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;color:#742a2a}
+.cause{background:#fff;border-radius:10px;padding:18px 22px;margin:22px 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.cause h3{margin-top:0}
+.fix-step{display:flex;gap:14px;margin:12px 0;align-items:flex-start}
+.fix-step-num{width:32px;height:32px;background:#0f766e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-size:14px}
+.fix-step-body{flex:1}
+.fix-step-body strong{display:block;color:#0f172a;font-size:15px;margin-bottom:4px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "DKIM signerer ikke i Microsoft 365 — slik fikser du det", "description": "Vanlig årsak: CNAME-records mangler eller DKIM ikke aktivert i Microsoft Defender. Steg-for-steg-fix.", "datePublished": "2026-05-10", "dateModified": "2026-05-10", "author": {"@type": "Organization", "name": "Micronet", "url": "https://micronet.no/"}, "publisher": {"@type": "Organization", "name": "data1.no", "logo": {"@type": "ImageObject", "url": "https://data1.no/og-image.png"}}, "mainEntityOfPage": "https://data1.no/feil/dkim-fail-microsoft-365/", "inLanguage": "nb-NO"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://data1.no/"}, {"@type": "ListItem", "position": 2, "name": "Feil og fixes", "item": "https://data1.no/feil/"}, {"@type": "ListItem", "position": 3, "name": "DKIM Microsoft 365", "item": "https://data1.no/feil/dkim-fail-microsoft-365/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "DKIM signerer ikke i Microsoft 365 — slik fikser du det", "step": [{"@type": "HowToStep", "name": "Verifiser CNAME i DNS", "text": "Begge selector1 og selector2 må peke til onmicrosoft-versjonene."}, {"@type": "HowToStep", "name": "Aktiver DKIM i Defender", "text": "security.microsoft.com → DKIM → Enable for domenet."}, {"@type": "HowToStep", "name": "Test med Gmail \"Show original\"", "text": "DKIM=pass må vises i header etter aktivering."}]}</script>
+<script src="/_assets/tracker.js" defer></script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/feil/">Feil</a> › DKIM Microsoft 365</nav>
+  <h1>DKIM signerer ikke i Microsoft 365</h1>
+  <p class="meta">Sist oppdatert 10. mai 2026 · Av Micronet</p>
+
+  <div class="error-box">DKIM=fail · selector1._domainkey.dittfirma.no</div>
+
+  <p class="lead">Microsoft 365 har en tendens til at DKIM viser "klar til aktivering" men aldri signerer faktisk e-post. Årsaken er nesten alltid at CNAME-records ikke er publisert eller at DKIM ikke er trykket på.</p>
+
+  <h2>Slik fikser du det</h2>
+
+<div class="fix-step">
+<div class="fix-step-num">1</div>
+<div class="fix-step-body">
+<strong>Verifiser at CNAME-records er i DNS</strong>
+Microsoft genererer to CNAME-records ved aktivering: <code>selector1._domainkey.dittfirma.no</code> → <code>selector1-dittfirma-no._domainkey.dittfirma.onmicrosoft.com</code> og tilsvarende for selector2. Sjekk i Domeneshop/Cloudflare at begge er publisert.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">2</div>
+<div class="fix-step-body">
+<strong>Aktiver DKIM i Microsoft Defender</strong>
+Gå til <code>security.microsoft.com</code> → E-post & samarbeid → Policyer & regler → Trusler → DKIM. Velg domenet og klikk <strong>Enable</strong>. Hvis Microsoft klager: vent 30 min og prøv igjen.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">3</div>
+<div class="fix-step-body">
+<strong>Test ved å sende en e-post</strong>
+Send en test-e-post til en Gmail-konto, åpne meldingen og klikk "Show original". Du skal se <code>dkim=pass</code> i autentiseringsheaderen.
+</div>
+</div>
+
+<h2>Hvis det fortsatt feiler</h2>
+<p>Sjekk at du ikke har en eksisterende DKIM-record fra en annen leverandør (f.eks. tidligere Mailgun-oppsett). Microsoft 365 og Mailgun bruker samme selector-navn, og en gammel record kan blokkere den nye. Slett alle <code>*._domainkey</code>-records som ikke er aktive og prøv igjen.</p>
+
+  <div class="cta-box">
+    <h3>Sjekk om dette er fikset på domenet ditt</h3>
+    <p>Gratis. Ingen registrering. Karakter A+ til F på 10 sekunder.</p>
+    <a href="/?utm_source=feil-dkim-fail-microsoft-365">Sjekk eget domene →</a>
+  </div>
+
+  <h2>Lese mer</h2>
+  <ul>
+    <li><a href="/feil/">Alle vanlige feil og fixes</a></li>
+    <li><a href="/blogg/dmarc/">DMARC forklart fra grunnen</a></li>
+    <li><a href="/blogg/spf/">SPF forklart fra grunnen</a></li>
+    <li><a href="/ordbok/">Ordbok: e-postsikkerhet fra A til Å</a></li>
+  </ul>
+
+  <div class="author-card">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Micronet</div>
+      <div class="author-meta">Norsk IT-konsulenttjeneste — DMARC, e-postsikkerhet og infrastruktur. <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

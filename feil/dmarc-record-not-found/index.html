@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hvis data1.no eller MXToolbox sier 'No DMARC record found' er domenet ditt åpent for spoofing. Slik legger du til DMARC riktig.">
+<meta name="keywords" content="no dmarc record found, dmarc mangler, dmarc oppsett, dmarc dns">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/feil/dmarc-record-not-found/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/feil/dmarc-record-not-found/">
+<meta property="og:title" content="DMARC-record mangler — slik fikser du det på 5 minutter | data1.no">
+<meta property="og:description" content="Hvis data1.no eller MXToolbox sier 'No DMARC record found' er domenet ditt åpent for spoofing. Slik legger du til DMARC riktig.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>DMARC-record mangler — slik fikser du det på 5 minutter | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<style>
+.error-box{background:#fff5f5;border-left:4px solid #c53030;padding:14px 18px;border-radius:8px;margin:18px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;color:#742a2a}
+.cause{background:#fff;border-radius:10px;padding:18px 22px;margin:22px 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.cause h3{margin-top:0}
+.fix-step{display:flex;gap:14px;margin:12px 0;align-items:flex-start}
+.fix-step-num{width:32px;height:32px;background:#0f766e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-size:14px}
+.fix-step-body{flex:1}
+.fix-step-body strong{display:block;color:#0f172a;font-size:15px;margin-bottom:4px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "DMARC-record mangler — slik fikser du det på 5 minutter", "description": "Hvis data1.no eller MXToolbox sier 'No DMARC record found' er domenet ditt åpent for spoofing. Slik legger du til DMARC riktig.", "datePublished": "2026-05-10", "dateModified": "2026-05-10", "author": {"@type": "Organization", "name": "Micronet", "url": "https://micronet.no/"}, "publisher": {"@type": "Organization", "name": "data1.no", "logo": {"@type": "ImageObject", "url": "https://data1.no/og-image.png"}}, "mainEntityOfPage": "https://data1.no/feil/dmarc-record-not-found/", "inLanguage": "nb-NO"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://data1.no/"}, {"@type": "ListItem", "position": 2, "name": "Feil og fixes", "item": "https://data1.no/feil/"}, {"@type": "ListItem", "position": 3, "name": "DMARC mangler", "item": "https://data1.no/feil/dmarc-record-not-found/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "DMARC-record mangler — slik fikser du det på 5 minutter", "step": [{"@type": "HowToStep", "name": "Logg inn hos DNS-leverandør", "text": "Domeneshop, Cloudflare eller annen DNS-administrasjon."}, {"@type": "HowToStep", "name": "Opprett TXT-record", "text": "Navn: _dmarc. Verdi: v=DMARC1; p=none; rua=mailto:dmarc@dittfirma.no; pct=100; adkim=r; aspf=r;"}, {"@type": "HowToStep", "name": "Verifiser etter 30-60 min", "text": "Sjekk på data1.no at DMARC-recorden er live."}]}</script>
+<script src="/_assets/tracker.js" defer></script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/feil/">Feil</a> › DMARC mangler</nav>
+  <h1>Ingen DMARC-record funnet — fix på 5 minutter</h1>
+  <p class="meta">Sist oppdatert 10. mai 2026 · Av Micronet</p>
+
+  <div class="error-box">No DMARC record found at _dmarc.dittfirma.no</div>
+
+  <p class="lead">Uten DMARC-record kan hvem som helst sende e-post som ser ut til å komme fra ditt domene. Det er den vanligste mekanismen bak fakturasvindel og direktørsvindel.</p>
+
+  <h2>Hva betyr feilmeldingen?</h2>
+<div class="cause">
+<p>DMARC ligger som en TXT-record på <code>_dmarc.dittfirma.no</code>. Hvis verktøyet ikke finner en slik record, har domenet ditt ingen DMARC-policy — og mottakere har ingen instruks om hva de skal gjøre med uautentisert e-post i ditt navn.</p>
+</div>
+
+<h2>Slik legger du til DMARC</h2>
+
+<div class="fix-step">
+<div class="fix-step-num">1</div>
+<div class="fix-step-body">
+<strong>Logg inn hos DNS-leverandøren</strong>
+Domeneshop, Cloudflare, GoDaddy — uansett hvem som drifter DNS-en for domenet ditt. Finn TXT-record-administrasjon.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">2</div>
+<div class="fix-step-body">
+<strong>Legg til en ny TXT-record</strong>
+Type: TXT. Navn: <code>_dmarc</code>. Verdi: <code>v=DMARC1; p=none; rua=mailto:dmarc@dittfirma.no; pct=100; adkim=r; aspf=r;</code>. TTL: 3600.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">3</div>
+<div class="fix-step-body">
+<strong>Vent 30-60 minutter på DNS-propagering</strong>
+Sjekk deretter med data1.no. Du skal se DMARC-recorden din vises korrekt.
+</div>
+</div>
+
+<h2>Hvorfor p=none først?</h2>
+<p>Du må <strong>aldri</strong> starte direkte med <code>p=reject</code>. Det vil avvise dine egne legitime e-poster hvis SPF eller DKIM ikke er korrekt satt opp. <code>p=none</code> er en overvåkings-modus — du får rapporter uten at noe påvirkes. Etter 2-4 uker, når du har bekreftet at all legitim post består autentisering, skjerper du til <code>p=quarantine</code> og deretter <code>p=reject</code>.</p>
+
+  <div class="cta-box">
+    <h3>Sjekk om dette er fikset på domenet ditt</h3>
+    <p>Gratis. Ingen registrering. Karakter A+ til F på 10 sekunder.</p>
+    <a href="/?utm_source=feil-dmarc-record-not-found">Sjekk eget domene →</a>
+  </div>
+
+  <h2>Lese mer</h2>
+  <ul>
+    <li><a href="/feil/">Alle vanlige feil og fixes</a></li>
+    <li><a href="/blogg/dmarc/">DMARC forklart fra grunnen</a></li>
+    <li><a href="/blogg/spf/">SPF forklart fra grunnen</a></li>
+    <li><a href="/ordbok/">Ordbok: e-postsikkerhet fra A til Å</a></li>
+  </ul>
+
+  <div class="author-card">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Micronet</div>
+      <div class="author-meta">Norsk IT-konsulenttjeneste — DMARC, e-postsikkerhet og infrastruktur. <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

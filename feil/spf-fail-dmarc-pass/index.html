@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Når SPF feiler men DMARC fortsatt består, redder DKIM dagen. Slik fungerer alignment og hvorfor DKIM er den robuste mekanismen.">
+<meta name="keywords" content="spf fail dmarc pass, dkim alignment, spf failed but dmarc pass">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/feil/spf-fail-dmarc-pass/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/feil/spf-fail-dmarc-pass/">
+<meta property="og:title" content="SPF feiler men DMARC består — hva betyr det? | data1.no">
+<meta property="og:description" content="Når SPF feiler men DMARC fortsatt består, redder DKIM dagen. Slik fungerer alignment og hvorfor DKIM er den robuste mekanismen.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>SPF feiler men DMARC består — hva betyr det? | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<style>
+.error-box{background:#fff5f5;border-left:4px solid #c53030;padding:14px 18px;border-radius:8px;margin:18px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;color:#742a2a}
+.cause{background:#fff;border-radius:10px;padding:18px 22px;margin:22px 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.cause h3{margin-top:0}
+.fix-step{display:flex;gap:14px;margin:12px 0;align-items:flex-start}
+.fix-step-num{width:32px;height:32px;background:#0f766e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-size:14px}
+.fix-step-body{flex:1}
+.fix-step-body strong{display:block;color:#0f172a;font-size:15px;margin-bottom:4px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SPF feiler men DMARC består — hva betyr det?", "description": "Når SPF feiler men DMARC fortsatt består, redder DKIM dagen. Slik fungerer alignment og hvorfor DKIM er den robuste mekanismen.", "datePublished": "2026-05-10", "dateModified": "2026-05-10", "author": {"@type": "Organization", "name": "Micronet", "url": "https://micronet.no/"}, "publisher": {"@type": "Organization", "name": "data1.no", "logo": {"@type": "ImageObject", "url": "https://data1.no/og-image.png"}}, "mainEntityOfPage": "https://data1.no/feil/spf-fail-dmarc-pass/", "inLanguage": "nb-NO"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://data1.no/"}, {"@type": "ListItem", "position": 2, "name": "Feil og fixes", "item": "https://data1.no/feil/"}, {"@type": "ListItem", "position": 3, "name": "SPF feil men DMARC OK", "item": "https://data1.no/feil/spf-fail-dmarc-pass/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "SPF feiler men DMARC består — hva betyr det?", "step": [{"@type": "HowToStep", "name": "Verifiser DKIM signerer", "text": "Sjekk via Show original i Gmail at dkim=pass."}, {"@type": "HowToStep", "name": "Bekreft alignment", "text": "DKIM d=-domenet må matche From-domenet (med relaxed alignment kan det være subdomain)."}, {"@type": "HowToStep", "name": "Ikke bekymre deg for SPF-fail ved videresending", "text": "DKIM redder dagen i normal drift."}]}</script>
+<script src="/_assets/tracker.js" defer></script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/feil/">Feil</a> › SPF feil men DMARC OK</nav>
+  <h1>SPF=fail men DMARC=pass — er dette et problem?</h1>
+  <p class="meta">Sist oppdatert 10. mai 2026 · Av Micronet</p>
+
+  <div class="error-box">spf=fail · dkim=pass · dmarc=pass</div>
+
+  <p class="lead">Dette er ikke nødvendigvis et problem — det er nøyaktig hvorfor DMARC bruker både SPF og DKIM. Hvis ÉN av dem består med korrekt alignment, består DMARC.</p>
+
+  <h2>Hvorfor skjer dette?</h2>
+<div class="cause">
+<p>SPF feiler ofte ved videresending — mailing-lister, e-post-aliaser eller .forward-konfigurasjoner endrer Return-Path slik at SPF-sjekken hos mottaker ikke matcher. Dette er normalt og forventet.</p>
+<p>Men DKIM-signaturen er kryptografisk — den følger meldingen gjennom videresending uten å bryte. Derfor består DKIM, og DMARC-kravet om at "minst én av SPF/DKIM må passere med alignment" blir oppfylt.</p>
+</div>
+
+<h2>Hva er alignment?</h2>
+<p>DMARC krever at domenet i SPF eller DKIM samsvarer med From-domenet:</p>
+<ul>
+<li><strong>SPF alignment:</strong> Return-Path-domenet matcher From-domenet</li>
+<li><strong>DKIM alignment:</strong> DKIM-signatur-domenet (<code>d=</code>) matcher From-domenet</li>
+</ul>
+<p>Med <code>aspf=r</code> og <code>adkim=r</code> (relaxed, default) tillates subdomener — så DKIM-domain <code>mail.dittfirma.no</code> aligner med From <code>info@dittfirma.no</code>.</p>
+
+<h2>Når er det faktisk et problem?</h2>
+<div class="cause">
+<p><strong>Hvis SPF=fail OG DKIM=fail:</strong> da feiler DMARC og e-posten avvises ved <code>p=reject</code>. Sjekk:</p>
+<ul>
+<li>SPF-record er korrekt og inkluderer alle dine avsendere</li>
+<li>DKIM er aktivert og signerer</li>
+<li>Alignment er korrekt (From-domenet matcher SPF/DKIM-domenet)</li>
+</ul>
+</div>
+
+<h2>Best practice</h2>
+<p>Sørg for at DKIM alltid signerer korrekt. Da har du robust e-post-autentisering selv ved videresending. SPF-feil ved videresending er normalt og ikke noe å bekymre seg for så lenge DKIM passerer.</p>
+
+  <div class="cta-box">
+    <h3>Sjekk om dette er fikset på domenet ditt</h3>
+    <p>Gratis. Ingen registrering. Karakter A+ til F på 10 sekunder.</p>
+    <a href="/?utm_source=feil-spf-fail-dmarc-pass">Sjekk eget domene →</a>
+  </div>
+
+  <h2>Lese mer</h2>
+  <ul>
+    <li><a href="/feil/">Alle vanlige feil og fixes</a></li>
+    <li><a href="/blogg/dmarc/">DMARC forklart fra grunnen</a></li>
+    <li><a href="/blogg/spf/">SPF forklart fra grunnen</a></li>
+    <li><a href="/ordbok/">Ordbok: e-postsikkerhet fra A til Å</a></li>
+  </ul>
+
+  <div class="author-card">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Micronet</div>
+      <div class="author-meta">Norsk IT-konsulenttjeneste — DMARC, e-postsikkerhet og infrastruktur. <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Når legitim e-post havner i spam-mappa hos kunder, er årsaken nesten alltid SPF/DKIM/DMARC — ikke innholdet. Slik fikser du det.">
+<meta name="keywords" content="mail havner i spam, mail i søppelpost, e-post leveres ikke, spam mottaker">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/feil/mail-havner-i-spam/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/feil/mail-havner-i-spam/">
+<meta property="og:title" content="Mailen din havner i spam? Det er ikke innholdet, det er DNS | data1.no">
+<meta property="og:description" content="Når legitim e-post havner i spam-mappa hos kunder, er årsaken nesten alltid SPF/DKIM/DMARC — ikke innholdet. Slik fikser du det.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Mailen din havner i spam? Det er ikke innholdet, det er DNS | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<style>
+.error-box{background:#fff5f5;border-left:4px solid #c53030;padding:14px 18px;border-radius:8px;margin:18px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;color:#742a2a}
+.cause{background:#fff;border-radius:10px;padding:18px 22px;margin:22px 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.cause h3{margin-top:0}
+.fix-step{display:flex;gap:14px;margin:12px 0;align-items:flex-start}
+.fix-step-num{width:32px;height:32px;background:#0f766e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-size:14px}
+.fix-step-body{flex:1}
+.fix-step-body strong{display:block;color:#0f172a;font-size:15px;margin-bottom:4px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Mailen din havner i spam? Det er ikke innholdet, det er DNS", "description": "Når legitim e-post havner i spam-mappa hos kunder, er årsaken nesten alltid SPF/DKIM/DMARC — ikke innholdet. Slik fikser du det.", "datePublished": "2026-05-10", "dateModified": "2026-05-10", "author": {"@type": "Organization", "name": "Micronet", "url": "https://micronet.no/"}, "publisher": {"@type": "Organization", "name": "data1.no", "logo": {"@type": "ImageObject", "url": "https://data1.no/og-image.png"}}, "mainEntityOfPage": "https://data1.no/feil/mail-havner-i-spam/", "inLanguage": "nb-NO"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://data1.no/"}, {"@type": "ListItem", "position": 2, "name": "Feil og fixes", "item": "https://data1.no/feil/"}, {"@type": "ListItem", "position": 3, "name": "Mail i spam", "item": "https://data1.no/feil/mail-havner-i-spam/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Mailen din havner i spam? Det er ikke innholdet, det er DNS", "step": [{"@type": "HowToStep", "name": "Karaktersjekk på data1.no", "text": "F eller D karakter forteller at autentiseringen sannsynligvis er årsaken."}, {"@type": "HowToStep", "name": "Test til Gmail", "text": "Show original viser nøyaktig hvilken autentisering feilet."}, {"@type": "HowToStep", "name": "Fix SPF, DKIM eller DMARC", "text": "Følg konkret guide for det som feilet."}]}</script>
+<script src="/_assets/tracker.js" defer></script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/feil/">Feil</a> › Mail i spam</nav>
+  <h1>Mailen din havner i mottakerens spam-mappe</h1>
+  <p class="meta">Sist oppdatert 10. mai 2026 · Av Micronet</p>
+
+  <div class="error-box">Recipient marked email as spam · DKIM/SPF authentication failed</div>
+
+  <p class="lead">Du sender en legitim e-post. Mottakeren får aldri den, eller finner den i spam-mappa. Innholdet er greit — så hva er galt? Svar: domenets DNS-konfigurasjon.</p>
+
+  <h2>Tre vanlige årsaker</h2>
+
+<div class="cause">
+<h3>1. SPF mangler eller er feil</h3>
+<p>Mottakerservere sjekker om IP-adressen som sendte e-posten er autorisert. Mangler SPF, eller står den på <code>?all</code> eller <code>+all</code>, regnes meldingen som mistenkelig.</p>
+</div>
+
+<div class="cause">
+<h3>2. DKIM signerer ikke</h3>
+<p>DKIM beviser at innholdet ikke er manipulert. Uten DKIM-signatur vekter Gmail og Outlook meldingen mye lavere. For Microsoft 365: må aktiveres i Defender. For Google Workspace: i Admin Console.</p>
+</div>
+
+<div class="cause">
+<h3>3. DMARC mangler</h3>
+<p>Selv med korrekt SPF og DKIM, gir mangel på DMARC dårlig tillit-score. Sett opp <code>p=none</code> som minimum — det er gratis og umiddelbart effekt.</p>
+</div>
+
+<h2>Slik diagnostiserer du på 30 sekunder</h2>
+
+<div class="fix-step">
+<div class="fix-step-num">1</div>
+<div class="fix-step-body">
+<strong>Sjekk domenet på data1.no</strong>
+Karakter A eller A+ betyr ikke spam-årsak fra autentisering. Karakter D eller F betyr at det helt sannsynlig ER autentiseringen.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">2</div>
+<div class="fix-step-body">
+<strong>Send test til Gmail og les "Show original"</strong>
+Du ser konkret hva som feilet: <code>spf=fail</code>, <code>dkim=none</code>, eller <code>dmarc=fail</code>. Det forteller deg hva som må fikses.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">3</div>
+<div class="fix-step-body">
+<strong>Test mot mail-tester.com (gratis)</strong>
+Gir score 0-10 hvor 10 er perfekt. Under 8 betyr at e-posten din kommer til å havne i spam ofte.
+</div>
+</div>
+
+  <div class="cta-box">
+    <h3>Sjekk om dette er fikset på domenet ditt</h3>
+    <p>Gratis. Ingen registrering. Karakter A+ til F på 10 sekunder.</p>
+    <a href="/?utm_source=feil-mail-havner-i-spam">Sjekk eget domene →</a>
+  </div>
+
+  <h2>Lese mer</h2>
+  <ul>
+    <li><a href="/feil/">Alle vanlige feil og fixes</a></li>
+    <li><a href="/blogg/dmarc/">DMARC forklart fra grunnen</a></li>
+    <li><a href="/blogg/spf/">SPF forklart fra grunnen</a></li>
+    <li><a href="/ordbok/">Ordbok: e-postsikkerhet fra A til Å</a></li>
+  </ul>
+
+  <div class="author-card">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Micronet</div>
+      <div class="author-meta">Norsk IT-konsulenttjeneste — DMARC, e-postsikkerhet og infrastruktur. <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

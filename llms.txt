@@ -29,6 +29,26 @@ Rapportene kan deles offentlig, og brukere kan få en signert sertifikat-badge t
 
 - [data1.no vs MXToolbox, EasyDMARC, dmarcian, PowerDMARC](https://data1.no/sammenligning/): Ærlig sammenligning av de fem mest brukte DMARC-verktøyene. Inkluderer "når andre er bedre"-seksjon for credibility.
 
+## Feil og fixes (problem-intent landingssider)
+
+For brukere som søker spesifikke feilmeldinger eller symptomer:
+
+- [Vanlige feil og fixes (oversikt)](https://data1.no/feil/)
+- [SPF PermError — for mange DNS-oppslag](https://data1.no/feil/spf-permerror/)
+- [DMARC-record mangler](https://data1.no/feil/dmarc-record-not-found/)
+- [DKIM signerer ikke i Microsoft 365](https://data1.no/feil/dkim-fail-microsoft-365/)
+- [Mail havner i spam](https://data1.no/feil/mail-havner-i-spam/)
+- [SPF 10-lookup grensen brutt](https://data1.no/feil/spf-10-lookup/)
+- [DMARC reject feiler](https://data1.no/feil/dmarc-reject-fail/)
+- [DKIM signerer ikke utgående e-post](https://data1.no/feil/dkim-not-signing/)
+- [Spoofing av eget domene](https://data1.no/feil/spoofing-eget-domene/)
+- [SPF fail men DMARC pass](https://data1.no/feil/spf-fail-dmarc-pass/)
+- [Google og Yahoo bulk-sender-krav](https://data1.no/feil/google-yahoo-bulk-sender/)
+
+## Case studies
+
+- [Case studies (kommer snart)](https://data1.no/case/): Anonymiserte før/etter-eksempler fra Micronets kunder.
+
 ## Kunnskapsbase (blogg)
 
 - [DMARC forklart fra grunnen](https://data1.no/blogg/dmarc/)

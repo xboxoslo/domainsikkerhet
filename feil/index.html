@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vanlige feil i SPF, DMARC og DKIM — og slik fikser du dem. Steg-for-steg-guider for de mest typiske problemene.">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/feil/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vanlige e-postsikkerhets-feil og hvordan fikse dem | data1.no">
+<meta property="og:description" content="Direkte fixer på de mest typiske SPF/DMARC/DKIM-feilene.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<title>Vanlige feil og fixes | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<style>
+.fix-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:24px 0}
+.fix-card{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06);text-decoration:none;color:inherit;display:block;transition:all .15s}
+.fix-card:hover{box-shadow:0 8px 20px rgba(15,23,42,.07);transform:translateY(-2px)}
+.fix-card-error{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:#c53030;background:#fff5f5;padding:6px 10px;border-radius:6px;display:inline-block;margin-bottom:8px;word-break:break-all}
+.fix-card-title{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:4px}
+.fix-card-sub{font-size:13px;color:#64748b}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Vanlige e-postsikkerhets-feil og fixes","url":"https://data1.no/feil/","inLanguage":"nb-NO"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hjem","item":"https://data1.no/"},{"@type":"ListItem","position":2,"name":"Feil og fixes","item":"https://data1.no/feil/"}]}</script>
+<script src="/_assets/tracker.js" defer></script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › Feil og fixes</nav>
+  <h1>Vanlige e-postsikkerhets-feil og hvordan fikse dem</h1>
+  <p class="meta">Direkte løsninger på de typiske SPF/DMARC/DKIM-problemene</p>
+  <p class="lead">Får du en av disse feilmeldingene eller varslene? Klikk gjennom for steg-for-steg-fix.</p>
+
+  <div class="fix-grid">
+    <a href="/feil/spf-permerror/" class="fix-card">
+      <div class="fix-card-error">SPF PermError</div>
+      <div class="fix-card-title">SPF PermError — for mange DNS-oppslag</div>
+      <div class="fix-card-sub">SPF over 10-lookup-grensen. Slik flatter du ut.</div>
+    </a>
+    <a href="/feil/dmarc-record-not-found/" class="fix-card">
+      <div class="fix-card-error">No DMARC Record Found</div>
+      <div class="fix-card-title">DMARC-record mangler helt</div>
+      <div class="fix-card-sub">Domenet er åpent for spoofing. Fix på 5 min.</div>
+    </a>
+    <a href="/feil/dkim-fail-microsoft-365/" class="fix-card">
+      <div class="fix-card-error">DKIM fail · M365</div>
+      <div class="fix-card-title">DKIM signerer ikke i Microsoft 365</div>
+      <div class="fix-card-sub">CNAME mangler eller DKIM ikke aktivert.</div>
+    </a>
+    <a href="/feil/mail-havner-i-spam/" class="fix-card">
+      <div class="fix-card-error">Mail havner i spam</div>
+      <div class="fix-card-title">Mailen din havner i mottakerens spam-mappe</div>
+      <div class="fix-card-sub">Ikke innholdet — ofte SPF/DKIM/DMARC.</div>
+    </a>
+    <a href="/feil/spf-10-lookup/" class="fix-card">
+      <div class="fix-card-error">10 DNS lookup limit</div>
+      <div class="fix-card-title">SPF 10-lookup-grensen brutt</div>
+      <div class="fix-card-sub">Strategier for SPF-flattening og subdomener.</div>
+    </a>
+    <a href="/feil/dmarc-reject-fail/" class="fix-card">
+      <div class="fix-card-error">DMARC reject ikke aktiv</div>
+      <div class="fix-card-title">DMARC står på p=reject men spoofing slipper gjennom</div>
+      <div class="fix-card-sub">Alignment, subdomener og pct-tag.</div>
+    </a>
+    <a href="/feil/dkim-not-signing/" class="fix-card">
+      <div class="fix-card-error">DKIM not signing</div>
+      <div class="fix-card-title">DKIM signerer ikke utgående e-post</div>
+      <div class="fix-card-sub">Vanlig årsak: aktivering glemt etter DNS.</div>
+    </a>
+    <a href="/feil/spoofing-eget-domene/" class="fix-card">
+      <div class="fix-card-error">Spoofing av eget domene</div>
+      <div class="fix-card-title">Noen sender e-post i ditt navn</div>
+      <div class="fix-card-sub">Slik stopper du det permanent med DMARC reject.</div>
+    </a>
+    <a href="/feil/spf-fail-dmarc-pass/" class="fix-card">
+      <div class="fix-card-error">SPF=fail DMARC=pass</div>
+      <div class="fix-card-title">SPF feiler men DMARC består — hva nå?</div>
+      <div class="fix-card-sub">DKIM redder fra alignment-feil.</div>
+    </a>
+    <a href="/feil/google-yahoo-bulk-sender/" class="fix-card">
+      <div class="fix-card-error">Bulk sender requirements</div>
+      <div class="fix-card-title">Google og Yahoo bulk-sender-krav</div>
+      <div class="fix-card-sub">5000+ e-post/dag? Sjekk om du oppfyller kravene.</div>
+    </a>
+  </div>
+
+  <div class="cta-box">
+    <h3>Sjekk hvilke feil som faktisk gjelder ditt domene</h3>
+    <p>Gratis. Ingen registrering. Karakter A+ til F på 10 sekunder.</p>
+    <a href="/?utm_source=feil-index">Sjekk eget domene →</a>
+  </div>
+</main>
+</body>
+</html>
