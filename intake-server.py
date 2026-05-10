@@ -612,7 +612,7 @@ def render_shield_png(grade, gc, gc_light):
     draw = ImageDraw.Draw(img)
 
     # 6. Hvit sirkel med myk drop-shadow (gir letter-badge løftet 3D-følelse)
-    cx, cy, r = 60*SCALE, 58*SCALE, 30*SCALE
+    cx, cy, r = 60*SCALE, 58*SCALE, 24*SCALE
     circle_shadow = Image.new('RGBA', (iw, ih), (0, 0, 0, 0))
     csd = ImageDraw.Draw(circle_shadow)
     csd.ellipse((cx-r, cy-r+2*SCALE, cx+r, cy+r+2*SCALE), fill=(0, 0, 0, 60))
@@ -622,7 +622,7 @@ def render_shield_png(grade, gc, gc_light):
     draw.ellipse((cx-r, cy-r, cx+r, cy+r), fill=(255, 255, 255, 255))
 
     # 7. Grade-bokstaven
-    font_size = 56*SCALE if len(grade) == 1 else 44*SCALE
+    font_size = 44*SCALE if len(grade) == 1 else 34*SCALE
     font = None
     for path in [
         str(Path(__file__).parent / 'fonts' / 'DejaVuSans-Bold.ttf'),
@@ -640,7 +640,7 @@ def render_shield_png(grade, gc, gc_light):
     tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
     tx = cx - tw / 2 - bbox[0]
     ty = cy - th / 2 - bbox[1]
-    draw.text((tx, ty), grade, fill=_hex_to_rgb(gc) + (255,), font=font)
+    draw.text((tx, ty), grade, fill=(15, 23, 42, 255), font=font)
 
     # 8. Hake-badge i øvre høyre hjørne (kun på høye grades, slik portalen har)
     if grade in ('A+', 'A', 'B'):
