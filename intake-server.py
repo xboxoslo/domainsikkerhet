@@ -624,8 +624,14 @@ def render_shield_png(grade, gc, gc_light):
     # 7. Grade-bokstaven
     font_size = 36*SCALE if len(grade) == 1 else 28*SCALE
     font = None
-    for path in [r'C:\Windows\Fonts\arialbd.ttf', r'C:\Windows\Fonts\arial.ttf',
-                 r'C:\Windows\Fonts\segoeuib.ttf']:
+    for path in [
+        '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
+        '/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf',
+        '/usr/share/fonts/TTF/DejaVuSans-Bold.ttf',
+        '/usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Bold.ttf',
+        '/System/Library/Fonts/Helvetica.ttc',
+        r'C:\Windows\Fonts\arialbd.ttf', r'C:\Windows\Fonts\arial.ttf',
+        r'C:\Windows\Fonts\segoeuib.ttf']:
         try: font = ImageFont.truetype(path, font_size); break
         except Exception: continue
     if font is None: font = ImageFont.load_default()
