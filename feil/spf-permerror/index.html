@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SPF PermError oppstår når SPF-recorden trigger over 10 DNS-oppslag. Slik finner du årsaken og fikser den med flattening eller subdomener.">
+<meta name="keywords" content="spf permerror, spf 10 lookup, spf flattening, spf for many dns lookups">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/feil/spf-permerror/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/feil/spf-permerror/">
+<meta property="og:title" content="SPF PermError — for mange DNS-oppslag (slik fikser du det) | data1.no">
+<meta property="og:description" content="SPF PermError oppstår når SPF-recorden trigger over 10 DNS-oppslag. Slik finner du årsaken og fikser den med flattening eller subdomener.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>SPF PermError — for mange DNS-oppslag (slik fikser du det) | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<style>
+.error-box{background:#fff5f5;border-left:4px solid #c53030;padding:14px 18px;border-radius:8px;margin:18px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;color:#742a2a}
+.cause{background:#fff;border-radius:10px;padding:18px 22px;margin:22px 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.cause h3{margin-top:0}
+.fix-step{display:flex;gap:14px;margin:12px 0;align-items:flex-start}
+.fix-step-num{width:32px;height:32px;background:#0f766e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-size:14px}
+.fix-step-body{flex:1}
+.fix-step-body strong{display:block;color:#0f172a;font-size:15px;margin-bottom:4px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SPF PermError — for mange DNS-oppslag (slik fikser du det)", "description": "SPF PermError oppstår når SPF-recorden trigger over 10 DNS-oppslag. Slik finner du årsaken og fikser den med flattening eller subdomener.", "datePublished": "2026-05-10", "dateModified": "2026-05-10", "author": {"@type": "Organization", "name": "Micronet", "url": "https://micronet.no/"}, "publisher": {"@type": "Organization", "name": "data1.no", "logo": {"@type": "ImageObject", "url": "https://data1.no/og-image.png"}}, "mainEntityOfPage": "https://data1.no/feil/spf-permerror/", "inLanguage": "nb-NO"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://data1.no/"}, {"@type": "ListItem", "position": 2, "name": "Feil og fixes", "item": "https://data1.no/feil/"}, {"@type": "ListItem", "position": 3, "name": "SPF PermError", "item": "https://data1.no/feil/spf-permerror/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "SPF PermError — for mange DNS-oppslag (slik fikser du det)", "step": [{"@type": "HowToStep", "name": "Identifiser overskridelsen", "text": "Bruk data1.no eller dmarcian's SPF-checker for å telle nøyaktig hvor mange lookups SPF-recorden din genererer."}, {"@type": "HowToStep", "name": "Velg strategi", "text": "Flatten med ip4:, splitt til subdomener, eller bruk en flattening-tjeneste."}, {"@type": "HowToStep", "name": "Verifiser fix", "text": "Etter DNS-oppdatering, sjekk på nytt med data1.no — du skal se under 10 lookups og PermError borte."}]}</script>
+<script src="/_assets/tracker.js" defer></script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/feil/">Feil</a> › SPF PermError</nav>
+  <h1>SPF PermError: For mange DNS-oppslag</h1>
+  <p class="meta">Sist oppdatert 10. mai 2026 · Av Micronet</p>
+
+  <div class="error-box">SPF PermError: too many DNS lookups (max 10)</div>
+
+  <p class="lead">PermError betyr at SPF-recorden din i praksis er ugyldig — mottakere ignorerer den helt, og DMARC kan ikke bestå SPF-validering. Resultatet: e-post havner oftere i spam og du er sårbar for spoofing.</p>
+
+  <h2>Hva er årsaken?</h2>
+<div class="cause">
+<p>SPF har en hard grense på <strong>10 DNS-oppslag</strong> totalt per validering. Hver <code>include:</code>, <code>a</code>, <code>mx</code>, <code>exists</code> og <code>redirect</code> teller. Inkluderte SPF-records teller også (kjedet).</p>
+<p>Eksempel som overskrider grensen:</p>
+<pre><code>v=spf1 include:spf.protection.outlook.com include:_spf.google.com include:servers.mcsv.net include:sendgrid.net include:_spf.salesforce.com -all</code></pre>
+<p>Dette gir cirka 12-13 lookups — over grensen.</p>
+</div>
+
+<h2>Slik fikser du det — tre strategier</h2>
+
+<div class="fix-step">
+<div class="fix-step-num">1</div>
+<div class="fix-step-body">
+<strong>Flatten med ip4:-direktiver</strong>
+Erstatt en eller flere <code>include:</code> med <code>ip4:</code>-rangen direkte. Du finner IP-rangen i leverandørens dokumentasjon (Microsoft, Google, Mailchimp publiserer disse). Ulempe: må oppdateres når leverandøren endrer IP.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">2</div>
+<div class="fix-step-body">
+<strong>Bruk subdomener for tredjepartstjenester</strong>
+Send markedsmail fra <code>nyhetsbrev.dittfirma.no</code> med egen SPF-record som inkluderer Mailchimp. Hovedrokken bevares slank. Anbefalt for organisasjoner med 4+ utgående e-posttjenester.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">3</div>
+<div class="fix-step-body">
+<strong>Bruk en SPF flattening-tjeneste</strong>
+EasyDMARC, dmarcian og PowerDMARC tilbyr automatisk flattening — de henter IP-rangen kontinuerlig og oppdaterer din SPF. Krever betalt abonnement men er null vedlikehold.
+</div>
+</div>
+
+<h2>Vanlig fallgruve</h2>
+<p>Ikke fjern <code>-all</code> bare for å redusere lookups — det er den viktigste delen av SPF-recorden. Den forteller mottakere hva de skal gjøre med ikke-autoriserte avsendere. Uten den har SPF ingen håndhevelse.</p>
+
+  <div class="cta-box">
+    <h3>Sjekk om dette er fikset på domenet ditt</h3>
+    <p>Gratis. Ingen registrering. Karakter A+ til F på 10 sekunder.</p>
+    <a href="/?utm_source=feil-spf-permerror">Sjekk eget domene →</a>
+  </div>
+
+  <h2>Lese mer</h2>
+  <ul>
+    <li><a href="/feil/">Alle vanlige feil og fixes</a></li>
+    <li><a href="/blogg/dmarc/">DMARC forklart fra grunnen</a></li>
+    <li><a href="/blogg/spf/">SPF forklart fra grunnen</a></li>
+    <li><a href="/ordbok/">Ordbok: e-postsikkerhet fra A til Å</a></li>
+  </ul>
+
+  <div class="author-card">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Micronet</div>
+      <div class="author-meta">Norsk IT-konsulenttjeneste — DMARC, e-postsikkerhet og infrastruktur. <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

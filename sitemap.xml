@@ -126,4 +126,16 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url><loc>https://data1.no/feil/</loc><lastmod>2026-05-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://data1.no/feil/spf-permerror/</loc><lastmod>2026-05-10</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://data1.no/feil/dmarc-record-not-found/</loc><lastmod>2026-05-10</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://data1.no/feil/dkim-fail-microsoft-365/</loc><lastmod>2026-05-10</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://data1.no/feil/mail-havner-i-spam/</loc><lastmod>2026-05-10</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://data1.no/feil/spf-10-lookup/</loc><lastmod>2026-05-10</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://data1.no/feil/dmarc-reject-fail/</loc><lastmod>2026-05-10</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://data1.no/feil/dkim-not-signing/</loc><lastmod>2026-05-10</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://data1.no/feil/spoofing-eget-domene/</loc><lastmod>2026-05-10</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://data1.no/feil/spf-fail-dmarc-pass/</loc><lastmod>2026-05-10</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://data1.no/feil/google-yahoo-bulk-sender/</loc><lastmod>2026-05-10</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://data1.no/case/</loc><lastmod>2026-05-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

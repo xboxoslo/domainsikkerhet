@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DKIM-record finnes i DNS, men utgående mail viser dkim=none. Tre vanligste årsaker og fixes.">
+<meta name="keywords" content="dkim not signing, dkim signs outgoing mail, dkim missing in headers">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/feil/dkim-not-signing/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/feil/dkim-not-signing/">
+<meta property="og:title" content="DKIM signerer ikke utgående e-post — vanlige årsaker | data1.no">
+<meta property="og:description" content="DKIM-record finnes i DNS, men utgående mail viser dkim=none. Tre vanligste årsaker og fixes.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>DKIM signerer ikke utgående e-post — vanlige årsaker | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<style>
+.error-box{background:#fff5f5;border-left:4px solid #c53030;padding:14px 18px;border-radius:8px;margin:18px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;color:#742a2a}
+.cause{background:#fff;border-radius:10px;padding:18px 22px;margin:22px 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.cause h3{margin-top:0}
+.fix-step{display:flex;gap:14px;margin:12px 0;align-items:flex-start}
+.fix-step-num{width:32px;height:32px;background:#0f766e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-size:14px}
+.fix-step-body{flex:1}
+.fix-step-body strong{display:block;color:#0f172a;font-size:15px;margin-bottom:4px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "DKIM signerer ikke utgående e-post — vanlige årsaker", "description": "DKIM-record finnes i DNS, men utgående mail viser dkim=none. Tre vanligste årsaker og fixes.", "datePublished": "2026-05-10", "dateModified": "2026-05-10", "author": {"@type": "Organization", "name": "Micronet", "url": "https://micronet.no/"}, "publisher": {"@type": "Organization", "name": "data1.no", "logo": {"@type": "ImageObject", "url": "https://data1.no/og-image.png"}}, "mainEntityOfPage": "https://data1.no/feil/dkim-not-signing/", "inLanguage": "nb-NO"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://data1.no/"}, {"@type": "ListItem", "position": 2, "name": "Feil og fixes", "item": "https://data1.no/feil/"}, {"@type": "ListItem", "position": 3, "name": "DKIM signerer ikke", "item": "https://data1.no/feil/dkim-not-signing/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "DKIM signerer ikke utgående e-post — vanlige årsaker", "step": [{"@type": "HowToStep", "name": "Aktiver DKIM eksplisitt", "text": "Microsoft Defender eller Google Admin Console — trykk Enable."}, {"@type": "HowToStep", "name": "Slett gamle DKIM-records", "text": "Tidligere selector-records kan blokkere nye."}, {"@type": "HowToStep", "name": "Verifiser med Gmail Show original", "text": "Du skal se DKIM-Signature-headeren og dkim=pass."}]}</script>
+<script src="/_assets/tracker.js" defer></script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/feil/">Feil</a> › DKIM signerer ikke</nav>
+  <h1>DKIM signerer ikke utgående e-post</h1>
+  <p class="meta">Sist oppdatert 10. mai 2026 · Av Micronet</p>
+
+  <div class="error-box">Authentication-Results: dkim=none (no signature)</div>
+
+  <p class="lead">DKIM-recorden ligger riktig i DNS men utgående e-post viser ingen signatur. Det betyr DKIM-verifiseringen er ufullstendig på avsendersiden — ikke i DNS.</p>
+
+  <h2>Vanligste årsak: aktivering glemt</h2>
+<div class="cause">
+<p>Microsoft 365 og Google Workspace publiserer DKIM-recorder, men du må eksplisitt klikke "Aktiver" eller "Start authentication" etter at DNS er på plass.</p>
+<p><strong>Microsoft 365:</strong> security.microsoft.com → DKIM → Enable<br>
+<strong>Google Workspace:</strong> admin.google.com → Apps → Gmail → Authenticate email → Start authentication</p>
+</div>
+
+<h2>Andre vanlige årsaker</h2>
+
+<div class="fix-step">
+<div class="fix-step-num">1</div>
+<div class="fix-step-body">
+<strong>Konflikt med gammel DKIM-record</strong>
+Brukte du tidligere Mailgun, Postmark eller annen tjeneste som signerte for samme selector-navn? Slett gamle <code>*._domainkey</code>-records.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">2</div>
+<div class="fix-step-body">
+<strong>Sender via SMTP-relay som ikke signerer</strong>
+Hvis du sender via en server som ikke har DKIM aktivert (f.eks. en gammel SMTP-server), blir det ingen signatur uavhengig av DNS. Sørg for at avsender-systemet faktisk signerer.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">3</div>
+<div class="fix-step-body">
+<strong>Forkert From-domain</strong>
+Hvis du sender fra <code>noreply@dittfirma.no</code> men DKIM er satt opp for <code>marketing.dittfirma.no</code>, signerer den ikke. From-domenet må matche DKIM-domenet.
+</div>
+</div>
+
+<h2>Diagnose</h2>
+<p>Send en test-e-post til en Gmail-konto, åpne meldingen og klikk "Show original". Se etter <code>DKIM-Signature:</code>-headeren. Hvis den mangler helt, signerer ikke avsenderen. Hvis den finnes men <code>dkim=fail</code>, er det et nøkkel- eller alignment-problem.</p>
+
+  <div class="cta-box">
+    <h3>Sjekk om dette er fikset på domenet ditt</h3>
+    <p>Gratis. Ingen registrering. Karakter A+ til F på 10 sekunder.</p>
+    <a href="/?utm_source=feil-dkim-not-signing">Sjekk eget domene →</a>
+  </div>
+
+  <h2>Lese mer</h2>
+  <ul>
+    <li><a href="/feil/">Alle vanlige feil og fixes</a></li>
+    <li><a href="/blogg/dmarc/">DMARC forklart fra grunnen</a></li>
+    <li><a href="/blogg/spf/">SPF forklart fra grunnen</a></li>
+    <li><a href="/ordbok/">Ordbok: e-postsikkerhet fra A til Å</a></li>
+  </ul>
+
+  <div class="author-card">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Micronet</div>
+      <div class="author-meta">Norsk IT-konsulenttjeneste — DMARC, e-postsikkerhet og infrastruktur. <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

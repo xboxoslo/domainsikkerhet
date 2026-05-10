@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Selv med p=reject kan spoofing levere hvis alignment, subdomener eller pct-tag er feil. Slik finner du årsaken.">
+<meta name="keywords" content="dmarc reject not working, dmarc p=reject feiler, dmarc alignment problem">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/feil/dmarc-reject-fail/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/feil/dmarc-reject-fail/">
+<meta property="og:title" content="DMARC står på p=reject men spoofing slipper gjennom — hvorfor? | data1.no">
+<meta property="og:description" content="Selv med p=reject kan spoofing levere hvis alignment, subdomener eller pct-tag er feil. Slik finner du årsaken.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>DMARC står på p=reject men spoofing slipper gjennom — hvorfor? | data1.no</title>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<style>
+.error-box{background:#fff5f5;border-left:4px solid #c53030;padding:14px 18px;border-radius:8px;margin:18px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;color:#742a2a}
+.cause{background:#fff;border-radius:10px;padding:18px 22px;margin:22px 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.cause h3{margin-top:0}
+.fix-step{display:flex;gap:14px;margin:12px 0;align-items:flex-start}
+.fix-step-num{width:32px;height:32px;background:#0f766e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-size:14px}
+.fix-step-body{flex:1}
+.fix-step-body strong{display:block;color:#0f172a;font-size:15px;margin-bottom:4px}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "DMARC står på p=reject men spoofing slipper gjennom — hvorfor?", "description": "Selv med p=reject kan spoofing levere hvis alignment, subdomener eller pct-tag er feil. Slik finner du årsaken.", "datePublished": "2026-05-10", "dateModified": "2026-05-10", "author": {"@type": "Organization", "name": "Micronet", "url": "https://micronet.no/"}, "publisher": {"@type": "Organization", "name": "data1.no", "logo": {"@type": "ImageObject", "url": "https://data1.no/og-image.png"}}, "mainEntityOfPage": "https://data1.no/feil/dmarc-reject-fail/", "inLanguage": "nb-NO"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://data1.no/"}, {"@type": "ListItem", "position": 2, "name": "Feil og fixes", "item": "https://data1.no/feil/"}, {"@type": "ListItem", "position": 3, "name": "DMARC reject feiler", "item": "https://data1.no/feil/dmarc-reject-fail/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "DMARC står på p=reject men spoofing slipper gjennom — hvorfor?", "step": [{"@type": "HowToStep", "name": "Sjekk pct-verdi", "text": "Skal være 100 for full beskyttelse."}, {"@type": "HowToStep", "name": "Sjekk sp-tag for subdomener", "text": "sp=reject sikrer subdomener også."}, {"@type": "HowToStep", "name": "Verifiser at det er ditt eksakte domene", "text": "Lookalike-domener stoppes ikke av DMARC."}]}</script>
+<script src="/_assets/tracker.js" defer></script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <div class="spacer"></div>
+  <a href="/" class="nav-link">Sjekk eget domene →</a>
+</header>
+<main>
+  <nav class="crumbs"><a href="/">Hjem</a> › <a href="/feil/">Feil</a> › DMARC reject feiler</nav>
+  <h1>DMARC står på p=reject men spoofing-mailer leveres likevel</h1>
+  <p class="meta">Sist oppdatert 10. mai 2026 · Av Micronet</p>
+
+  <div class="error-box">p=reject set, but spoofed mail still delivered to inbox</div>
+
+  <p class="lead">Du har satt p=reject og forventer at spoofing-forsøk avvises. Men kunder melder fortsatt at de mottar svindel-e-post som hevder å komme fra deg. Tre årsaker er typisk.</p>
+
+  <h2>Årsak 1: pct-tag mindre enn 100</h2>
+<div class="cause">
+<p>Hvis recorden din er <code>v=DMARC1; p=reject; pct=25;</code> betyr det at policyen kun gjelder for 25 % av uautentisert post — resten faller tilbake til neste mildere policy. Sjekk pct-verdien:</p>
+<pre><code>v=DMARC1; p=reject; pct=100; rua=mailto:dmarc@dittfirma.no</code></pre>
+<p>pct=100 (eller utelatt — default er 100) er det du vil ha for full beskyttelse.</p>
+</div>
+
+<h2>Årsak 2: Subdomener mangler dekning</h2>
+<div class="cause">
+<p>DMARC på <code>dittfirma.no</code> dekker ikke automatisk <code>nyhetsbrev.dittfirma.no</code> hvis ikke <code>sp=</code> er satt:</p>
+<pre><code>v=DMARC1; p=reject; sp=reject; rua=mailto:dmarc@dittfirma.no</code></pre>
+<p>Uten <code>sp=reject</code> arves <code>p=</code> automatisk — men ofte ser man feilen at folk har satt eksplisitt <code>sp=none</code> og åpnet for subdomain-spoofing.</p>
+</div>
+
+<h2>Årsak 3: Cousin-domain spoofing</h2>
+<div class="cause">
+<p>DMARC stopper kun spoofing av ditt EKSAKTE domene. En angriper kan registrere <code>dittfirrma.no</code> (med to r-er) og sende fra det — DMARC har ingen kontroll over et annet domene.</p>
+<p>Beskyttelse: brand-monitoring, registrering av lookalike-domener, og ansatte-trening i å sjekke avsender-domener nøye.</p>
+</div>
+
+<h2>Diagnose-trinn</h2>
+
+<div class="fix-step">
+<div class="fix-step-num">1</div>
+<div class="fix-step-body">
+<strong>Be mottaker videresende den falske mailen til deg som vedlegg</strong>
+Du trenger originalheaderene, ikke bare innholdet.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">2</div>
+<div class="fix-step-body">
+<strong>Sjekk From-headeren</strong>
+Hvis det er <code>support@dittfirrma.no</code> (lookalike) er det ikke et DMARC-problem. Hvis det er <code>support@dittfirma.no</code> (ditt eksakte domene), bør DMARC ha stoppet det.
+</div>
+</div>
+
+<div class="fix-step">
+<div class="fix-step-num">3</div>
+<div class="fix-step-body">
+<strong>Sjekk Authentication-Results-headeren</strong>
+Den viser hva mottakerens server konkluderte med. <code>dmarc=pass</code> er problem — da er det enten alignment-feil eller en svakhet i DMARC-policyen din.
+</div>
+</div>
+
+  <div class="cta-box">
+    <h3>Sjekk om dette er fikset på domenet ditt</h3>
+    <p>Gratis. Ingen registrering. Karakter A+ til F på 10 sekunder.</p>
+    <a href="/?utm_source=feil-dmarc-reject-fail">Sjekk eget domene →</a>
+  </div>
+
+  <h2>Lese mer</h2>
+  <ul>
+    <li><a href="/feil/">Alle vanlige feil og fixes</a></li>
+    <li><a href="/blogg/dmarc/">DMARC forklart fra grunnen</a></li>
+    <li><a href="/blogg/spf/">SPF forklart fra grunnen</a></li>
+    <li><a href="/ordbok/">Ordbok: e-postsikkerhet fra A til Å</a></li>
+  </ul>
+
+  <div class="author-card">
+    <div class="author-avatar">M</div>
+    <div>
+      <div class="author-name">Micronet</div>
+      <div class="author-meta">Norsk IT-konsulenttjeneste — DMARC, e-postsikkerhet og infrastruktur. <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
