@@ -1,0 +1,12 @@
+Her er en LinkedIn-post basert på blogginnholdet:
+
+---
+
+**54% av norske domener har sterk e-postsikkerhet – men Equinor, Hydro og Yara scorer 0 poeng** 😬
+
+Ny analyse av 158 norske domener viser at offentlig sektor leder an med NAV, SSB og Oljefondet på topp. Samtidig mangler flere børsnoterte industriselskaper grunnleggende DMARC-beskyttelse.
+
+Uten dette kan hvem som helst sende e-post som tilsynelatende kommer fra din bedrift. Risiko: phishing, domene-spoofing og betalingssvindel.
+
+**Hvor står din bedrift?** Les analysen 👇
+https://data1.no/blogg/norske-storselskaper-uten-grunnleggende-e-postsikkerhet/
