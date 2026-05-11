@@ -1,0 +1,159 @@
+domain,sector,score,grade,dmarc_policy,has_spf,has_dmarc,has_dkim,has_mta_sts,has_tls_rpt,has_bimi
+dnb.no,Banker,95,A+,reject,1,1,1,1,1,1
+nordea.no,Banker,80,A,reject,1,1,1,0,0,0
+sparebank1.no,Banker,80,A,reject,1,1,1,0,0,0
+storebrand.no,Banker,78,B,reject,1,1,1,0,0,1
+handelsbanken.no,Banker,63,C,reject,1,1,0,0,0,1
+santander.no,Banker,60,C,reject,1,1,0,0,0,0
+sbanken.no,Banker,75,B,reject,1,1,1,0,0,0
+sparebanken-vest.no,Banker,8,F,none,0,1,0,0,0,0
+sparebanken-sor.no,Banker,8,F,none,0,1,0,0,0,0
+sparebanken-ost.no,Banker,0,F,,0,0,0,0,0,0
+nordnet.no,Banker,65,C,quarantine,1,1,1,0,0,0
+finanstilsynet.no,Banker,80,A,reject,1,1,1,0,0,0
+gjensidige.no,Forsikring,63,C,quarantine,1,1,1,0,0,1
+fremtind.no,Forsikring,80,A,reject,1,1,1,0,0,0
+if.no,Forsikring,80,A,reject,1,1,1,0,0,0
+tryg.no,Forsikring,48,D,none,1,1,1,0,0,0
+codan.no,Forsikring,45,D,,1,0,1,0,0,0
+knif.no,Forsikring,48,D,none,1,1,1,0,0,0
+frende.no,Forsikring,63,C,quarantine,1,1,1,0,0,1
+eika.no,Forsikring,60,C,reject,1,1,0,0,0,0
+telenor.no,Telecom,97,A+,reject,1,1,1,1,1,0
+telia.no,Telecom,75,B,reject,1,1,1,0,0,0
+ice.no,Telecom,80,A,reject,1,1,1,0,0,0
+get.no,Telecom,48,D,none,1,1,1,0,0,0
+altibox.no,Telecom,73,B,reject,1,1,1,0,0,0
+talkmore.no,Telecom,80,A,reject,1,1,1,0,0,0
+nav.no,Offentlig sektor,100,A+,reject,1,1,1,1,1,1
+skatteetaten.no,Offentlig sektor,82,A,quarantine,1,1,1,1,1,0
+helsenorge.no,Offentlig sektor,80,A,reject,1,1,1,0,0,0
+altinn.no,Offentlig sektor,33,F,none,1,1,0,0,0,0
+politiet.no,Offentlig sektor,92,A+,reject,1,1,1,1,1,0
+posten.no,Offentlig sektor,80,A,reject,1,1,1,0,0,0
+regjeringen.no,Offentlig sektor,60,C,reject,1,1,0,0,0,0
+stortinget.no,Offentlig sektor,97,A+,reject,1,1,1,1,1,0
+udi.no,Offentlig sektor,97,A+,reject,1,1,1,1,1,0
+nbim.no,Offentlig sektor,100,A+,reject,1,1,1,1,1,1
+brreg.no,Offentlig sektor,65,C,quarantine,1,1,1,0,0,0
+ssb.no,Offentlig sektor,100,A+,reject,1,1,1,1,1,1
+nho.no,Offentlig sektor,80,A,reject,1,1,1,0,1,0
+lo.no,Offentlig sektor,92,A+,reject,1,1,1,1,1,0
+forsvaret.no,Offentlig sektor,53,D,none,1,1,1,0,0,0
+nrk.no,Offentlig sektor,53,D,none,1,1,1,0,0,0
+norsk-helsenett.no,Offentlig sektor,60,C,reject,1,1,0,0,0,0
+mattilsynet.no,Offentlig sektor,80,A,reject,1,1,1,0,0,0
+oslo-universitetssykehus.no,Helse,60,C,reject,1,1,1,0,0,0
+helse-bergen.no,Helse,80,A,reject,1,1,1,0,0,0
+sthf.no,Helse,60,C,reject,1,1,1,0,0,0
+helse-fonna.no,Helse,80,A,reject,1,1,1,0,0,0
+sykehuspartner.no,Helse,60,C,reject,1,1,1,0,0,0
+apotek1.no,Helse,95,A+,reject,1,1,1,1,1,1
+boots.no,Helse,75,B,reject,1,1,1,0,0,0
+equinor.no,Energi / olje,0,F,,0,0,0,0,0,0
+hydro.no,Energi / olje,0,F,,0,0,0,0,0,0
+statkraft.no,Energi / olje,33,F,none,1,1,0,0,0,0
+yara.no,Energi / olje,0,F,,0,0,0,0,0,0
+aker-solutions.no,Energi / olje,0,F,,0,0,0,0,0,0
+elkem.no,Energi / olje,92,A+,reject,1,1,1,1,1,0
+nyfosse.no,Energi / olje,0,F,,0,0,0,0,0,0
+vg.no,Medier,75,B,reject,1,1,1,0,0,0
+dagbladet.no,Medier,38,D,none,1,1,1,0,0,0
+tv2.no,Medier,80,A,reject,1,1,1,0,0,0
+aftenposten.no,Medier,75,B,reject,1,1,1,0,0,0
+bt.no,Medier,75,B,reject,1,1,1,0,0,0
+dn.no,Medier,53,D,none,1,1,1,0,0,0
+e24.no,Medier,80,A,reject,1,1,1,0,0,0
+nettavisen.no,Medier,65,C,quarantine,1,1,1,0,0,0
+itavisen.no,Medier,48,D,none,1,1,1,0,0,0
+digi.no,Medier,33,F,none,1,1,0,0,0,0
+tu.no,Medier,53,D,none,1,1,1,0,0,0
+adressa.no,Medier,65,C,quarantine,1,1,1,0,0,0
+faedrelandsvennen.no,Medier,0,F,,0,0,0,0,0,0
+sa.no,Medier,65,C,quarantine,1,1,1,0,0,0
+elkjop.no,E-handel,80,A,reject,1,1,1,0,0,0
+komplett.no,E-handel,80,A,reject,1,1,1,0,0,0
+power.no,E-handel,78,B,reject,1,1,1,0,0,1
+xxl.no,E-handel,70,B,quarantine,1,1,1,0,1,0
+clas-ohlson.no,E-handel,33,F,none,1,1,0,0,0,0
+jernia.no,E-handel,75,B,reject,1,1,1,0,0,0
+biltema.no,E-handel,60,C,quarantine,1,1,1,0,0,0
+ikea.com,E-handel,100,A+,reject,1,1,1,1,1,1
+zalando.no,E-handel,51,D,none,1,1,1,0,0,1
+hm.com,E-handel,78,B,reject,1,1,1,0,0,1
+cubus.com,E-handel,45,D,quarantine,1,1,0,0,0,0
+boozt.com,E-handel,68,C,quarantine,1,1,1,0,0,1
+fjordkraft.no,E-handel,85,A,reject,1,1,1,1,1,0
+sas.no,Reise / hotell / transport,45,D,quarantine,1,1,0,0,0,0
+norwegian.no,Reise / hotell / transport,53,D,none,1,1,1,0,0,0
+flytoget.no,Reise / hotell / transport,80,A,reject,1,1,1,0,0,0
+nsb.no,Reise / hotell / transport,65,C,quarantine,1,1,1,0,0,0
+ruter.no,Reise / hotell / transport,60,C,quarantine,1,1,1,0,0,0
+vy.no,Reise / hotell / transport,68,C,quarantine,1,1,1,0,0,1
+strawberry.no,Reise / hotell / transport,95,A+,reject,1,1,1,1,1,1
+choice.no,Reise / hotell / transport,92,A+,reject,1,1,1,1,1,0
+scandichotels.no,Reise / hotell / transport,25,F,,1,0,0,0,0,0
+tide.no,Reise / hotell / transport,65,C,quarantine,1,1,1,0,0,0
+kolumbus.no,Reise / hotell / transport,65,C,quarantine,1,1,1,0,0,0
+bring.no,Logistikk / shipping,53,D,none,1,1,1,0,0,0
+postnord.no,Logistikk / shipping,80,A,reject,1,1,1,0,0,0
+schenker.no,Logistikk / shipping,0,F,,0,0,0,0,0,0
+bilforsikring.no,Logistikk / shipping,8,F,none,0,1,0,0,0,0
+visma.com,Tech / SaaS,53,D,none,1,1,1,0,0,0
+opera.com,Tech / SaaS,80,A,reject,1,1,1,0,1,0
+schibsted.com,Tech / SaaS,95,A+,reject,1,1,1,1,1,1
+finn.no,Tech / SaaS,75,B,reject,1,1,1,0,0,0
+hjemla.no,Tech / SaaS,8,F,none,0,1,0,0,0,0
+amedia.no,Tech / SaaS,80,A,reject,1,1,1,0,0,0
+mojang.com,Tech / SaaS,60,C,quarantine,1,1,1,0,0,0
+funcom.com,Tech / SaaS,53,D,none,1,1,1,0,0,0
+remarkable.com,Tech / SaaS,78,B,reject,1,1,1,0,0,1
+uio.no,Universiteter og høyskoler,33,F,none,1,1,0,0,0,0
+ntnu.no,Universiteter og høyskoler,18,F,none,1,1,0,0,1,0
+uib.no,Universiteter og høyskoler,65,C,quarantine,1,1,1,0,0,0
+uit.no,Universiteter og høyskoler,80,A,reject,1,1,1,0,0,0
+nmbu.no,Universiteter og høyskoler,53,D,none,1,1,1,0,0,0
+hvl.no,Universiteter og høyskoler,48,D,none,1,1,1,0,0,0
+oslomet.no,Universiteter og høyskoler,97,A+,reject,1,1,1,1,1,0
+inn.no,Universiteter og høyskoler,80,A,reject,1,1,1,0,0,0
+nord.no,Universiteter og høyskoler,60,C,quarantine,1,1,1,0,0,0
+khio.no,Universiteter og høyskoler,53,D,none,1,1,1,0,0,0
+nhh.no,Universiteter og høyskoler,65,C,quarantine,1,1,1,0,0,0
+bi.no,Universiteter og høyskoler,48,D,none,1,1,1,0,0,0
+ks.no,Universiteter og høyskoler,53,D,none,1,1,1,0,0,0
+oslo.kommune.no,Kommuner,53,D,none,1,1,1,0,0,0
+bergen.kommune.no,Kommuner,85,A,reject,1,1,1,0,1,0
+trondheim.kommune.no,Kommuner,65,C,quarantine,1,1,1,0,1,0
+stavanger.kommune.no,Kommuner,80,A,reject,1,1,1,0,0,0
+baerum.kommune.no,Kommuner,53,D,none,1,1,1,0,0,0
+kristiansand.kommune.no,Kommuner,80,A,reject,1,1,1,0,0,0
+fredrikstad.kommune.no,Kommuner,80,A,reject,1,1,1,0,0,0
+drammen.kommune.no,Kommuner,80,A,reject,1,1,1,0,0,0
+tromso.kommune.no,Kommuner,53,D,none,1,1,1,0,0,0
+asker.kommune.no,Kommuner,65,C,quarantine,1,1,1,0,0,0
+sandnes.kommune.no,Kommuner,80,A,reject,1,1,1,0,0,0
+sarpsborg.kommune.no,Kommuner,80,A,reject,1,1,1,0,0,0
+larvik.kommune.no,Kommuner,75,B,reject,1,1,1,0,0,0
+sandefjord.kommune.no,Kommuner,80,A,reject,1,1,1,0,0,0
+tonsberg.kommune.no,Kommuner,80,A,reject,1,1,1,0,0,0
+sopra-steria.no,IT-konsulenter / store leverandører,25,F,,1,0,0,0,0,0
+accenture.com,IT-konsulenter / store leverandører,80,A,reject,1,1,1,0,0,0
+capgemini.com,IT-konsulenter / store leverandører,75,B,reject,1,1,1,0,0,0
+atea.no,IT-konsulenter / store leverandører,53,D,none,1,1,1,0,0,0
+tietoevry.com,IT-konsulenter / store leverandører,70,B,quarantine,1,1,1,0,1,0
+advania.no,IT-konsulenter / store leverandører,92,A+,reject,1,1,1,1,1,0
+nordlo.no,IT-konsulenter / store leverandører,60,C,reject,1,1,0,0,0,0
+crayon.com,IT-konsulenter / store leverandører,80,A,reject,1,1,1,0,0,0
+itera.no,IT-konsulenter / store leverandører,48,D,,1,1,1,0,0,0
+mxtoolbox.com,DMARC-konkurrenter / sammenlignbare,80,A,reject,1,1,1,1,1,1
+easydmarc.com,DMARC-konkurrenter / sammenlignbare,95,A+,reject,1,1,1,1,1,1
+dmarcian.com,DMARC-konkurrenter / sammenlignbare,100,A+,reject,1,1,1,1,1,1
+powerdmarc.com,DMARC-konkurrenter / sammenlignbare,95,A+,reject,1,1,1,1,1,1
+valimail.com,DMARC-konkurrenter / sammenlignbare,95,A+,reject,1,1,1,1,1,1
+agari.com,DMARC-konkurrenter / sammenlignbare,100,A+,reject,1,1,1,1,1,1
+redcross.no,Frivillig sektor / interesseorg,92,A+,reject,1,1,1,1,1,0
+norad.no,Frivillig sektor / interesseorg,80,A,reject,1,1,1,0,0,0
+unicef.no,Frivillig sektor / interesseorg,53,D,none,1,1,1,0,0,0
+kreftforeningen.no,Frivillig sektor / interesseorg,80,A,reject,1,1,1,0,0,0
+nakk.no,Frivillig sektor / interesseorg,0,F,,0,0,0,0,0,0
+lhl.no,Frivillig sektor / interesseorg,80,A,reject,1,1,1,0,0,0

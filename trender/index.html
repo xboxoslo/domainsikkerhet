@@ -3,41 +3,78 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Daglig oppdaterte trender for norske domeners e-postsikkerhet. Hvilke domener har forbedret eller forverret SPF, DMARC, DKIM siste uke?">
-<meta name="keywords" content="dmarc trender, e-post sikkerhet norge, dmarc statistikk daglig, norske domener dmarc">
+<meta name="description" content="Status for e-postsikkerheten til 158 norske domener, oppdatert daglig. Karakterfordeling, DMARC-pyramide, sektor-sammenligning og leaderboards.">
+<meta name="keywords" content="dmarc trender, dmarc norge statistikk, spf dkim norge, dmarc adopsjon, norske domener e-postsikkerhet">
 <meta name="theme-color" content="#1a202c">
 <link rel="canonical" href="https://data1.no/trender/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DMARC-trender for norske domener — oppdatert 2026-05-11">
-<meta property="og:description" content="Live oversikt: hvilke norske domener forbedret eller forverret e-postsikkerheten siden 2026-05-09.">
+<meta property="og:title" content="DMARC-status for 158 norske domener — oppdatert 2026-05-11">
+<meta property="og:description" content="54 % av 158 norske domener har p=reject. 45 % er sårbare. Oppdatert daglig.">
 <meta property="og:image" content="https://data1.no/og-image.png">
-<title>DMARC-trender for norske domener — 2026-05-11 | data1.no</title>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Daglige DMARC-trender for norske domener","description":"Daglige målinger av SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI for 158 norske domener.","url":"https://data1.no/trender/","dateModified":"2026-05-11","creator":{"@type":"Organization","name":"Micronet","url":"https://micronet.no"},"license":"https://creativecommons.org/licenses/by/4.0/","keywords":["DMARC","SPF","DKIM","e-postsikkerhet","Norge"]}</script>
+<title>DMARC-trender for 158 norske domener — 2026-05-11 | data1.no</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Daglige DMARC-trender for norske domener","description":"Daglige målinger av SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI for 158 norske domener.","url":"https://data1.no/trender/","dateModified":"2026-05-11","creator":{"@type":"Organization","name":"Micronet","url":"https://micronet.no"},"license":"https://creativecommons.org/licenses/by/4.0/","keywords":["DMARC","SPF","DKIM","e-postsikkerhet","Norge"],"distribution":{"@type":"DataDownload","contentUrl":"https://data1.no/trender/data.csv","encodingFormat":"text/csv"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hjem","item":"https://data1.no/"},{"@type":"ListItem","position":2,"name":"Trender","item":"https://data1.no/trender/"}]}</script>
 <style>
 @font-face{font-family:"Inter";font-weight:400 900;font-display:optional;src:url(/fonts/inter-latin.woff2)format("woff2");unicode-range:U+0000-00FF}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:"Inter",-apple-system,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.6}
-.header{background:#1a202c;padding:14px 28px;display:flex;align-items:center;gap:18px}
+.header{background:#1a202c;padding:14px 28px;display:flex;align-items:center;gap:18px;height:68px}
 .logo{color:#fff;font-size:19px;font-weight:800;text-decoration:none}.logo span{color:#4fd1c5}
 .spacer{flex:1}.nav-link{color:#cbd5e0;text-decoration:none;font-size:14px}
-main{max-width:920px;margin:0 auto;padding:36px 22px 80px}
+main{max-width:1100px;margin:0 auto;padding:36px 22px 80px}
 .crumbs{font-size:13px;color:#94a3b8;margin-bottom:16px}.crumbs a{color:#0f766e;text-decoration:none}
-h1{font-size:34px;font-weight:900;color:#0f172a;letter-spacing:-.025em;margin-bottom:8px}
-.lead{font-size:16px;color:#475569;margin-bottom:6px}
-.meta{font-size:13px;color:#64748b;margin-bottom:28px}
-.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:24px 0}
-.stat{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px;text-align:center}
-.stat-num{font-size:28px;font-weight:900;color:#0f766e}
-.stat-label{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.04em;margin-top:4px}
-h2{font-size:22px;font-weight:800;color:#0f172a;margin:32px 0 12px;letter-spacing:-.015em}
+h1{font-size:36px;font-weight:900;color:#0f172a;letter-spacing:-.025em;line-height:1.15;margin-bottom:10px}
+.lead{font-size:17px;color:#475569;max-width:780px;margin-bottom:8px}
+.meta{font-size:13px;color:#64748b;margin-bottom:32px}
+.meta a{color:#0f766e;text-decoration:none;font-weight:600}
+h2{font-size:24px;font-weight:800;color:#0f172a;margin:48px 0 12px;letter-spacing:-.015em}
+h2 .h2-sub{font-size:14px;font-weight:500;color:#94a3b8;margin-left:8px}
+h3{font-size:18px;font-weight:700;color:#0f172a;margin:14px 0 8px}
+p{margin-bottom:14px;color:#334155}
+.hero-stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:24px 0 12px}
+.hero-stat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px 22px}
+.hero-stat-num{font-size:36px;font-weight:900;letter-spacing:-.02em;line-height:1.1}
+.hero-stat-label{font-size:13px;color:#64748b;margin-top:4px;line-height:1.4}
+.callout-hero{background:linear-gradient(135deg,#0f172a 0%,#1a2540 100%);color:#fff;border-radius:14px;padding:24px 28px;margin:24px 0;font-size:16px}
+.callout-hero strong{color:#5eead4}
+.spark{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px 22px;margin:20px 0}
+.spark-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+.spark-title{font-size:13px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.04em}
+.spark-delta{font-size:14px;font-weight:800}
+.spark-range{font-size:11px;color:#94a3b8;margin-top:4px}
+.col2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:780px){.col2{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:22px 24px}
+.card-title{font-size:14px;font-weight:800;color:#475569;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px}
+.gd-row,.py-row{display:grid;grid-template-columns:48px 1fr 60px 60px;gap:12px;align-items:center;padding:6px 0}
+.py-row{grid-template-columns:1fr 60% 130px}
+.gd-label{font-size:18px;font-weight:900}
+.py-label{font-size:13.5px;color:#334155}
+.gd-bar-bg,.py-bar-bg{height:14px;background:#f1f5f9;border-radius:6px;overflow:hidden}
+.gd-bar,.py-bar{height:100%;border-radius:6px;transition:width .4s}
+.gd-count{font-weight:700;text-align:right;font-size:14px}
+.gd-pct{color:#64748b;text-align:right;font-size:13px}
+.py-count{font-size:13px;color:#64748b;text-align:right}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:16px 0}
+.feat{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px;text-align:center}
+.feat-pct{font-size:24px;font-weight:900;color:#0f172a;line-height:1.1}
+.feat-label{font-size:13px;font-weight:700;color:#0f766e;margin-top:4px}
+.feat-detail{font-size:11px;color:#94a3b8;margin-top:2px}
 table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;margin:14px 0;font-size:14px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
 th{background:#0f172a;color:#fff;text-align:left;padding:10px 14px;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
-td{padding:12px 14px;border-bottom:1px solid #f1f5f9}
+td{padding:10px 14px;border-bottom:1px solid #f1f5f9}
 tr:last-child td{border-bottom:none}
 .grade{display:inline-block;color:#fff;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:700;min-width:30px;text-align:center}
 a{color:#0f766e;text-decoration:none}a:hover{text-decoration:underline}
 .empty{background:#f8fafc;padding:20px;text-align:center;color:#94a3b8;border-radius:10px;font-size:14px}
-.callout{background:#f0fdfa;border-left:4px solid #14b8a6;padding:14px 18px;border-radius:0 10px 10px 0;margin:20px 0;font-size:14px;color:#134e4a}
+.method{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px 24px;margin:32px 0;font-size:13.5px;color:#475569;line-height:1.7}
+.method strong{color:#0f172a}
+.method ul{margin:10px 0 0 22px}
+.cta-strip{background:linear-gradient(135deg,#0f172a 0%,#1a2540 100%);color:#fff;border-radius:14px;padding:24px 28px;margin:32px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.cta-strip h3{color:#fff;font-size:18px;margin:0 0 4px}
+.cta-strip p{color:#cbd5e0;margin:0;font-size:14px}
+.cta-strip a{background:#14b8a6;color:#fff;padding:12px 24px;border-radius:999px;font-weight:700;text-decoration:none}
+.cta-strip a:hover{background:#0d9488;text-decoration:none}
 </style>
 </head>
 <body>
@@ -48,26 +85,375 @@ a{color:#0f766e;text-decoration:none}a:hover{text-decoration:underline}
 </header>
 <main>
 <nav class="crumbs"><a href="/">Hjem</a> › Daglige trender</nav>
-<h1>Daglige DMARC-trender</h1>
-<p class="lead">Hvilke norske domener forbedret eller forverret e-postsikkerheten siste 7 dager?</p>
-<p class="meta">Oppdatert 2026-05-11 · sammenligner med 2026-05-09 · automatisk daglig skanning av 158 domener</p>
+<h1>DMARC-status for 158 norske domener</h1>
+<p class="lead">Daglig oppdatert oversikt over e-postsikkerheten til Norges største nettsteder, kommuner, banker, mediehus, helseforetak og e-handel.</p>
+<p class="meta">Oppdatert 2026-05-11 · sammenligner med 2026-05-09 · <a href="/trender/data.csv">Last ned data (CSV)</a></p>
 
-<div class="summary-grid">
-<div class="stat"><div class="stat-num">64.5</div><div class="stat-label">Snitt-score (av 100)</div></div>
-<div class="stat"><div class="stat-num">86</div><div class="stat-label">Med p=reject</div></div>
-<div class="stat"><div class="stat-num">12</div><div class="stat-label">Uten DMARC</div></div>
-<div class="stat"><div class="stat-num">0</div><div class="stat-label">Forbedret siste uke</div></div>
+<div class="callout-hero">
+<strong>71 av 158 (45 %)</strong> norske domener er fortsatt sårbare for e-post-spoofing — de mangler enten DMARC helt, eller har en policy som ikke blokkerer forfalskning. Bare <strong>86 (54 %)</strong> har <code>p=reject</code> som er den eneste policyen som faktisk stopper svindel.
 </div>
 
-<h2>📈 Domener som forbedret seg (0)</h2>
-<div class="empty">Ingen domener har forbedret seg betydelig siste uke.</div><h2>📉 Domener som forverret seg (0)</h2><div class="empty">Ingen domener har forverret seg betydelig siste uke.</div><h2>✅ Nye domener med p=reject (43)</h2><table><thead><tr><th>Domene</th><th>Tidligere policy</th></tr></thead><tbody><tr><td><a href="/?d=finanstilsynet.no">finanstilsynet.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=eika.no">eika.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=altibox.no">altibox.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=talkmore.no">talkmore.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=ssb.no">ssb.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=nho.no">nho.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=lo.no">lo.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=norsk-helsenett.no">norsk-helsenett.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=mattilsynet.no">mattilsynet.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=oslo-universitetssykehus.no">oslo-universitetssykehus.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=helse-bergen.no">helse-bergen.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=sthf.no">sthf.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=helse-fonna.no">helse-fonna.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=sykehuspartner.no">sykehuspartner.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=apotek1.no">apotek1.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=boots.no">boots.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=elkem.no">elkem.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=hm.com">hm.com</a></td><td>ingen</td></tr><tr><td><a href="/?d=fjordkraft.no">fjordkraft.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=choice.no">choice.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=postnord.no">postnord.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=amedia.no">amedia.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=remarkable.com">remarkable.com</a></td><td>ingen</td></tr><tr><td><a href="/?d=oslomet.no">oslomet.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=inn.no">inn.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=bergen.kommune.no">bergen.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=stavanger.kommune.no">stavanger.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=kristiansand.kommune.no">kristiansand.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=fredrikstad.kommune.no">fredrikstad.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=drammen.kommune.no">drammen.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=sandnes.kommune.no">sandnes.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=sarpsborg.kommune.no">sarpsborg.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=larvik.kommune.no">larvik.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=sandefjord.kommune.no">sandefjord.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=tonsberg.kommune.no">tonsberg.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=nordlo.no">nordlo.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=crayon.com">crayon.com</a></td><td>ingen</td></tr><tr><td><a href="/?d=valimail.com">valimail.com</a></td><td>ingen</td></tr><tr><td><a href="/?d=agari.com">agari.com</a></td><td>ingen</td></tr><tr><td><a href="/?d=redcross.no">redcross.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=norad.no">norad.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=kreftforeningen.no">kreftforeningen.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=lhl.no">lhl.no</a></td><td>ingen</td></tr></tbody></table><div class="callout">
-<strong>Hva betyr dette?</strong> p=reject er den eneste DMARC-policyen som faktisk blokkerer e-post-forfalskning. Domener som går fra «none» eller «quarantine» til «reject» har tatt det viktige siste steget mot full beskyttelse.
+<div class="hero-stat-row">
+<div class="hero-stat"><div class="hero-stat-num">64.5</div><div class="hero-stat-label">Snitt-score (av 100)</div></div>
+<div class="hero-stat"><div class="hero-stat-num" style="color:#16a34a">86</div><div class="hero-stat-label">Med p=reject (full beskyttelse)</div></div>
+<div class="hero-stat"><div class="hero-stat-num" style="color:#dc2626">12</div><div class="hero-stat-label">Uten DMARC i det hele tatt</div></div>
+<div class="hero-stat"><div class="hero-stat-num" style="color:#0f766e">43</div><div class="hero-stat-label">Nye p=reject siden 2026-05-09</div></div>
 </div>
 
-<h2>Sjekk ditt domene</h2>
-<p style="margin-bottom:24px">Vil du vite hvor ditt domene står på samme rangering? <a href="/" style="font-weight:700">Kjør gratis analyse →</a></p>
+<div class="spark">
+        <div class="spark-head">
+            <div class="spark-title">Snitt-score over tid</div>
+            <div class="spark-delta" style="color:#dc2626">-1.3 siste 3 dager</div>
+        </div>
+        <svg viewBox="0 0 600 80" width="100%" height="80" preserveAspectRatio="none">
+            <path d="M 0.0,5.0 L 300.0,75.0 L 600.0,75.0" fill="none" stroke="#0f766e" stroke-width="2.5"/>
+        </svg>
+        <div class="spark-range">2026-05-09 → 2026-05-11 · min 64.5 · max 65.8</div>
+    </div>
 
-<p style="font-size:13px;color:#94a3b8;margin-top:40px;border-top:1px solid #e2e8f0;padding-top:18px">Data oppdateres daglig kl 06:00 UTC av automatisk skanner. Karakterskala: A+ (90+), A (80-89), B (70-79), C (55-69), D (35-54), F (0-34).</p>
+<h2>Karakterfordeling</h2>
+<div class="card">
+<div class="card-title">Hvor mange ligger på hver karakter (158 domener)</div>
+<div class="gd-row">
+            <div class="gd-label" style="color:#16a34a">A+</div>
+            <div class="gd-bar-bg"><div class="gd-bar" style="width:57.5%;background:#16a34a"></div></div>
+            <div class="gd-count">23</div>
+            <div class="gd-pct">14.6%</div>
+        </div>
+<div class="gd-row">
+            <div class="gd-label" style="color:#22c55e">A</div>
+            <div class="gd-bar-bg"><div class="gd-bar" style="width:100.0%;background:#22c55e"></div></div>
+            <div class="gd-count">40</div>
+            <div class="gd-pct">25.3%</div>
+        </div>
+<div class="gd-row">
+            <div class="gd-label" style="color:#84cc16">B</div>
+            <div class="gd-bar-bg"><div class="gd-bar" style="width:42.5%;background:#84cc16"></div></div>
+            <div class="gd-count">17</div>
+            <div class="gd-pct">10.8%</div>
+        </div>
+<div class="gd-row">
+            <div class="gd-label" style="color:#eab308">C</div>
+            <div class="gd-bar-bg"><div class="gd-bar" style="width:72.5%;background:#eab308"></div></div>
+            <div class="gd-count">29</div>
+            <div class="gd-pct">18.4%</div>
+        </div>
+<div class="gd-row">
+            <div class="gd-label" style="color:#f97316">D</div>
+            <div class="gd-bar-bg"><div class="gd-bar" style="width:70.0%;background:#f97316"></div></div>
+            <div class="gd-count">28</div>
+            <div class="gd-pct">17.7%</div>
+        </div>
+<div class="gd-row">
+            <div class="gd-label" style="color:#dc2626">F</div>
+            <div class="gd-bar-bg"><div class="gd-bar" style="width:52.5%;background:#dc2626"></div></div>
+            <div class="gd-count">21</div>
+            <div class="gd-pct">13.3%</div>
+        </div>
+</div>
+
+<h2>DMARC-pyramiden</h2>
+<div class="card">
+<div class="card-title">Fra full beskyttelse til ingen beskyttelse</div>
+<div class="py-row">
+            <div class="py-label">p=reject — full beskyttelse</div>
+            <div class="py-bar-bg"><div class="py-bar" style="width:54.4%;background:#16a34a"></div></div>
+            <div class="py-count">86 (54%)</div>
+        </div>
+<div class="py-row">
+            <div class="py-label">p=quarantine — karantene</div>
+            <div class="py-bar-bg"><div class="py-bar" style="width:15.8%;background:#eab308"></div></div>
+            <div class="py-count">25 (16%)</div>
+        </div>
+<div class="py-row">
+            <div class="py-label">p=none — kun overvåking</div>
+            <div class="py-bar-bg"><div class="py-bar" style="width:21.5%;background:#f97316"></div></div>
+            <div class="py-count">34 (22%)</div>
+        </div>
+<div class="py-row">
+            <div class="py-label">ingen DMARC</div>
+            <div class="py-bar-bg"><div class="py-bar" style="width:7.6%;background:#dc2626"></div></div>
+            <div class="py-count">12 (8%)</div>
+        </div>
+</div>
+<p style="font-size:13.5px;color:#64748b;margin-top:10px">Bare <code>p=reject</code> stopper forfalsket e-post fra å nå mottakeren. <code>p=quarantine</code> sender den i søppelpost. <code>p=none</code> overvåker uten å påvirke leveringen. Ingen DMARC = full sårbarhet.</p>
+
+<h2>Adopsjon per teknologi</h2>
+<div class="feat-grid">
+<div class="feat">
+            <div class="feat-pct">92%</div>
+            <div class="feat-label">SPF</div>
+            <div class="feat-detail">145 av 158</div>
+        </div>
+<div class="feat">
+            <div class="feat-pct">92%</div>
+            <div class="feat-label">DMARC</div>
+            <div class="feat-detail">146 av 158</div>
+        </div>
+<div class="feat">
+            <div class="feat-pct">82%</div>
+            <div class="feat-label">DKIM</div>
+            <div class="feat-detail">129 av 158</div>
+        </div>
+<div class="feat">
+            <div class="feat-pct">16%</div>
+            <div class="feat-label">MTA-STS</div>
+            <div class="feat-detail">26 av 158</div>
+        </div>
+<div class="feat">
+            <div class="feat-pct">21%</div>
+            <div class="feat-label">TLS-RPT</div>
+            <div class="feat-detail">33 av 158</div>
+        </div>
+<div class="feat">
+            <div class="feat-pct">15%</div>
+            <div class="feat-label">BIMI</div>
+            <div class="feat-detail">24 av 158</div>
+        </div>
+</div>
+
+<h2>Sektor-sammenligning</h2>
+<table>
+<thead><tr><th>Sektor</th><th style="text-align:right">Antall</th><th style="text-align:right">Snitt-score</th><th style="text-align:right">Med p=reject</th></tr></thead>
+<tbody>
+<tr>
+            <td>DMARC-konkurrenter / sammenlignbare</td>
+            <td style="text-align:right">6</td>
+            <td style="text-align:right;font-weight:700">94.2</td>
+            <td style="text-align:right">6 (100%)</td>
+        </tr>
+<tr>
+            <td>Offentlig sektor</td>
+            <td style="text-align:right">18</td>
+            <td style="text-align:right;font-weight:700">78.0</td>
+            <td style="text-align:right">13 (72%)</td>
+        </tr>
+<tr>
+            <td>Telecom</td>
+            <td style="text-align:right">6</td>
+            <td style="text-align:right;font-weight:700">75.5</td>
+            <td style="text-align:right">5 (83%)</td>
+        </tr>
+<tr>
+            <td>Helse</td>
+            <td style="text-align:right">7</td>
+            <td style="text-align:right;font-weight:700">72.9</td>
+            <td style="text-align:right">7 (100%)</td>
+        </tr>
+<tr>
+            <td>Kommuner</td>
+            <td style="text-align:right">15</td>
+            <td style="text-align:right;font-weight:700">72.6</td>
+            <td style="text-align:right">10 (67%)</td>
+        </tr>
+<tr>
+            <td>E-handel</td>
+            <td style="text-align:right">13</td>
+            <td style="text-align:right;font-weight:700">69.5</td>
+            <td style="text-align:right">7 (54%)</td>
+        </tr>
+<tr>
+            <td>Reise / hotell / transport</td>
+            <td style="text-align:right">11</td>
+            <td style="text-align:right;font-weight:700">64.8</td>
+            <td style="text-align:right">3 (27%)</td>
+        </tr>
+<tr>
+            <td>IT-konsulenter / store leverandører</td>
+            <td style="text-align:right">9</td>
+            <td style="text-align:right;font-weight:700">64.8</td>
+            <td style="text-align:right">5 (56%)</td>
+        </tr>
+<tr>
+            <td>Tech / SaaS</td>
+            <td style="text-align:right">9</td>
+            <td style="text-align:right;font-weight:700">64.7</td>
+            <td style="text-align:right">5 (56%)</td>
+        </tr>
+<tr>
+            <td>Frivillig sektor / interesseorg</td>
+            <td style="text-align:right">6</td>
+            <td style="text-align:right;font-weight:700">64.2</td>
+            <td style="text-align:right">4 (67%)</td>
+        </tr>
+<tr>
+            <td>Forsikring</td>
+            <td style="text-align:right">8</td>
+            <td style="text-align:right;font-weight:700">60.9</td>
+            <td style="text-align:right">3 (38%)</td>
+        </tr>
+<tr>
+            <td>Universiteter og høyskoler</td>
+            <td style="text-align:right">13</td>
+            <td style="text-align:right;font-weight:700">57.9</td>
+            <td style="text-align:right">3 (23%)</td>
+        </tr>
+<tr>
+            <td>Banker</td>
+            <td style="text-align:right">12</td>
+            <td style="text-align:right;font-weight:700">57.7</td>
+            <td style="text-align:right">8 (67%)</td>
+        </tr>
+<tr>
+            <td>Medier</td>
+            <td style="text-align:right">14</td>
+            <td style="text-align:right;font-weight:700">57.5</td>
+            <td style="text-align:right">5 (36%)</td>
+        </tr>
+<tr>
+            <td>Logistikk / shipping</td>
+            <td style="text-align:right">4</td>
+            <td style="text-align:right;font-weight:700">35.2</td>
+            <td style="text-align:right">1 (25%)</td>
+        </tr>
+<tr>
+            <td>Energi / olje</td>
+            <td style="text-align:right">7</td>
+            <td style="text-align:right;font-weight:700">17.9</td>
+            <td style="text-align:right">1 (14%)</td>
+        </tr>
+</tbody>
+</table>
+
+<h2>Topp 10 <span class="h2-sub">— høyest score</span></h2>
+<table>
+<thead><tr><th>Domene</th><th>Karakter</th><th style="text-align:right">Score</th></tr></thead>
+<tbody><tr>
+            <td><a href="/?d=nav.no">nav.no</a></td>
+            <td><span class="grade" style="background:#16a34a">A+</span></td>
+            <td style="text-align:right;font-weight:700">100</td>
+        </tr>
+<tr>
+            <td><a href="/?d=nbim.no">nbim.no</a></td>
+            <td><span class="grade" style="background:#16a34a">A+</span></td>
+            <td style="text-align:right;font-weight:700">100</td>
+        </tr>
+<tr>
+            <td><a href="/?d=ssb.no">ssb.no</a></td>
+            <td><span class="grade" style="background:#16a34a">A+</span></td>
+            <td style="text-align:right;font-weight:700">100</td>
+        </tr>
+<tr>
+            <td><a href="/?d=ikea.com">ikea.com</a></td>
+            <td><span class="grade" style="background:#16a34a">A+</span></td>
+            <td style="text-align:right;font-weight:700">100</td>
+        </tr>
+<tr>
+            <td><a href="/?d=dmarcian.com">dmarcian.com</a></td>
+            <td><span class="grade" style="background:#16a34a">A+</span></td>
+            <td style="text-align:right;font-weight:700">100</td>
+        </tr>
+<tr>
+            <td><a href="/?d=agari.com">agari.com</a></td>
+            <td><span class="grade" style="background:#16a34a">A+</span></td>
+            <td style="text-align:right;font-weight:700">100</td>
+        </tr>
+<tr>
+            <td><a href="/?d=telenor.no">telenor.no</a></td>
+            <td><span class="grade" style="background:#16a34a">A+</span></td>
+            <td style="text-align:right;font-weight:700">97</td>
+        </tr>
+<tr>
+            <td><a href="/?d=stortinget.no">stortinget.no</a></td>
+            <td><span class="grade" style="background:#16a34a">A+</span></td>
+            <td style="text-align:right;font-weight:700">97</td>
+        </tr>
+<tr>
+            <td><a href="/?d=udi.no">udi.no</a></td>
+            <td><span class="grade" style="background:#16a34a">A+</span></td>
+            <td style="text-align:right;font-weight:700">97</td>
+        </tr>
+<tr>
+            <td><a href="/?d=oslomet.no">oslomet.no</a></td>
+            <td><span class="grade" style="background:#16a34a">A+</span></td>
+            <td style="text-align:right;font-weight:700">97</td>
+        </tr></tbody>
+</table>
+
+<h2>Bunn 10 <span class="h2-sub">— mest sårbare</span></h2>
+<table>
+<thead><tr><th>Domene</th><th>Karakter</th><th style="text-align:right">Score</th></tr></thead>
+<tbody><tr>
+            <td><a href="/?d=nakk.no">nakk.no</a></td>
+            <td><span class="grade" style="background:#dc2626">F</span></td>
+            <td style="text-align:right;font-weight:700">0</td>
+        </tr>
+<tr>
+            <td><a href="/?d=schenker.no">schenker.no</a></td>
+            <td><span class="grade" style="background:#dc2626">F</span></td>
+            <td style="text-align:right;font-weight:700">0</td>
+        </tr>
+<tr>
+            <td><a href="/?d=faedrelandsvennen.no">faedrelandsvennen.no</a></td>
+            <td><span class="grade" style="background:#dc2626">F</span></td>
+            <td style="text-align:right;font-weight:700">0</td>
+        </tr>
+<tr>
+            <td><a href="/?d=nyfosse.no">nyfosse.no</a></td>
+            <td><span class="grade" style="background:#dc2626">F</span></td>
+            <td style="text-align:right;font-weight:700">0</td>
+        </tr>
+<tr>
+            <td><a href="/?d=aker-solutions.no">aker-solutions.no</a></td>
+            <td><span class="grade" style="background:#dc2626">F</span></td>
+            <td style="text-align:right;font-weight:700">0</td>
+        </tr>
+<tr>
+            <td><a href="/?d=yara.no">yara.no</a></td>
+            <td><span class="grade" style="background:#dc2626">F</span></td>
+            <td style="text-align:right;font-weight:700">0</td>
+        </tr>
+<tr>
+            <td><a href="/?d=hydro.no">hydro.no</a></td>
+            <td><span class="grade" style="background:#dc2626">F</span></td>
+            <td style="text-align:right;font-weight:700">0</td>
+        </tr>
+<tr>
+            <td><a href="/?d=equinor.no">equinor.no</a></td>
+            <td><span class="grade" style="background:#dc2626">F</span></td>
+            <td style="text-align:right;font-weight:700">0</td>
+        </tr>
+<tr>
+            <td><a href="/?d=sparebanken-ost.no">sparebanken-ost.no</a></td>
+            <td><span class="grade" style="background:#dc2626">F</span></td>
+            <td style="text-align:right;font-weight:700">0</td>
+        </tr>
+<tr>
+            <td><a href="/?d=hjemla.no">hjemla.no</a></td>
+            <td><span class="grade" style="background:#dc2626">F</span></td>
+            <td style="text-align:right;font-weight:700">8</td>
+        </tr></tbody>
+</table>
+
+<h2>Endringer siste uke</h2>
+<div class="col2">
+<div>
+<h3>📈 Forbedret (0)</h3><div class="empty">Ingen forbedringer på 5+ poeng siste uke.</div></div>
+<div>
+<h3>📉 Forverret (0)</h3><div class="empty">Ingen forverring på 5+ poeng siste uke.</div></div></div><h2>✅ Nye domener med p=reject <span class="h2-sub">— siden 2026-05-09</span></h2><table><thead><tr><th>Domene</th><th>Tidligere policy</th></tr></thead><tbody><tr><td><a href="/?d=finanstilsynet.no">finanstilsynet.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=eika.no">eika.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=altibox.no">altibox.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=talkmore.no">talkmore.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=ssb.no">ssb.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=nho.no">nho.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=lo.no">lo.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=norsk-helsenett.no">norsk-helsenett.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=mattilsynet.no">mattilsynet.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=oslo-universitetssykehus.no">oslo-universitetssykehus.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=helse-bergen.no">helse-bergen.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=sthf.no">sthf.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=helse-fonna.no">helse-fonna.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=sykehuspartner.no">sykehuspartner.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=apotek1.no">apotek1.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=boots.no">boots.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=elkem.no">elkem.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=hm.com">hm.com</a></td><td>ingen</td></tr><tr><td><a href="/?d=fjordkraft.no">fjordkraft.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=choice.no">choice.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=postnord.no">postnord.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=amedia.no">amedia.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=remarkable.com">remarkable.com</a></td><td>ingen</td></tr><tr><td><a href="/?d=oslomet.no">oslomet.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=inn.no">inn.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=bergen.kommune.no">bergen.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=stavanger.kommune.no">stavanger.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=kristiansand.kommune.no">kristiansand.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=fredrikstad.kommune.no">fredrikstad.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=drammen.kommune.no">drammen.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=sandnes.kommune.no">sandnes.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=sarpsborg.kommune.no">sarpsborg.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=larvik.kommune.no">larvik.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=sandefjord.kommune.no">sandefjord.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=tonsberg.kommune.no">tonsberg.kommune.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=nordlo.no">nordlo.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=crayon.com">crayon.com</a></td><td>ingen</td></tr><tr><td><a href="/?d=valimail.com">valimail.com</a></td><td>ingen</td></tr><tr><td><a href="/?d=agari.com">agari.com</a></td><td>ingen</td></tr><tr><td><a href="/?d=redcross.no">redcross.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=norad.no">norad.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=kreftforeningen.no">kreftforeningen.no</a></td><td>ingen</td></tr><tr><td><a href="/?d=lhl.no">lhl.no</a></td><td>ingen</td></tr></tbody></table>
+<div class="cta-strip">
+<div><h3>Hvor står ditt eget domene?</h3><p>Kjør gratis analyse — karakter A+ til F på 10 sekunder.</p></div>
+<a href="/">Sjekk eget domene →</a>
+</div>
+
+<h2>Metodikk</h2>
+<div class="method">
+<p><strong>Datakilde:</strong> Daglige DNS-oppslag fra Cloudflare DoH og Google DNS for 158 norske domener, valgt fordi de er de mest besøkte og samfunnskritiske nettstedene innenfor bank, offentlig sektor, helse, energi, medier og e-handel.</p>
+<p><strong>Score-sammensetning (0-100):</strong></p>
+<ul>
+<li>DMARC (35p) — full beskyttelse krever p=reject og pct=100</li>
+<li>SPF (25p) — gyldig record med -all eller ~all</li>
+<li>DKIM (20p) — minst én aktiv selektor med 2048-bit eller bedre</li>
+<li>MTA-STS (12p) — gyldig policy med enforce</li>
+<li>TLS-RPT (5p) — gyldig rapport-adresse</li>
+<li>BIMI (3p) — gyldig logo-pekepinn</li>
+</ul>
+<p><strong>Karakterskala:</strong> A+ (90+), A (80-89), B (70-79), C (55-69), D (35-54), F (0-34).</p>
+<p><strong>Lisens:</strong> Data publisert under <a href="https://creativecommons.org/licenses/by/4.0/" rel="nofollow">CC BY 4.0</a>. Fri å bruke til journalistikk, forskning og kommersielle formål — krediter <a href="https://data1.no/">data1.no</a>.</p>
+<p><strong>Last ned:</strong> <a href="/trender/data.csv">data.csv</a> (alle 158 domener, alle målinger). Oppdateres daglig kl 06:00 UTC.</p>
+</div>
+
+<p style="font-size:13px;color:#94a3b8;margin-top:32px;border-top:1px solid #e2e8f0;padding-top:18px">data1.no drives av <a href="https://micronet.no/" style="color:#0f766e">Micronet AS</a> · automatisk skanning hver natt kl 06:00 UTC · <a href="/trender/data.csv">CSV-eksport</a> · <a href="/sammenligning/">data1.no vs konkurrenter</a></p>
 </main>
 </body>
 </html>
