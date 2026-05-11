@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Norske storselskaper uten grunnleggende e-postsikkerhet — ukentlig DMARC-analyse fra data1.no.">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<link rel="canonical" href="https://data1.no/blogg/norske-storselskaper-uten-grunnleggende-e-postsikkerhet/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Norske storselskaper uten grunnleggende e-postsikkerhet">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<title>Norske storselskaper uten grunnleggende e-postsikkerhet | data1.no</title>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<style>
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.data-table th{background:#0f172a;color:#fff;text-align:left;padding:10px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.data-table td{padding:10px 12px;border-bottom:1px solid #f1f5f9}
+.callout{background:#f0fdfa;border-left:4px solid #14b8a6;padding:14px 18px;border-radius:0 10px 10px 0;margin:18px 0}
+.callout.warn{background:#fff7ed;border-left-color:#f97316;color:#7c2d12}
+.meta{font-size:13px;color:#64748b;margin-bottom:22px}
+.lead{font-size:18px;color:#475569;margin-bottom:24px;line-height:1.7}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Norske storselskaper uten grunnleggende e-postsikkerhet","datePublished":"2026-05-11","dateModified":"2026-05-11","author":{"@type":"Organization","name":"Micronet","url":"https://micronet.no/"},"publisher":{"@type":"Organization","name":"data1.no","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"}},"description":"Norske storselskaper uten grunnleggende e-postsikkerhet","image":"https://data1.no/og-image.png","mainEntityOfPage":"https://data1.no/blogg/norske-storselskaper-uten-grunnleggende-e-postsikkerhet/","inLanguage":"nb-NO"}</script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <form class="header-search" action="/" method="get" role="search">
+    <input type="text" name="domain" placeholder="Skriv inn domene — f.eks. micronet.no" aria-label="Sjekk domene">
+    <button type="submit">Analyser →</button>
+  </form>
+</header>
+<main>
+<nav class="crumbs"><a href="/">Hjem</a> › <a href="/blogg/">Blogg</a> › Ukerapport 20</nav>
+<h1>Norske storselskaper uten grunnleggende e-postsikkerhet</h1>
+
+<p class="lead">Equinor, Hydro, Yara og flere børsnoterte selskaper mangler fortsatt DMARC-beskyttelse – mens offentlige etater som NAV og SSB ligger i verdenstoppen.</p>
+
+<p class="meta">Publisert 11. mai 2026 · Av Micronet · 4 min lesetid</p>
+
+<p>Data1.no har analysert 158 norske domener, og tallene tegner et skjevt bilde: Mens offentlig sektor tar e-postsikkerhet på alvor, ligger flere av Norges største industriselskaper langt etter. Snittscore på 64,5 av 100 mulige poeng skjuler store forskjeller mellom topp og bunn.</p>
+
+<h2 id="borsgiganter-med-karakter-f">Børsgiganter med karakter F</h2>
+
+<p>I bunnsjiktet finner vi <a href="/?d=equinor.no">equinor.no</a>, <a href="/?d=hydro.no">hydro.no</a> og <a href="/?d=yara.no">yara.no</a> – alle med 0 poeng. Disse selskapene mangler grunnleggende DMARC-konfigurering, noe som gjør dem sårbare for phishing og domene-spoofing.</p>
+
+<div class="callout warn">
+<strong>Hva betyr 0 poeng?</strong> Ingen DMARC-policy er publisert. Det betyr at hvem som helst kan sende e-post som tilsynelatende kommer fra bedriften, uten at mottaker har noen måte å verifisere at avsenderen er ekte.
+</div>
+
+<p>Også <a href="/?d=aker-solutions.no">aker-solutions.no</a> og <a href="/?d=schenker.no">schenker.no</a> scorer 0 poeng. For logistikk- og leverandørbedrifter, som ofte sender fakturaer og ordrebekreftelser, er dette spesielt risikabelt. Forfalsket e-post kan føre til betalingssvindel, både for bedriften selv og deres kunder.</p>
+
+<p><a href="/?d=sparebanken-ost.no">sparebanken-ost.no</a> scorer også 0 poeng – en skuffelse fra finanssektoren, som burde være på offensiven når det gjelder sikkerhet.</p>
+
+<h2 id="offentlig-sektor-leverer">Offentlig sektor leverer</h2>
+
+<p>Mens industrien sliter, viser offentlig sektor hvordan det skal gjøres. <a href="/?d=nav.no">nav.no</a>, <a href="/?d=ssb.no">ssb.no</a> og <a href="/?d=nbim.no">nbim.no</a> (Oljefondet) scorer alle 100 poeng med fullt utbygd DMARC, SPF, DKIM, MTA-STS og BIMI.</p>
+
+<p>Også <a href="/?d=stortinget.no">stortinget.no</a>, <a href="/?d=udi.no">udi.no</a> og <a href="/?d=oslomet.no">oslomet.no</a> ligger i toppsjiktet med 97 poeng. Dette viser at når offentlig sektor setter sikkerhet på agendaen, leverer de.</p>
+
+<p>At <a href="/?d=telenor.no">telenor.no</a> scorer 97 poeng er også positivt – en av få private bedrifter i toppen.</p>
+
+<h2 id="86-domener-med-full-beskyttelse">86 domener med full beskyttelse</h2>
+
+<p>54 prosent av de analyserte domenene (86 av 158) har satt DMARC-policy til <code>p=reject</code>, som er det anbefalte nivået. Dette betyr at e-post som ikke passerer autentisering blir avvist før den når mottakeren.</p>
+
+<p>23 domener scorer toppkarakter A+, mens 40 får A. Til sammen utgjør dette 40 prosent av utvalget – et solid tall, men langt fra tilfredsstillende når vi ser hvor mange store aktører som fortsatt ligger på bunnen.</p>
+
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>Karakter</th>
+      <th>Antall domener</th>
+      <th>Andel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A+ (95-100p)</td>
+      <td>23</td>
+      <td>15%</td>
+    </tr>
+    <tr>
+      <td>A (85-94p)</td>
+      <td>40</td>
+      <td>25%</td>
+    </tr>
+    <tr>
+      <td>B (75-84p)</td>
+      <td>17</td>
+      <td>11%</td>
+    </tr>
+    <tr>
+      <td>C (60-74p)</td>
+      <td>29</td>
+      <td>18%</td>
+    </tr>
+    <tr>
+      <td>D (40-59p)</td>
+      <td>28</td>
+      <td>18%</td>
+    </tr>
+    <tr>
+      <td>F (0-39p)</td>
+      <td>21</td>
+      <td>13%</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="hva-bor-gjores">Hva bør gjøres?</h2>
+
+<p>For bedrifter som scorer lavt, er veien videre enkel:</p>
+
+<ol>
+  <li><strong>Sett opp SPF-record</strong> – definer hvilke servere som har lov til å sende e-post på vegne av domenet ditt</li>
+  <li><strong>Aktiver DKIM</strong> – signer utgående e-post digitalt, slik at mottaker kan verifisere at den ikke er endret underveis</li>
+  <li><strong>Publiser DMARC-policy</strong> – start med <code>p=none</code> for overvåking, gå deretter til <code>p=quarantine</code> og til slutt <code>p=reject</code></li>
+  <li><strong>Legg til MTA-STS</strong> – sikre kryptert overføring av e-post mellom servere</li>
+  <li><strong>Vurder BIMI</strong> – vis bedriftens logo i e-postklienter for økt tillit</li>
+</ol>
+
+<p>Det finnes ingen unnskyldning for manglende grunnkonfigurasjon. Verktøy som <a href="/">data1.no</a> gjør det enkelt å sjekke status, og implementering tar vanligvis timer, ikke uker.</p>
+
+<h3>Se din egen bedrift</h3>
+
+<p>Lurer du på hvordan ditt eget domene scorer? Sjekk gratis på <a href="/">data1.no</a> – skriv inn domenenavnet og få umiddelbar analyse av SPF, DMARC, DKIM, MTA-STS og mer.</p>
+
+<p>For å sammenligne deg med andre i samme bransje, besøk <a href="/sammenligning/">sammenligningssiden</a>. Der kan du se hvordan andre norske bedrifter ligger an, og hva som skiller toppscorerne fra bunnsjiktet.</p>
+
+<p>Vil du følge utviklingen over tid? Sjekk <a href="/trender/">trendsiden</a> for å se hvordan norsk e-postsikkerhet endrer seg uke for uke.</p>
+
+<div style="margin-top:40px;padding:20px;background:#f0fdfa;border-radius:12px;border:1px solid #99f6e4">
+<h3 style="margin-bottom:8px">Sjekk ditt eget domene</h3>
+<p style="margin-bottom:14px">Få samme analyse for ditt domene på 10 sekunder, helt gratis.</p>
+<a href="/" style="display:inline-block;background:#14b8a6;color:#fff;padding:10px 22px;border-radius:8px;text-decoration:none;font-weight:700">Kjør analyse →</a>
+</div>
+</main>
+</body>
+</html>

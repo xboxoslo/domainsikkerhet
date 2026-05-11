@@ -612,7 +612,7 @@ def render_shield_png(grade, gc, gc_light):
     draw = ImageDraw.Draw(img)
 
     # 6. Hvit sirkel med myk drop-shadow (gir letter-badge løftet 3D-følelse)
-    cx, cy, r = 60*SCALE, 58*SCALE, 24*SCALE
+    cx, cy, r = 60*SCALE, 58*SCALE, 30*SCALE
     circle_shadow = Image.new('RGBA', (iw, ih), (0, 0, 0, 0))
     csd = ImageDraw.Draw(circle_shadow)
     csd.ellipse((cx-r, cy-r+2*SCALE, cx+r, cy+r+2*SCALE), fill=(0, 0, 0, 60))
@@ -622,10 +622,17 @@ def render_shield_png(grade, gc, gc_light):
     draw.ellipse((cx-r, cy-r, cx+r, cy+r), fill=(255, 255, 255, 255))
 
     # 7. Grade-bokstaven
-    font_size = 36*SCALE if len(grade) == 1 else 28*SCALE
+    font_size = 44*SCALE if len(grade) == 1 else 34*SCALE
     font = None
-    for path in [r'C:\Windows\Fonts\arialbd.ttf', r'C:\Windows\Fonts\arial.ttf',
-                 r'C:\Windows\Fonts\segoeuib.ttf']:
+    for path in [
+        str(Path(__file__).parent / 'fonts' / 'DejaVuSans-Bold.ttf'),
+        '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
+        '/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf',
+        '/usr/share/fonts/TTF/DejaVuSans-Bold.ttf',
+        '/usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Bold.ttf',
+        '/System/Library/Fonts/Helvetica.ttc',
+        r'C:\Windows\Fonts\arialbd.ttf', r'C:\Windows\Fonts\arial.ttf',
+        r'C:\Windows\Fonts\segoeuib.ttf']:
         try: font = ImageFont.truetype(path, font_size); break
         except Exception: continue
     if font is None: font = ImageFont.load_default()
@@ -633,7 +640,7 @@ def render_shield_png(grade, gc, gc_light):
     tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
     tx = cx - tw / 2 - bbox[0]
     ty = cy - th / 2 - bbox[1]
-    draw.text((tx, ty), grade, fill=_hex_to_rgb(gc) + (255,), font=font)
+    draw.text((tx, ty), grade, fill=(0, 0, 0, 255), font=font)
 
     # 8. Hake-badge i øvre høyre hjørne (kun på høye grades, slik portalen har)
     if grade in ('A+', 'A', 'B'):
@@ -924,12 +931,99 @@ class Handler(BaseHTTPRequestHandler):
                 return
             self._render_stats()
             return
+        if parsed.path == '/admin/preview-email':
+            qs = urllib.parse.parse_qs(parsed.query)
+            token = (qs.get('token') or [''])[0]
+            if not ADMIN_TOKEN or token != ADMIN_TOKEN:
+                self.send_response(401); self._cors()
+                self.send_header('Content-Type', 'text/plain'); self.end_headers()
+                self.wfile.write(b'Unauthorized')
+                return
+            to_email = (qs.get('to') or [''])[0]
+            if not to_email or '@' not in to_email:
+                self.send_response(400); self._cors()
+                self.send_header('Content-Type', 'text/plain'); self.end_headers()
+                self.wfile.write(b'Missing or invalid ?to=email@example.com')
+                return
+            try:
+                self._send_shield_preview(to_email)
+                self.send_response(200); self._cors()
+                self.send_header('Content-Type', 'text/plain'); self.end_headers()
+                self.wfile.write(f'Sent preview to {to_email}'.encode('utf-8'))
+            except Exception as e:
+                self.send_response(500); self._cors()
+                self.send_header('Content-Type', 'text/plain'); self.end_headers()
+                self.wfile.write(f'Error: {e}'.encode('utf-8'))
+            return
         if parsed.path == '/healthz':
             self.send_response(200); self._cors()
             self.send_header('Content-Type', 'text/plain'); self.end_headers()
             self.wfile.write(b'ok')
             return
         self.send_response(404); self._cors(); self.end_headers()
+
+    def _send_shield_preview(self, to_email):
+        """Send a test email with all 6 shields (A+, A, B, C, D, F) inline."""
+        from email.mime.multipart import MIMEMultipart
+        from email.mime.text import MIMEText
+        from email.mime.image import MIMEImage
+        import base64
+
+        grades = [(95, 'A+'), (85, 'A'), (75, 'B'), (62, 'C'), (45, 'D'), (15, 'F')]
+        related = MIMEMultipart('related')
+        related['From'] = MAILGUN_FROM
+        related['To'] = to_email
+        related['Subject'] = 'Skjold-preview — alle 6 karakterer (A+ til F)'
+
+        rows = []
+        for s, expected_grade in grades:
+            grade, gc, gc_light = grade_palette(s)
+            png = render_shield_png(grade, gc, gc_light)
+            cid = f'shield-{grade.replace("+","p").lower()}'
+            img = MIMEImage(png, _subtype='png')
+            img.add_header('Content-ID', f'<{cid}>')
+            img.add_header('Content-Disposition', 'inline', filename=f'{cid}.png')
+            related.attach(img)
+            rows.append(f'''
+              <tr>
+                <td style="padding:18px;background:{score_card_bg(s)};border-radius:14px" valign="middle" align="center">
+                  <img src="cid:{cid}" width="120" height="130" alt="{grade}" style="display:block;border:0">
+                  <div style="margin-top:10px;font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#475569">
+                    <strong style="color:{gc};font-size:18px">{grade}</strong> &middot; score {s}
+                  </div>
+                </td>
+              </tr>''')
+
+        html = f'''<!doctype html><html><body style="margin:0;padding:24px;background:#f1f5f9;font-family:Helvetica,Arial,sans-serif">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 auto;background:#fff;border-radius:14px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+  <tr><td>
+    <h1 style="font-size:22px;margin:0 0 8px;color:#0f172a">Skjold-preview</h1>
+    <p style="font-size:14px;color:#475569;margin:0 0 18px">Alle 6 karakter-skjold som brukes i e-postrapporter fra data1.no. Bekreft at fargene og hake-badge-en gjengis riktig hos deg.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="14">{''.join(rows)}</table>
+    <p style="font-size:12px;color:#94a3b8;margin:18px 0 0">Test-e-post fra /admin/preview-email · {datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")}</p>
+  </td></tr>
+</table>
+</body></html>'''
+
+        text = 'Skjold-preview: ' + ', '.join(f'{g} (score {s})' for s, g in grades)
+
+        alt = MIMEMultipart('alternative')
+        alt.attach(MIMEText(text, 'plain', 'utf-8'))
+        alt.attach(MIMEText(html, 'html', 'utf-8'))
+        related.attach(alt)
+
+        endpoint = (f'https://api.eu.mailgun.net/v3/{MAILGUN_DOMAIN}/messages.mime'
+                    if MAILGUN_REGION == 'eu'
+                    else f'https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages.mime')
+        body, ct = multipart_form([
+            ('to', to_email),
+            ('message', ('message.eml', 'message/rfc822', related.as_bytes())),
+        ])
+        auth = base64.b64encode(f'api:{MAILGUN_API_KEY}'.encode()).decode()
+        req = urllib.request.Request(endpoint, data=body, method='POST',
+                                     headers={'Content-Type': ct, 'Authorization': f'Basic {auth}'})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.loads(r.read().decode('utf-8'))
 
     def _handle_track_get(self, query):
         qs = urllib.parse.parse_qs(query)
