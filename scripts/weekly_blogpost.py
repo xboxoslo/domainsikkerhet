@@ -25,7 +25,7 @@ if not API_KEY:
     print('FEIL: ANTHROPIC_API_KEY ikke satt. Avbryter.')
     sys.exit(1)
 
-MODEL = 'claude-sonnet-4-5'  # eller claude-sonnet-4-6 når tilgjengelig
+MODEL = 'claude-sonnet-4-6'
 MAX_TOKENS = 4000
 API_URL = 'https://api.anthropic.com/v1/messages'
 
