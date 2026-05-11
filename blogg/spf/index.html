@@ -67,8 +67,10 @@ td{padding:10px 12px;border-bottom:1px solid #f1f5f9}
 <body>
 <header class="header">
   <a href="/" class="logo">data1<span>.no</span></a>
-  <div class="spacer"></div>
-  <a href="/" class="nav-link">Sjekk eget domene →</a>
+  <form class="header-search" action="/" method="get" role="search">
+    <input type="text" name="domain" placeholder="Skriv inn domene — f.eks. micronet.no" aria-label="Sjekk domene">
+    <button type="submit">Analyser →</button>
+  </form>
 </header>
 <main>
   <nav class="crumbs"><a href="/">Hjem</a> › <a href="/blogg/">Blogg</a> › SPF</nav>

@@ -27,8 +27,10 @@
 <body>
 <header class="header">
   <a href="/" class="logo">data1<span>.no</span></a>
-  <div class="spacer"></div>
-  <a href="/" class="nav-link">Sjekk eget domene →</a>
+  <form class="header-search" action="/" method="get" role="search">
+    <input type="text" name="domain" placeholder="Skriv inn domene — f.eks. micronet.no" aria-label="Sjekk domene">
+    <button type="submit">Analyser →</button>
+  </form>
 </header>
 <main class="container">
   <h1>Norges 100 største nettsteder — e-post sikkerhetsrapport 2026</h1>
