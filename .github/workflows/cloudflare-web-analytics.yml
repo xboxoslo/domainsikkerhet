@@ -1,0 +1,96 @@
+name: Cloudflare Web Analytics setup
+
+# Manuell trigger. Aktiverer/oppdaterer Cloudflare Web Analytics for data1.no
+# og skriver ut beacon-tokenet du trenger for å lime inn JS-snippet.
+#
+# Krever repo secrets:
+#   - CLOUDFLARE_API_TOKEN  (Account:Web Analytics:Edit + Zone:Read)
+#   - CLOUDFLARE_ZONE_ID    (data1.no zone-id)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  setup-analytics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    env:
+      CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CF_ZONE: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+      HOST: data1.no
+
+    steps:
+      - name: Validate secrets
+        run: |
+          if [ -z "$CF_TOKEN" ] || [ -z "$CF_ZONE" ]; then
+            echo "::error::CLOUDFLARE_API_TOKEN eller CLOUDFLARE_ZONE_ID mangler"
+            exit 1
+          fi
+
+      - name: Hent account_id fra zone
+        run: |
+          set -e
+          RESP=$(curl -sS "https://api.cloudflare.com/client/v4/zones/$CF_ZONE" \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            -H "Content-Type: application/json")
+          OK=$(echo "$RESP" | jq -r '.success')
+          if [ "$OK" != "true" ]; then
+            echo "::error::Kan ikke lese zone. Sjekk token (Zone:Read) og CLOUDFLARE_ZONE_ID."
+            echo "$RESP" | jq .
+            exit 1
+          fi
+          ACCOUNT_ID=$(echo "$RESP" | jq -r '.result.account.id')
+          echo "ACCOUNT_ID=$ACCOUNT_ID" >> $GITHUB_ENV
+          echo "Account ID: $ACCOUNT_ID"
+
+      - name: List eksisterende Web Analytics-sites
+        id: list
+        run: |
+          set -e
+          RESP=$(curl -sS "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/rum/site_info/list" \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            -H "Content-Type: application/json")
+          OK=$(echo "$RESP" | jq -r '.success')
+          if [ "$OK" != "true" ]; then
+            echo "::error::Kan ikke liste Web Analytics-sites. Tokenet mangler 'Account:Web Analytics:Edit'-scope."
+            echo "$RESP" | jq .
+            echo "FIX: Cloudflare → My Profile → API Tokens → rediger token → Add permission → Account → Web Analytics → Edit. Lagre og kjør på nytt."
+            exit 1
+          fi
+          EXISTING=$(echo "$RESP" | jq -r --arg h "$HOST" '.result[] | select(.host==$h) | .site_tag')
+          if [ -n "$EXISTING" ]; then
+            echo "SITE_TAG=$EXISTING" >> $GITHUB_ENV
+            echo "Allerede satt opp. site_tag=$EXISTING"
+          fi
+
+      - name: Opprett Web Analytics-site hvis ikke finnes
+        if: env.SITE_TAG == ''
+        run: |
+          set -e
+          RESP=$(curl -sS -X POST "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/rum/site_info" \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data "{\"host\":\"$HOST\",\"auto_install\":true}")
+          OK=$(echo "$RESP" | jq -r '.success')
+          if [ "$OK" != "true" ]; then
+            echo "::error::Klarte ikke opprette site"
+            echo "$RESP" | jq .
+            exit 1
+          fi
+          SITE_TAG=$(echo "$RESP" | jq -r '.result.site_tag')
+          echo "SITE_TAG=$SITE_TAG" >> $GITHUB_ENV
+          echo "::notice::Opprettet Web Analytics for $HOST. site_tag=$SITE_TAG (auto_install=true → Cloudflare injiserer beaconen, ingen kode trengs)."
+
+      - name: Oppsummering
+        run: |
+          echo "=================================="
+          echo "Cloudflare Web Analytics — $HOST"
+          echo "site_tag = $SITE_TAG"
+          echo "=================================="
+          echo ""
+          echo "Med auto_install=true legger Cloudflare beaconen inn automatisk på alle requests gjennom proxy."
+          echo "Se data: https://dash.cloudflare.com → Analytics & Logs → Web Analytics → $HOST"
