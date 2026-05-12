@@ -32,8 +32,9 @@
 a.logo{text-decoration:none}
 a.logo:hover{opacity:.85}
 .modal-body{display:flex !important;flex-direction:column !important;overflow:hidden !important}
-.intake-form{flex:1 1 auto !important;min-height:0 !important;height:auto !important;overflow-y:auto !important;padding-bottom:0 !important}
-.intake-actions{position:sticky !important;bottom:0 !important;background:#fff !important;margin:8px -28px 0 !important;padding:14px 28px !important;border-top:1px solid #e2e8f0 !important;flex-shrink:0 !important;z-index:2}
+.intake-form{flex:1 1 auto !important;min-height:0 !important;height:auto !important;overflow-y:auto !important;padding-bottom:14px !important}
+.intake-actions{flex-shrink:0 !important;background:#fff !important;padding:14px 28px !important;border-top:1px solid #e2e8f0 !important;display:flex !important;gap:10px !important;justify-content:flex-end !important;z-index:2}
+.modal-body:has(#intakeSuccess[style*="flex"]) .intake-actions{display:none !important}
 @media(max-width:640px){
   .header{padding:10px 12px !important;gap:8px !important}
   .logo{font-size:16px !important}
@@ -114,12 +115,12 @@ a.logo:hover{opacity:.85}
                 <div id="intakeError" class="intake-error" style="display:none"></div>
 
                 <div id="cf-turnstile-container" style="display:flex;justify-content:center;min-height:65px;margin-top:4px"></div>
-
-                <div class="intake-actions">
-                    <button type="button" class="intake-btn intake-btn-cancel" onclick="closeHaloModal()">Avbryt</button>
-                    <button type="submit" class="intake-btn intake-btn-submit" id="intakeSubmit">Send rapport</button>
-                </div>
             </form>
+
+            <div class="intake-actions" id="intakeActions">
+                <button type="button" class="intake-btn intake-btn-cancel" onclick="closeHaloModal()">Avbryt</button>
+                <button type="submit" form="intakeForm" class="intake-btn intake-btn-submit" id="intakeSubmit">Send rapport</button>
+            </div>
 
             <div class="intake-success" id="intakeSuccess" style="display:none">
                 <div class="intake-success-icon">✓</div>
