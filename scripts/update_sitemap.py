@@ -33,6 +33,8 @@ PAGES = {
     '/rapport-2026/kommuner/': 0.85,
     '/rapport-2026/e-handel/': 0.85,
     '/rapport-2026/medier/': 0.85,
+    '/case/': 0.7,
+    '/feil/': 0.8,
 }
 
 
@@ -60,10 +62,25 @@ def discover_blog_posts() -> dict[str, float]:
     return out
 
 
+def discover_error_pages() -> dict[str, float]:
+    """Finn alle /feil/*-undersider med index.html."""
+    out = {}
+    feil_dir = ROOT / 'feil'
+    if not feil_dir.exists():
+        return out
+    for sub in feil_dir.iterdir():
+        if sub.is_dir() and (sub / 'index.html').exists():
+            out[f'/feil/{sub.name}/'] = 0.75
+    return out
+
+
 def main():
     # Slå sammen statiske + auto-oppdagete sider
     all_pages = dict(PAGES)
     for path, prio in discover_blog_posts().items():
+        if path not in all_pages:
+            all_pages[path] = prio
+    for path, prio in discover_error_pages().items():
         if path not in all_pages:
             all_pages[path] = prio
 
