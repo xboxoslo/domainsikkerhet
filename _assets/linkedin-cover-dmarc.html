@@ -5,69 +5,87 @@
 <title>LinkedIn Cover — DMARC offentlig sektor</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  html,body{background:#1e293b;font-family:'Inter','SF Pro Display',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased}
+  html,body{background:#0a0a0a;font-family:'JetBrains Mono','SF Mono','Menlo','Consolas',monospace;-webkit-font-smoothing:antialiased}
   .cover{
     width:1280px;height:720px;
-    background:radial-gradient(ellipse at top left,#1a2540 0%,#0f172a 65%);
-    position:relative;overflow:hidden;
-    color:#fff;
-    padding:80px 90px;
-    display:flex;flex-direction:column;justify-content:space-between;
+    background:#0c0c0c;
+    color:#e5e5e5;
+    padding:60px 70px;
+    display:flex;flex-direction:column;
+    font-size:18px;line-height:1.5;
+    position:relative;
   }
-  .top{display:flex;align-items:center;justify-content:space-between}
-  .brand{font-size:22px;font-weight:800;letter-spacing:-.02em}
-  .brand span{color:#4fd1c5}
-  .badge{
-    background:rgba(220,38,38,.15);color:#fca5a5;
-    border:1px solid rgba(220,38,38,.4);
-    padding:8px 16px;border-radius:999px;
-    font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
-  }
-  .center{display:flex;align-items:flex-end;gap:36px}
-  .big-num{
-    font-size:280px;font-weight:900;line-height:.85;letter-spacing:-.04em;
-    background:linear-gradient(135deg,#5eead4,#14b8a6 60%,#0f766e);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .num-label{padding-bottom:30px}
-  .num-label .l1{font-size:38px;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
-  .num-label .l2{font-size:22px;font-weight:500;color:#94a3b8;letter-spacing:-.01em}
-  .headline{
-    font-size:46px;font-weight:800;line-height:1.1;letter-spacing:-.025em;
-    max-width:1000px;
-  }
-  .headline em{font-style:normal;color:#5eead4}
-  .footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.1);padding-top:24px}
-  .meta{font-size:15px;color:#94a3b8;letter-spacing:.01em}
-  .meta strong{color:#cbd5e0;font-weight:600}
-  .url{font-size:18px;font-weight:700;color:#5eead4;letter-spacing:-.01em}
-  .dots{position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(20,184,166,.12) 0%,transparent 70%);pointer-events:none}
+  .prompt{color:#7c7c7c}
+  .green{color:#7fb069}
+  .red{color:#e06c75}
+  .yellow{color:#e5c07b}
+  .dim{color:#6a6a6a}
+  .white{color:#fafafa}
+
+  .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px;font-size:15px;color:#6a6a6a}
+  .header .right{display:flex;gap:18px}
+
+  .cmd{margin-bottom:18px}
+  .out{margin-bottom:6px}
+  .blank{height:14px}
+
+  .table{margin:6px 0 18px 0;font-size:17px}
+  .row{display:grid;grid-template-columns:34px 1fr 110px 110px 90px;gap:14px;padding:3px 0}
+  .row.head{color:#6a6a6a;border-bottom:1px solid #1f1f1f;padding-bottom:6px;margin-bottom:4px}
+  .row .num{color:#6a6a6a;text-align:right}
+
+  .footer{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;padding-top:18px;border-top:1px solid #1f1f1f}
+  .footer .left{color:#6a6a6a;font-size:14px;line-height:1.6}
+  .footer .url{color:#7fb069;font-size:18px}
 </style>
 </head>
 <body>
 <div class="cover">
-  <div class="dots"></div>
-  <div class="top">
-    <div class="brand">data1<span>.no</span></div>
-    <div class="badge">RAPPORT · MAI 2026</div>
-  </div>
 
-  <div class="center">
-    <div class="big-num">12</div>
-    <div class="num-label">
-      <div class="l1">norske offentlige etater</div>
-      <div class="l2">overvåker phishing — men stopper den ikke</div>
+  <div class="header">
+    <span>~/dmarc-sweep</span>
+    <div class="right">
+      <span>norske-domener.txt</span>
+      <span>2026-05-12</span>
     </div>
   </div>
 
-  <div class="headline">
-    Altinn, NRK, UiO og 9 andre har DMARC <em>kun på overvåking</em>.
+  <div class="cmd">
+    <span class="prompt">$</span> <span class="white">dig-sweep --policy=none --sector=offentlig norske-domener.txt</span>
   </div>
 
+  <div class="out dim">scanning 100 domains via 1.1.1.1 ...</div>
+  <div class="out dim">filtering: has DMARC AND p=none AND has MX</div>
+  <div class="blank"></div>
+
+  <div class="out"><span class="yellow">12 matches:</span></div>
+
+  <div class="table">
+    <div class="row head"><span class="num">#</span><span>domain</span><span>spf</span><span>dkim</span><span>policy</span></div>
+    <div class="row"><span class="num">01</span><span class="white">altinn.no</span><span class="green">ok</span><span class="green">ok</span><span class="red">p=none</span></div>
+    <div class="row"><span class="num">02</span><span class="white">nrk.no</span><span class="green">ok</span><span class="green">ok</span><span class="red">p=none</span></div>
+    <div class="row"><span class="num">03</span><span class="white">forsvaret.no</span><span class="green">ok</span><span class="green">ok</span><span class="red">p=none</span></div>
+    <div class="row"><span class="num">04</span><span class="white">uio.no</span><span class="green">ok</span><span class="green">ok</span><span class="red">p=none</span></div>
+    <div class="row"><span class="num">05</span><span class="white">ntnu.no</span><span class="green">ok</span><span class="green">ok</span><span class="red">p=none</span></div>
+    <div class="row"><span class="num">06</span><span class="white">nmbu.no</span><span class="green">ok</span><span class="green">ok</span><span class="red">p=none</span></div>
+    <div class="row"><span class="num">07</span><span class="white">hvl.no</span><span class="green">ok</span><span class="green">ok</span><span class="red">p=none</span></div>
+    <div class="row"><span class="num">08</span><span class="white">khio.no</span><span class="green">ok</span><span class="green">ok</span><span class="red">p=none</span></div>
+    <div class="row"><span class="num">09</span><span class="white">oslo.kommune.no</span><span class="green">ok</span><span class="green">ok</span><span class="red">p=none</span></div>
+    <div class="row"><span class="num">10</span><span class="white">baerum.kommune.no</span><span class="green">ok</span><span class="green">ok</span><span class="red">p=none</span></div>
+    <div class="row"><span class="num">11</span><span class="white">tromso.kommune.no</span><span class="green">ok</span><span class="green">ok</span><span class="red">p=none</span></div>
+    <div class="row"><span class="num">12</span><span class="white">ks.no</span><span class="green">ok</span><span class="green">ok</span><span class="red">p=none</span></div>
+  </div>
+
+  <div class="out dim"># SPF + DKIM på plass, men ingenting håndheves.</div>
+
   <div class="footer">
-    <div class="meta">Live DNS-verifisert · <strong>12. mai 2026</strong> · 100 norske domener</div>
+    <div class="left">
+      sweep: 100 domener, DoH 1.1.1.1, MX-filtrert<br>
+      audit log: github.com/xboxoslo/domainsikkerhet
+    </div>
     <div class="url">data1.no</div>
   </div>
+
 </div>
 </body>
 </html>
