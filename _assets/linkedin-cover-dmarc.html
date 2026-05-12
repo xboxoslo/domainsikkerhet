@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<title>LinkedIn Cover — DMARC offentlig sektor</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#1e293b;font-family:'Inter','SF Pro Display',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased}
+  .cover{
+    width:1280px;height:720px;
+    background:radial-gradient(ellipse at top left,#1a2540 0%,#0f172a 65%);
+    position:relative;overflow:hidden;
+    color:#fff;
+    padding:80px 90px;
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .top{display:flex;align-items:center;justify-content:space-between}
+  .brand{font-size:22px;font-weight:800;letter-spacing:-.02em}
+  .brand span{color:#4fd1c5}
+  .badge{
+    background:rgba(220,38,38,.15);color:#fca5a5;
+    border:1px solid rgba(220,38,38,.4);
+    padding:8px 16px;border-radius:999px;
+    font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  }
+  .center{display:flex;align-items:flex-end;gap:36px}
+  .big-num{
+    font-size:280px;font-weight:900;line-height:.85;letter-spacing:-.04em;
+    background:linear-gradient(135deg,#5eead4,#14b8a6 60%,#0f766e);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .num-label{padding-bottom:30px}
+  .num-label .l1{font-size:38px;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+  .num-label .l2{font-size:22px;font-weight:500;color:#94a3b8;letter-spacing:-.01em}
+  .headline{
+    font-size:46px;font-weight:800;line-height:1.1;letter-spacing:-.025em;
+    max-width:1000px;
+  }
+  .headline em{font-style:normal;color:#5eead4}
+  .footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.1);padding-top:24px}
+  .meta{font-size:15px;color:#94a3b8;letter-spacing:.01em}
+  .meta strong{color:#cbd5e0;font-weight:600}
+  .url{font-size:18px;font-weight:700;color:#5eead4;letter-spacing:-.01em}
+  .dots{position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(20,184,166,.12) 0%,transparent 70%);pointer-events:none}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="dots"></div>
+  <div class="top">
+    <div class="brand">data1<span>.no</span></div>
+    <div class="badge">RAPPORT · MAI 2026</div>
+  </div>
+
+  <div class="center">
+    <div class="big-num">12</div>
+    <div class="num-label">
+      <div class="l1">norske offentlige etater</div>
+      <div class="l2">overvåker phishing — men stopper den ikke</div>
+    </div>
+  </div>
+
+  <div class="headline">
+    Altinn, NRK, UiO og 9 andre har DMARC <em>kun på overvåking</em>.
+  </div>
+
+  <div class="footer">
+    <div class="meta">Live DNS-verifisert · <strong>12. mai 2026</strong> · 100 norske domener</div>
+    <div class="url">data1.no</div>
+  </div>
+</div>
+</body>
+</html>
