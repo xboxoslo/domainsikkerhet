@@ -5,7 +5,7 @@ body{font-family:"Inter","Inter Fallback",-apple-system,BlinkMacSystemFont,sans-
 .header{background:#1a202c;padding:14px 28px;display:flex;align-items:center;gap:18px;box-shadow:0 2px 8px rgba(0,0,0,.3);position:sticky;top:0;z-index:100}
 .logo{color:#fff;font-size:19px;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;height:40px;white-space:nowrap}.logo:hover{opacity:.85}.logo span{color:#4fd1c5}
 .spacer{flex:1}.nav-link{color:#cbd5e0;text-decoration:none;font-size:14px}.nav-link:hover{color:#fff}
-.header-search{flex:1;max-width:580px;margin:0 auto;display:flex;gap:8px;align-items:center}
+.header-search{width:580px;max-width:calc(100% - 200px);margin:0 auto;display:flex;gap:8px;align-items:center;flex-shrink:1}
 .header-search input{flex:1;height:40px;padding:0 16px;border:1px solid #4a5568;border-radius:8px;font-size:15px;outline:0;background:#2d3748;color:#fff;font-family:inherit}
 .header-search input::placeholder{color:#718096}
 .header-search input:focus{border-color:#4fd1c5}
