@@ -1,0 +1,60 @@
+name: Verify sp= subdomain policy
+
+# Manuell trigger. Sjekker sp= subdomain-policy for de 12 offentlige etatene
+# i bloggposten 2026-05-12. Brukes for å verifisere LinkedIn-claim om at
+# "ingen av de 12 har sp= subdomain-policy satt".
+#
+# Output: _data/sp-verification-YYYY-MM-DD.md
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run sp= verification
+        run: python scripts/verify_sp_subdomain.py
+
+      - name: Upload report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sp-verification-${{ github.run_id }}
+          path: _data/sp-verification-*.md
+
+      - name: Commit report back to repo
+        run: |
+          git config user.name "data1.no bot"
+          git config user.email "bot@data1.no"
+          if [[ -n $(git status --porcelain _data/) ]]; then
+            git add _data/sp-verification-*.md
+            git commit -m "sp= verification: $(date -u +%Y-%m-%d)"
+            git push
+            echo "Rapport pushet."
+          else
+            echo "Ingen ny rapport."
+          fi
+
+      - name: Print report summary
+        run: |
+          echo "::group::sp= verification report"
+          cat _data/sp-verification-*.md | head -40
+          echo "::endgroup::"
