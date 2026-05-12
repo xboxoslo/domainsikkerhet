@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Altinn, NRK, UiO, NTNU og syv andre offentlige etater har DMARC kun på overvåking (p=none) i 2026. Phishing-e-post som spoofer disse domenene kan teknisk nå mottakerens innboks.">
+<meta name="keywords" content="dmarc altinn, dmarc nrk, dmarc uio, dmarc ntnu, dmarc offentlig sektor, p=none, e-postsikkerhet stat, phishing offentlig sektor norge">
+<meta name="author" content="Micronet">
+<meta name="theme-color" content="#1a202c">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="data1.no">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:url" content="https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/">
+<meta property="og:title" content="Altinn, NRK og 10 andre offentlige etater har DMARC kun på overvåking — data1.no rapport 2026">
+<meta property="og:description" content="12 norske offentlige etater bruker DMARC kun til overvåking (p=none), ikke håndhevelse. Phishing-e-post som spoofer disse domenene kan teknisk nå mottakerens innboks.">
+<meta property="og:image" content="https://data1.no/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Altinn, NRK, UiO, NTNU og 8 andre offentlige etater: DMARC kun på overvåking">
+<meta name="twitter:description" content="Phishing-e-post som spoofer disse offentlige domenene kan teknisk nå mottakerens innboks. data1.no har scannet 158 norske domener.">
+<meta name="twitter:image" content="https://data1.no/og-image.png">
+<title>Altinn, NRK, UiO og 9 andre offentlige etater har DMARC kun på overvåking — data1.no</title>
+<link rel="stylesheet" href="/blogg/_assets/post.css">
+<style>
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;background:rgba(15,23,42,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:8px;overflow:hidden;border:1px solid rgba(56,189,248,.15)}
+.data-table th{background:rgba(15,23,42,.8);color:#fff;text-align:left;padding:10px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid rgba(56,189,248,.2)}
+.data-table td{padding:10px 12px;border-bottom:1px solid rgba(56,189,248,.08);color:#cbd5e0}
+.data-table a{color:#7dd3fc;text-decoration:none}
+.data-table a:hover{text-decoration:underline}
+.grade-pill{display:inline-block;padding:2px 8px;border-radius:6px;font-weight:800;font-size:12px;letter-spacing:-.01em;color:#fff}
+.grade-f{background:#dc2626}
+.grade-d{background:#ef4444}
+.grade-c{background:#f97316}
+.tldr{background:rgba(15,23,42,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(56,189,248,.2);border-left:4px solid #14b8a6;border-radius:10px;padding:18px 22px;margin:24px 0}
+.tldr strong{color:#5eead4}
+.method{font-size:13px;color:#94a3b8;background:rgba(15,23,42,.4);border:1px solid rgba(56,189,248,.12);border-radius:8px;padding:14px 18px;margin:32px 0 0}
+.method strong{color:#cbd5e0}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Altinn, NRK og 10 andre offentlige etater har DMARC kun på overvåking","datePublished":"2026-05-12","dateModified":"2026-05-12","author":{"@type":"Organization","name":"Micronet","url":"https://micronet.no/"},"publisher":{"@type":"Organization","name":"data1.no","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"}},"description":"12 norske offentlige etater bruker DMARC kun til overvåking (p=none), ikke håndhevelse. Phishing-e-post som spoofer disse domenene kan teknisk nå mottakerens innboks.","image":"https://data1.no/og-image.png","mainEntityOfPage":"https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/","inLanguage":"nb-NO"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hjem","item":"https://data1.no/"},{"@type":"ListItem","position":2,"name":"Blogg","item":"https://data1.no/blogg/"},{"@type":"ListItem","position":3,"name":"Offentlige etater DMARC 2026","item":"https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/"}]}</script>
+</head>
+<body>
+<header class="header">
+  <a href="/" class="logo">data1<span>.no</span></a>
+  <form class="header-search" action="/" method="get" role="search">
+    <input type="text" name="domain" placeholder="Skriv inn domene — f.eks. micronet.no" aria-label="Sjekk domene">
+    <button type="submit">Analyser →</button>
+  </form>
+</header>
+<main>
+<nav class="crumbs"><a href="/">Hjem</a> › <a href="/blogg/">Blogg</a> › Offentlige etater DMARC 2026</nav>
+<h1>Altinn, NRK, UiO og 9 andre offentlige etater har DMARC kun på overvåking</h1>
+
+<p class="lead">12 norske offentlige etater — inkludert Altinn, NRK, Universitetet i Oslo, NTNU og tre kommuner — har DMARC-record på plass, men kun på overvåkings-modus (p=none). Det betyr at e-postservere ikke avviser phishing-e-post som utgir seg for å komme fra disse domenene.</p>
+
+<p class="meta">Publisert 12. mai 2026 · Av Micronet · 5 min lesetid</p>
+
+<div class="tldr">
+  <strong>Kort oppsummert:</strong> Alle 12 etatene har gjort jobben med å aktivere DMARC — men ingen av dem har skjerpet policyen til <code>p=quarantine</code> eller <code>p=reject</code>. Det betyr at Gmail og Outlook samler inn DMARC-rapporter for spoofing-forsøk, men leverer fortsatt den falske e-posten i innboksen. Det er trygt å bli i overvåkings-modus i 4-8 uker mens man analyserer rapportene — men flere av disse etatene har hatt DMARC-record i flere år uten å skjerpe.
+</div>
+
+<h2 id="hva-er-p-none">Hva betyr "p=none"?</h2>
+
+<p>DMARC har tre nivåer av håndhevelse, satt via <code>p=</code>-parameteren i TXT-recorden:</p>
+
+<ul>
+  <li><strong><code>p=none</code></strong> — overvåking. Mottakende e-postserver (Gmail, Outlook, Apple Mail) sjekker DMARC, samler rapport-data, men leverer e-posten uansett. <em>Phishing-e-post når innboksen.</em></li>
+  <li><strong><code>p=quarantine</code></strong> — mistenkelig e-post sendes til spam-mappen.</li>
+  <li><strong><code>p=reject</code></strong> — mistenkelig e-post avvises ved levering, mottaker ser den aldri. <em>Dette er anbefalt sluttilstand.</em></li>
+</ul>
+
+<p>Anbefalt overgang er <code>p=none</code> i 4-8 uker for å identifisere alle legitime avsendere, deretter trinnvis skjerpelse til <code>p=quarantine</code> med prosentvis utrulling, og til slutt <code>p=reject</code>. Hele prosessen tar typisk 2-3 måneder.</p>
+
+<h2 id="de-12-etatene">De 12 offentlige etatene med p=none</h2>
+
+<p>Data1.no har scannet 158 norske domener daglig siden januar 2026. Følgende 12 offentlige domener har DMARC-record, men har stoppet på overvåkings-modus:</p>
+
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>Domene</th>
+      <th>Sektor</th>
+      <th>Karakter</th>
+      <th>DMARC-policy</th>
+      <th>Live-status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><a href="/sjekk/altinn.no/">altinn.no</a></td><td>Statsportal</td><td><span class="grade-pill grade-f">F</span></td><td><code>p=none</code></td><td><a href="/sjekk/altinn.no/">Se rapport →</a></td></tr>
+    <tr><td><a href="/sjekk/nrk.no/">nrk.no</a></td><td>Statskanalen</td><td><span class="grade-pill grade-d">D</span></td><td><code>p=none</code></td><td><a href="/sjekk/nrk.no/">Se rapport →</a></td></tr>
+    <tr><td><a href="/sjekk/forsvaret.no/">forsvaret.no</a></td><td>Forsvaret</td><td><span class="grade-pill grade-d">D</span></td><td><code>p=none</code></td><td><a href="/sjekk/forsvaret.no/">Se rapport →</a></td></tr>
+    <tr><td><a href="/sjekk/uio.no/">uio.no</a></td><td>Universitetet i Oslo</td><td><span class="grade-pill grade-f">F</span></td><td><code>p=none</code></td><td><a href="/sjekk/uio.no/">Se rapport →</a></td></tr>
+    <tr><td><a href="/sjekk/ntnu.no/">ntnu.no</a></td><td>NTNU</td><td><span class="grade-pill grade-f">F</span></td><td><code>p=none</code></td><td><a href="/sjekk/ntnu.no/">Se rapport →</a></td></tr>
+    <tr><td><a href="/sjekk/nmbu.no/">nmbu.no</a></td><td>NMBU</td><td><span class="grade-pill grade-d">D</span></td><td><code>p=none</code></td><td><a href="/sjekk/nmbu.no/">Se rapport →</a></td></tr>
+    <tr><td><a href="/sjekk/hvl.no/">hvl.no</a></td><td>Høgskulen på Vestlandet</td><td><span class="grade-pill grade-d">D</span></td><td><code>p=none</code></td><td><a href="/sjekk/hvl.no/">Se rapport →</a></td></tr>
+    <tr><td><a href="/sjekk/khio.no/">khio.no</a></td><td>Kunsthøgskolen i Oslo</td><td><span class="grade-pill grade-d">D</span></td><td><code>p=none</code></td><td><a href="/sjekk/khio.no/">Se rapport →</a></td></tr>
+    <tr><td><a href="/sjekk/oslo.kommune.no/">oslo.kommune.no</a></td><td>Oslo kommune</td><td><span class="grade-pill grade-d">D</span></td><td><code>p=none</code></td><td><a href="/sjekk/oslo.kommune.no/">Se rapport →</a></td></tr>
+    <tr><td><a href="/sjekk/baerum.kommune.no/">baerum.kommune.no</a></td><td>Bærum kommune</td><td><span class="grade-pill grade-d">D</span></td><td><code>p=none</code></td><td><a href="/sjekk/baerum.kommune.no/">Se rapport →</a></td></tr>
+    <tr><td><a href="/sjekk/tromso.kommune.no/">tromso.kommune.no</a></td><td>Tromsø kommune</td><td><span class="grade-pill grade-d">D</span></td><td><code>p=none</code></td><td><a href="/sjekk/tromso.kommune.no/">Se rapport →</a></td></tr>
+    <tr><td><a href="/sjekk/ks.no/">ks.no</a></td><td>KS (kommune-interesseorganisasjon)</td><td><span class="grade-pill grade-d">D</span></td><td><code>p=none</code></td><td><a href="/sjekk/ks.no/">Se rapport →</a></td></tr>
+  </tbody>
+</table>
+
+<p>Alle 12 har bekreftet aktive MX-records (verifisert via Cloudflare DNS 12. mai 2026), så dette er reelle e-post-domener, ikke parkerte URL-er.</p>
+
+<h2 id="hva-betyr-det-i-praksis">Hva betyr dette i praksis?</h2>
+
+<p>For en kriminell som ønsker å sende phishing-e-post i navnet til en av disse etatene, er forskjellen mellom <code>p=none</code> og <code>p=reject</code> avgjørende:</p>
+
+<ul>
+  <li>Med <strong><code>p=reject</code></strong>: Forfalsket e-post med <code>From: noreply@altinn.no</code> blir avvist av Outlook/Gmail før den når frem. Mottakeren ser aldri den.</li>
+  <li>Med <strong><code>p=none</code></strong>: Samme forfalskede e-post leveres normalt til innboksen. Mottakeren kan ikke skille den fra ekte Altinn-varsel uten å sjekke headers manuelt.</li>
+</ul>
+
+<p>Norsk offentlig sektor er et populært phishing-mål, særlig rundt skattemeldings-sesongen for <a href="/sjekk/altinn.no/">altinn.no</a> og rundt søknadsfrister for universitetene. <a href="/blogg/dmarc/">DMARC med <code>p=reject</code> er det enkleste enkelttiltak</a> for å redusere risikoen.</p>
+
+<h2 id="motpolen">Motpolen: offentlige etater som har skjerpet</h2>
+
+<p>For å sette dette i kontekst: flere norske offentlige etater <em>har</em> fullført overgangen til håndhevende DMARC. <a href="/sjekk/nav.no/">nav.no</a>, <a href="/sjekk/ssb.no/">ssb.no</a> og <a href="/sjekk/stortinget.no/">stortinget.no</a> kjører alle med <code>p=reject</code>. Det viser at det er fullt mulig — det krever bare prioritet og en plan for utrulling.</p>
+
+<h2 id="hva-bor-skje">Hva bør skje nå?</h2>
+
+<p>For etatene som står på <code>p=none</code>: hvis DMARC-recorden har vært aktiv i over 8 uker, er det på tide å skjerpe. Praktisk gjennomføring:</p>
+
+<ol>
+  <li><strong>Analyser DMARC-rapporter (RUA)</strong> — finn alle legitime avsendere og verifiser at de består SPF og DKIM.</li>
+  <li><strong>Skjerp til <code>p=quarantine; pct=25</code></strong> — 25 % av spoofet e-post sendes til spam.</li>
+  <li><strong>Trinnvis opp til pct=100</strong>, deretter <code>p=reject</code>.</li>
+</ol>
+
+<p>For alle andre med eget domene: <a href="/">sjekk DMARC-statusen din her</a> på 10 sekunder. Eller bruk vår <a href="/verktoy/dmarc-generator/">DMARC-generator</a> for å bygge riktig record.</p>
+
+<div class="method">
+  <strong>Metodikk:</strong> Data hentet via Cloudflare DNS-over-HTTPS 12. mai 2026 kl 09:02 UTC. Live-verifisering kjørt 12. mai kl 20:30. Alle 12 domener har bekreftet MX-records og DMARC-record med <code>p=none</code>. Karakter (A+ til F) reflekterer en sammenlagt score basert på DMARC (35p), SPF (25p), DKIM (20p), MTA-STS (12p), TLS-RPT (5p) og BIMI (3p). Full metodikk: <a href="/ordbok/">ordbok</a>.
+</div>
+
+</main>
+</body>
+</html>
