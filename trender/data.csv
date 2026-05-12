@@ -23,7 +23,7 @@ telenor.no,Telecom,97,A+,reject,1,1,1,1,1,0
 telia.no,Telecom,75,B,reject,1,1,1,0,0,0
 ice.no,Telecom,80,A,reject,1,1,1,0,0,0
 get.no,Telecom,48,D,none,1,1,1,0,0,0
-altibox.no,Telecom,73,B,reject,1,1,1,0,0,0
+altibox.no,Telecom,53,D,reject,1,1,0,0,0,0
 talkmore.no,Telecom,80,A,reject,1,1,1,0,0,0
 nav.no,Offentlig sektor,100,A+,reject,1,1,1,1,1,1
 skatteetaten.no,Offentlig sektor,82,A,quarantine,1,1,1,1,1,0
