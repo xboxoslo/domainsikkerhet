@@ -185,7 +185,7 @@
     filtered.sort((a, b) => b.score - a.score || a.domain.localeCompare(b.domain));
     document.getElementById('rankBody').innerHTML = filtered.map((r, i) =>
       '<tr><td class="rank">' + (i + 1) + '</td>' +
-      '<td><a href="/?domain=' + encodeURIComponent(r.domain) + '" rel="nofollow">' + htmlEscape(r.domain) + '</a></td>' +
+      '<td><a href="/sjekk/' + encodeURIComponent(r.domain) + '/">' + htmlEscape(r.domain) + '</a></td>' +
       '<td><span class="grade-pill ' + gradeClass(r.grade) + '">' + r.grade + '</span></td>' +
       '<td class="score">' + r.score + '%</td>' +
       '<td>' + check(r.dmarc) + '<span class="muted">' + (r.dmarc_p || '') + '</span></td>' +
