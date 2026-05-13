@@ -16,8 +16,8 @@ SNAPSHOTS_DIR = ROOT / '_data' / 'snapshots'
 OUT_DIR = ROOT / 'sjekk'
 
 GRADE_COLORS = {
-    'A+': '#10b981', 'A': '#22c55e', 'B': '#eab308',
-    'C': '#f97316', 'D': '#ef4444', 'F': '#dc2626',
+    'A+': '#10b981', 'A': '#22c55e', 'B': '#3b82f6',
+    'C': '#eab308', 'D': '#f97316', 'F': '#7f1d1d',
 }
 
 
