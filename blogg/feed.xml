@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data1.no — blogg om e-postsikkerhet</title>
+    <link>https://data1.no/blogg/</link>
+    <atom:link href="https://data1.no/blogg/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Praktiske guider på norsk om hvordan du beskytter e-post-domenet ditt mot phishing, spoofing og misbruk.</description>
+    <language>nb-NO</language>
+    <lastBuildDate>Thu, 14 May 2026 09:55:58 +0000</lastBuildDate>
+    <generator>scripts/generate_rss.py</generator>
+    <item>
+      <title>Altinn, NRK og 10 andre offentlige etater har DMARC kun på overvåking</title>
+      <link>https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/</link>
+      <guid isPermaLink="true">https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/</guid>
+      <pubDate>Tue, 12 May 2026 09:00:00 +0000</pubDate>
+      <description>Altinn, NRK, UiO, NTNU og syv andre offentlige etater har DMARC kun på overvåking (p=none) i 2026. Phishing-e-post som spoofer disse domenene kan teknisk nå mottakerens innboks.</description>
+    </item>
+    <item>
+      <title>Norske storselskaper uten grunnleggende e-postsikkerhet</title>
+      <link>https://data1.no/blogg/norske-storselskaper-uten-grunnleggende-e-postsikkerhet/</link>
+      <guid isPermaLink="true">https://data1.no/blogg/norske-storselskaper-uten-grunnleggende-e-postsikkerhet/</guid>
+      <pubDate>Mon, 11 May 2026 09:00:00 +0000</pubDate>
+      <description>Norske storselskaper uten grunnleggende e-postsikkerhet — ukentlig DMARC-analyse fra data1.no.</description>
+    </item>
+    <item>
+      <title>Equinor, Hydro og Yara: Tre industrigiganter uten e-postsikkerhet</title>
+      <link>https://data1.no/blogg/equinor-hydro-og-yara-tre-industrigiganter-uten-e-postsikker/</link>
+      <guid isPermaLink="true">https://data1.no/blogg/equinor-hydro-og-yara-tre-industrigiganter-uten-e-postsikker/</guid>
+      <pubDate>Sat, 09 May 2026 09:00:00 +0000</pubDate>
+      <description>Equinor, Hydro og Yara: Tre industrigiganter uten e-postsikkerhet — ukentlig DMARC-analyse fra data1.no.</description>
+    </item>
+    <item>
+      <title>Slik setter du opp DMARC i Google Workspace</title>
+      <link>https://data1.no/blogg/dmarc-google-workspace/</link>
+      <guid isPermaLink="true">https://data1.no/blogg/dmarc-google-workspace/</guid>
+      <pubDate>Fri, 08 May 2026 09:00:00 +0000</pubDate>
+      <description>Slik setter du opp DMARC i Google Workspace / Gmail steg for steg. Oppfyll Googles 2024-krav for masseutsendelse og beskytt domenet ditt mot phishing.</description>
+    </item>
+    <item>
+      <title>Slik setter du opp DMARC i Microsoft 365</title>
+      <link>https://data1.no/blogg/dmarc-microsoft-365/</link>
+      <guid isPermaLink="true">https://data1.no/blogg/dmarc-microsoft-365/</guid>
+      <pubDate>Fri, 08 May 2026 09:00:00 +0000</pubDate>
+      <description>Steg-for-steg guide til å sette opp DMARC i Microsoft 365 / Exchange Online — fra første TXT-record til full p=reject med rapportering. Med Norge-spesifikke tips.</description>
+    </item>
+    <item>
+      <title>SPF-oppsett i Microsoft 365</title>
+      <link>https://data1.no/blogg/spf-microsoft-365/</link>
+      <guid isPermaLink="true">https://data1.no/blogg/spf-microsoft-365/</guid>
+      <pubDate>Fri, 08 May 2026 09:00:00 +0000</pubDate>
+      <description>Komplett guide til SPF-oppsett for Microsoft 365 / Exchange Online. Inkluderer 10-lookup grensen, hybrid-oppsett og alle vanlige tredjepartstjenester.</description>
+    </item>
+    <item>
+      <title>DKIM forklart: Digital signatur for e-post</title>
+      <link>https://data1.no/blogg/dkim/</link>
+      <guid isPermaLink="true">https://data1.no/blogg/dkim/</guid>
+      <pubDate>Thu, 07 May 2026 09:00:00 +0000</pubDate>
+      <description>DKIM (DomainKeys Identified Mail) er den digitale signaturen som beviser at en e-post faktisk kommer fra deg. Lær hvordan det fungerer og hvordan du verifiserer oppsettet.</description>
+    </item>
+    <item>
+      <title>DMARC forklart: Slik beskytter du domenet mot phishing</title>
+      <link>https://data1.no/blogg/dmarc/</link>
+      <guid isPermaLink="true">https://data1.no/blogg/dmarc/</guid>
+      <pubDate>Thu, 07 May 2026 09:00:00 +0000</pubDate>
+      <description>DMARC forklart enkelt: Hva det er, hvorfor du trenger det, og hvordan du setter det opp på .no-domener — med konkrete eksempler og typiske feil å unngå.</description>
+    </item>
+    <item>
+      <title>SPF: Slik beskytter du domenet mot e-post-spoofing</title>
+      <link>https://data1.no/blogg/spf/</link>
+      <guid isPermaLink="true">https://data1.no/blogg/spf/</guid>
+      <pubDate>Thu, 07 May 2026 09:00:00 +0000</pubDate>
+      <description>SPF (Sender Policy Framework) er ditt første forsvar mot e-post-spoofing. Lær hvordan det fungerer, hvordan du setter det opp, og 7 vanlige feil som ødelegger leveringsdyktigheten.</description>
+    </item>
+  </channel>
+</rss>

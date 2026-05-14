@@ -9,10 +9,13 @@
 <meta name="theme-color" content="#1a202c">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/">
+<link rel="alternate" type="application/rss+xml" title="data1.no — blogg om e-postsikkerhet" href="https://data1.no/blogg/feed.xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="data1.no">
 <meta property="og:locale" content="nb_NO">
 <meta property="og:url" content="https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/">
+<meta property="article:published_time" content="2026-05-12T09:00:00+00:00">
+<meta property="article:modified_time" content="2026-05-12T09:00:00+00:00">
 <meta property="og:title" content="Altinn, NRK og 10 andre offentlige etater har DMARC kun på overvåking — data1.no rapport 2026">
 <meta property="og:description" content="12 norske offentlige etater bruker DMARC kun til overvåking (p=none), ikke håndhevelse. Phishing-e-post som spoofer disse domenene kan teknisk nå mottakerens innboks.">
 <meta property="og:image" content="https://data1.no/og-image.png">
@@ -38,7 +41,7 @@
 .method{font-size:13px;color:#94a3b8;background:rgba(15,23,42,.4);border:1px solid rgba(56,189,248,.12);border-radius:8px;padding:14px 18px;margin:32px 0 0}
 .method strong{color:#cbd5e0}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Altinn, NRK og 10 andre offentlige etater har DMARC kun på overvåking","datePublished":"2026-05-12","dateModified":"2026-05-12","author":{"@type":"Organization","name":"Micronet","url":"https://micronet.no/"},"publisher":{"@type":"Organization","name":"data1.no","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"}},"description":"12 norske offentlige etater bruker DMARC kun til overvåking (p=none), ikke håndhevelse. Phishing-e-post som spoofer disse domenene kan teknisk nå mottakerens innboks.","image":"https://data1.no/og-image.png","mainEntityOfPage":"https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/","inLanguage":"nb-NO"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"Altinn, NRK og 10 andre offentlige etater har DMARC kun på overvåking","datePublished":"2026-05-12","dateModified":"2026-05-12","author":{"@type":"Organization","name":"Micronet","url":"https://micronet.no/"},"publisher":{"@type":"Organization","name":"data1.no","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"}},"description":"12 norske offentlige etater bruker DMARC kun til overvåking (p=none), ikke håndhevelse. Phishing-e-post som spoofer disse domenene kan teknisk nå mottakerens innboks.","image":"https://data1.no/og-image.png","mainEntityOfPage":"https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/","inLanguage":"nb-NO"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hjem","item":"https://data1.no/"},{"@type":"ListItem","position":2,"name":"Blogg","item":"https://data1.no/blogg/"},{"@type":"ListItem","position":3,"name":"Offentlige etater DMARC 2026","item":"https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/"}]}</script>
 </head>
 <body>
@@ -55,7 +58,7 @@
 
 <p class="lead">12 norske offentlige etater — inkludert Altinn, NRK, Universitetet i Oslo, NTNU og tre kommuner — har DMARC-record på plass, men kun på overvåkings-modus (p=none). Det betyr at e-postservere ikke avviser phishing-e-post som utgir seg for å komme fra disse domenene.</p>
 
-<p class="meta">Publisert 12. mai 2026 · Av Micronet · 5 min lesetid</p>
+<p class="meta">Publisert <time datetime="2026-05-12">12. mai 2026</time> · Av Micronet · 5 min lesetid</p>
 
 <div class="tldr">
   <strong>Kort oppsummert:</strong> Alle 12 etatene har gjort jobben med å aktivere DMARC — men ingen av dem har skjerpet policyen til <code>p=quarantine</code> eller <code>p=reject</code>. Det betyr at Gmail og Outlook samler inn DMARC-rapporter for spoofing-forsøk, men leverer fortsatt den falske e-posten i innboksen. Det er trygt å bli i overvåkings-modus i 4-8 uker mens man analyserer rapportene — men flere av disse etatene har hatt DMARC-record i flere år uten å skjerpe.
