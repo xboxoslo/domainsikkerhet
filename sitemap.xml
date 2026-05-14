@@ -1164,4 +1164,24 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://data1.no/dmarc/</loc>
+    <lastmod>2026-05-14</lastmod>
+  </url>
+  <url>
+    <loc>https://data1.no/spf/</loc>
+    <lastmod>2026-05-14</lastmod>
+  </url>
+  <url>
+    <loc>https://data1.no/dkim/</loc>
+    <lastmod>2026-05-14</lastmod>
+  </url>
+  <url>
+    <loc>https://data1.no/mta-sts/</loc>
+    <lastmod>2026-05-14</lastmod>
+  </url>
+  <url>
+    <loc>https://data1.no/tls-rpt/</loc>
+    <lastmod>2026-05-14</lastmod>
+  </url>
 </urlset>

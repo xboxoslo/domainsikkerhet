@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="nb-NO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DMARC-oppsett for norske virksomheter | Micronet</title>
+  <meta name="description" content="Få trygg DMARC-innføring med p=none, p=quarantine og p=reject. Vi hjelper med rua/ruf, rapportanalyse og kontrollert overgang til håndheving.">
+  <link rel="canonical" href="https://data1.no/dmarc/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"DMARC-oppsett og forvaltning","serviceType":"DMARC implementering","provider":{"@type":"Organization","name":"Micronet AS","url":"https://micronet.no"},"areaServed":"NO","url":"https://data1.no/dmarc/","offers":{"@type":"Offer","priceCurrency":"NOK","priceSpecification":[{"@type":"PriceSpecification","name":"Etablering","price":"1990"},{"@type":"PriceSpecification","name":"Drift/oppfølging","price":"295","unitText":"per domene per måned"}]}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Hvorfor starte med p=none?","acceptedAnswer":{"@type":"Answer","text":"p=none lar dere samle DMARC-rapporter uten å blokkere e-post. Dette gir trygg kartlegging av legitime avsendere før håndheving."}},{"@type":"Question","name":"Når bør vi gå til p=quarantine og p=reject?","acceptedAnswer":{"@type":"Answer","text":"Når rapportene viser at legitime kilder består SPF eller DKIM med riktig alignment, kan policy trappes opp gradvis til full håndheving."}}]}</script>
+</head>
+<body>
+  <main>
+    <h1>DMARC som faktisk stopper spoofing</h1>
+    <p>DMARC er styringslaget for e-postautentisering. Mange norske virksomheter har SPF og DKIM, men mangler en policy som forteller mottakende e-postsystemer hva de skal gjøre når en melding mislykkes. Resultatet er ofte at falske e-poster fortsatt leveres. Med en tydelig DMARC-strategi får dere kontroll, rapportering og en trygg vei fra observasjon til håndheving. Denne siden er laget for ledere, IT-ansvarlige og driftsteam som vil redusere phishing-risiko uten å bryte legitim e-post.</p>
+    <h2>Fra p=none til p=reject uten overraskelser</h2>
+    <p>Vi anbefaler alltid en trinnvis overgang. Først settes DMARC til <strong>p=none</strong>. Da samler dere data uten å påvirke leveranse. Rapportene viser hvilke systemer som sender på vegne av domenet, hvor de sender fra, og om de passerer SPF eller DKIM med riktig alignment. Deretter går dere til <strong>p=quarantine</strong>, gjerne med gradvis <code>pct</code>-økning. Til slutt settes <strong>p=reject</strong> når dere vet at legitime strømmer er på plass. Denne overgangen reduserer risiko for feilblokkering og gir bedre intern forankring.</p>
+    <h2>rua, ruf og rapportanalyse i praksis</h2>
+    <p>DMARC gir to sentrale rapporttyper: <code>rua</code> (aggregert) og <code>ruf</code> (forensisk, når tilgjengelig). Aggregert data er ryggraden i beslutningene: hvilke IP-er sender, hvordan autentiseringen feiler, og hvilke mottakere som ser problemene. Forensisk data kan gi mer detalj i enkelte miljøer. Vi hjelper dere med å sette riktige mottaksadresser, etablere filtering og lage rutiner for ukentlig analyse. Målet er ikke bare å "ha en record", men å bruke data aktivt for å finne skygge-IT, gamle tredjepartstjenester og feil i avsenderoppsett.</p>
+    <h2>Typiske feil vi rydder opp i</h2>
+    <p>Vanlige problemer er manglende alignment mellom From-domene og autentiserende domene, leverandører som signerer med feil DKIM-domene, og SPF som ikke dekker alle avsendere. Vi dokumenterer avsenderlandskapet, prioriterer tiltak etter risiko, og verifiserer i rapportene at hvert tiltak faktisk virker. Dere får en tydelig beslutningslogg som gjør revisjon, internkontroll og rapportering til ledelse enklere.</p>
+    <section aria-label="Pris">
+      <h2>Pris</h2>
+      <p><strong>Etablering: kr 1 990,-</strong><br><strong>Drift/oppfølging: fra kr 295,- per domene per måned</strong></p>
+    </section>
+    <nav aria-label="Handlinger">
+      <p><a href="/">Test domenet gratis</a> · <a href="https://micronet.no/kontakt">Bestill oppsett</a> · <a href="mailto:hjelp@micronet.no">Få hjelp av Micronet</a></p>
+    </nav>
+    <h2>Relaterte sider</h2>
+    <ul>
+      <li><a href="/spf/">SPF-oppsett</a></li>
+      <li><a href="/dkim/">DKIM-oppsett</a></li>
+      <li><a href="/mta-sts/">MTA-STS</a></li>
+      <li><a href="/tls-rpt/">TLS-RPT</a></li>
+    </ul>
+    <h2>Videre lesing</h2>
+    <ul>
+      <li><a href="/blogg/dmarc/">DMARC-guide på norsk</a></li>
+      <li><a href="/blogg/dmarc-microsoft-365/">DMARC i Microsoft 365</a></li>
+      <li><a href="/blogg/dmarc-google-workspace/">DMARC i Google Workspace</a></li>
+    </ul>
+  </main>
+</body>
+</html>

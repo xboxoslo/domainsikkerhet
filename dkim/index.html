@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="nb-NO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DKIM-oppsett med nøkkelrotasjon | Micronet</title>
+  <meta name="description" content="DKIM-oppsett med selector, public/private key, 2048-bit nøkler og nøkkelrotasjon for Microsoft 365 og Google Workspace.">
+  <link rel="canonical" href="https://data1.no/dkim/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"DKIM-oppsett","provider":{"@type":"Organization","name":"Micronet AS"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Hvorfor 2048-bit DKIM?","acceptedAnswer":{"@type":"Answer","text":"2048-bit gir sterkere kryptografisk sikkerhet og anbefales i nye oppsett."}}]}</script>
+</head>
+<body>
+  <main>
+    <h1>DKIM-oppsett for stabil leveranse</h1>
+    <p>Vi hjelper med selector-strategi, nøkkelhåndtering og trygg rotasjon i Microsoft 365 og Google Workspace.</p>
+    <p><strong>Etablering: kr 1 990,-</strong><br><strong>Drift/oppfølging: fra kr 295,- per domene per måned</strong></p>
+    <p><a href="/">Test domenet gratis</a> · <a href="https://micronet.no/kontakt">Bestill oppsett</a> · <a href="mailto:hjelp@micronet.no">Få hjelp av Micronet</a></p>
+    <p><a href="/dmarc/">DMARC</a> | <a href="/spf/">SPF</a> | <a href="/mta-sts/">MTA-STS</a> | <a href="/tls-rpt/">TLS-RPT</a></p>
+    <p><a href="/blogg/dkim/">DKIM-guide</a> | <a href="/feil/dkim-not-signing/">DKIM not signing</a> | <a href="/feil/dkim-fail-microsoft-365/">DKIM Microsoft 365</a></p>
+  <section><h2>Detaljert DKIM-faginnhold</h2><p>En god DKIM-strategi starter med selector-arkitektur. Hver avsenderplattform bør ha egen selector for tydelig sporing og enklere rotasjon. Private keys skal lagres sikkert og aldri deles ukontrollert. Public key publiseres i DNS med korrekt syntaks og tilstrekkelig TTL. Vi anbefaler 2048-bit RSA for moderne oppsett, og planlagt rotasjon med overlapp mellom gammel og ny selector. I Microsoft 365 innebærer dette korrekt aktivering per domene samt verifisering av signeringsstatus i utgående trafikk. I Google Workspace må DKIM aktiveres eksplisitt, og selector/navn må samsvare med DNS-publikasjonen. Feil oppstår ofte når tredjepartsleverandører sender uten riktig d=-domene eller med gammel nøkkel. Vi bygger derfor kontrollpunkter i onboarding-prosessen for nye utsendingssystemer. Samtidig sikrer vi at DKIM støtter DMARC-alignment slik at policy kan håndheves trygt. Ved hendelser eller mistenkt kompromittering gjennomfører vi umiddelbar nøkkelrotasjon med dokumentert rollback-plan.</p><p>Kontinuerlig oppfølging er avgjørende. Vi ser på leveransedata, rapporter og valideringstester for å bekrefte at signering faktisk skjer for alle kritiske meldingsstrømmer.</p></section></main>
+</body>
+</html>

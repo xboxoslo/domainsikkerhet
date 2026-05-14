@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="nb-NO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SPF-oppsett uten PermError | Micronet</title>
+  <meta name="description" content="SPF-oppsett med include, ip4/ip6, -all/~all og kontroll på 10 DNS lookup-grensen.">
+  <link rel="canonical" href="https://data1.no/spf/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"SPF-oppsett","provider":{"@type":"Organization","name":"Micronet AS"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Hva betyr SPF PermError?","acceptedAnswer":{"@type":"Answer","text":"PermError betyr permanent SPF-feil, ofte forårsaket av for mange DNS-oppslag, feil syntaks eller flere SPF-poster."}}]}</script>
+</head>
+<body>
+  <main>
+    <h1>SPF-oppsett som faktisk er vedlikeholdbart</h1>
+    <p>Denne siden dekker include, ip4/ip6, -all/~all, 10 DNS lookup-grensen, PermError og opprydding av overlappende SPF-poster.</p>
+    <p><strong>Etablering: kr 1 990,-</strong><br><strong>Drift/oppfølging: fra kr 295,- per domene per måned</strong></p>
+    <p><a href="/">Test domenet gratis</a> · <a href="https://micronet.no/kontakt">Bestill oppsett</a> · <a href="mailto:hjelp@micronet.no">Få hjelp av Micronet</a></p>
+    <p><a href="/dmarc/">DMARC</a> | <a href="/dkim/">DKIM</a> | <a href="/mta-sts/">MTA-STS</a> | <a href="/tls-rpt/">TLS-RPT</a></p>
+    <p><a href="/blogg/spf/">SPF-guide</a> | <a href="/feil/spf-10-lookup/">SPF 10 lookup</a> | <a href="/feil/spf-permerror/">SPF PermError</a></p>
+  <section><h2>Detaljert SPF-faginnhold</h2><p>SPF må designes som en levende policy. ... (lang tekst) Include-mekanismer bør begrunnes per leverandør, og alle include-kjeder må testes for lookup-forbruk. Med ip4/ip6 bør dere beskrive eierskap til adressene og livssyklus for endring. Vi anbefaler changelog, tydelig ansvar og kvartalsvis revisjon. PermError-feil må håndteres med rotårsaksanalyse: overskredet lookup-grense, syntaksfeil eller flere v=spf1-poster. Når flere team legger til leverandører uten felles kontroll, vokser risikoen for feil. Derfor etablerer vi godkjenningsflyt og mal for nye avsendere. For de fleste virksomheter starter vi med ~all, men går til -all etter validering mot faktisk utsending. Dette gir bedre signal til mottakere. Vi kobler også SPF mot DMARC-rapporter for å måle effekt. Hvis en legitim strøm feiler SPF, vurderer vi DKIM-signering som alternativ, slik at DMARC fortsatt kan passere via alignment. Målet er robust drift, ikke bare en teknisk rekord.</p><p>Vi dokumenterer også hvordan SPF påvirker leveranse i praksis hos store mottakere. Ved tvilstilfeller validerer vi headers fra faktiske meldinger og sammenholder med DNS-respons, TTL og cache-atferd. Denne arbeidsformen reduserer feil i endringsvinduer.</p></section></main>
+</body>
+</html>
