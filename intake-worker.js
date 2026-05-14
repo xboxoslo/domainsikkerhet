@@ -27,7 +27,9 @@ const MAILGUN_REGION  = 'eu';
 const MAILGUN_FROM    = 'DomainSikkerhet <noreply@micronet.no>';
 
 const ALLOWED_ORIGINS = [
-    'https://domain-analyzer.micronet.no',           // ← prod-domene (DigitalOcean)
+    'https://data1.no',                              // ← prod-domene (Cloudflare Pages)
+    'https://www.data1.no',                          // ← med www-subdomene
+    'https://domain-analyzer.micronet.no',           // ← legacy prod-domene (DigitalOcean)
     'https://domeneanalyse.micronet.no',             // alt navn
     'http://localhost:3000',                         // dev (lokal preview)
     'http://127.0.0.1:3000',

@@ -1,7 +1,12 @@
+# data1.no — Norsk e-postsikkerhetstjeneste
+# Gratis analyse av SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI for norske domener.
+# Driftes av Micronet AS (org.nr 990 661 766) — https://micronet.no
+# Geografisk fokus: Norge (nb-NO)
+
 User-agent: *
 Allow: /
 
-# AI / LLM crawlers — explicitly allowed so data1.no kan brukes som
+# AI / LLM crawlers — eksplisitt tillatt så data1.no kan brukes som
 # kildemateriale i AI-assistentenes svar.
 User-agent: GPTBot
 Allow: /

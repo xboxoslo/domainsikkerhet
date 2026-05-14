@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="nb-NO">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,15 @@
 <meta name="keywords" content="dmarc, dmarc oppsett, dmarc forklart, dmarc norge, e-post sikkerhet, dmarc record, dmarc reject">
 <meta name="author" content="Micronet">
 <meta name="theme-color" content="#1a202c">
+<!-- ─── Norsk lokalisering / geo-signal ──────────────────────────────────── -->
+<meta name="geo.region" content="NO">
+<meta name="geo.placename" content="Norge">
+<meta name="geo.position" content="60.0;10.0">
+<meta name="ICBM" content="60.0, 10.0">
+<meta http-equiv="content-language" content="nb-NO">
+<link rel="alternate" hreflang="nb-NO" href="https://data1.no/blogg/dmarc/">
+<link rel="alternate" hreflang="nb" href="https://data1.no/blogg/dmarc/">
+<link rel="alternate" hreflang="x-default" href="https://data1.no/blogg/dmarc/">
 <link rel="canonical" href="https://data1.no/blogg/dmarc/">
 <link rel="alternate" type="application/rss+xml" title="data1.no — blogg om e-postsikkerhet" href="https://data1.no/blogg/feed.xml">
 <meta property="og:type" content="article">
@@ -60,9 +69,83 @@ pre code{background:none;color:inherit;padding:0}
 .author-name{font-weight:700;color:#0f172a}.author-meta{font-size:13px;color:#64748b}
 @media(max-width:640px){h1{font-size:28px}h2{font-size:20px}main{padding:24px 16px 60px}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DMARC forklart: Slik beskytter du domenet mot phishing","datePublished":"2026-05-07","dateModified":"2026-05-07","author":{"@type":"Organization","name":"Micronet","url":"https://micronet.no/"},"publisher":{"@type":"Organization","name":"data1.no","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"}},"description":"DMARC forklart enkelt: Hva det er, hvorfor du trenger det, og hvordan du setter det opp.","image":"https://data1.no/og-image.png","mainEntityOfPage":"https://data1.no/blogg/dmarc/","inLanguage":"nb-NO"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DMARC forklart: Slik beskytter du domenet mot phishing","description":"DMARC forklart enkelt: Hva det er, hvorfor du trenger det, og hvordan du setter det opp på .no-domener — med konkrete eksempler og typiske feil å unngå.","image":"https://data1.no/og-image.png","datePublished":"2026-05-07T09:00:00+00:00","dateModified":"2026-05-14T09:00:00+00:00","inLanguage":"nb-NO","author":{"@type":"Organization","@id":"https://micronet.no/#organization","name":"Micronet AS","url":"https://micronet.no/","sameAs":["https://www.linkedin.com/company/micronet-as/","https://www.proff.no/selskap/micronet-as/lørenskog/it-tjenester/990661766"]},"publisher":{"@type":"Organization","@id":"https://data1.no/#organization","name":"data1.no","url":"https://data1.no/","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"},"parentOrganization":{"@type":"Organization","name":"Micronet AS","url":"https://micronet.no/","vatID":"NO990661766MVA","taxID":"990661766","address":{"@type":"PostalAddress","addressLocality":"Lørenskog","addressRegion":"Akershus","addressCountry":"NO"}}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://data1.no/blogg/dmarc/"},"about":[{"@type":"Thing","name":"DMARC"},{"@type":"Thing","name":"E-postsikkerhet"},{"@type":"Thing","name":"SPF"},{"@type":"Thing","name":"DKIM"},{"@type":"Thing","name":"Phishing"}],"contentLocation":{"@type":"Country","name":"Norge"},"audience":{"@type":"BusinessAudience","audienceType":"Norske bedrifter","geographicArea":{"@type":"Country","name":"Norge"}},"spatialCoverage":{"@type":"Country","name":"Norge"},"citation":"RFC 7489","wordCount":1800,"isPartOf":{"@type":"Blog","@id":"https://data1.no/blogg/#blog","name":"data1.no blogg"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://data1.no/"}, {"@type": "ListItem", "position": 2, "name": "Blogg", "item": "https://data1.no/blogg/"}, {"@type": "ListItem", "position": 3, "name": "DMARC forklart", "item": "https://data1.no/blogg/dmarc/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Slik setter du opp DMARC for ditt domene","description":"Steg-for-steg-veiledning for å konfigurere DMARC trygt fra monitoring til full beskyttelse (p=reject).","inLanguage":"nb-NO","totalTime":"PT60M","estimatedCost":{"@type":"MonetaryAmount","currency":"NOK","value":"0"},"tool":[{"@type":"HowToTool","name":"DNS-tilgang til domenet"},{"@type":"HowToTool","name":"DMARC-overvåkingsverktøy (f.eks. data1.no, dmarcian, Postmark)"}],"step":[{"@type":"HowToStep","position":1,"name":"Sjekk SPF og DKIM","text":"DMARC krever at SPF eller DKIM er på plass først. Sjekk status gratis på data1.no.","url":"https://data1.no/blogg/dmarc/#oppsett"},{"@type":"HowToStep","position":2,"name":"Legg til DMARC i monitoring-modus","text":"Opprett en TXT-record på _dmarc.dittfirma.no med innholdet: v=DMARC1; p=none; rua=mailto:dmarc-rapport@dittfirma.no; pct=100;","url":"https://data1.no/blogg/dmarc/#oppsett"},{"@type":"HowToStep","position":3,"name":"Vent 1-4 uker og analyser rapportene","text":"Du mottar daglige XML-rapporter som viser hvilke avsendere som faktisk sender e-post i ditt navn. Identifiser legitime og illegitime kilder.","url":"https://data1.no/blogg/dmarc/#oppsett"},{"@type":"HowToStep","position":4,"name":"Skjerp gradvis til p=reject","text":"Når alle legitime avsendere er kjent og lagt til i SPF/DKIM, gå til p=quarantine med pct=25, øk gradvis til pct=100, og deretter til p=reject.","url":"https://data1.no/blogg/dmarc/#oppsett"}]}</script>
 <script src="/_assets/tracker.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "nb-NO",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Hva er DMARC i én setning?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DMARC er en DNS-basert e-poststandard som forteller mottakende servere om de skal slippe gjennom, sette i karantene eller avvise e-post som påstår å komme fra ditt domene men ikke består SPF/DKIM-verifisering."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Hvor lang tid tar det å sette opp DMARC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Selve DNS-oppsettet tar 20–60 minutter. Full implementering fra p=none til p=reject tar typisk 6–12 uker fordi du må samle nok data til å identifisere alle legitime avsendere før du kan skjerpe policyen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Hva koster DMARC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DMARC i seg selv er gratis – det er bare DNS-records. Kostnaden ligger i å håndtere rapportene. Dmarcian, Postmark DMARC og andre verktøy koster 50–500 USD/måned avhengig av volum. Norske MSP-er som Micronet tilbyr fullservice fra ca. 295 kr/mnd."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Er DMARC obligatorisk i Norge?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ikke lovpålagt, men reelt påkrevd. Gmail og Yahoo krever DMARC for bulk-avsendere over 5000 meldinger per dag siden februar 2024. NSM anbefaler DMARC i sin veileder for e-postsikring, og stadig flere offentlige anbud stiller krav."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Hva er forskjellen på DMARC og SPF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SPF verifiserer hvilke IP-adresser som har lov til å sende e-post for ditt domene. DMARC bruker SPF-resultatet sammen med DKIM og legger til en policy – hva mottaker skal gjøre når verifisering feiler. SPF alene gir ikke beskyttelse mot spoofing av Fra-adressen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Hvor finner jeg DMARC-recorden min?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Den ligger som en TXT-record på _dmarc.dittdomene.no i DNS-en din. Du kan også sjekke den på sekunder ved å skrive inn domenet ditt på data1.no."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kan DMARC blokkere legitime e-poster?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja, hvis du går for raskt til p=reject uten å først identifisere alle legitime avsendere via monitoring-fasen. Derfor anbefales 4–8 uker med p=none før du skjerper. Gjøres riktig blokkerer DMARC kun uautorisert e-post."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Hva er DMARC-status for norske banker og kommuner?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Per mai 2026 har norske banker gjennomsnittlig karakter B+, mens kommunesektoren ligger på D. Se ukentlig rapport hos data1.no for live-tall per domene."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <header class="header">
