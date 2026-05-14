@@ -1,0 +1,62 @@
+name: Ping IndexNow
+
+# Pinger Bing / Yandex / Seznam via IndexNow når blogg-poster endres.
+# Bypass-er crawl-køen og varsler søkemotorer direkte.
+#
+# Triggere:
+# - Push til main som endrer blogg/**/index.html eller sitemap.xml
+# - Manuell trigger via Actions-tabben
+#
+# Krever repository secret INDEXNOW_KEY (32 hex tegn).
+# Verifikasjons-fil ligger på https://data1.no/<key>.txt
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'blogg/**/index.html'
+      - 'sitemap.xml'
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: 'Komma-separert URL-liste (la stå tom for å pushe siste 10 blogg-poster)'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Ping IndexNow
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: |
+          if [[ -z "$INDEXNOW_KEY" ]]; then
+            echo "::error::INDEXNOW_KEY secret mangler. Sett den i Settings > Secrets > Actions."
+            exit 1
+          fi
+          if [[ -n "${{ inputs.urls }}" ]]; then
+            IFS=',' read -ra URL_ARR <<< "${{ inputs.urls }}"
+            python scripts/ping_indexnow.py "${URL_ARR[@]}"
+          else
+            python scripts/ping_indexnow.py
+          fi
