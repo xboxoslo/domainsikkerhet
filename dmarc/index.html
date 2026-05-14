@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="nb-NO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DMARC-oppsett | p=none, quarantine og reject</title>
+  <meta name="description" content="Lær riktig DMARC-oppsett: p=none, p=quarantine, p=reject, rapportering med rua/ruf og trygg innføring til full håndheving.">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"Hva er forskjellen på p=none, p=quarantine og p=reject?","acceptedAnswer":{"@type":"Answer","text":"p=none overvåker uten håndheving, p=quarantine sender feilende e-post til spam, og p=reject avviser e-posten hos mottaker."}},
+    {"@type":"Question","name":"Når bør vi gå fra p=none til p=reject?","acceptedAnswer":{"@type":"Answer","text":"Etter at SPF og DKIM er stabile for alle legitime avsendere, normalt etter 2–8 uker med rapportanalyse."}},
+    {"@type":"Question","name":"Hva brukes rua og ruf til?","acceptedAnswer":{"@type":"Answer","text":"rua mottar aggregerte DMARC-rapporter, mens ruf kan motta detaljerte feilrapporter der dette støttes."}}
+  ]}
+  </script>
+</head>
+<body>
+  <main>
+    <h1>DMARC-oppsett som faktisk stopper spoofing</h1>
+    <p>DMARC forteller mottakere hva de skal gjøre når SPF/DKIM feiler. Start med <code>p=none</code> for innsikt, stram til <code>p=quarantine</code>, og fullfør med <code>p=reject</code>.</p>
+
+    <h2>Praktisk policy-løp</h2>
+    <ul>
+      <li><strong>Fase 1:</strong> <code>p=none</code> + <code>rua=</code> for overvåking.</li>
+      <li><strong>Fase 2:</strong> <code>p=quarantine</code> når legitime kilder er verifisert.</li>
+      <li><strong>Fase 3:</strong> <code>p=reject</code> for maksimal beskyttelse.</li>
+    </ul>
+
+    <p><a href="/?domain=eksempel.no">Test domenet gratis</a></p>
+    <p><a href="/?domain=eksempel.no">Bestill oppsett</a></p>
+    <p><a href="https://micronet.no/">Få hjelp av Micronet</a></p>
+  </main>
+</body>
+</html>

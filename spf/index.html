@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="nb-NO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPF-oppsett | include, -all og 10 lookup-grensen</title>
+  <meta name="description" content="Slik bygger du en korrekt SPF-record med include, -all/~all og kontroll på 10 DNS lookup-grensen.">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"Hva betyr include i SPF?","acceptedAnswer":{"@type":"Answer","text":"include autoriserer avsendere definert i en ekstern SPF-record, for eksempel Microsoft 365 eller andre utsendingstjenester."}},
+    {"@type":"Question","name":"Skal vi bruke -all eller ~all?","acceptedAnswer":{"@type":"Answer","text":"-all er hard fail og anbefales når oppsettet er kontrollert. ~all er soft fail og brukes ofte i overgangsfase."}},
+    {"@type":"Question","name":"Hva skjer ved mer enn 10 DNS lookups?","acceptedAnswer":{"@type":"Answer","text":"SPF kan ende i PermError og validering feiler. Reduser includes eller bruk strukturering/flattening."}}
+  ]}
+  </script>
+</head>
+<body><main><h1>SPF-record uten fallgruver</h1><p>SPF definerer hvilke servere som får sende e-post for domenet ditt. Feil bruk av <code>include:</code> og <code>all</code>-mekanismer gir leveringsproblemer.</p><h2>Nøkkelregler</h2><ul><li>Hold SPF til én TXT-record per domene.</li><li>Kontroller <code>include:</code>-kjeder mot 10 lookup-grensen.</li><li>Bruk <code>-all</code> når alle legitime avsendere er kartlagt.</li></ul><p><a href="/?domain=eksempel.no">Test domenet gratis</a></p><p><a href="/?domain=eksempel.no">Bestill oppsett</a></p><p><a href="https://micronet.no/">Få hjelp av Micronet</a></p></main></body>
+</html>
