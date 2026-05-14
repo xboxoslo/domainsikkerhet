@@ -2,7 +2,7 @@
 <title>data1.no E-post sikkerhet: C</title>
 <defs>
 <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2540"/><stop offset="100%" stop-color="#0f172a"/></linearGradient>
-<linearGradient id="grade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fde68a"/><stop offset="100%" stop-color="#ca8a04"/></linearGradient>
+<linearGradient id="grade" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fef08a"/><stop offset="100%" stop-color="#eab308"/></linearGradient>
 </defs>
 <rect width="180" height="48" rx="6" fill="url(#bg)"/>
 <path d="M118 0 L180 0 L180 48 L118 48 Z" fill="url(#grade)"/>

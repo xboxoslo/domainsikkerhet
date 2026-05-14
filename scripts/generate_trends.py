@@ -16,8 +16,8 @@ WATCHLIST = ROOT / '_data' / 'domains-watchlist.txt'
 TRENDS_DIR = ROOT / 'trender'
 TRENDS_DIR.mkdir(exist_ok=True)
 
-GRADE_COLOR = {'A+': '#16a34a', 'A': '#22c55e', 'B': '#84cc16',
-               'C': '#eab308', 'D': '#f97316', 'F': '#dc2626'}
+GRADE_COLOR = {'A+': '#10b981', 'A': '#22c55e', 'B': '#3b82f6',
+               'C': '#eab308', 'D': '#f97316', 'F': '#7f1d1d'}
 
 
 def load_latest_snapshots() -> tuple[dict | None, dict | None, list]:
