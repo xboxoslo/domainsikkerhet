@@ -1,5 +1,5 @@
 """
-Lokal intake-backend for domain-analyzer.
+Intake-backend for data1.no (kjører på Railway, eksponert via https://intake.data1.no).
 
 Kjører på http://localhost:3001 — mottar POST fra HTML-skjemaet,
 sender HTML-rapport via Mailgun og oppretter ticket i Halo PSA.
@@ -7,7 +7,7 @@ sender HTML-rapport via Mailgun og oppretter ticket i Halo PSA.
 Kjør:
     1. Lag intake-secrets.env i samme mappe (se intake-secrets.env.example)
     2. python intake-server.py
-    3. I domain-analyzer.html — sett:
+    3. I frontend (index.html) er INTAKE_ENDPOINT satt til https://intake.data1.no/intake.
          const INTAKE_ENDPOINT = 'http://localhost:3001/intake';
 
 Krever kun Python 3.8+ (ingen pip install).
@@ -270,7 +270,7 @@ def create_halo_ticket(b):
         {'text': f"domene:{b.get('domain','')}"},
         {'text': f"score:{b.get('score') or 'na'}"},
         {'text': f"karakter:{b.get('grade') or 'na'}"},
-        {'text': 'kilde:domain-analyzer'},
+        {'text': 'kilde:data1.no'},
     ]
     if b.get('orgnr'):
         tags.append({'text': f"orgnr:{b['orgnr']}"})
@@ -394,7 +394,7 @@ def create_halo_quote(b):
     """Opprett draft quote i Halo med item 516 (Mail SPF-DKIM-DMARC), template 29 (Tilbud Micronet).
 
     Hvis b['orderType'] == 'dmarc-service-package' tilpasses tittel og notat for direkte
-    DMARC-tjenestebestillinger (uten domeneanalyse-score)."""
+    DMARC-tjenestebestillinger (uten data1.no-score)."""
     token = halo_token()
     client_id, user_id = halo_find_or_create_customer(b, token)
     # Bygg adresse-linje fra BRREG-data hvis tilgjengelig
@@ -474,7 +474,7 @@ def esc(s):
             .replace('"','&quot;').replace("'",'&#39;'))
 
 def grade_palette(s):
-    """Returnerer (grade, gradeColor, gradeColorLight) — samme mapping som domain-analyzer.html."""
+    """Returnerer (grade, gradeColor, gradeColorLight) — samme mapping som data1.no frontend."""
     if s >= 90: return 'A+', '#2f855a', '#9ae6b4'
     if s >= 80: return 'A',  '#38a169', '#b9e8c7'
     if s >= 70: return 'B',  '#48916b', '#bfe3cb'
@@ -829,7 +829,7 @@ def render_email_html(b):
 
       <tr><td style="background:#f8fafc;padding:16px 28px;border-top:1px solid #e2e8f0;font-size:11px;color:#94a3b8;line-height:1.6">
         Micronet AS &middot; <a href="mailto:hjelp@micronet.no" style="color:#0f766e;text-decoration:none">hjelp@micronet.no</a> &middot; 22 80 20 40<br>
-        Du fikk denne mailen fordi du bestilte en sikkerhetsanalyse på domeneanalyse.micronet.no
+        Du fikk denne mailen fordi du bestilte en sikkerhetsanalyse på data1.no
       </td></tr>
 
     </table>

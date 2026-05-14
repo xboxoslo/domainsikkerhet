@@ -1,71 +1,72 @@
-# DomainSikkerhet — Domeneanalyse-intake
+# data1.no
 
-Lokal intake-backend for `domain-analyzer.html`. Mottar POST fra skjemaet,
-sender pent designet HTML-rapport via Mailgun (med 3D-skjold som inline PNG),
-og oppretter draft quote i HaloPSA.
+Gratis norsk verktøy for e-postsikkerhetsanalyse — spesialisert på .no-domener.
+Sjekker SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI på sekunder, gir karakter
+A+ til F og konkrete tiltak.
+
+Drives av Micronet AS (org.nr 990 661 766). Live på https://data1.no.
 
 ## Arkitektur
 
 ```
-domain-analyzer.html  ──POST /intake──▶  intake-server.py  ──┬─▶  Mailgun (e-post m/skjold-PNG)
-(brukerens nettleser)                    (lokal Python)        └─▶  HaloPSA (/api/Quotation)
+data1.no                                   intake.data1.no
+(Cloudflare Pages, statisk HTML)            (CNAME → Railway)
+   │                                              │
+   ├─► /index.html                                ▼
+   │     analyser-domene (DNS-lookup i browser)   intake-server.py
+   │     viser score + tiltak                       ├─► Cloudflare Turnstile (anti-bot)
+   │                                                ├─► Halo PSA (ticket + quote)
+   └─► "Send rapport på e-post"-knapp              └─► Mailgun (HTML-mail + skjold-PNG)
+         POST → intake.data1.no/intake
 ```
 
-## Komponenter
+| Fil / katalog            | Rolle                                                            |
+|--------------------------|------------------------------------------------------------------|
+| `index.html`             | Hovedfrontend (DNS-analyse, score, rapport-knapp)                |
+| `intake-server.py`       | Backend (Halo + Mailgun + Turnstile + stats), kjører på Railway  |
+| `Procfile`               | Railway prosess-konfig (`web: python intake-server.py`)          |
+| `intake-secrets.env.example` | Eksempel-konfig for secrets                                  |
+| `blogg/`                 | Bloggartikler (DMARC, SPF, DKIM, Microsoft 365, Google Workspace)|
+| `rapport-2026/`          | Ukentlige rapporter (topp 100, banker, kommuner, e-handel, medier) |
+| `verktoy/`               | DMARC- og SPF-generatorer                                        |
+| `feil/`                  | Feilsøking-sider (SPF PermError, DKIM, m.m.)                     |
+| `ordbok/`                | Definisjoner (DefinedTermSet schema for AI-ekstraksjon)          |
+| `_data/`                 | Watchlist (158 domener), ukentlige rapport-data                  |
+| `_assets/`               | Tracker-script, fonter                                           |
+| `scripts/`               | Daily scan, sitemap-builder, IndexNow-ping, rapport-generator    |
+| `docs/`                  | Intern arkitektur-dokumentasjon                                  |
 
-| Fil | Rolle |
-|---|---|
-| `intake-server.py` | Lokal Python HTTP-server (port 3001). Sender Mailgun-mail + oppretter Halo-quote. |
-| `domain-analyzer.html` | Frontend-skjema. Kjører lokalt (port 3000) eller på `domeneanalyse.micronet.no`. |
-| `intake-worker.js` | Cloudflare Worker-versjon (ikke deployet — beholdes som alternativ). |
-| `intake-secrets.env.example` | Mal for `.env`-fila med API-nøkler (kopier til `intake-secrets.env`). |
-| `scripts/` | Engangs-oppslag for å finne Halo-IDer (item, agent, template). |
+## Lokal utvikling
 
-## Oppsett
+Frontend er ren statisk HTML — server hvilken som helst HTTP-server fra repo-rot:
 
-```bash
-# 1. Klon repoet
-git clone https://github.com/<bruker>/domeneanalyse-intake.git
-cd domeneanalyse-intake
+```sh
+python3 -m http.server 3000
+# Åpne http://localhost:3000
+```
 
-# 2. Installer avhengigheter
-pip install -r requirements.txt
+Backend (kun nødvendig hvis du skal teste "Send rapport"-flyten lokalt):
 
-# 3. Kopier hemmelighets-malen og fyll inn nøkler
+```sh
 cp intake-secrets.env.example intake-secrets.env
-# Rediger intake-secrets.env med:
-#   HALO_CLIENT_ID, HALO_CLIENT_SECRET, MAILGUN_API_KEY
-
-# 4. Kjør serveren
-python intake-server.py
+# Fyll inn MAILGUN_API_KEY, HALO_CLIENT_ID, HALO_CLIENT_SECRET m.m.
+python3 intake-server.py
+# Lytter på http://localhost:3001
 ```
 
-Server lytter på `http://localhost:3001/intake`.
+Frontend bruker automatisk `http://localhost:3001/intake` når den åpnes på
+`localhost` eller `127.0.0.1`, og `https://intake.data1.no/intake` ellers.
 
-Frontend må peke `INTAKE_ENDPOINT` til denne URL-en (eller en publisert variant
-hvis serveren deployes utad).
+## Deploy
 
-## Halo-konfigurasjon (Micronet-tenant)
+| Komponent       | Hvor                                | Hvordan                              |
+|-----------------|-------------------------------------|--------------------------------------|
+| Frontend        | Cloudflare Pages                    | Auto-deploy på push til `main`       |
+| Backend         | Railway                             | Auto-deploy på push til `main`       |
+| DNS for `data1.no` | Cloudflare                       | Manuelt via CF-dashbordet            |
 
-Default IDs som brukes i `intake-server.py`:
+Se `docs/intake-architecture.md` for detaljer om DNS- og custom-domain-oppsett.
 
-- **Item** `516` (`MAI001`) — Mail (SPF-DKIM-DMARC), kr 295/mnd
-- **Item** `735` (`EST003`) — Estimert Service Bedrift, kr 1990 etablering (engangs)
-- **PDF Template** `29` — Tilbud Micronet
-- **Agent (eier)** `23` — API-bruker
-- **Agent (assigned)** `3` — Terje Otterlei (review)
+## Lisens
 
-## E-post-design
-
-- Inline PNG-skjold rendret med Pillow (drop-shadow, halo, hake-badge på A+/A/B)
-- Karakterskala (F→A+) med aktiv karakter ringet inn
-- Komponent-liste (DMARC, SPF, DKIM, MTA-STS, TLS-RPT, BIMI) med beskrivelser
-- Pris kr 295/mnd vist inline
-- Personlig signatur
-
-Bygger full RFC822 MIME via `email.mime` og sender via Mailgun
-`/messages.mime`-endepunktet for korrekt `Content-ID:` på inline-bilde.
-
-## Sikkerhet
-
-`intake-secrets.env` er gitignore'd. **Aldri commit** API-nøkler.
+© Micronet AS. Alle rettigheter forbeholdt.
