@@ -5,7 +5,7 @@ Kjøres etter weekly_blogpost.py så nye AI-genererte poster automatisk
 dukker opp i blog-listingen.
 """
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
@@ -99,7 +99,14 @@ def main():
             if p:
                 posts.append(p)
 
-    posts.sort(key=lambda x: x['date'] or datetime.min, reverse=True)
+    def _sort_key(p):
+        d = p['date']
+        if d is None:
+            return datetime.min.replace(tzinfo=timezone.utc)
+        if d.tzinfo is None:
+            return d.replace(tzinfo=timezone.utc)
+        return d
+    posts.sort(key=_sort_key, reverse=True)
 
     # Bygg HTML-fragmenter for postene
     posts_html = []
@@ -137,3 +144,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
