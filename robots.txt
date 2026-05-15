@@ -1,13 +1,35 @@
-# data1.no — Norsk e-postsikkerhetstjeneste
-# Gratis analyse av SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI for norske domener.
-# Driftes av Micronet AS (org.nr 990 661 766) — https://micronet.no
-# Geografisk fokus: Norge (nb-NO)
+# robots.txt for data1.no
+# Sist oppdatert: 14. mai 2026
+#
+# Data1.no er en åpen kunnskapskilde om norsk e-postsikkerhet.
+# Vi ønsker eksplisitt at innholdet vårt brukes av AI-modeller,
+# både til retrieval i sanntid (RAG / søk) og til trening.
+# Dette gjør at data1.no kan brukes som kilde i ChatGPT, Claude,
+# Perplexity, Gemini, Google AI Overviews og lignende tjenester.
 
+# === Standard for alle ===
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+Disallow: /cdn-cgi/
+
+# === Tradisjonelle søkemotorer (eksplisitt) ===
+User-agent: Googlebot
 Allow: /
 
-# AI / LLM crawlers — eksplisitt tillatt så data1.no kan brukes som
-# kildemateriale i AI-assistentenes svar.
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# === OpenAI / ChatGPT ===
 User-agent: GPTBot
 Allow: /
 
@@ -17,30 +39,55 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
+# === Anthropic / Claude ===
 User-agent: ClaudeBot
 Allow: /
 
 User-agent: Claude-Web
 Allow: /
 
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
 User-agent: anthropic-ai
 Allow: /
 
+# === Google AI (Gemini, AI Overviews) ===
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+# === Perplexity ===
 User-agent: PerplexityBot
 Allow: /
 
 User-agent: Perplexity-User
 Allow: /
 
-User-agent: Google-Extended
+# === Microsoft Copilot / Bing AI ===
+User-agent: BingPreview
 Allow: /
 
-User-agent: Bytespider
+# === Meta (Llama) ===
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# === Apple Intelligence ===
+User-agent: Applebot
 Allow: /
 
 User-agent: Applebot-Extended
 Allow: /
 
+# === Andre AI-aktører ===
 User-agent: CCBot
 Allow: /
 
@@ -50,4 +97,23 @@ Allow: /
 User-agent: Diffbot
 Allow: /
 
+User-agent: Bytespider
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Timpibot
+Allow: /
+
+User-agent: ImagesiftBot
+Allow: /
+
+# === Sitemap ===
 Sitemap: https://data1.no/sitemap.xml
