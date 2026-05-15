@@ -22,7 +22,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
           token: ${{ secrets.BOT_PAT }}
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -52,14 +52,28 @@ jobs:
           git config user.email "bot@data1.no"
 
           # Bare commit hvis det faktisk er endringer
-          if [[ -n $(git status --porcelain) ]]; then
-            git add _data/snapshots/ trender/ sjekk/ sitemap.xml
-            git commit -m "Daily scan: $(date -u +%Y-%m-%d) [skip ci]"
-            git push
-            echo "Endringer pushet."
-          else
+          if [[ -z $(git status --porcelain) ]]; then
             echo "Ingen endringer i dag."
+            exit 0
           fi
+
+          git add _data/snapshots/ trender/ sjekk/ sitemap.xml
+          git commit -m "Daily scan: $(date -u +%Y-%m-%d) [skip ci]"
+
+          # Retry-loop: workflowen tar ~11 min så main kan ha flyttet seg.
+          # Rebase + push, opptil 3 forsøk med 5s sleep mellom.
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || git rebase --abort
+            if git push; then
+              echo "Endringer pushet på forsøk $attempt."
+              exit 0
+            fi
+            echo "Push avvist (forsøk $attempt). Sover 5s og prøver igjen..."
+            sleep 5
+          done
+
+          echo "::error::Push feilet etter 3 forsøk."
+          exit 1
 
       - name: Ping Google for re-indeksering
         run: |
