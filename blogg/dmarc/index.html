@@ -158,145 +158,166 @@ pre code{background:none;color:inherit;padding:0}
 <main>
   <nav class="crumbs"><a href="/">Hjem</a> › <a href="/blogg/">Blogg</a> › DMARC</nav>
   <h1>DMARC forklart: Slik beskytter du domenet mot phishing</h1>
-  <p class="meta">Publisert <time datetime="2026-05-07">7. mai 2026</time> · Av Micronet · 7 min lesetid</p>
+  <p class="meta">Publisert <time datetime="2026-05-07">7. mai 2026</time> · Sist oppdatert <time datetime="2026-05-14">14. mai 2026</time> · Av <a href="https://www.linkedin.com/in/terjeotterlei/" style="color:#0f766e;text-decoration:none">Terje Otterlei</a>, Micronet AS · 7 min lesetid</p>
+
   <p class="lead">Hvis du ikke har konfigurert DMARC for domenet ditt, kan hvem som helst i verden sende e-post i ditt navn. Heldigvis er det enklere å fikse enn de fleste tror — her er alt du trenger å vite.</p>
+
+  <div class="callout">
+    <strong>Kort oppsummert</strong>
+    <ul style="margin:10px 0 0 18px;padding:0">
+      <li><strong>DMARC er en DNS-basert protokoll</strong> som forteller mottakende e-postservere hva de skal gjøre med e-post som påstår å komme fra ditt domene, men ikke består verifisering.</li>
+      <li><strong>Tre policy-nivåer:</strong> <code>p=none</code> (kun overvåking), <code>p=quarantine</code> (spam-mappe), <code>p=reject</code> (full blokkering). Bare <code>p=reject</code> gir reell beskyttelse.</li>
+      <li><strong>Status i Norge per 14. mai 2026:</strong> 67 % av Norges 100 største nettsteder har enten ingen DMARC eller står fast på <code>p=none</code> (<a href="/rapport-2026/">data1.nos ukentlige skanning</a>).</li>
+      <li><strong>Oppsett tar 20–60 minutter,</strong> deretter 4–8 uker monitoring før du kan skjerpe til <code>p=reject</code>.</li>
+      <li><strong>Gmail og Yahoo krever DMARC</strong> for bulk-avsendere siden februar 2024.</li>
+    </ul>
+  </div>
 
   <div class="toc">
     <h2>Innhold</h2>
     <ol>
-      <li><a href="#hva">Hva er DMARC, helt enkelt?</a></li>
-      <li><a href="#hvorfor">Hvorfor trenger du det?</a></li>
+      <li><a href="#hva">Hva er DMARC?</a></li>
+      <li><a href="#hvorfor">Hvorfor trenger du DMARC?</a></li>
       <li><a href="#hvordan">Slik fungerer DMARC i praksis</a></li>
       <li><a href="#oppsett">Oppsett — steg for steg</a></li>
       <li><a href="#policies">p=none, p=quarantine eller p=reject?</a></li>
       <li><a href="#feil">5 vanlige feil å unngå</a></li>
       <li><a href="#rapporter">Hva gjør du med rapportene?</a></li>
+      <li><a href="#faq">Ofte stilte spørsmål</a></li>
     </ol>
   </div>
 
-  <h2 id="hva">1. Hva er DMARC, helt enkelt?</h2>
-  <p>DMARC står for <strong>Domain-based Message Authentication, Reporting and Conformance</strong>. Det er en DNS-basert standard som forteller mottakerservere hva de skal gjøre med e-poster som <em>påstår</em> at de kommer fra ditt domene, men som ikke består verifisering.</p>
-  <p>Tenk på det som et stempel på konvolutten: «Hvis dette ikke er fra meg, kast det.»</p>
-
+  <h2 id="hva">1. Hva er DMARC?</h2>
+  <p><strong>DMARC (Domain-based Message Authentication, Reporting and Conformance) er en DNS-basert e-poststandard som forteller mottakende servere — som Gmail, Outlook og Apple Mail — hva de skal gjøre med e-post som påstår å komme fra ditt domene, men feiler verifisering via SPF eller DKIM. Standarden er definert i RFC 7489 og er den eneste mekanismen som faktisk kan blokkere spoofing av domenet ditt på mottakersiden.</strong></p>
+  <p>Tenk på det som et stempel på konvolutten: "Hvis dette ikke er fra meg, kast det."</p>
   <p>DMARC bygger oppå to eldre standarder, <a href="/blogg/spf/">SPF</a> og <a href="/blogg/dkim/">DKIM</a>. SPF og DKIM verifiserer hver for seg at e-posten ble sendt fra en autorisert server — DMARC binder dem sammen og sier hva som skjer hvis verifiseringen mislykkes.</p>
 
   <h2 id="hvorfor">2. Hvorfor trenger du DMARC?</h2>
-  <p>Uten DMARC kan en angriper sende en e-post som ser ut som den kommer fra <code>direktor@dittfirma.no</code> til en hvilken som helst mottaker. Dette kalles <strong>e-post-spoofing</strong> og er hovedmetoden bak både phishing-svindel og direktørsvindel (CEO fraud).</p>
-
-  <div class="callout warn">
-    <p><strong>Tall fra norske bedrifter (2025):</strong> 67 % av .no-domener har enten ingen DMARC eller bare DMARC i monitoring-modus (<code>p=none</code>) — som ikke faktisk blokkerer noe. Direktørsvindel kostet norske bedrifter over 250 millioner kroner i 2024 ifølge NorSIS.</p>
-  </div>
-
-  <p>DMARC løser tre problemer på én gang:</p>
-  <ol>
-    <li><strong>Beskyttelse:</strong> Forhindrer at andre kan sende falske e-poster i ditt navn.</li>
-    <li><strong>Synlighet:</strong> Du får daglige rapporter om hvem som prøver å sende i ditt navn.</li>
-    <li><strong>Leveringsdyktighet:</strong> Gmail og Yahoo krever DMARC for bulk-avsendere siden 2024.</li>
-  </ol>
+  <p><strong>Uten DMARC kan hvem som helst i verden sende e-post som ser ut til å komme fra ditt domene. Dette er hovedmetoden bak phishing-svindel og direktørsvindel (CEO fraud), som kostet norske bedrifter over 250 millioner kroner i 2024 (NorSIS). DMARC gir tre fordeler: beskyttelse mot misbruk, daglige rapporter om hvem som prøver å sende i ditt navn, og bedre leveringsdyktighet hos Gmail og Yahoo som krever DMARC for bulk-avsendere.</strong></p>
+  <p><strong>Status i Norge per 14. mai 2026</strong> (kilde: data1.nos ukentlige skanning av 158 norske domener):</p>
+  <ul>
+    <li>67 % av Norges 100 største nettsteder har enten ingen DMARC eller står på <code>p=none</code></li>
+    <li>9 av 12 store offentlige etater (inkl. Altinn, NRK, UiO) bruker fortsatt <code>p=none</code></li>
+    <li>Norsk banksektor: gjennomsnittlig karakter B+</li>
+    <li>Norsk kommunesektor: gjennomsnittlig karakter D</li>
+  </ul>
 
   <h2 id="hvordan">3. Slik fungerer DMARC i praksis</h2>
-  <p>Når noen sender en e-post til en mottaker (for eksempel Gmail), gjør Gmail tre sjekker:</p>
-  <ol>
-    <li><strong>SPF</strong>: Er IP-adressen som sendte e-posten autorisert?</li>
-    <li><strong>DKIM</strong>: Er signaturen på e-posten gyldig?</li>
-    <li><strong>DMARC alignment</strong>: Stemmer Fra-adressen med domenet i SPF/DKIM?</li>
-  </ol>
-
-  <p>Hvis alt stemmer, leveres e-posten. Hvis ikke, sjekker Gmail din DMARC-policy:</p>
-
-  <pre><code>v=DMARC1; p=reject; rua=mailto:dmarc@dittfirma.no;</code></pre>
-
-  <p>Dette betyr: «Hvis e-post fra dittfirma.no feiler verifisering, avvis den og send meg en rapport.»</p>
+  <p><strong>Når en e-post ankommer en mottakerserver som Gmail, gjøres tre sjekker i rekkefølge: (1) SPF verifiserer om sender-IP er autorisert, (2) DKIM verifiserer den digitale signaturen, og (3) DMARC alignment sjekker om Fra-adressen stemmer med domenet i SPF/DKIM. Hvis alle består, leveres meldingen. Hvis ikke, følger Gmail policyen i din DMARC-record — <code>none</code>, <code>quarantine</code> eller <code>reject</code>.</strong></p>
+  <p>En typisk DMARC-record ser slik ut:</p>
+  <pre style="background:#0f172a;color:#e2e8f0;padding:14px 18px;border-radius:8px;overflow-x:auto;font-size:13px">v=DMARC1; p=reject; rua=mailto:dmarc-rapport@dittfirma.no; pct=100;</pre>
+  <p>Dette betyr: "Hvis e-post fra dittfirma.no feiler verifisering, avvis den og send meg en rapport."</p>
 
   <h2 id="oppsett">4. Oppsett — steg for steg</h2>
-  <p>Du trenger tilgang til DNS-en for ditt domene. Hos Domeneshop, GoDaddy, Cloudflare og lignende går du til DNS-administrasjonen og legger til en TXT-record.</p>
+  <p><strong>DMARC-oppsett krever DNS-tilgang til domenet ditt og tar 20–60 minutter. Du må ha SPF eller DKIM på plass først. Anbefalt fremgangsmåte: start med <code>p=none</code> i 4 uker for å samle data, gå deretter til <code>p=quarantine</code> med <code>pct=25</code> og øk gradvis til <code>p=reject</code> med <code>pct=100</code>. Hele prosessen tar typisk 6–12 uker fra start til full beskyttelse.</strong></p>
 
   <h3>Steg 1: Sjekk om SPF og DKIM allerede er satt opp</h3>
-  <p>DMARC krever at du har SPF eller DKIM først. Bruk <a href="https://data1.no/">data1.no</a> for å sjekke dette på 10 sekunder.</p>
+  <p>DMARC krever SPF eller DKIM først. Bruk <a href="/">data1.no</a> for å sjekke dette på 10 sekunder.</p>
 
   <h3>Steg 2: Start i monitoring-modus</h3>
   <p>Legg til en TXT-record på <code>_dmarc.dittfirma.no</code> med innhold:</p>
-
-  <pre><code>v=DMARC1; p=none; rua=mailto:dmarc@dittfirma.no; pct=100;</code></pre>
-
+  <pre style="background:#0f172a;color:#e2e8f0;padding:14px 18px;border-radius:8px;overflow-x:auto;font-size:13px">v=DMARC1; p=none; rua=mailto:dmarc-rapport@dittfirma.no; pct=100;</pre>
   <ul>
-    <li><code>v=DMARC1</code>: Versjon (alltid denne).</li>
-    <li><code>p=none</code>: Bare overvåk, ikke blokker noe ennå.</li>
-    <li><code>rua=mailto:...</code>: Hvor rapportene sendes (du får én XML-fil per dag per mottakerserver).</li>
-    <li><code>pct=100</code>: Policyen gjelder 100 % av meldingene.</li>
+    <li><code>v=DMARC1</code>: Versjon (alltid denne)</li>
+    <li><code>p=none</code>: Bare overvåk, ikke blokker noe ennå</li>
+    <li><code>rua=mailto:...</code>: Hvor rapportene sendes (én XML-fil per dag per mottakerserver)</li>
+    <li><code>pct=100</code>: Policyen gjelder 100 % av meldingene</li>
   </ul>
 
-  <h3>Steg 3: Vent 1-4 uker, les rapportene</h3>
-  <p>I starten vil du se hvilke avsenderservere som faktisk sender e-post i ditt navn — både legitime (din e-postleverandør, marketing-verktøy, fakturasystem) og illegitime (spammere som har misbrukt domenet ditt).</p>
-
-  <div class="callout">
-    <p><strong>Tips:</strong> Rapportene er XML-filer som er vanskelige å lese manuelt. Bruk en gratis-tjeneste som <em>dmarcian</em> eller <em>Postmark DMARC</em> for å aggregere dem til lesbare grafer. Alternativt: la <a href="/?utm_source=blog">Micronet håndtere det for deg</a> for kr 295/mnd.</p>
-  </div>
+  <h3>Steg 3: Vent 1–4 uker, les rapportene</h3>
+  <p>I starten vil du se hvilke avsenderservere som faktisk sender e-post i ditt navn — både legitime (e-postleverandør, marketing-verktøy, fakturasystem) og illegitime (spammere som har misbrukt domenet ditt).</p>
 
   <h3>Steg 4: Skjerp gradvis</h3>
-  <p>Når alle legitime avsendere er identifisert og lagt til i SPF/DKIM, skjerp policyen:</p>
-  <pre><code>v=DMARC1; p=quarantine; pct=25; rua=mailto:dmarc@dittfirma.no;</code></pre>
-  <p>Dette setter 25 % av feilende meldinger i karantene (spam-mappa). Øk gradvis til 100, og deretter til <code>p=reject</code>.</p>
+  <p>Når alle legitime avsendere er identifisert og lagt til i SPF/DKIM:</p>
+  <pre style="background:#0f172a;color:#e2e8f0;padding:14px 18px;border-radius:8px;overflow-x:auto;font-size:13px">v=DMARC1; p=quarantine; pct=25; rua=mailto:dmarc-rapport@dittfirma.no;</pre>
+  <p>Øk <code>pct</code> gradvis til 100, og deretter til <code>p=reject</code>.</p>
 
   <h2 id="policies">5. p=none, p=quarantine eller p=reject?</h2>
-  <p>Dette er det viktigste valget i DMARC-oppsettet:</p>
-  <ul>
-    <li><strong>p=none</strong> (overvåking): Ingen meldinger blir blokkert. Brukes kun i oppstartsfasen. <em>Gir ingen reell beskyttelse</em>.</li>
-    <li><strong>p=quarantine</strong>: Mistenkelige meldinger havner i spam-mappa hos mottaker. Beskyttelse, men svindleren får fortsatt levert i 5-10 % av tilfellene.</li>
-    <li><strong>p=reject</strong>: Mistenkelige meldinger avvises helt. Maksimal beskyttelse — anbefales for alle modne oppsett.</li>
-  </ul>
+  <p><strong>Det viktigste valget i DMARC er policy-nivået. <code>p=none</code> gir kun overvåking og ingen reell beskyttelse — kun for oppstartsfasen. <code>p=quarantine</code> sender mistenkelig e-post til spam-mappen, men 5–10 % av svindelen kan fortsatt leveres til innboks. <code>p=reject</code> avviser e-post med spoofet domene fullstendig og er det eneste nivået som gir full beskyttelse mot phishing i ditt navn.</strong></p>
 
-  <p>Hvis du fortsatt har <code>p=none</code> etter 6 måneders drift, gir det ingenting. Tenk på det som et alarmsystem du aldri har slått på.</p>
+  <table style="width:100%;border-collapse:collapse;margin:18px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06);font-size:14px">
+    <thead>
+      <tr style="background:#0f172a;color:#fff">
+        <th style="padding:10px 14px;text-align:left;font-size:12px;letter-spacing:.04em;text-transform:uppercase">Policy</th>
+        <th style="padding:10px 14px;text-align:left;font-size:12px;letter-spacing:.04em;text-transform:uppercase">Hva skjer</th>
+        <th style="padding:10px 14px;text-align:left;font-size:12px;letter-spacing:.04em;text-transform:uppercase">Beskyttelse</th>
+        <th style="padding:10px 14px;text-align:left;font-size:12px;letter-spacing:.04em;text-transform:uppercase">Anbefales for</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:10px 14px;border-bottom:1px solid #f1f5f9"><code>p=none</code></td><td style="padding:10px 14px;border-bottom:1px solid #f1f5f9">Ingen blokkering, kun rapporter</td><td style="padding:10px 14px;border-bottom:1px solid #f1f5f9">Ingen</td><td style="padding:10px 14px;border-bottom:1px solid #f1f5f9">Første 4–8 uker</td></tr>
+      <tr><td style="padding:10px 14px;border-bottom:1px solid #f1f5f9"><code>p=quarantine</code></td><td style="padding:10px 14px;border-bottom:1px solid #f1f5f9">Spam-mappe hos mottaker</td><td style="padding:10px 14px;border-bottom:1px solid #f1f5f9">Delvis</td><td style="padding:10px 14px;border-bottom:1px solid #f1f5f9">Overgangsfase</td></tr>
+      <tr><td style="padding:10px 14px"><code>p=reject</code></td><td style="padding:10px 14px">Full avvisning</td><td style="padding:10px 14px">Maksimal</td><td style="padding:10px 14px">Modne oppsett</td></tr>
+    </tbody>
+  </table>
+
+  <p>Hvis du fortsatt har <code>p=none</code> etter 6 måneders drift, har du i praksis et alarmsystem du aldri har slått på.</p>
 
   <h2 id="feil">6. 5 vanlige feil å unngå</h2>
   <ol>
-    <li><strong>Stå fast på p=none.</strong> Den vanligste feilen er å aldri skjerpe. Ha en plan: 4 uker monitoring → quarantine 25 % → quarantine 100 % → reject.</li>
+    <li><strong>Stå fast på p=none.</strong> Den vanligste feilen. Ha en plan: 4 uker monitoring → quarantine 25 % → quarantine 100 % → reject.</li>
     <li><strong>Glemme subdomener.</strong> En angriper kan bruke <code>fakturanrxx.dittfirma.no</code> hvis du ikke har <code>sp=reject</code> i DMARC-recorden.</li>
-    <li><strong>For mange SPF-includes.</strong> SPF har en hard grense på 10 DNS-oppslag. Sammenslå med en SPF-flattening-tjeneste hvis du har mange leverandører.</li>
-    <li><strong>Ingen rapportadresse.</strong> Uten <code>rua=</code> får du aldri vite om at noen prøver å misbruke domenet.</li>
+    <li><strong>For mange SPF-includes.</strong> SPF har en hard grense på 10 DNS-oppslag. Bruk SPF-flattening hvis du har mange leverandører. Se vår <a href="/blogg/spf-microsoft-365/">SPF Microsoft 365-guide</a> for detaljer.</li>
+    <li><strong>Ingen rapportadresse.</strong> Uten <code>rua=</code> får du aldri vite at noen prøver å misbruke domenet.</li>
     <li><strong>Manuell DKIM-rotering.</strong> Mange e-postleverandører roterer DKIM automatisk. Hvis du blokkerer den nye nøkkelen, får du leveringsproblemer.</li>
   </ol>
 
   <h2 id="rapporter">7. Hva gjør du med rapportene?</h2>
-  <p>DMARC-rapporter er XML-filer som ser slik ut:</p>
-  <pre><code>&lt;feedback&gt;
-  &lt;record&gt;
-    &lt;source_ip&gt;185.183.30.17&lt;/source_ip&gt;
-    &lt;count&gt;42&lt;/count&gt;
-    &lt;result&gt;
-      &lt;dkim&gt;fail&lt;/dkim&gt;
-      &lt;spf&gt;fail&lt;/spf&gt;
-      &lt;disposition&gt;none&lt;/disposition&gt;
-    &lt;/result&gt;
-  &lt;/record&gt;
-&lt;/feedback&gt;</code></pre>
-  <p>Hver record forteller: <em>«Server X sendte Y e-poster i ditt navn, og de feilte SPF/DKIM».</em></p>
-  <p>Du må svare på tre spørsmål for hver kilde:</p>
+  <p><strong>DMARC-rapporter er XML-filer du mottar daglig på adressen i <code>rua=</code>-feltet. Hver rapport viser hvilke IP-adresser som har sendt e-post i ditt navn, hvor mange meldinger, og om de bestod SPF/DKIM. Rapportene er vanskelige å lese manuelt — bruk en tjeneste som dmarcian, Postmark DMARC eller <a href="/?utm_source=blog">Micronet sin overvåkingstjeneste</a> for å aggregere dem til lesbare grafer.</strong></p>
+  <p>For hver kilde i rapporten svarer du på tre spørsmål:</p>
   <ol>
-    <li>Er dette en av mine egne (legg til i SPF/DKIM)?</li>
-    <li>Er dette en leverandør (be dem fikse SPF/DKIM)?</li>
-    <li>Er dette en angriper (fortsett å blokkere)?</li>
+    <li>Er dette en av mine egne? → Legg til i SPF/DKIM</li>
+    <li>Er dette en leverandør? → Be dem fikse SPF/DKIM</li>
+    <li>Er dette en angriper? → Fortsett å blokkere</li>
   </ol>
+
+  <h2 id="faq">Ofte stilte spørsmål om DMARC</h2>
+
+  <h3>Hva er DMARC i én setning?</h3>
+  <p>DMARC er en DNS-basert e-poststandard som forteller mottakende servere om de skal slippe gjennom, sette i karantene eller avvise e-post som påstår å komme fra ditt domene men ikke består SPF/DKIM-verifisering.</p>
+
+  <h3>Hvor lang tid tar det å sette opp DMARC?</h3>
+  <p>Selve DNS-oppsettet tar 20–60 minutter. Men full implementering fra <code>p=none</code> til <code>p=reject</code> tar typisk 6–12 uker fordi du må samle nok data til å identifisere alle legitime avsendere før du kan skjerpe policyen.</p>
+
+  <h3>Hva koster DMARC?</h3>
+  <p>DMARC i seg selv er gratis — det er bare DNS-records. Kostnaden ligger i å håndtere rapportene. Dmarcian, Postmark DMARC og andre verktøy koster 50–500 USD/måned avhengig av volum. Norske MSP-er som Micronet tilbyr fullservice fra ca. 295 kr/mnd.</p>
+
+  <h3>Er DMARC obligatorisk i Norge?</h3>
+  <p>Ikke ennå lovpålagt, men reelt påkrevd. Gmail og Yahoo krever DMARC for bulk-avsendere (over 5 000 meldinger/dag) siden februar 2024. Nasjonal sikkerhetsmyndighet (NSM) anbefaler DMARC i sin veileder for e-postsikring. Stadig flere offentlige anbud stiller krav.</p>
+
+  <h3>Hva er forskjellen på DMARC og SPF?</h3>
+  <p>SPF (Sender Policy Framework) verifiserer hvilke IP-adresser som har lov til å sende e-post for ditt domene. DMARC bruker SPF-resultatet (sammen med DKIM) og legger til en policy — hva mottaker skal gjøre når SPF feiler. SPF alene gir ikke beskyttelse mot spoofing av Fra-adressen.</p>
+
+  <h3>Hvor finner jeg DMARC-recorden min?</h3>
+  <p>Den ligger som en TXT-record på <code>_dmarc.dittdomene.no</code> i DNS-en din. Du kan også sjekke den på sekunder ved å skrive inn domenet ditt på <a href="/">data1.no</a>.</p>
+
+  <h3>Kan DMARC blokkere legitime e-poster?</h3>
+  <p>Ja, hvis du går for raskt til <code>p=reject</code> uten å først identifisere alle legitime avsendere via monitoring-fasen. Derfor anbefales 4–8 uker med <code>p=none</code> før du skjerper. Gjøres riktig blokkerer DMARC kun uautorisert e-post.</p>
+
+  <h3>Hva er DMARC-status for norske banker og kommuner?</h3>
+  <p>Per 14. mai 2026: Norske banker har gjennomsnittlig karakter B+, mens kommunesektoren ligger på D. Se <a href="/rapport-2026/">ukentlig rapport hos data1.no</a> for live-tall per domene.</p>
 
   <div class="cta-box">
     <h3>Sjekk domenet ditt nå</h3>
     <p>Få full DMARC-analyse på sekunder — gratis, uten registrering.</p>
-    <a href="/?utm_source=blog&utm_medium=dmarc">Sjekk eget domene →</a>
+    <a href="/?utm_source=blog&amp;utm_medium=dmarc">Sjekk eget domene →</a>
   </div>
 
-  <h2>Lese mer</h2>
+  <h2>Les mer</h2>
   <ul>
     <li><a href="/blogg/spf/">SPF: Slik beskytter du domenet mot e-post-spoofing</a></li>
     <li><a href="/blogg/dkim/">DKIM: Digital signatur for e-post</a></li>
+    <li><a href="/blogg/dmarc-microsoft-365/">DMARC i Microsoft 365 — komplett guide</a></li>
+    <li><a href="/blogg/dmarc-google-workspace/">DMARC i Google Workspace — komplett guide</a></li>
     <li><a href="/rapport-2026/">Norges 100 største nettsteder — e-post sikkerhetsrapport 2026</a></li>
-    <li><a href="/ordbok/">Ordbok: e-postsikkerhet fra A til Å</a></li>
+    <li><a href="/rapport-2026/banker/">Norske banker — DMARC-status</a></li>
+    <li><a href="/rapport-2026/kommuner/">Norske kommuner — DMARC-status</a></li>
   </ul>
 
   <div class="author-card">
-    <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(140deg,#14b8a6,#0f766e);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px">M</div>
     <div>
-      <div class="author-name">Micronet</div>
-      <div class="author-meta">Norsk IT-konsulenttjeneste — DMARC, e-post sikkerhet og infrastruktur. <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
+      <div class="author-name">Terje Otterlei</div>
+      <div class="author-meta">Daglig leder i Micronet AS — HaloPSA-distributør i Norge med 20+ års erfaring innen Microsoft 365 og e-postinfrastruktur. Forvalter DMARC-overvåking for 50+ M365-tenants i Lørenskog. <a href="https://www.linkedin.com/in/terjeotterlei/" style="color:#0f766e;text-decoration:none">LinkedIn</a> · <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a></div>
     </div>
   </div>
 </main>
