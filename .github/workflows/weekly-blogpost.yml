@@ -22,7 +22,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
+          token: ${{ secrets.BOT_PAT }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -45,15 +46,26 @@ jobs:
           git config user.name "data1.no bot"
           git config user.email "bot@data1.no"
 
-          if [[ -n $(git status --porcelain) ]]; then
-            git add blogg/ _drafts/ sitemap.xml
-            git commit -m "Weekly AI blog post: $(date -u +%Y-W%V) [skip ci]"
-            git pull --rebase || true
-            git push
-            echo "Ny bloggpost pushet."
-          else
+          if [[ -z $(git status --porcelain) ]]; then
             echo "Ingen ny bloggpost generert."
+            exit 0
           fi
+
+          git add blogg/ _drafts/ sitemap.xml
+          git commit -m "Weekly AI blog post: $(date -u +%Y-W%V) [skip ci]"
+
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || git rebase --abort
+            if git push; then
+              echo "Ny bloggpost pushet på forsøk $attempt."
+              exit 0
+            fi
+            echo "Push avvist (forsøk $attempt). Sover 5s..."
+            sleep 5
+          done
+
+          echo "::error::Push feilet etter 3 forsøk."
+          exit 1
 
       - name: Ping search engines
         run: |
