@@ -1,6 +1,6 @@
-# DomainSikkerhet — Domeneanalyse-intake
+# data1 — Domeneanalyse-intake
 
-Lokal intake-backend for `domain-analyzer.html`. Mottar POST fra skjemaet,
+Backend for [data1.no](https://data1.no) (`domain-analyzer.html`). Mottar POST fra skjemaet,
 sender pent designet HTML-rapport via Mailgun (med 3D-skjold som inline PNG),
 og oppretter draft quote i HaloPSA.
 
@@ -25,8 +25,8 @@ domain-analyzer.html  ──POST /intake──▶  intake-server.py  ──┬�
 
 ```powershell
 # 1. Klon repoet
-git clone https://github.com/xboxoslo/domainsikkerhet.git C:\dev\domainsikkerhet
-cd C:\dev\domainsikkerhet
+git clone https://github.com/xboxoslo/data1.git C:\dev\data1
+cd C:\dev\data1
 
 # 2. Installer avhengigheter
 pip install -r requirements.txt

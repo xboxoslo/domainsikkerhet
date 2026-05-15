@@ -34,7 +34,7 @@ HALO_TICKET_TYPE = 'EasyDMARC'
 
 MAILGUN_DOMAIN = 'micronet.no'
 MAILGUN_REGION = 'eu'
-MAILGUN_FROM   = 'DomainSikkerhet <noreply@micronet.no>'
+MAILGUN_FROM   = 'data1.no <noreply@micronet.no>'
 
 ALLOWED_ORIGINS = {
     'http://localhost:3000',
