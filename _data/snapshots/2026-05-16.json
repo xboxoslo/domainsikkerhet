@@ -1,0 +1,5909 @@
+{
+  "date": "2026-05-16",
+  "timestamp": "2026-05-16T08:21:54.517433+00:00",
+  "domain_count": 158,
+  "results": [
+    {
+      "domain": "dnb.no",
+      "score": 95,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:%{ir}.%{v}.%{d}.spf.has.pphosted.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:phishing@dnb.no",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "k1",
+            "k2",
+            "s1",
+            "s2",
+            "mail"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20240821"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1;rua=mailto:tlsrpt@dnb.no"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://vmc.digicert.com/02cc892e-b27c-49e6-9c34-57bb0d3db06a.svg; a=https://vmc.digicert.com/02cc892e-b27c-49e6-9c34-57bb0d3db06a.pem"
+        }
+      }
+    },
+    {
+      "domain": "nordea.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.messagelabs.com ip4:192.254.122.173 ip4:167.89.22.98 include:_spf.anpdm.com include:spf.mailanyone.net ip4:141.193.32.19 ip4:139.117.104.4 ip4:139.116.71.0/25 ip4:212.18.128.128/25 ip6:2a02:9c8:0:1001::/64 ip4:185.94.12.21\" \" ip4:185.94.12.22 include:_spf.sndr.no include:mailout.osl.basefarm.net include:spf.protection.outlook.com include:spf.mandrillapp.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=none; fo=1; ri=3600; rua=mailto:nordea@rua.agari.com; ruf=mailto:nordea@ruf.agari.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sparebank1.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:de._netblocks.mimecast.com include:_spf_1.sparebank1.no include:_spf_2.sparebank1.no include:_spf_3.sparebank1.no include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc-reports@sparebank1.no; ruf=mailto:dmarc-forensic@sparebank1.no; adkim=r; aspf=r; ri=7200;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "storebrand.no",
+      "score": 78,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:%{ir}.%{v}.%{d}.spf.has.pphosted.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "k1",
+            "mandrill",
+            "s1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://vmc.digicert.com/ec7dc42f-b72d-4742-ac97-fac9e4ab5d08.svg; a=https://vmc.digicert.com/ec7dc42f-b72d-4742-ac97-fac9e4ab5d08.pem;"
+        }
+      }
+    },
+    {
+      "domain": "handelsbanken.no",
+      "score": 63,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:194.68.56.145 ip4:194.68.56.146 ip4:194.68.56.149 ip4:194.68.56.150 ip4:212.18.128.128/25 ip4:146.192.49.128/25 ip4:153.110.241.224/28  ip4:193.53.88.29 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:handelsbanken@rua.netcraft.com; ruf=mailto:handelsbanken@ruf.netcraft.com; fo=1;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://www.handelsbanken.no/sv/sepu/shb.svg"
+        }
+      }
+    },
+    {
+      "domain": "santander.no",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 exists:%{i}.spf.as.gruposantander.com exists:%{i}.spf.us.gruposantander.com include:spf.protection.outlook.com ip4:77.88.77.21 ip4:212.247.0.242 ip4:212.247.0.243 ip4:212.247.0.223 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:santander@rua.dmp.cisco.com; ruf=mailto:santander@ruf.dmp.cisco.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sbanken.no",
+      "score": 75,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:%{ir}.%{v}.%{d}.spf.has.pphosted.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:phishing@dnb.no",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sparebanken-vest.no",
+      "score": 8,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sparebanken-sor.no",
+      "score": 8,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sparebanken-ost.no",
+      "score": 0,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": false,
+          "record": null,
+          "policy": null,
+          "pct": null
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "nordnet.no",
+      "score": 65,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.google.com include:spf.protection.outlook.com include:_spf.nordnet.no -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; adkim=s; aspf=s; rua=mailto:dmarc@nordnet.se,mailto:lzh29ymj@ag.eu.dmarcian.com;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "google",
+            "default"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "finanstilsynet.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx ip4:89.250.123.21 ip4:195.159.150.70/31 include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; ruf=mailto:dmarc@finanstilsynet.no",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector2",
+            "k1",
+            "mandrill",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "gjensidige.no",
+      "score": 63,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:139.116.71.0/25 ip4:212.18.128.128/25 ip4:146.192.49.128/25 ip6:2a02:9c8:0:1001::/64 ip4:185.30.224.128/25 ip4:139.112.4.183 ip4:139.112.193.4/31 ip4:139.113.45.128/28 ip4:139.105.113.128 ip4:217.195.184.68 include:spf.bas.no include:spf.protec\" \"tion.outlook.com include:_spf-dc12.successfactors.com include:spf03.sabacloud.com include:spf.tucaas.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; pct=100; rua=mailto:n5ug6rur@ag.eu.dmarcian.com; ruf=mailto:n5ug6rur@fr.eu.dmarcian.com;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1;l=https://bimi.entrust.net/gjensidige.dk/logo.svg;a=https://bimi.entrust.net/gjensidige.dk/certchain.pem"
+        }
+      }
+    },
+    {
+      "domain": "fremtind.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:185.68.171.16/28 \" \"include:_spf_1.sparebank1.no \" \"include:_spf_2.sparebank1.no \" \"include:_spf_3.sparebank1.no \" \"include:_spf.questback.net \" \"include:spf.protection.outlook.com \" \"include:de._netblocks.mimecast.com \" \"-all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc-reports@sparebank1.no; ruf=mailto:dmarc-forensic@sparebank1.no; adkim=r; aspf=r; ri=7200;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "if.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:217.18.206.43 ip4:212.89.52.12 ip4:212.89.52.11 ip4:193.34.40.82 ip4:212.89.52.13 ip4:212.89.52.14 include:spf.protection.outlook.com include:servers.mcsv.net include:_spf.online.superoffice.com exists:%{ir}-spf.if.no -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc@if.no; fo=1;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "s1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "tryg.no",
+      "score": 48,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.mailanyone.net include:spf.protection.outlook.com include:_spf.qualtrics.com include:spf.hatteland.com include:spf.mailjet.com include:sendgrid.net include:eu.mailgun.org   include:spf.actimo.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:0b49eff1c887658@rep.dmarcanalyzer.com; ruf=mailto:0b49eff1c887658@for.dmarcanalyzer.com; fo=1;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "codan.no",
+      "score": 45,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com a:spf.mas.t-systems-service.com ip4:62.154.183.80/28 ip4:82.193.251.0/28 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": false,
+          "record": null,
+          "policy": null,
+          "pct": null
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "knif.no",
+      "score": 48,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com include:aspnett.net include:email.mojosender.com include:_spf.online.superoffice.com include:143397500.spf10.hubspotemail.net ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; sp=none; rua=mailto:djm5ys1dmc@rua.powerdmarc.com; ruf=mailto:djm5ys1dmc@ruf.powerdmarc.com; fo=0:1:d:s;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "frende.no",
+      "score": 63,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:%{i}._ip.%{h}._ehlo.%{d}._spf.vali.email include:spf.protection.outlook.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email,mailto:dmarc@visolit.no",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1;l=https://frende-public-bimi.s3.eu-west-1.amazonaws.com/frende-logo.svg"
+        }
+      }
+    },
+    {
+      "domain": "eika.no",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx a include:_spf.eu.mailgun.org include:spf-00727601.pphosted.com include:_spf.netigate.se include:spf.hatteland.com include:ssnc-corp.cloud include:spf.protection.outlook.com include:spf.ilnet.se include:_spf.sndr.no\" \" ip4:54.229.2.165 ip4:52.30.130.201 ip4:195.159.144.141 ip4:139.111.201.0/29 ip4:212.18.128.0/24 ip4:146.192.49.0/24 ip4:208.185.229.0/24 ip4:208.185.235.0/24 ip4:148.59.108.0/23  ip4:148.59.106.0/23 ip4:18.168.51.200 ip4:18.168.140.58 ip4:3.123.206.219\" \" ip4:3.68.129.51 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "telenor.no",
+      "score": 97,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf1.telenor.no include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=reject; aspf=s; adkim=r; fo=s; ri=86400; rua=mailto:abuse@telenor.net,mailto:01dbb77e79@rua.easydmarc.eu; ruf=mailto:abuse@telenor.net,mailto:ruf-dmarcreport@telenor.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=202603110918;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:01dbb77e79@tls.easydmarc.eu"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "telia.no",
+      "score": 75,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf-a.telia.no include:spf-b.telia.no include:_spf-c.telia.net include:u3780608.wl109.sendgrid.net include:_spf.sndr.no include:spf.mailjet.com include:mail.zendesk.com ip4:194.16.29.164 ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=quarantine; rua=mailto:rhisqdsk@ag.eu.dmarcian.com, mailto:dmarc@teliacompany.com, mailto:dmarc@report.telia.net; ruf=mailto:dmarc@teliacompany.com;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "ice.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf1.ice.no include:spf2.ice.no include:spf3.ice.no include:spf4.ice.no include:spf5.ice.no include:spf.lyse.no -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:wlur5gvy@ag.eu.dmarcadvisor.com;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "k1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "get.no",
+      "score": 48,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx ip4:84.208.20.34/32 ip4:193.208.151.32/27 ip4:80.74.207.112/28 include:spf.protection.outlook.com include:mail.zendesk.com include:_spf.sndr.no ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;p=none;sp=none;fo=1;rua=mailto:cv1zdpyr@ag.dmarcian-eu.com;ruf=mailto:cv1zdpyr@fr.dmarcian-eu.com;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "altibox.no",
+      "score": 73,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:62.192.28.128/26 ip4:212.203.106.0/24 ip4:195.140.184.0/22 ip4:91.192.40.0/22 ip4:79.161.5.211 ip4:79.160.226.238 include:spf.altibox.no include:spf.protection.outlook.com include:_spf.anpdm.com include:_spf.questback.com include:spf-altibox.al\" \"into.net include:amazonses.com include:_spf.salesforce.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; aspf=s; adkim=s; pct=70; rua=mailto:wlur5gvy@ag.eu.dmarcadvisor.com;",
+          "policy": "reject",
+          "pct": 70
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "talkmore.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com include:spf.sendinblue.com include:spf.mail.jcloud.no ip4:217.65.225.228/31 ip4:213.179.60.5 include:spf1.talkmore.no -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=none; aspf=s",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "s1",
+            "s2",
+            "mail"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "nav.no",
+      "score": 100,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:155.55.50.204 ip4:155.55.50.205 ip4:155.55.50.24 include:spf.protection.outlook.com include:_spf.salesforce.com include:spf-003ba702.pphosted.com a:ai-p-s1-ext.ai.basefarm.net ip4:195.43.63.191/32 ip4:195.43.63.192/32 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=reject; aspf=r; adkim=r; fo=1; pct=100; rua=mailto:dsm1h58m@ag.dmarcian.com; ruf=mailto:dsm1h58m@fr.dmarcian.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=2020091600001"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:postmaster@nav.no"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://www.nav.no/favicon.svg;"
+        }
+      }
+    },
+    {
+      "domain": "skatteetaten.no",
+      "score": 82,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 a:smtp.skatteetaten.no a:smtp2.skatteetaten.no a:mail.sismo.no a:smtp01.emea.sabacloud.com a:msg-out.onevoice.no a:ai-p-s1-ext.ai.basefarm.net  a:cre-p2-ext.p2.osl.basefarm.net ip4:151.187.161.76 include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; sp=reject; fo=1;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20250903133025;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1;rua=tlsrpt@skatteetaten.no"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "helsenorge.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com include:_spf.nhn.no include:spf.logicalware.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc@nhn.no,mailto:dsm1h58m@ag.dmarcian.com; ruf=mailto:dmarcfull@nhn.no",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "altinn.no",
+      "score": 33,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 a:ai-p-s1-ext.ai.basefarm.net ip4:195.43.63.191/32 ip4:195.43.63.192/32 ip4:51.13.102.144 include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "politiet.no",
+      "score": 92,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_u.politiet.no._spf.smart.ondmarc.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; sp=reject; rua=mailto:39ed5b71@inbox.ondmarc.com; ruf=mailto:39ed5b71@inbox.ondmarc.com; adkim=r; aspf=r; fo=1; rf=afrf; ri=3600",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "default"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=1756293948664"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:39ed5b71@inbox.ondmarc.com;"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "posten.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:85.19.65.0/24 ip4:139.112.164.16/28 ip4:139.116.15.32/28 ip4:139.116.71.0/25 ip4:139.112.164.8/31 ip4:77.240.25.140 ip4:139.117.144.107/27 ip4:185.30.224.128/25 ip4:194.204.27.130 ip4:194.204.27.131 ip4:185.56.184.0/24 ip6:2a02:9c8:0:1000::/64\" \" ip6:2a02:9c8:0:1001::/64 ip4:139.117.145.0/24 ip4:185.38.121.20/28 ip6:2a04:6fb0:121::21/126 ip4:194.187.25.111 ip4:151.252.13.148 ip4:62.92.7.144/28 include:spf.hatteland.com include:fotonisoftware.fi include:network.mynewsdesk.com include:spf.protecti\" \"on.outlook.com include:servers.mcsv.net include:_spf.salesforce.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; ruf=mailto:forensic.dmarc@posten.no; rua=mailto:dmarc_agg@vali.email; adkim=r; aspf=r",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "k1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "regjeringen.no",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "stortinget.no",
+      "score": 97,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf1.stortinget.no include:msg-out.onevoice.no include:spf.protection.outlook.com include:spf-eu.exlibrisgroup.com include:_spf.nanolearning.com include:spf.mailjet.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; rua=mailto:re+vwfdhztymli@dmarc.postmarkapp.com,mailto:dmarc_agg@vali.email; sp=reject;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20250507080000Z;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:tlsrpt@stortinget.no"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "udi.no",
+      "score": 97,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:195.88.106.0/27 ip4:85.31.192.42 ip4:85.31.193.42 ip4:168.245.3.4 ip4:195.88.107.133 ip4:195.88.107.134 ip4:52.232.27.151 include:spf.messagelabs.com include:sendgrid.net include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:8giteywu@ag.eu.dmarcadvisor.com; ruf=mailto:8giteywu@fr.eu.dmarcadvisor.com; fo=1",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=22102021"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1;rua=mailto:8giteywu@tls.eu.dmarcadvisor.com"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "nbim.no",
+      "score": 100,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;p=reject;sp=reject;pct=100;rua=mailto:exchange-rua@nbim.no",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20250205080000Z;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1;rua=mailto:tls-rpt-reports@nbim.no"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1;l=https://bimi.nbim.no/image.svg;a="
+        }
+      }
+    },
+    {
+      "domain": "brreg.no",
+      "score": 65,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx include:spf.protection.outlook.com a:smtprelay.brreg.no include:_spf.sndr.no a:msg-out.onevoice.no a:ai-p-s1-ext.ai.basefarm.net -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:v0dcem69@ag.eu.dmarcadvisor.com; ruf=mailto:v0dcem69@fr.eu.dmarcadvisor.com;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "ssb.no",
+      "score": 100,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:542fqsidvj.powerspf.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:rlgcl6wlcj@rua.powerdmarc.com; ruf=mailto:rlgcl6wlcj@ruf.powerdmarc.com; pct=100; fo=0;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "k2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20260414115813835505;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1;rua=mailto:rlgcl6wlcj@tls.powerdmarc.com"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1;l=https://hostedbimi.com/20506/ab8bdf10-a130-4355-919b-6694245d04f9.svg;"
+        }
+      }
+    },
+    {
+      "domain": "nho.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.nho.no include:_spf2.nho.no include:spf.protection.outlook.com include:sendgrid.net ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:re+xoog2bbqx13@dmarc.postmarkapp.com; ruf=mailto:dmarc.forensic@nho.no; sp=reject; fo=1",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "mandrill",
+            "s1",
+            "s2",
+            "mail"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:tlsrpt@495z8q8j.uriports.com"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "lo.no",
+      "score": 92,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.lo_no._d.easydmarc.pro include:_spf.sndr.no ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;p=reject;pct=100;rua=mailto:bb6dbb1f61@rua.easydmarc.eu;ruf=mailto:bb6dbb1f61@ruf.easydmarc.eu;ri=86400;fo=1;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20260422T130452;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:bb6dbb1f61@tls.easydmarc.com;"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "forsvaret.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:169.51.78.16/28 ip4:169.51.91.224/27 a include:spf.protection.outlook.com include:_spf.sndr.no -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:dmarc_agg@vali.email",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "nrk.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx a ip4:160.67.135.178 ip4:160.67.166.179 ip4:77.94.235.18 ip4:23.253.183.25 ip4:77.94.238.194 a:msg-out.onevoice.no include:spf.protection.outlook.com include:_spf.anpdm.com include:_spf.sndr.no include:_spf.google.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; pct=100; rua=mailto:dmarc-reports@nrk.no; ruf=mailto:dmarc-reports@nrk.no; fo=1",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "google",
+            "k1",
+            "mandrill",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "norsk-helsenett.no",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc@nhn.no,mailto:dsm1h58m@ag.dmarcian.com; ruf=mailto:dmarcparked@nhn.no",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "mattilsynet.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:53z54mvgra.powerspf.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:gldwqlm3kk@rua.powerdmarc.com; ruf=mailto:gldwqlm3kk@ruf.powerdmarc.com; pct=100; fo=0:1:d:s;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "oslo-universitetssykehus.no",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 redirect=_spf.sykehuspartner.no",
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;p=reject;pct=100;rua=mailto:dmarc@sykehuspartner.no,mailto:qlmn4rql@ag.dmarcian.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "helse-bergen.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:185.201.93.122 ip4:161.4.88.20/30 ip4:167.89.59.190 a:smtp.nethome.no include:_spf.nhn.no include:msg-out._spf.onevoice.no include:servers.mcsv.net include:_spf.sndr.no include:spf.protection.outlook.com include:mail.webropolsurveys.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=reject; rua=mailto:dsm1h58m@ag.dmarcian.com;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "k1",
+            "default"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sthf.no",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 redirect=_spf.sykehuspartner.no",
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; rua=mailto:dmarc@sykehuspartner.no,mailto:qlmn4rql@ag.dmarcian.com;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "helse-fonna.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:185.201.93.122 ip4:161.4.88.20/30 include:_spf.nhn.no include:msg-out._spf.onevoice.no include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=reject; rua=mailto:dsm1h58m@ag.dmarcian.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "default"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sykehuspartner.no",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 redirect=_spf.sykehuspartner.no",
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100;  rua=mailto:dmarc@sykehuspartner.no,mailto:qlmn4rql@ag.dmarcian.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "apotek1.no",
+      "score": 95,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_u.apotek1.no._spf.smart.ondmarc.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; sp=reject; rua=mailto:3fb658a1@inbox.eu.redsift.cloud; ruf=mailto:3fb658a1@inbox.eu.redsift.cloud; adkim=r; aspf=r; fo=0; rf=afrf; ri=3600",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "k2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=1773847771041"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:3fb658a1@inbox.eu.redsift.cloud;"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://www.apotek1.no/assets/apotek_1_gruppen_as_1326243576.svg; a=https://www.apotek1.no/assets/apotek_1_gruppen_as_1326243576.pem"
+        }
+      }
+    },
+    {
+      "domain": "boots.no",
+      "score": 75,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:%{ir}.%{v}.%{d}.spf.has.pphosted.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "equinor.no",
+      "score": 0,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": false,
+          "record": null,
+          "policy": null,
+          "pct": null
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "hydro.no",
+      "score": 0,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": false,
+          "record": null,
+          "policy": null,
+          "pct": null
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "statkraft.no",
+      "score": 33,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx include:_spf-a.statkraft.com include:_spf-b.statkraft.com include:_spf-c.statkraft.com include:spf.protection.outlook.com ip4:193.212.95.47/32 ip4:193.212.95.46/32 ip4:91.213.22.73/32 ip4:91.213.22.74/32 ip4:193.212.95.25/32 ip4:193.212.95.26/32\" \" ip4:81.191.33.231/32 ip4:193.212.95.30/32 ip4:81.191.33.235/32 ip4:193.212.95.103/32 ip4:193.212.95.101/32 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:wgy3ft58@ag.eu.dmarcian.com; ruf=mailto:wgy3ft58@fr.eu.dmarcian.com;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "yara.no",
+      "score": 0,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": false,
+          "record": null,
+          "policy": null,
+          "pct": null
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "aker-solutions.no",
+      "score": 0,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": false,
+          "record": null,
+          "policy": null,
+          "pct": null
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "elkem.no",
+      "score": 92,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com ip4:144.127.0.66 ip4:34.249.196.78 ip4:34.251.157.56 ip4:34.252.27.239 ip4:35.157.154.159 ip4:35.157.154.159 a:smtp.nettkroken.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc@b6py34t3.uriports.com;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20231130183005Z;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:tlsrpt@b6py34t3.uriports.com"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "nyfosse.no",
+      "score": 0,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": false,
+          "record": null,
+          "policy": null,
+          "pct": null
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "vg.no",
+      "score": 75,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_u.vg.no._spf.smart.ondmarc.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; sp=none; rua=mailto:af0d07b7@inbox.ondmarc.com; ruf=mailto:af0d07b7@inbox.ondmarc.com; adkim=r; aspf=r; fo=0; rf=afrf; ri=3600",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "k2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "dagbladet.no",
+      "score": 38,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:servers.mcsv.net include:spf.protection.outlook.com include:customers.clickdimensions.com ?all",
+          "all_qualifier": "?"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:65250275ea9c3@dmarc.centerasecurity.com;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "k1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "tv2.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx a ip4:193.227.205.26 ip4:193.227.205.160/28 ip4:77.75.211.0/28 ip6:2a00:e48::/32 ip4:23.251.238.30 ip4:23.251.238.31 ip4:23.251.238.32 ip4:23.251.238.33 ip4:194.132.117.189 include:_spf.google.com include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=reject; fo=0; rua=mailto:tv2norway@eu.cp-dmarc.com; ruf=mailto:rufreports@tv2.no,mailto:tv2norway@eu.cp-dmarc.com;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "aftenposten.no",
+      "score": 75,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 a a:auth-smtp.nebula.fi include:_u.aftenposten.no._spf.smart.ondmarc.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; sp=reject; rua=mailto:af0d07b7@inbox.ondmarc.com,mailto:dmarc@schibsted.com; ruf=mailto:af0d07b7@inbox.ondmarc.com,mailto:dmarc-forensics@schibsted.com; adkim=s; aspf=r; fo=0; rf=afrf; ri=86400",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "google",
+            "mandrill"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "bt.no",
+      "score": 75,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_u.bt.no._spf.smart.ondmarc.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; sp=reject; rua=mailto:af0d07b7@inbox.ondmarc.com; ruf=mailto:af0d07b7@inbox.ondmarc.com; adkim=r; aspf=r; fo=0; rf=afrf; ri=3600",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "google"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "dn.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:137.221.30.0/28 ip4:137.221.26.0/28 ip4:188.95.246.87 ip4:185.175.96.15 ip4:185.47.40.123 ip4:185.47.42.25 ip6:2a02:c0:2f0:7500:f816:3eff:febc:836a ip6:2a02:c0:4f0:6c00:f816:3eff:fe43:13e7 ip4:87.238.53.0/25 ip4:87.238.53.192/26 ip4:139.116.7\" \"1.0/25 ip4:194.17.7.157 ip4:194.17.7.135 include:spf.protection.outlook.com include:servers.mcsv.net include:madgexjb.com include:spf.mandrillapp.com include:_spf-hosting.eg.dk include:amazonses.com include:navigacloud.com include:1545457.spf06.hubspote\" \"mail.net -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:c52cb600dc9c789@rep.dmarcanalyzer.com; ruf=mailto:c52cb600dc9c789@for.dmarcanalyzer.com; sp=none; fo=1",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector2",
+            "k1",
+            "mandrill",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "e24.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_u.e24.no._spf.smart.ondmarc.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; sp=none; rua=mailto:af0d07b7@inbox.ondmarc.com; ruf=mailto:af0d07b7@inbox.ondmarc.com; adkim=r; aspf=r; fo=0; rf=afrf; ri=3600",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "nettavisen.no",
+      "score": 65,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.aid.no -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:dmarcreports@amedia.no; adkim=s; aspf=s",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "k1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "itavisen.no",
+      "score": 48,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com include:_spf.google.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "k2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "digi.no",
+      "score": 33,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 a ip4:176.58.114.74 include:_spf.tu.c.bitbit.net include:_spf.google.com include:3307297.spf06.hubspotemail.net include:sendgrid.net include:fdspfeuc.freshemail.io -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; pct=100; rua=mailto:re+vroa7kob7oa@dmarc.postmarkapp.com; sp=none; aspf=r;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "tu.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 a ip4:176.58.114.74 include:_spf.tu.c.bitbit.net include:_spf.google.com include:3307297.spf06.hubspotemail.net include:sendgrid.net include:fdspfeuc.freshemail.io -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; pct=100; rua=mailto:re+mtez1oafpfh@dmarc.postmarkapp.com; sp=none; aspf=r;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "k1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "adressa.no",
+      "score": 65,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.polarisit.no  include:spf.mtasv.net  -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:dmarc@polarisit.no; pct=100; adkim=r; aspf=r",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "faedrelandsvennen.no",
+      "score": 0,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": false,
+          "record": null,
+          "policy": null,
+          "pct": null
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sa.no",
+      "score": 65,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.aid.no -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:dmarcreports@amedia.no; adkim=s; aspf=s",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "k1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "elkjop.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:4.223.163.109 ip4:52.232.40.96 ip4:20.123.165.140 ip4:20.71.48.99 ip4:194.248.0.0/24 ip4:213.236.224.0/24 ip4:193.212.50.128/26 include:spf.elkjop.no include:network.mynewsdesk.com include:spf.protection.outlook.com include:spf.mailjet.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:fzqlnmma@ag.eu.dmarcadvisor.com; ruf=mailto:fzqlnmma@fr.eu.dmarcadvisor.com; fo=1;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "komplett.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:komplett.com include:carmamail.com include:spf.protection.outlook.com include:mail.zendesk.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc@komplett.no; ruf=mailto:dmarc@komplett.no;fo=1",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "mail"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "power.no",
+      "score": 78,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:c15qzoi02e.powerspf.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:gtg5w9trpe@rua.powerdmarc.com; ruf=mailto:gtg5w9trpe@ruf.powerdmarc.com; fo=1;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "google",
+            "mandrill",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://www.power.no/media/pqohhbra/power-bimi-logo.svg; a=https://www.power.no/media/lqxnpxyy/power-vmc.pem"
+        }
+      }
+    },
+    {
+      "domain": "xxl.no",
+      "score": 70,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1\" \" ip4:20.47.149.138\" \" ip4:23.249.208.0/20\" \" ip4:23.251.224.0/19\" \" ip4:23.253.183.25\" \" ip4:213.32.156.105\" \" ip4:34.198.122.65\" \" ip4:34.249.196.78\" \" ip4:34.251.157.56\" \" ip4:34.252.27.239\" \" ip4:35.157.154.159\" \" ip4:35.157.187.101\" \" ip4:40.92.0.0/15\" \" ip4:40.107.0.0/16\" \" ip4:50.31.32.0/19\" \" ip4:51.4.72.0/24\" \" ip4:51.4.80.0/27\" \" ip4:51.5.72.0/24\" \" ip4:51.5.80.0/27\" \" ip4:52.0.20.102\" \" ip4:52.2.238.96\" \" ip4:52.20.146.34\" \" ip4:52.100.0.0/14\" \" ip4:54.173.229.38\" \" ip4:54.174.116.32\" \" ip4:54.240.0.0/17\" \" ip4:54.229.40.125\" \" ip4:69.72.41.208\" \" ip4:69.169.224.0/20\" \" include:spf.protection.outlook.com\" \" include:docebosaas.com\" \" include:spf1.xxl.no\" \" -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:0ogbegil@ag.eu.dmarcadvisor.com; ruf=mailto:0ogbegil@fr.eu.dmarcadvisor.com;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "k2",
+            "mandrill",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:0ogbegil@tls.eu.dmarcian.com"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "clas-ohlson.no",
+      "score": 33,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip6:fd1b:212c:a5f9::/48 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "jernia.no",
+      "score": 75,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:81.0.131.209 ip4:198.37.154.52  ip4:167.89.0.0/17 ip4:168.245.0.0/17 include:_spf.mailgun.org include:_spf.eu.mailgun.org include:spf.protection.outlook.com include:_spf.netigate.se include:amazonses.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;p=reject;rua=mailto:jernia@dmarcrua.tmes.trendmicro.eu;fo=1;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "k1",
+            "mandrill",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "biltema.no",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx include:spf.protection.outlook.com include:spf-008f3a01.pphosted.com ip4:66.159.233.42 ip4:66.159.234.118  ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;p=quarantine;sp=quarantine;pct=100;rua=mailto:security@biltema.com,mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:security@biltema.com,mailto:dmarc_ruf@emaildefense.proofpoint.com;ri=86400;aspf=r;adkim=r;fo=1",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "ikea.com",
+      "score": 100,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.ikea.com include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@ikea.com; ruf=mailto:dmarc_ruf@ikea.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=1751618879951"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:MTA-STS.RUA@ikea.com;"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://www.ikea.com/ext/bimi/logo.svg; a=https://www.ikea.com/ext/bimi/cert.pem;"
+        }
+      }
+    },
+    {
+      "domain": "zalando.no",
+      "score": 51,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:185.85.220.205 include:_spf.google.com include:spf.protection.outlook.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:dmarc_reports@zalando.no; ruf=mailto:dmarc_auth@zalando.no;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1;l=https://demand-cdn.s3.eu-central-1.amazonaws.com/tech-crm/BIMI/fs-V3/order_1503132189_logo.svg;a=https://demand-cdn.s3.eu-central-1.amazonaws.com/tech-crm/BIMI/fs-V3/zalando_se.pem"
+        }
+      }
+    },
+    {
+      "domain": "hm.com",
+      "score": 78,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com include:%{i}._ip.%{h}._ehlo.%{d}._spf.vali.email ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "k2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://vmc.digicert.com/96cfc8b7-6d6c-404a-b950-b6456484f912.svg; a=https://vmc.digicert.com/96cfc8b7-6d6c-404a-b950-b6456484f912.pem"
+        }
+      }
+    },
+    {
+      "domain": "cubus.com",
+      "score": 45,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.mailanyone.net include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "boozt.com",
+      "score": 68,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx include:_spf.google.com ?include:trustpilotservice.com ?include:sendgrid.net ?include:carmamail.com ?include:relays.gooddata.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; sp=quarantine; fo=1; aspf=r; rua=mailto:dmarc_agg@dmarc.everest.email; ruf=mailto:dmarc_fr@dmarc.everest.email; pct=100; rf=afrf",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://nw.booztcdn.com/bimi/Boozt.svg; a=https://nw.booztcdn.com/bimi/boozt_fashion_ab.pem"
+        }
+      }
+    },
+    {
+      "domain": "fjordkraft.no",
+      "score": 85,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:tq48t0rqw0.powerspf.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:3hr05bmd20@rua.powerdmarc.com; ruf=mailto:3hr05bmd20@ruf.powerdmarc.com; pct=0; fo=1;",
+          "policy": "reject",
+          "pct": 0
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "mandrill",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20221110083923972474;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1;rua=mailto:3hr05bmd20@tls.powerdmarc.com"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sas.no",
+      "score": 45,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 a include:spf.protection.outlook.com include:_spf-dc2.successfactors.com exists:%{i}.spf.hc63-0.eu.iphmx.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:tcs-is-soc@sas.dk; ruf=mailto:tcs-is-soc@sas.dk; pct=100; sp=none; adkim=r; aspf=r; fo=1",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "norwegian.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx ip4:81.93.162.181 ip4:81.93.162.182 ip4:35.174.145.124 ip4:195.225.14.20 ip4:195.225.14.21 include:mail.zendesk.com include:cmail1.com include:carmamail.com include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; sp=none; fo=1; ri=86400; rua=mailto:8803750eec31473aa1000b2fd3d14a16@dmarc-reports.cloudflare.net,mailto:norwegian@rua.agari.com,mailto:dmarc@norwegian.com; ruf=mailto:norwegian@ruf.agari.com",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "flytoget.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com include:servers.mcsv.net include:mailgun.org include:_spf.netigate.se include:sendgrid.net ip4:82.223.108.208 ip4:195.225.8.252 ip4:213.52.68.119 ip4:193.181.161\" \".13 ip4:77.77.159.56/29 ip4:137.221.30.0/28 ip4:137.221.26.0/28 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarclogg@flytoget.no;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "k1",
+            "dkim",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "nsb.no",
+      "score": 65,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 a mx include:spf.protection.outlook.com include:customers.clickdimensions.com ip4:138.62.101.69 ip4:138.62.101.70 ip4:138.62.101.71 ip4:138.62.101.72 ip4:138.62.101.73 ip4:138.62.101.130 ip4:213.206.105.88 ip4:213.206.105.85 ip4:138.62.255.15 ip4:1\" \"38.62.255.11 ip4:138.62.5.45 ip4:138.62.36.42 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email,mailto:dmarc-report@nsb.no,mailto:re+xrd0x0roufc@dmarc.postmarkapp.com,mailto:jfcbhtn7@rua.eu.dmarcmanager.app; ruf=mailto:dmarc-report@nsb.no; fo=1",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "ruter.no",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.intility.no mx include:sendgrid.net mx include:_spf.sndr.no ip4:195.225.27.32 ip4:185.38.121.22 include:spf.protection.outlook.com include:_spf.eu.mailgun.org include:spf.eu.exclaimer.net include:amazonses.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:iyplyhnb@ag.eu.dmarcadvisor.com;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "vy.no",
+      "score": 68,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.vy.no.eu-jfcbhtn7.e1.dspf.app -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email,mailto:dmarc-report@vy.no,mailto:jfcbhtn7@rua.eu.dmarcmanager.app; ruf=mailto:dmarc-report@vy.no; fo=1",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://vmc.digicert.com/a382e989-1098-46e9-9ef1-9cdbecb820a2.svg; a=https://vmc.digicert.com/a382e989-1098-46e9-9ef1-9cdbecb820a2.pem"
+        }
+      }
+    },
+    {
+      "domain": "strawberry.no",
+      "score": 95,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_u.strawberry.no._spf.smart.ondmarc.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; sp=reject; rua=mailto:71d20dc5@inbox.ondmarc.com; ruf=mailto:71d20dc5@inbox.ondmarc.com; adkim=r; aspf=r; fo=1; rf=afrf; ri=3600",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=170867573803Z;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:9rpufwcc@tls.eu.dmarcadvisor.com"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://vmc.digicert.com/ba4cdf81-d313-48f6-8ea7-801da437c286.svg; a=https://vmc.digicert.com/ba4cdf81-d313-48f6-8ea7-801da437c286.pem;"
+        }
+      }
+    },
+    {
+      "domain": "choice.no",
+      "score": 92,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_u.choice.no._spf.smart.ondmarc.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; sp=reject; rua=mailto:71d20dc5@inbox.ondmarc.com; ruf=mailto:71d20dc5@inbox.ondmarc.com; adkim=r; aspf=r; fo=1; rf=afrf; ri=3600",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "k2",
+            "s1",
+            "s2",
+            "mail"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=170791003458Z;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:9rpufwcc@tls.dmarcian.eu"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "scandichotels.no",
+      "score": 25,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": false,
+          "record": null,
+          "policy": null,
+          "pct": null
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "tide.no",
+      "score": 65,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:88.151.164.9 include:spf.protection.outlook.com include:spf.ess.de.barracudanetworks.com include:_spf.securitycenter.no -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; fo=1; rua=mailto:kmv6r1jw@ag.dmarcian-eu.com,mailto:rua+tide.no@dmarc.barracudanetworks.com; ruf=mailto:dmarc-forensic@tide.no,mailto:ruf+tide.no@dmarc.barracudanetworks.com",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "kolumbus.no",
+      "score": 65,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 a ip4:188.172.137.15 ip4:195.159.144.141 ip4:152.93.253.190 ip6:2a02:2c8:1:400:250:56ff:feb8:5296 ip6:2a02:2c8:1:400::3313 ip6:2a02:2c8:1:400::3311 ip4:23.251.238.30 ip4:23.251.238.31 ip4:23.251.238.32 ip4:23.251.238.33 include:spf1.kolumbus.no inc\" \"lude:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:0oepkx8e@ag.eu.dmarcian.com, mailto:25e666500664226@rep.dmarcanalyzer.com; ruf=mailto:25e666500664226@for.dmarcanalyzer.com; fo=1;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "bring.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:139.118.71.0/24 ip4:139.116.71.0/25 ip4:139.117.144.107/27 ip4:85.221.23.80/29 ip4:176.125.233.240/28 ip4:176.125.235.0/28 ip4:195.18.229.120/31 ip4:195.18.229.127/32 ip4:195.18.229.128/32 ip4:195.18.229.160/29 ip4:62.92.7.144/28 ip6:2a02:9c8:\" \"0:1000::/64 ip6:2a02:9c8:0:1001::/64 include:bringcrm.no include:spf.protection.outlook.com include:spf.zetta.io -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; pct=100; rua=mailto:dmarc_agg@vali.email; adkim=r; aspf=r",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "mail"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "postnord.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:192.108.100.252 ip4:192.108.101.135 ip4:192.108.101.136 ip4:192.108.101.137 ip4:192.108.101.95 ip4:52.59.154.94 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:9kqyvuc8@ag.eu.dmarcadvisor.com,mailto:rua@dmarc.portsgroup.com;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "schenker.no",
+      "score": 0,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": false,
+          "record": null,
+          "policy": null,
+          "pct": null
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "bilforsikring.no",
+      "score": 8,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "visma.com",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spfzone.visma.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:re+dinga1rjzqy@dmarc.postmarkapp.com,mailto:vit-dkim@visma.com; fo=0; aspf=r; rf=afrf; pct=100; sp=none;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "opera.com",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:185.26.182.76 ip4:195.189.142.89 ip6:2001:4c28:4000:722:185:26:182:76 ip6:2001:4c28:4000:779:195:189:142:89 mx include:_spf.google.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; aspf=s; adkim=s; ri=86400; rua=mailto:c22187dc@in.mailhardener.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "mail"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:c22187dc@in.mailhardener.com"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "schibsted.com",
+      "score": 95,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_u.schibsted.com._spf.smart.ondmarc.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=reject; pct=100; fo=1; rf=afrf; ri=3600; rua=mailto:af0d07b7@inbox.ondmarc.com; ruf=mailto:af0d07b7@inbox.ondmarc.com; aspf=r;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "google",
+            "k1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=1757345696061"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:af0d07b7@inbox.ondmarc.com;"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://vmc.digicert.com/fe0f80e2-2479-42df-95ea-e1d3f674c4b1.svg; a=https://vmc.digicert.com/fe0f80e2-2479-42df-95ea-e1d3f674c4b1.pem"
+        }
+      }
+    },
+    {
+      "domain": "finn.no",
+      "score": 75,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 a:o1.em.finn.no include:_spf.google.com include:_u.finn.no._spf.smart.ondmarc.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;\" \"p=reject;\" \"pct=100;\" \"fo=1;\" \"rf=afrf;\" \"ri=3600;\" \"rua=mailto:3ba3664e@inbox.ondmarc.com;\" \"ruf=mailto:3ba3664e@inbox.ondmarc.com;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "k1",
+            "default",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "hjemla.no",
+      "score": 8,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:post@hjemla.no",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "amedia.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.google.com include:spf.hatteland.com include:143321966.spf10.hubspotemail.net include:spf.recman.no -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarcreports@amedia.no; adkim=s; aspf=s",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "k1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "mojang.com",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 a mx include:spf.protection.outlook.com include:spf.mtasv.net include:_spf.google.com include:amazonses.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; pct=100; rua=mailto:re+mcad4hb0aan@dmarc.postmarkapp.com; sp=none; aspf=r;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "funcom.com",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:195.110.28.0/23 ip4:194.0.169.0/24 ip4:195.169.90.0/27 ip4:96.10.3.40/29 ip4:195.159.90.0/28 ip4:37.18.192.0/23 ip4:62.212.95.100 ip4:109.74.188.192/29 include:sendgrid.net include:spf.protection.outlook.com include:mail.helpshift.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; sp=none; rua=mailto:dmarc@funcom.com; ruf=mailto:dmarc@funcom.com",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "remarkable.com",
+      "score": 78,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.google.com include:mailgun.org include:_spf.salesforce.com include:servers.mcsv.net ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:re+15ecc99d86fb@inbound.dmarcdigests.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "k2",
+            "mandrill"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://vmc.digicert.com/0af9fed8-ddee-4518-9825-dae0c497af4b.svg; a=https://vmc.digicert.com/0af9fed8-ddee-4518-9825-dae0c497af4b.pem"
+        }
+      }
+    },
+    {
+      "domain": "uio.no",
+      "score": 33,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx include:spf.uio.no include:_spf.google.com include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "ntnu.no",
+      "score": 18,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 redirect=_spf.ntnu.no",
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:dmarc_rua@it.ntnu.no;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:tls_rua@it.ntnu.no"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "uib.no",
+      "score": 65,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:129.177.0.0/16 ip4:129.240.10.0/25 ip4:193.75.92.158 ip4:158.37.3.239 ip4:51.120.69.132 ip6:2001:700:200::/48 ip6:2001:700:100:10::/64 include:spf.protection.outlook.com include:msg-out._spf.onevoice.no include:spf.rail.uib.no -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:l0b9yg2m@ag.eu.dmarcian.com; ruf=mailto:dmarcreports@uib.no",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "uit.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:129.242.4.0/24 ip4:158.39.202.33 ip4:89.221.244.172 include:spf.protection.outlook.com include:spf.uio.no include:msg-out._spf.onevoice.no include:_spf.mailgun.org include:spf-eu.exlibrisgroup.com\" \" include:spf.topdesk.net include:spfprotection.itpartner.no ip4:52.143.59.192 include:sendgrid.net ip4:149.72.200.207 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=reject; rua=mailto:dkim-rua@uit.no; ruf=mailto:dkim-ruf@uit.no; fo=1",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector2",
+            "default",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "nmbu.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:128.39.239.94/32 ip4:128.39.238.99/32 include:_spf.nmbu.no include:spf.uio.no include:spf.protection.outlook.com include:_spf.uninett.no include:spf.topdesk.net -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; sp=none; rua=mailto:dmarc_rua@nmbu.no; ruf=mailto:dmarc_ruf@nmbu.no",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "hvl.no",
+      "score": 48,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com ip4:167.89.59.190 ip4:158.37.32.53 include:spf.uio.no include:_spf.uninett.no include:spf.flowmailer.net include:msg-out._spf.onevoice.no\" \" ip4:213.115.226.0/25 ip4:213.115.199.0/24 ip4:195.62.77.0/24 ip4:195.62.76.0/24 ip4:195.58.123.128/25 include:spf-eu.exlibrisgroup.com mx ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; pct=100; rua=mailto:DMARC-rua@hvl.no",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "oslomet.no",
+      "score": 97,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.oslomet.no include:spf.protection.outlook.com ip4:158.37.3.0/24 ip4:109.105.110.209 include:_spf.rulemailer.com include:spf.flowmailer.net -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc@it.oslomet.no; ruf=mailto:dmarc-ruf@it.oslomet.no; adkim=r; aspf=r; pct=100; rf=afrf;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=2026042301"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1;rua=mailto:rfc8460-reports@it.oslomet.no"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "inn.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx include:spf.inn.no include:spf.protection.outlook.com include:spf.uio.no include:spf-eu.exlibrisgroup.com include:_spf.uninett.no include:_spf.sndr.no include:spf.flowmailer.net -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "k1",
+            "mandrill",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "nord.no",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com include:spf.topdesk.net include:spf.mandrillapp.com include:_spf.uninett.no include:spf.uio.no include:spf.brevo.com a:msg-out.onevoice.no include:_spf.sndr.no include:_spf1.nord.no ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:dmarc@nord.no; ruf=mailto:dmarc@nord.no; fo=1",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "mandrill",
+            "s1",
+            "s2",
+            "mail"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "khio.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:158.36.122.44 include:spf.protection.outlook.com include:spf.uio.no include:_spf.uninett.no mx include:spf-eu.exlibrisgroup.com ip4:217.28.204.8 ip4:217.28.202.8 include:msg-out.onevoice.no include:spf.flowmailer.net -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:dmarc@inbound.flowmailer.net; ruf=mailto:dmarc@inbound.flowmailer.net; fo=1",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "k2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "nhh.no",
+      "score": 65,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com include:_spf.qualtrics.com include:spf.watermarkinsights.com include:spf.uio.no include:spf.nhh.no include:spf-eu.exlibrisgroup.com mx -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "k1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "bi.no",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:144.164.0.0/16 ip4:89.250.112.0 include:_spf.qualtrics.com ip4:167.89.59.190 ip4:167.89.66.251 ip4:149.72.60.180 include:spf.protection.outlook.com include:amazonses.com include:_spf.salesforce.com include:spf-eu.exlibrisgroup.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; sp=quarantine; pct=30; rua=mailto:30e48f5f@in.mailhardener.com; ruf=mailto:30e48f5f@in.mailhardener.com; fo=1",
+          "policy": "quarantine",
+          "pct": 30
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "ks.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx ip4:195.159.159.70 ip4:195.159.101.208 ip4:193.161.175.28 ip4:193.161.175.29 ip4:137.221.26.0/28 ip4:137.221.30.0/28 include:_spf.online.superoffice.com include:_spf.mailgun.org inclu\" \"de:spf.protection.outlook.com include:_spf.sndr.no include:spf.mailjet.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:dsm1h58m@ag.dmarcian.com",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "k1",
+            "mandrill",
+            "s1",
+            "s2",
+            "mailo"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "oslo.kommune.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:nm92qxbr@ag.eu.dmarcadvisor.com;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "bergen.kommune.no",
+      "score": 85,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx a:msg-out.onevoice.no a:spf1-u.bgokomm.no include:spf.protection.outlook.com ip4:193.161.175.25 ip4:193.161.175.26 ip4:193.161.172.49 ip4:193.161.174.236 ip4:85.19.187.5 ip4:193.161.175.28 ip4:193.161.175.29 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=reject; pct=100; rua=mailto:DMARC.Rapporter@bgnkomm.no;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:dmarc.rapporter@bergen.kommune.no"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "trondheim.kommune.no",
+      "score": 65,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:46.250.221.7 +include:_spf1.trondheim.kommune.no  ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; fo=1; rua=mailto:dsm1h58m@ag.dmarcian.com; ruf=mailto:dmarc.service@trondheim.kommune.no;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "k1",
+            "default",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:dsm1h58m@tls.us.dmarcian.com"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "stavanger.kommune.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com include:spf.stavanger.kommune.no ip4:91.243.69.106 ip4:91.243.69.107 ip4:91.243.69.252 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:pagelzrw@ag.eu.dmarcian.com; ruf=mailto:pagelzrw@fr.eu.dmarcian.com;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector2",
+            "k1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "baerum.kommune.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx ip4:193.161.44.20/32 ip4:193.161.44.32/32 a:mail.baerum.kommune.no a:mail2.baerum.kommune.no a:smtp.onevoice.no a:msg-out.onevoice.no include:mg-lcsse.tietoevry.com include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:dmarc@baerumkommune.uriports.com; ruf=mailto:dmarc@baerumkommune.uriports.com; fo=1:d:s",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "kristiansand.kommune.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:158.150.32.29 ip4:158.150.116.42 ip4:158.150.120.103 ip4:158.150.120.104 include:spf.protection.outlook.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dsm1h58m@ag.dmarcian.com; ruf=mailto:dmarc-ruf@kristiansand.kommune.no;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "default"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "fredrikstad.kommune.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx +ip4:156.52.1.25 +ip4:156.52.6.0/23 +ip4:156.52.1.24 +include:spf.protection.outlook.com +include:msg-out._spf.onevoice.no \" \"+include:_spf.sndr.no +include:spf.mailjet.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; ruf=mailto:dmarcmon@fredrikstad.kommune.no; rua=mailto:mailmonitor@fredrikstad.kommune.no",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "k2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "drammen.kommune.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:185.121.204.138/32 ip4:212.247.85.136/30 ip4:185.121.204.164/32 ip4:195.204.54.40 ip4:81.0.157.136 ip4:81.0.157.140 ip4:81.0.157.146 ip4:194.19.74.242 ip4:185.38.121.23 ip4:87.54.30.56 ip4:185.163.189.56 ip4:131.207.55.52/31 ip4:139.116.71.0/\" \"25 ip4:131.207.55.52/31 include:spf.egcloud.no include:spf.protection.outlook.com include:msg-out._spf.onevoice.no include:sendgrid.net -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dsm1h58m@ag.dmarcian.com; ruf=mailto:dsm1h58m@fr.dmarcian.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "default",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "tromso.kommune.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:p24u9b3746.powerspf.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:lwdb7jov6p@rua.powerdmarc.com; ruf=mailto:lwdb7jov6p@ruf.powerdmarc.com; fo=1;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "asker.kommune.no",
+      "score": 65,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:194.19.79.151 ip4:194.19.79.158 ip4:77.88.70.15 ip4:131.207.55.52/31 ip4:87.54.30.56 ip4:79.161.16.66\" \" include:_spf.eu.mailgun.org include:sendgrid.net include:servers.mcsv.net include:spf.protection.outlook.com include:spf.tmes.trendmicro.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:iy6goy3vba@rua.powerdmarc.com; ruf=mailto:iy6goy3vba@ruf.powerdmarc.com,mailto:dmarc@asker.kommune.no; fo=0:1:d:s;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "k1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sandnes.kommune.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com ip4:91.247.74.192/32 include:utpost.acos.no include:_spf.sndr.no include:spf.infostorm.no include:spf.mailjet.com a:msg-out.onevoice.no ip4:188.244.75.74/32 ip4:51.13.21.234 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; rua=mailto:dsm1h58m@ag.us.dmarcian.com; sp=reject; aspf=r;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "k2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sarpsborg.kommune.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com ip4:213.160.227.26 ip4:192.162.4.69 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dsm1h58m@ag.dmarcian.com; ruf=mailto:dsm1h58m@fr.dmarcian.com; fo=1;pct=100",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "larvik.kommune.no",
+      "score": 75,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.google.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=reject; adkim=r; aspf=r; fo=1; rua=mailto:lkit@larvik.kommune.no",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sandefjord.kommune.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:131.207.55.52/31 include:spf.sandefjord.kommune.no include:spf.protection.outlook.com include:mailgun.org include:spf.mailjet.com include:_spf.elasticemail.com include:spf.tmes.trendmicro.eu -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarcreport@sandefjord.kommune.no;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "tonsberg.kommune.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx a:mx03.v-man.no ip4:91.90.66.0/24 a:spam01.technet.no ip4:34.249.196.78 ip4:34.251.157.56 ip4:34.252.27.239 ip4:35.157.154.159 ip4:35.157.187.101 include:spf.protection.outlook.com include:_spf.sndr.no a:utpost.acos.no -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dsm1h58m@ag.dmarcian.com;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "sopra-steria.no",
+      "score": 25,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx ip4:212.180.1.59/24 ip4:84.37.121.0/28 ip4:90.115.201.24/32 ip4:216.74.162.13/32 ip4:216.74.162.14/32 ip4:143.47.149.171 include:_spf.atoracle.com include:spf.protection.outlook.com include:_spf.prod.hydra.sophos.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": false,
+          "record": null,
+          "policy": null,
+          "pct": null
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "accenture.com",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spfa.exchange.accenture.com include:_spfb.exchange.accenture.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;p=reject;fo=1;aspf=s;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "google",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "capgemini.com",
+      "score": 75,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_u.capgemini.com._spf.smart.ondmarc.com exists:%{i}.spf.hc2065-58.eu.iphmx.com exists:%{i}.spf.hc674-87.eu.iphmx.com exists:%{i}.spf.hc756-17.eu.iphmx.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; pct=100; sp=reject; rua=mailto:rua.corp@capgemini.com,mailto:52d9f001@inbox.eu.redsift.cloud; ruf=mailto:ruf.corp@capgemini.com,mailto:52d9f001@inbox.eu.redsift.cloud; adkim=r; aspf=r; fo=1; rf=afrf; ri=3600",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "k2",
+            "dkim",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "atea.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:amazonses.com include:_spf.telecomputing.no include:_spf1.atea.no include:_spf2.atea.no include:spf.tmes.trendmicro.com include:stspg-customer.com include:_spf.eu.mailgun.org -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=none; rua=mailto:NO.DMARC.Reports@atea.no,mailto:re+vepvuvzcil2@dmarc.postmarkapp.com;",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1",
+            "s2",
+            "mail"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "tietoevry.com",
+      "score": 70,
+      "grade": "B",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf1.tietoevry.com include:_spf2.tietoevry.com include:mktomail.com include:spf.protection.outlook.com include:mail.zendesk.com include:_smtpspf.fxh42.net ip4:51.140.185.73 ip4:51.145.26.67 ip4:51.140.29.80 ip4:195.167.132.162 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=quarantine; rua=mailto:tietoevry_dmarc@tietoevry.com,mailto:s2oifvqz@ag.eu.dmarcadvisor.com; ruf=mailto:dmarc_ruf@tietoevry.com,mailto:s2oifvqz@fr.eu.dmarcadvisor.com; fo=1;",
+          "policy": "quarantine",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:tlsrpt@tietoevry.com;"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "advania.no",
+      "score": 92,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.advania_no._d.easydmarc.pro include:spf1.emarketeer.com include:spf.protection.outlook.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;p=reject;rua=mailto:bb6dbb1f61@rua.easydmarc.eu;ruf=mailto:bb6dbb1f61@ruf.easydmarc.eu;fo=1;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20240923T211429;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:bb6dbb1f61@tls.easydmarc.com;"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "nordlo.no",
+      "score": 60,
+      "grade": "C",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.nordlo.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:be164e45587a211@rep.dmarcanalyzer.com; ruf=mailto:be164e45587a211@for.dmarcanalyzer.com; fo=1;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "crayon.com",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx a include:_spf-a.crayon.com include:spf.myconnectwise.net include:spf.protection.outlook.com ip4:167.89.0.0/17 ip4:208.117.48.0/20 ip4:50.31.32.0/19 ip4:198.37.144.0/20 ip4:198.21.0.0/21 ip4:192.254.112.0/20 ip4:168.245.0.0/17 ip4:149.72.0.0/16\" \" -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "itera.no",
+      "score": 48,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 mx a ip4:93.190.81.166 ip4:20.107.84.202 ip4:93.190.81.183 ip6:fe80::64f2:afed:6d57:658d include:spf.protection.outlook.com include:spf.recman.no include:spf.iteracloud.com include:sendgrid.net include:8054464.spf04.hubspotemail.net ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p= reject; fo=1; ri=3600; rua=mailto:DMARC-Itera@itera.no,mailto:dmarc_agg@vali.email; ruf=mailto:DMARC-Itera@itera.no",
+          "policy": null,
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "k1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "mxtoolbox.com",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 redirect=mxtoolbox.com.hosted.spf-report.com",
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:634990a7@mxtoolbox.dmarc-report.com,mailto:634990a7@mxtoolbox.dmarc-report.net; ruf=mailto:634990a7@forensics.dmarc-report.com,mailto:634990a7@forensics.dmarc-report.net; fo=1; pct=100",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "google",
+            "mailo"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20211220;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1;rua=mailto:tlsrpt@mxtoolbox.com"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://images.bimi-report.com/mxtoolbox.com.svg; a=https://images.bimi-report.com/mxtoolbox.com.certificate.pem"
+        }
+      }
+    },
+    {
+      "domain": "easydmarc.com",
+      "score": 95,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.easydmarc_com._d.easydmarc.pro include:9358352.spf08.hubspotemail.net ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;p=reject;rua=mailto:46436954e5@rua.easydmarc.asia;ruf=mailto:46436954e5@ruf.easydmarc.asia;fo=1;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "k2",
+            "mail"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20240627T224502;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:46436954e5@tls.easydmarc.com,mailto:2d7736bd85@tls.easydmarc.com;"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1;l=https://assets.easydmarc.com/c3711171be/bimi-easydmarc-com-09cde6cf.svg;a=https://assets.easydmarc.com/c3711171be/bimi-easydmarc-com-7ef6fb1a.pem"
+        }
+      }
+    },
+    {
+      "domain": "dmarcian.com",
+      "score": 100,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.google.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmcn-corp-ag-in@corp-ag-in.dmarcian.com; ruf=mailto:wbxefl4v@fr.dmarcian.com;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "google",
+            "k1",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20200218v04;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:dmcn-corp-tls-in@corp-tls-in.dmarcian.com"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://dmarcian.com/wp-content/themes/_dmarcian/img/bimi/dm_bimi.svg"
+        }
+      }
+    },
+    {
+      "domain": "powerdmarc.com",
+      "score": 95,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:ntc8xslu91.powerspf.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:15r6gzki9a@rua.powerdmarc.com,mailto:dmarc@powerdmarc.com; ruf=mailto:15r6gzki9a@ruf.powerdmarc.com,mailto:dmarc@powerdmarc.com; pct=100; fo=0:1:d:s;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "k2",
+            "s1"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20210303194631807328;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1;rua=mailto:15r6gzki9a@tls.powerdmarc.com,mailto:tls@powerdmarc.com"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1;l=https://hostedbimi.com/297/0a664763-5cab-4514-bed9-dc181be64b19.svg;a=https://hostedbimi.com/297/327ac8ef-f57f-4714-9d3c-e2287031a2af.pem;"
+        }
+      }
+    },
+    {
+      "domain": "valimail.com",
+      "score": 95,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:valimail.com._nspf.vali.email include:%{i}._ip.%{h}._ehlo.%{d}._spf.vali.email include:stspg-customer.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email,mailto:dmarc.reports@valimail.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "mandrill",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=6ac7f644446e3ce6dc64834ac3b5c7cc"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:tls-report@vali.email"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://amplify.valimail.com/bimi/valimail/tKiJ_dLu6tw-valimail_inc_925936833_2025.svg; a=https://amplify.valimail.com/bimi/valimail/tKiJ_dLu6tw-valimail_inc_925936833_2025.pem"
+        }
+      }
+    },
+    {
+      "domain": "agari.com",
+      "score": 100,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 exists:%{i}._i.%{d}._d.espf.agari.com include:%{d}.01.spf-protect.agari.com include:mktomail.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; sp=reject; fo=1; ri=3600; rua=mailto:agari-data@rua.agari.com; ruf=mailto:agari-data@ruf.agari.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector2",
+            "mandrill",
+            "s1"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20191109010300Z"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:dmistry@agari.com"
+        },
+        "bimi": {
+          "present": true,
+          "record": "v=BIMI1; l=https://def0a2r1nm3zw.cloudfront.net/bimi_asset_e10befcf1c19bc4ed4922e2fb7590f29.svg"
+        }
+      }
+    },
+    {
+      "domain": "redcross.no",
+      "score": 92,
+      "grade": "A+",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.redcross_no._d.easydmarc.pro include:spf.protection.outlook.com include:docebosaas.com ~all",
+          "all_qualifier": "~"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;p=reject;rua=mailto:bb6dbb1f61@rua.easydmarc.eu;ruf=mailto:bb6dbb1f61@ruf.easydmarc.eu;fo=1;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "k1",
+            "k2",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": true,
+          "record": "v=STSv1; id=20250123T132149;"
+        },
+        "tls_rpt": {
+          "present": true,
+          "record": "v=TLSRPTv1; rua=mailto:bb6dbb1f61@tls.easydmarc.com;"
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "norad.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com include:_spf.anpdm.com include:spf.eu.exclaimer.net include:spf.flowmailer.net include:_spf.machina.no include:sendgrid.net -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1; p=reject; rua=mailto:1qehfzgl@ag.eu.dmarcadvisor.com;",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "selector2",
+            "default",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "unicef.no",
+      "score": 53,
+      "grade": "D",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:_spf.intility.com include:spf.protection.outlook.com include:_spf.salesforce.com -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;  p=none; rua=mailto:a31abe5d89e4470ea70ccfdc8aedf5a0@dmarc-reports.cloudflare.net",
+          "policy": "none",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "mandrill",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "kreftforeningen.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 ip4:212.16.185.16 ip4:185.91.65.41 ip4:168.245.72.164 ip4:198.2.128.0/24 ip4:198.2.132.0/22 ip4:198.2.136.0/23 ip4:198.2.145.0/24 ip4:198.2.186.0/23 ip4:205.201.131.128/25 ip4:205.201.134.128/25 ip4:205.201.136.0/23 ip4:205.201.139.0/24 ip4:198.2.1\" \"77.0/24 ip4:198.2.178.0/23 ip4:198.2.180.0/24 ip4:176.125.233.253 ip4:176.125.233.252 ip4:176.125.235.12 ip4:54.246.247.240/28 ip4:54.77.200.126/32 ip4:54.154.234.46/32 ip4:54.72.85.15/32 ip4:23.251.238.30/31 ip4:23.251.238.32/31 include:spf.protection.ou\" \"tlook.com include:_spflist1.reliablemail.org include:_spflist2.reliablemail.org include:_spf.sndr.no include:_spf.machina.no include:mail.zendesk.com ip4:167.89.98.6 ip4:149.72.197.187 ip4:149.72.211.157 ip4:149.72.26.210 ip4:69.169.226.118 ip4:69.169.226\" \".254 ip4:199.255.192.0/22 ip4:199.127.232.0/22 ip4:54.240.0.0/18 ip4:69.169.224.0/20 ip4:23.249.208.0/20 ip4:23.251.224.0/19 ip4:76.223.176.0/20 ip4:54.240.64.0/19 ip4:54.240.96.0/19 ip4:52.82.172.0/22 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;p=reject;sp=none;adkim=r;aspf=r;pct=100;fo=0;rf=afrf;ri=86400;rua=mailto:rua@kreftforeningen.no,mailto:dmarc_agg@vali.email",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "k1",
+            "mandrill",
+            "default",
+            "s1",
+            "s2"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "nakk.no",
+      "score": 0,
+      "grade": "F",
+      "checks": {
+        "spf": {
+          "present": false,
+          "record": null,
+          "all_qualifier": null
+        },
+        "dmarc": {
+          "present": false,
+          "record": null,
+          "policy": null,
+          "pct": null
+        },
+        "dkim": {
+          "present": false,
+          "selectors": []
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    },
+    {
+      "domain": "lhl.no",
+      "score": 80,
+      "grade": "A",
+      "checks": {
+        "spf": {
+          "present": true,
+          "record": "v=spf1 include:spf.protection.outlook.com include:_spf.intility.com include:spf.mtasv.net include:servers.mcsv.net include:mail.zendesk.com include:spf.eu.exclaimer.net include:_spf.grade.se +ip4:195.67.27.98 +ip4:195.67.27.100 +ip4:81.93.150.143 -all",
+          "all_qualifier": "-"
+        },
+        "dmarc": {
+          "present": true,
+          "record": "v=DMARC1;p=reject;sp=none;adkim=r;aspf=r;pct=100;rf=afrf;ri=86400;rua=mailto:lpvtm1hp@ag.eu.dmarcadvisor.com",
+          "policy": "reject",
+          "pct": 100
+        },
+        "dkim": {
+          "present": true,
+          "selectors": [
+            "selector1",
+            "k1",
+            "s1"
+          ]
+        },
+        "mta_sts": {
+          "present": false,
+          "record": null
+        },
+        "tls_rpt": {
+          "present": false,
+          "record": null
+        },
+        "bimi": {
+          "present": false,
+          "record": null
+        }
+      }
+    }
+  ],
+  "summary": {
+    "avg_score": 64.56962025316456,
+    "grade_distribution": {
+      "A+": 23,
+      "A": 40,
+      "B": 17,
+      "C": 30,
+      "D": 27,
+      "F": 21
+    },
+    "has_dmarc_reject": 86,
+    "no_dmarc": 12
+  }
+}
