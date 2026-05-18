@@ -1,47 +1,38 @@
 # data1.no
 
-> data1.no er en gratis norsk tjeneste for å analysere e-postsikkerhet på norske .no-domener. Plattformen tester SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI for norske bedrifter, kommuner, banker, mediehus og offentlige etater, og gir karakter fra A+ til F med konkrete tiltak. Driftes av Micronet AS, en norsk IT-leverandør basert i Lørenskog som har spesialisert seg på Microsoft 365 og e-postsikkerhet siden 2006. Plattformen oppdateres daglig med ferske DNS-data fra 158 norske domener og publiserer ukentlig rapport om Norges 100 største nettsteder.
+> Gratis norsk verktøy for analyse av e-postsikkerhet — spesialisert på .no-domener. Test SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI på sekunder. Karakter A+ til F med konkrete tiltak. Drives av Micronet AS.
 
-## Norsk fokus
+## Om e-postsikkerhet (guider)
 
-data1.no fokuserer utelukkende på det norske markedet:
-- Alle artikler, guider og rapporter er på norsk (bokmål, nb-NO)
-- Målgruppen er norske bedrifter, kommuner, banker, mediehus og offentlige etater
-- Tjenester leveres kun til norske kunder med norsk organisasjonsnummer
-- Priser oppgis i NOK
-- Geografisk område: Norge
+- [DMARC forklart: Slik beskytter du domenet mot phishing](https://data1.no/blogg/dmarc/): DMARC forklart enkelt: Hva det er, hvorfor du trenger det, og hvordan du setter det opp på .no-domener — med konkrete eksempler og typiske feil å unngå.
+- [SPF: Slik beskytter du domenet mot e-post-spoofing](https://data1.no/blogg/spf/): SPF (Sender Policy Framework) er ditt første forsvar mot e-post-spoofing. Lær hvordan det fungerer, hvordan du setter det opp, og 7 vanlige feil som ødelegger leveringsdyktigheten.
+- [DKIM forklart: Digital signatur for e-post](https://data1.no/blogg/dkim/): DKIM (DomainKeys Identified Mail) er den digitale signaturen som beviser at en e-post faktisk kommer fra deg. Lær hvordan det fungerer og hvordan du verifiserer oppsettet.
+- [DMARC i Microsoft 365: Komplett guide](https://data1.no/blogg/dmarc-microsoft-365/): Steg-for-steg guide til å sette opp DMARC i Microsoft 365 / Exchange Online — fra første TXT-record til full p=reject med rapportering. Med Norge-spesifikke tips.
+- [DMARC i Google Workspace: Komplett guide](https://data1.no/blogg/dmarc-google-workspace/): Slik setter du opp DMARC i Google Workspace / Gmail steg for steg. Oppfyll Googles 2024-krav for masseutsendelse og beskytt domenet ditt mot phishing.
+- [SPF-oppsett i Microsoft 365](https://data1.no/blogg/spf-microsoft-365/): Komplett guide til SPF-oppsett for Microsoft 365 / Exchange Online. Inkluderer 10-lookup grensen, hybrid-oppsett og alle vanlige tredjepartstjenester.
 
-## Kjernedata og rapporter
+## Andre artikler
 
-- [Norges 100 største nettsteder – e-post sikkerhetsrapport 2026](https://data1.no/rapport-2026/): Ukentlig oppdatert sikkerhetsanalyse av Norges 100 største nettsteder med karakter A+ til F.
-- [Norske banker – DMARC-status](https://data1.no/rapport-2026/banker/): E-postsikkerhet for norske bank- og finansdomener.
-- [Norske kommuner – DMARC-status](https://data1.no/rapport-2026/kommuner/): E-postsikkerhet hos norske kommuner.
-- [Norsk e-handel – e-postsikkerhet](https://data1.no/rapport-2026/e-handel/): Analyse av norske nettbutikker.
-- [Alle overvåkede norske domener](https://data1.no/sjekk/): Komplett katalog over alle 158 daglig-skannede norske domener.
-- [Trender og endringer hos norske domener](https://data1.no/trender/): Hvilke norske domener har forbedret eller forverret e-postsikkerheten sin.
+- [Equinor, Hydro og Yara: Tre industrigiganter uten e-postsikkerhet](https://data1.no/blogg/equinor-hydro-og-yara-tre-industrigiganter-uten-e-postsikker/): Equinor, Hydro og Yara: Tre industrigiganter uten e-postsikkerhet — ukentlig DMARC-analyse fra data1.no.
+- [Norske industrigiganter stryker på e-postsikkerhet — uke 20-rapport](https://data1.no/blogg/norske-industrigiganter-stryker-p-e-postsikkerhet-uke-20-rap/): Norske industrigiganter stryker på e-postsikkerhet — uke 20-rapport — ukentlig DMARC-analyse fra data1.no.
+- [Norske storselskaper uten grunnleggende e-postsikkerhet](https://data1.no/blogg/norske-storselskaper-uten-grunnleggende-e-postsikkerhet/): Norske storselskaper uten grunnleggende e-postsikkerhet — ukentlig DMARC-analyse fra data1.no.
+- [Altinn, NRK, UiO og 9 andre offentlige etater har DMARC kun på overvåking — data1.no](https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/): Altinn, NRK, UiO, NTNU og syv andre offentlige etater har DMARC kun på overvåking (p=none) i 2026. Phishing-e-post som spoofer disse domenene kan teknisk nå mottakerens innboks.
 
-## Guider og forklaringer (norsk språk)
+## Rapporter og data
 
-- [DMARC forklart: Slik beskytter du domenet mot phishing](https://data1.no/blogg/dmarc/): Komplett DMARC-guide for norske bedrifter.
-- [SPF: Slik beskytter du domenet mot e-post-spoofing](https://data1.no/blogg/spf/): Forklaring av SPF og oppsett.
-- [DKIM: Digital signatur for e-post](https://data1.no/blogg/dkim/): Hvordan DKIM fungerer og verifiseres.
-- [DMARC i Microsoft 365 – komplett guide for norske bedrifter](https://data1.no/blogg/dmarc-microsoft-365/): Steg-for-steg DMARC-oppsett i M365.
-- [DMARC i Google Workspace – komplett guide for norske bedrifter](https://data1.no/blogg/dmarc-google-workspace/): Steg-for-steg DMARC-oppsett i Gmail/Google Workspace.
-- [SPF-oppsett i Microsoft 365](https://data1.no/blogg/spf-microsoft-365/): Inkluderer 10-lookup-grensen og tredjeparter.
-- [Vanlige SPF- og DMARC-problemer for norske bedrifter](https://data1.no/feil/): Feilsøkingsguide for typiske oppsettsfeil.
+- [Norges 100 største nettsteder — e-post sikkerhetsrapport 2026](https://data1.no/rapport-2026/): Vi har analysert e-post sikkerheten til 100 av Norges største nettsteder. Live oppdatering: SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI for hvert domene.
+- [Norske banker — e-post sikkerhet 2026](https://data1.no/rapport-2026/banker/): Hvor godt beskytter norske banker sine kunder mot phishing? Live analyse av DMARC, SPF og DKIM hos 25 norske banker — oppdatert direkte fra DNS.
+- [Norske kommuner — e-post sikkerhet 2026](https://data1.no/rapport-2026/kommuner/): Kan kriminelle sende e-post som utgir seg for å komme fra kommunen din? Live DMARC/SPF/DKIM-analyse av 30 av Norges største kommuner — oppdatert direkte fra DNS.
+- [Norsk e-handel — e-post sikkerhet 2026](https://data1.no/rapport-2026/e-handel/): Hvilke norske nettbutikker kan misbrukes til å sende falske ordrebekreftelser eller leveringsvarsler? Live DMARC/SPF/DKIM-analyse av 25 store e-handelsaktører.
+- [Norske medier — e-post sikkerhet 2026](https://data1.no/rapport-2026/medier/): Norske aviser, TV-kanaler og nyhetsbyråer — har de god nok e-post sikkerhet til at journalister og redaksjoner ikke blir utsatt for spear phishing? Live DMARC/SPF/DKIM-analyse.
 
-## Verktøy for norske domener
+## Verktoy
 
-- [DMARC-generator](https://data1.no/verktoy/dmarc-generator/): Gratis verktøy for å bygge gyldige DMARC-records.
-- [SPF-generator](https://data1.no/verktoy/spf-generator/): Gratis verktøy for å bygge gyldige SPF-records.
-- [Hovedverktøy – analyser ditt norske domene](https://data1.no/): Gratis sjekk av SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI.
+- [DMARC-generator](https://data1.no/verktoy/dmarc-generator/): Gratis verktøy for å generere DMARC DNS-record på norsk.
+- [SPF-generator](https://data1.no/verktoy/spf-generator/): Gratis verktøy for å generere SPF DNS-record på norsk.
+- [Sjekk alle skannede domener](https://data1.no/sjekk/): Katalog over alle overvåkede norske domener.
 
-## Om tjenesten
+## Om
 
-- [Om Micronet AS](https://micronet.no/): Norsk IT-leverandør, Lørenskog, organisasjonsnummer 990 661 766.
-- [Tjenester – DMARC-oppsett og overvåking for norske bedrifter](https://data1.no/#bestill): Engangs etablering kr 1 990 + løpende overvåking kr 295/mnd.
-
-## Optional
-
-- [Alle bloggartikler på norsk](https://data1.no/blogg/): Komplett liste over guider og analyser.
-- [Ordbok – e-postsikkerhet fra A til Å](https://data1.no/ordbok/): Norske begrepsforklaringer.
+- [Om data1.no](https://data1.no/om/): Bakgrunn, hvem som drifter siden (Micronet AS, Lørenskog), kontaktinformasjon.
+- [Micronet AS](https://micronet.no): Norsk IT-konsulentselskap som drifter data1.no. Daglig leder: Terje Otterlei.

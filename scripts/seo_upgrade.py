@@ -1,7 +1,7 @@
 """SEO + AI-synlighet-oppgradering for data1.no.
 
 Fase 1: forfatter (Micronet -> Terje Otterlei), trim keywords til <= 7
-Fase 2: Article-schema med Person-author, SoftwareApplication paa verktoy/
+Fase 2: Article-schema med Person-author, SoftwareApplication på verktøy/
 Fase 3: Generer /llms.txt og /llms-full.txt fra blogg-katalogen
 
 Idempotent. Kjor:
@@ -164,7 +164,7 @@ SOFTWAREAPP_TEMPLATES = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "DMARC-generator",
-        "description": "Gratis verktoy for aa generere DMARC DNS-record paa norsk.",
+        "description": "Gratis verktøy for å generere DMARC DNS-record på norsk.",
         "applicationCategory": "SecurityApplication",
         "operatingSystem": "Web",
         "url": "https://data1.no/verktoy/dmarc-generator/",
@@ -177,7 +177,7 @@ SOFTWAREAPP_TEMPLATES = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "SPF-generator",
-        "description": "Gratis verktoy for aa generere SPF DNS-record paa norsk.",
+        "description": "Gratis verktøy for å generere SPF DNS-record på norsk.",
         "applicationCategory": "SecurityApplication",
         "operatingSystem": "Web",
         "url": "https://data1.no/verktoy/spf-generator/",
@@ -208,7 +208,7 @@ def _add_softwareapp_if_missing(fp: Path) -> bool:
 
 
 def phase2():
-    """Article author -> Person, SoftwareApplication paa verktoy."""
+    """Article author -> Person, SoftwareApplication på verktøy."""
     article_changes = 0
     softapp_added = 0
 
@@ -239,7 +239,7 @@ def phase2():
 
     print(f'Fase 2 ferdig:')
     print(f'  Article-author bytttet til Person i {article_changes} JSON-LD blokker')
-    print(f'  SoftwareApplication lagt til paa {softapp_added} verktoy-sider')
+    print(f'  SoftwareApplication lagt til på {softapp_added} verktøy-sider')
 
 
 # ----- Fase 3 -----
@@ -287,7 +287,7 @@ def phase3():
     posts = _list_blog_posts()
     reports = _list_report_pages()
 
-    # Sorter blogginnlegg pedagogisk: forklaringer foerst, deretter implementasjon, deretter rapporter
+    # Sorter blogginnlegg pedagogisk: forklaringer først, deretter implementasjon, deretter rapporter
     priority_slugs = ['dmarc', 'spf', 'dkim',
                       'dmarc-microsoft-365', 'dmarc-google-workspace',
                       'spf-microsoft-365']
@@ -295,7 +295,7 @@ def phase3():
     posts.sort(key=lambda p: (pri.get(p['slug'], 999), p['slug']))
 
     lines = ['# data1.no', '']
-    lines.append('> Gratis norsk verktoy for analyse av e-postsikkerhet — spesialisert paa .no-domener. Test SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI paa sekunder. Karakter A+ til F med konkrete tiltak. Drives av Micronet AS.')
+    lines.append('> Gratis norsk verktøy for analyse av e-postsikkerhet — spesialisert på .no-domener. Test SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI på sekunder. Karakter A+ til F med konkrete tiltak. Drives av Micronet AS.')
     lines.append('')
 
     lines.append('## Om e-postsikkerhet (guider)')
@@ -322,14 +322,14 @@ def phase3():
 
     lines.append('## Verktoy')
     lines.append('')
-    lines.append('- [DMARC-generator](https://data1.no/verktoy/dmarc-generator/): Gratis verktoy for aa generere DMARC DNS-record paa norsk.')
-    lines.append('- [SPF-generator](https://data1.no/verktoy/spf-generator/): Gratis verktoy for aa generere SPF DNS-record paa norsk.')
-    lines.append('- [Sjekk alle skannede domener](https://data1.no/sjekk/): Katalog over alle overvaakede norske domener.')
+    lines.append('- [DMARC-generator](https://data1.no/verktoy/dmarc-generator/): Gratis verktøy for å generere DMARC DNS-record på norsk.')
+    lines.append('- [SPF-generator](https://data1.no/verktoy/spf-generator/): Gratis verktøy for å generere SPF DNS-record på norsk.')
+    lines.append('- [Sjekk alle skannede domener](https://data1.no/sjekk/): Katalog over alle overvåkede norske domener.')
     lines.append('')
 
     lines.append('## Om')
     lines.append('')
-    lines.append('- [Om data1.no](https://data1.no/om/): Bakgrunn, hvem som drifter siden (Micronet AS, Loerenskog), kontaktinformasjon.')
+    lines.append('- [Om data1.no](https://data1.no/om/): Bakgrunn, hvem som drifter siden (Micronet AS, Lørenskog), kontaktinformasjon.')
     lines.append('- [Micronet AS](https://micronet.no): Norsk IT-konsulentselskap som drifter data1.no. Daglig leder: Terje Otterlei.')
     lines.append('')
 
@@ -340,14 +340,14 @@ def phase3():
     full = list(lines)
     full.append('## Hva data1.no gjor teknisk')
     full.append('')
-    full.append('data1.no kjorer en serie DNS-baserte sjekker paa et domene:')
+    full.append('data1.no kjorer en serie DNS-baserte sjekker på et domene:')
     full.append('')
-    full.append('- **SPF**: Henter TXT-record paa apex (`domene.no`), parser `v=spf1`-streng, teller DNS-oppslag (10-grense), validerer `-all`/`~all`-policy.')
-    full.append('- **DMARC**: Henter TXT-record paa `_dmarc.domene.no`, parser policy (`p=`, `sp=`, `pct=`, `rua=`, `ruf=`, `aspf=`, `adkim=`).')
-    full.append('- **DKIM**: Forsoeker vanlige selectorer (`selector1`, `selector2`, `s1`, `google`, m.fl.) og henter TXT-record paa `_domainkey`. Validerer noekkellengde (min 2048 bit anbefalt per RFC 8301).')
-    full.append('- **MTA-STS**: Henter TXT-record paa `_mta-sts.domene.no` og policy-fil paa `https://mta-sts.domene.no/.well-known/mta-sts.txt`.')
-    full.append('- **TLS-RPT**: Henter TXT-record paa `_smtp._tls.domene.no`.')
-    full.append('- **BIMI**: Henter TXT-record paa `default._bimi.domene.no`, lastet ned logo-SVG, sjekker om VMC-sertifikat er angitt.')
+    full.append('- **SPF**: Henter TXT-record på apex (`domene.no`), parser `v=spf1`-streng, teller DNS-oppslag (10-grense), validerer `-all`/`~all`-policy.')
+    full.append('- **DMARC**: Henter TXT-record på `_dmarc.domene.no`, parser policy (`p=`, `sp=`, `pct=`, `rua=`, `ruf=`, `aspf=`, `adkim=`).')
+    full.append('- **DKIM**: Forsøker vanlige selectorer (`selector1`, `selector2`, `s1`, `google`, m.fl.) og henter TXT-record på `_domainkey`. Validerer nøkkellengde (min 2048 bit anbefalt per RFC 8301).')
+    full.append('- **MTA-STS**: Henter TXT-record på `_mta-sts.domene.no` og policy-fil på `https://mta-sts.domene.no/.well-known/mta-sts.txt`.')
+    full.append('- **TLS-RPT**: Henter TXT-record på `_smtp._tls.domene.no`.')
+    full.append('- **BIMI**: Henter TXT-record på `default._bimi.domene.no`, lastet ned logo-SVG, sjekker om VMC-sertifikat er angitt.')
     full.append('')
     full.append('## Karaktersystem')
     full.append('')
