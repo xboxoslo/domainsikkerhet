@@ -14,6 +14,7 @@
 ## Andre artikler
 
 - [Equinor, Hydro og Yara: Tre industrigiganter uten e-postsikkerhet](https://data1.no/blogg/equinor-hydro-og-yara-tre-industrigiganter-uten-e-postsikker/): Equinor, Hydro og Yara: Tre industrigiganter uten e-postsikkerhet — ukentlig DMARC-analyse fra data1.no.
+- [Industritunge norske selskaper med skremmende svak e-postsikkerhet — uke 21-rapport](https://data1.no/blogg/industritunge-norske-selskaper-med-skremmende-svak-e-postsik/): Industritunge norske selskaper med skremmende svak e-postsikkerhet — uke 21-rapport — ukentlig DMARC-analyse fra data1.no.
 - [Norske industrigiganter stryker på e-postsikkerhet — uke 20-rapport](https://data1.no/blogg/norske-industrigiganter-stryker-p-e-postsikkerhet-uke-20-rap/): Norske industrigiganter stryker på e-postsikkerhet — uke 20-rapport — ukentlig DMARC-analyse fra data1.no.
 - [Norske storselskaper uten grunnleggende e-postsikkerhet](https://data1.no/blogg/norske-storselskaper-uten-grunnleggende-e-postsikkerhet/): Norske storselskaper uten grunnleggende e-postsikkerhet — ukentlig DMARC-analyse fra data1.no.
 - [Altinn, NRK, UiO og 9 andre offentlige etater har DMARC kun på overvåking — data1.no](https://data1.no/blogg/offentlige-etater-dmarc-overvaking-2026/): Altinn, NRK, UiO, NTNU og syv andre offentlige etater har DMARC kun på overvåking (p=none) i 2026. Phishing-e-post som spoofer disse domenene kan teknisk nå mottakerens innboks.

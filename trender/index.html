@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="description" content="Status for e-postsikkerheten til 158 norske domener, oppdatert daglig. Karakterfordeling, DMARC-pyramide, sektor-sammenligning og leaderboards.">
 <meta name="keywords" content="dmarc trender, dmarc norge statistikk, spf dkim norge, dmarc adopsjon, norske domener e-postsikkerhet">
 <meta name="theme-color" content="#1a202c">
 <link rel="canonical" href="https://data1.no/trender/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DMARC-status for 158 norske domener — oppdatert 2026-05-17">
+<meta property="og:title" content="DMARC-status for 158 norske domener — oppdatert 2026-05-18">
 <meta property="og:description" content="54 % av 158 norske domener har p=reject. 45 % er sårbare. Oppdatert daglig.">
 <meta property="og:image" content="https://data1.no/og-image.png">
-<title>DMARC-trender for 158 norske domener — 2026-05-17 | data1.no</title>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Daglige DMARC-trender for norske domener","description":"Daglige målinger av SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI for 158 norske domener.","url":"https://data1.no/trender/","dateModified":"2026-05-17","creator":{"@type":"Organization","name":"Micronet","url":"https://micronet.no"},"license":"https://creativecommons.org/licenses/by/4.0/","keywords":["DMARC","SPF","DKIM","e-postsikkerhet","Norge"],"distribution":{"@type":"DataDownload","contentUrl":"https://data1.no/trender/data.csv","encodingFormat":"text/csv"}}</script>
+<title>DMARC-trender for 158 norske domener — 2026-05-18 | data1.no</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Daglige DMARC-trender for norske domener","description":"Daglige målinger av SPF, DMARC, DKIM, MTA-STS, TLS-RPT og BIMI for 158 norske domener.","url":"https://data1.no/trender/","dateModified":"2026-05-18","creator":{"@type":"Organization","name":"Micronet","url":"https://micronet.no"},"license":"https://creativecommons.org/licenses/by/4.0/","keywords":["DMARC","SPF","DKIM","e-postsikkerhet","Norge"],"distribution":{"@type":"DataDownload","contentUrl":"https://data1.no/trender/data.csv","encodingFormat":"text/csv"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hjem","item":"https://data1.no/"},{"@type":"ListItem","position":2,"name":"Trender","item":"https://data1.no/trender/"}]}</script>
 <style>
 @font-face{font-family:"Inter";font-weight:400 900;font-display:optional;src:url(/fonts/inter-latin.woff2)format("woff2");unicode-range:U+0000-00FF}
@@ -76,7 +77,6 @@ a{color:#0f766e;text-decoration:none}a:hover{text-decoration:underline}
 .cta-strip a{background:#14b8a6;color:#fff;padding:12px 24px;border-radius:999px;font-weight:700;text-decoration:none}
 .cta-strip a:hover{background:#0d9488;text-decoration:none}
 </style>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
 <header class="header">
@@ -88,7 +88,7 @@ a{color:#0f766e;text-decoration:none}a:hover{text-decoration:underline}
 <nav class="crumbs"><a href="/">Hjem</a> › Daglige trender</nav>
 <h1>DMARC-status for 158 norske domener</h1>
 <p class="lead">Daglig oppdatert oversikt over e-postsikkerheten til Norges største nettsteder, kommuner, banker, mediehus, helseforetak og e-handel.</p>
-<p class="meta">Oppdatert 2026-05-17 · sammenligner med 2026-05-10 · <a href="/trender/data.csv">Last ned data (CSV)</a></p>
+<p class="meta">Oppdatert 2026-05-18 · sammenligner med 2026-05-11 · <a href="/trender/data.csv">Last ned data (CSV)</a></p>
 
 <div class="callout-hero">
 <strong>71 av 158 (45 %)</strong> norske domener er fortsatt sårbare for e-post-spoofing — de mangler enten DMARC helt, eller har en policy som ikke blokkerer forfalskning. Bare <strong>86 (54 %)</strong> har <code>p=reject</code> som er den eneste policyen som faktisk stopper svindel.
@@ -98,18 +98,18 @@ a{color:#0f766e;text-decoration:none}a:hover{text-decoration:underline}
 <div class="hero-stat"><div class="hero-stat-num">64.6</div><div class="hero-stat-label">Snitt-score (av 100)</div></div>
 <div class="hero-stat"><div class="hero-stat-num" style="color:#16a34a">86</div><div class="hero-stat-label">Med p=reject (full beskyttelse)</div></div>
 <div class="hero-stat"><div class="hero-stat-num" style="color:#dc2626">12</div><div class="hero-stat-label">Uten DMARC i det hele tatt</div></div>
-<div class="hero-stat"><div class="hero-stat-num" style="color:#0f766e">0</div><div class="hero-stat-label">Nye p=reject siden 2026-05-10</div></div>
+<div class="hero-stat"><div class="hero-stat-num" style="color:#0f766e">0</div><div class="hero-stat-label">Nye p=reject siden 2026-05-11</div></div>
 </div>
 
 <div class="spark">
         <div class="spark-head">
             <div class="spark-title">Snitt-score over tid</div>
-            <div class="spark-delta" style="color:#dc2626">-1.3 siste 9 dager</div>
+            <div class="spark-delta" style="color:#dc2626">-1.3 siste 10 dager</div>
         </div>
         <svg viewBox="0 0 600 80" width="100%" height="80" preserveAspectRatio="none">
-            <path d="M 0.0,5.0 L 75.0,68.9 L 150.0,68.9 L 225.0,75.0 L 300.0,65.3 L 375.0,65.3 L 450.0,65.3 L 525.0,65.3 L 600.0,65.3" fill="none" stroke="#0f766e" stroke-width="2.5"/>
+            <path d="M 0.0,5.0 L 66.7,68.9 L 133.3,68.9 L 200.0,75.0 L 266.7,65.3 L 333.3,65.3 L 400.0,65.3 L 466.7,65.3 L 533.3,65.3 L 600.0,65.3" fill="none" stroke="#0f766e" stroke-width="2.5"/>
         </svg>
-        <div class="spark-range">2026-05-09 → 2026-05-17 · min 64.4 · max 65.8</div>
+        <div class="spark-range">2026-05-09 → 2026-05-18 · min 64.4 · max 65.8</div>
     </div>
 
 <h2>Karakterfordeling</h2>
