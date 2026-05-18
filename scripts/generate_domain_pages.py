@@ -170,6 +170,7 @@ def render_page(result: dict, today: str) -> str:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="description" content="{html.escape(desc)}">
 <meta name="author" content="Micronet">
 <meta name="theme-color" content="#1a202c">
@@ -261,6 +262,7 @@ def render_index(results: list, today: str) -> str:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="description" content="{html.escape(desc)}">
 <meta name="theme-color" content="#1a202c">
 <link rel="canonical" href="https://data1.no/sjekk/">

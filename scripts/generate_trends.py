@@ -320,6 +320,7 @@ def main():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="description" content="Status for e-postsikkerheten til {total} norske domener, oppdatert daglig. Karakterfordeling, DMARC-pyramide, sektor-sammenligning og leaderboards.">
 <meta name="keywords" content="dmarc trender, dmarc norge statistikk, spf dkim norge, dmarc adopsjon, norske domener e-postsikkerhet">
 <meta name="theme-color" content="#1a202c">

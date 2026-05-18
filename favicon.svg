@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny-ps" viewBox="0 0 512 512">
+<title>Micronet</title>
+<rect width="512" height="512" fill="#ffffff"/>
+<g>
+<circle cx="70.4" cy="130.0" r="19.2" fill="#A01B2E"/>
+<circle cx="89.5" cy="200.0" r="27.3" fill="#A01B2E"/>
+<circle cx="130.8" cy="276.6" r="38.3" fill="#A01B2E"/>
+<circle cx="198.5" cy="353.2" r="47.9" fill="#A01B2E"/>
+<circle cx="303.9" cy="360.6" r="38.3" fill="#A01B2E"/>
+<circle cx="385.7" cy="334.1" r="27.3" fill="#A01B2E"/>
+<circle cx="441.6" cy="292.1" r="19.2" fill="#A01B2E"/>
+<circle cx="201.5" cy="178.6" r="27.3" fill="#2E3344"/>
+<circle cx="258.9" cy="249.4" r="38.3" fill="#2E3344"/>
+<circle cx="346.6" cy="238.3" r="27.3" fill="#2E3344"/>
+</g>
+</svg>
