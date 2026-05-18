@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-18T06:00:00Z",
+  "lastUpdated": "2026-05-18T21:11:02Z",
   "summary": {
     "indexedPages": 12,
     "totalPages": 196,
@@ -9,61 +9,277 @@
     "ctr": 2.55
   },
   "timeline": [
-    {"date": "2026-02-17", "clicks": 0, "impressions": 4},
-    {"date": "2026-02-24", "clicks": 0, "impressions": 11},
-    {"date": "2026-03-03", "clicks": 1, "impressions": 28},
-    {"date": "2026-03-10", "clicks": 0, "impressions": 42},
-    {"date": "2026-03-17", "clicks": 2, "impressions": 67},
-    {"date": "2026-03-24", "clicks": 1, "impressions": 89},
-    {"date": "2026-03-31", "clicks": 3, "impressions": 112},
-    {"date": "2026-04-07", "clicks": 4, "impressions": 145},
-    {"date": "2026-04-14", "clicks": 5, "impressions": 178},
-    {"date": "2026-04-21", "clicks": 7, "impressions": 214},
-    {"date": "2026-04-28", "clicks": 9, "impressions": 286},
-    {"date": "2026-05-05", "clicks": 12, "impressions": 342},
-    {"date": "2026-05-12", "clicks": 18, "impressions": 511}
+    {
+      "date": "2026-02-17",
+      "clicks": 0,
+      "impressions": 4
+    },
+    {
+      "date": "2026-02-24",
+      "clicks": 0,
+      "impressions": 11
+    },
+    {
+      "date": "2026-03-03",
+      "clicks": 1,
+      "impressions": 28
+    },
+    {
+      "date": "2026-03-10",
+      "clicks": 0,
+      "impressions": 42
+    },
+    {
+      "date": "2026-03-17",
+      "clicks": 2,
+      "impressions": 67
+    },
+    {
+      "date": "2026-03-24",
+      "clicks": 1,
+      "impressions": 89
+    },
+    {
+      "date": "2026-03-31",
+      "clicks": 3,
+      "impressions": 112
+    },
+    {
+      "date": "2026-04-07",
+      "clicks": 4,
+      "impressions": 145
+    },
+    {
+      "date": "2026-04-14",
+      "clicks": 5,
+      "impressions": 178
+    },
+    {
+      "date": "2026-04-21",
+      "clicks": 7,
+      "impressions": 214
+    },
+    {
+      "date": "2026-04-28",
+      "clicks": 9,
+      "impressions": 286
+    },
+    {
+      "date": "2026-05-05",
+      "clicks": 12,
+      "impressions": 342
+    },
+    {
+      "date": "2026-05-12",
+      "clicks": 18,
+      "impressions": 511
+    }
   ],
   "topQueries": [
-    {"query": "norsk dmarc sjekk", "clicks": 8, "impressions": 120, "position": 14.2},
-    {"query": "spf test norge", "clicks": 5, "impressions": 95, "position": 18.7},
-    {"query": "dmarc microsoft 365 norsk", "clicks": 4, "impressions": 78, "position": 22.1},
-    {"query": "e-postsikkerhet norge", "clicks": 4, "impressions": 156, "position": 24.5},
-    {"query": "dkim oppsett norsk", "clicks": 3, "impressions": 62, "position": 19.3},
-    {"query": "norske banker dmarc", "clicks": 3, "impressions": 41, "position": 8.2},
-    {"query": "data1.no", "clicks": 3, "impressions": 28, "position": 1.4},
-    {"query": "bimi norge", "clicks": 2, "impressions": 67, "position": 16.7},
-    {"query": "gratis dmarc verktoy", "clicks": 2, "impressions": 89, "position": 26.4},
-    {"query": "mta-sts norsk", "clicks": 2, "impressions": 34, "position": 17.8},
-    {"query": "p=reject hjelp", "clicks": 1, "impressions": 23, "position": 21.5},
-    {"query": "altinn dmarc", "clicks": 1, "impressions": 54, "position": 12.3},
-    {"query": "nrk dmarc", "clicks": 1, "impressions": 38, "position": 11.9},
-    {"query": "norsk MSP DMARC", "clicks": 1, "impressions": 27, "position": 19.4},
-    {"query": "phishing beskyttelse norge", "clicks": 1, "impressions": 145, "position": 32.1}
+    {
+      "query": "norsk dmarc sjekk",
+      "clicks": 8,
+      "impressions": 120,
+      "position": 14.2
+    },
+    {
+      "query": "spf test norge",
+      "clicks": 5,
+      "impressions": 95,
+      "position": 18.7
+    },
+    {
+      "query": "dmarc microsoft 365 norsk",
+      "clicks": 4,
+      "impressions": 78,
+      "position": 22.1
+    },
+    {
+      "query": "e-postsikkerhet norge",
+      "clicks": 4,
+      "impressions": 156,
+      "position": 24.5
+    },
+    {
+      "query": "dkim oppsett norsk",
+      "clicks": 3,
+      "impressions": 62,
+      "position": 19.3
+    },
+    {
+      "query": "norske banker dmarc",
+      "clicks": 3,
+      "impressions": 41,
+      "position": 8.2
+    },
+    {
+      "query": "data1.no",
+      "clicks": 3,
+      "impressions": 28,
+      "position": 1.4
+    },
+    {
+      "query": "bimi norge",
+      "clicks": 2,
+      "impressions": 67,
+      "position": 16.7
+    },
+    {
+      "query": "gratis dmarc verktoy",
+      "clicks": 2,
+      "impressions": 89,
+      "position": 26.4
+    },
+    {
+      "query": "mta-sts norsk",
+      "clicks": 2,
+      "impressions": 34,
+      "position": 17.8
+    },
+    {
+      "query": "p=reject hjelp",
+      "clicks": 1,
+      "impressions": 23,
+      "position": 21.5
+    },
+    {
+      "query": "altinn dmarc",
+      "clicks": 1,
+      "impressions": 54,
+      "position": 12.3
+    },
+    {
+      "query": "nrk dmarc",
+      "clicks": 1,
+      "impressions": 38,
+      "position": 11.9
+    },
+    {
+      "query": "norsk MSP DMARC",
+      "clicks": 1,
+      "impressions": 27,
+      "position": 19.4
+    },
+    {
+      "query": "phishing beskyttelse norge",
+      "clicks": 1,
+      "impressions": 145,
+      "position": 32.1
+    }
   ],
   "topPages": [
-    {"url": "/blogg/dmarc/", "clicks": 12, "impressions": 340},
-    {"url": "/", "clicks": 9, "impressions": 287},
-    {"url": "/blogg/dmarc-microsoft-365/", "clicks": 7, "impressions": 198},
-    {"url": "/rapport-2026/", "clicks": 5, "impressions": 156},
-    {"url": "/blogg/spf/", "clicks": 4, "impressions": 142},
-    {"url": "/blogg/dkim/", "clicks": 3, "impressions": 118},
-    {"url": "/rapport-2026/banker/", "clicks": 3, "impressions": 78},
-    {"url": "/verktoy/dmarc-generator/", "clicks": 2, "impressions": 89},
-    {"url": "/blogg/spf-microsoft-365/", "clicks": 1, "impressions": 67},
-    {"url": "/feil/dmarc-record-not-found/", "clicks": 1, "impressions": 45}
+    {
+      "url": "/blogg/dmarc/",
+      "clicks": 12,
+      "impressions": 340
+    },
+    {
+      "url": "/",
+      "clicks": 9,
+      "impressions": 287
+    },
+    {
+      "url": "/blogg/dmarc-microsoft-365/",
+      "clicks": 7,
+      "impressions": 198
+    },
+    {
+      "url": "/rapport-2026/",
+      "clicks": 5,
+      "impressions": 156
+    },
+    {
+      "url": "/blogg/spf/",
+      "clicks": 4,
+      "impressions": 142
+    },
+    {
+      "url": "/blogg/dkim/",
+      "clicks": 3,
+      "impressions": 118
+    },
+    {
+      "url": "/rapport-2026/banker/",
+      "clicks": 3,
+      "impressions": 78
+    },
+    {
+      "url": "/verktoy/dmarc-generator/",
+      "clicks": 2,
+      "impressions": 89
+    },
+    {
+      "url": "/blogg/spf-microsoft-365/",
+      "clicks": 1,
+      "impressions": 67
+    },
+    {
+      "url": "/feil/dmarc-record-not-found/",
+      "clicks": 1,
+      "impressions": 45
+    }
   ],
   "indexingStatus": [
-    {"url": "https://data1.no/", "status": "indexed", "lastCrawl": "2026-05-15T18:11:20Z"},
-    {"url": "https://data1.no/blogg/dmarc/", "status": "indexed", "lastCrawl": "2026-05-14T11:08:00Z"},
-    {"url": "https://data1.no/blogg/spf/", "status": "indexed", "lastCrawl": "2026-05-13T09:22:14Z"},
-    {"url": "https://data1.no/blogg/dkim/", "status": "indexed", "lastCrawl": "2026-05-12T14:55:31Z"},
-    {"url": "https://data1.no/rapport-2026/", "status": "indexed", "lastCrawl": "2026-05-16T07:42:55Z"},
-    {"url": "https://data1.no/blogg/dmarc-microsoft-365/", "status": "indexed", "lastCrawl": "2026-05-11T18:30:00Z"},
-    {"url": "https://data1.no/blogg/dmarc-google-workspace/", "status": "crawled-not-indexed", "lastCrawl": "2026-05-10T16:14:00Z"},
-    {"url": "https://data1.no/verktoy/dmarc-generator/", "status": "indexed", "lastCrawl": "2026-05-09T12:18:00Z"},
-    {"url": "https://data1.no/verktoy/spf-generator/", "status": "crawled-not-indexed", "lastCrawl": "2026-05-08T10:00:00Z"},
-    {"url": "https://data1.no/feil/dmarc-record-not-found/", "status": "discovered", "lastCrawl": null},
-    {"url": "https://data1.no/feil/spf-10-lookup/", "status": "discovered", "lastCrawl": null},
-    {"url": "https://data1.no/om/", "status": "indexed", "lastCrawl": "2026-05-15T20:05:18Z"}
-  ]
+    {
+      "url": "https://data1.no/",
+      "status": "indexed",
+      "lastCrawl": "2026-05-15T18:11:20Z"
+    },
+    {
+      "url": "https://data1.no/blogg/dmarc/",
+      "status": "indexed",
+      "lastCrawl": "2026-05-14T11:08:00Z"
+    },
+    {
+      "url": "https://data1.no/blogg/spf/",
+      "status": "indexed",
+      "lastCrawl": "2026-05-13T09:22:14Z"
+    },
+    {
+      "url": "https://data1.no/blogg/dkim/",
+      "status": "indexed",
+      "lastCrawl": "2026-05-12T14:55:31Z"
+    },
+    {
+      "url": "https://data1.no/rapport-2026/",
+      "status": "indexed",
+      "lastCrawl": "2026-05-16T07:42:55Z"
+    },
+    {
+      "url": "https://data1.no/blogg/dmarc-microsoft-365/",
+      "status": "indexed",
+      "lastCrawl": "2026-05-11T18:30:00Z"
+    },
+    {
+      "url": "https://data1.no/blogg/dmarc-google-workspace/",
+      "status": "crawled-not-indexed",
+      "lastCrawl": "2026-05-10T16:14:00Z"
+    },
+    {
+      "url": "https://data1.no/verktoy/dmarc-generator/",
+      "status": "indexed",
+      "lastCrawl": "2026-05-09T12:18:00Z"
+    },
+    {
+      "url": "https://data1.no/verktoy/spf-generator/",
+      "status": "crawled-not-indexed",
+      "lastCrawl": "2026-05-08T10:00:00Z"
+    },
+    {
+      "url": "https://data1.no/feil/dmarc-record-not-found/",
+      "status": "discovered",
+      "lastCrawl": null
+    },
+    {
+      "url": "https://data1.no/feil/spf-10-lookup/",
+      "status": "discovered",
+      "lastCrawl": null
+    },
+    {
+      "url": "https://data1.no/om/",
+      "status": "indexed",
+      "lastCrawl": "2026-05-15T20:05:18Z"
+    }
+  ],
+  "_note": "GSC OAuth ikke konfigurert. Se docs/dashboard-n8n-setup.md for engangs-oppsett."
 }
