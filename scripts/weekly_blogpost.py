@@ -133,7 +133,7 @@ Du skriver ukentlige bloggposter basert på faktiske DMARC-data fra norske domen
 Format på output: REN HTML-fragmenter (ikke full HTML-side, bare innholdet i <main>). Bruk:
 - <h1> for tittel
 - <p class="lead"> for ingress (1 setning)
-- <p class="meta"> for "Publisert DD. mmm YYYY · Av Micronet · X min lesetid"
+- <p class="meta"> for "Publisert DD. mmm YYYY · Av Terje Otterlei · X min lesetid"
 - <h2 id="..."> for seksjonsoverskrifter
 - <h3> for underseksjoner
 - <p>, <ul>, <ol>, <strong>, <code> som vanlig

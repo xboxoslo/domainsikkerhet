@@ -3,11 +3,14 @@
 Fase 1: forfatter (Micronet -> Terje Otterlei), trim keywords til <= 7
 Fase 2: Article-schema med Person-author, SoftwareApplication på verktøy/
 Fase 3: Generer /llms.txt og /llms-full.txt fra blogg-katalogen
+Fase 4: konsistent forfatter overalt (synlig byline, author-card,
+        Person-schema på /om/, Article-author som @id-referanse)
 
 Idempotent. Kjor:
   python scripts/seo_upgrade.py phase1
   python scripts/seo_upgrade.py phase2
   python scripts/seo_upgrade.py phase3
+  python scripts/seo_upgrade.py phase4
   python scripts/seo_upgrade.py all
 """
 from __future__ import annotations
@@ -370,6 +373,148 @@ def phase3():
     print(f'  llms-full.txt: {(ROOT / "llms-full.txt").stat().st_size} bytes')
 
 
+# ----- Fase 4: konsistent forfatter -----
+
+PERSON_REFERENCE = {
+    "@type": "Person",
+    "@id": "https://data1.no/om/#terje-otterlei",
+    "name": "Terje Otterlei",
+}
+
+PERSON_FULL_SCHEMA = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://data1.no/om/#terje-otterlei",
+    "name": "Terje Otterlei",
+    "givenName": "Terje",
+    "familyName": "Otterlei",
+    "jobTitle": "Daglig leder",
+    "worksFor": {
+        "@type": "Organization",
+        "@id": "https://micronet.no/#organization",
+        "name": "Micronet AS",
+        "url": "https://micronet.no/",
+    },
+    "knowsAbout": [
+        "DMARC", "SPF", "DKIM", "MTA-STS", "BIMI",
+        "E-postsikkerhet", "Microsoft 365", "Exchange Online",
+        "Norsk IT-sikkerhet",
+    ],
+    "url": "https://data1.no/om/",
+    "sameAs": [
+        "https://www.linkedin.com/in/terjeotterlei/",
+        "https://github.com/xboxoslo",
+        "https://micronet.no/om/",
+    ],
+}
+
+NEW_AUTHOR_CARD = (
+    '<div class="author-card">\n'
+    '    <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(140deg,#14b8a6,#0f766e);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px">TO</div>\n'
+    '    <div>\n'
+    '      <div class="author-name">Terje Otterlei</div>\n'
+    '      <div class="author-meta">Daglig leder i Micronet AS — 20+ års erfaring innen Microsoft 365 og e-postinfrastruktur. Forvalter DMARC-overvåking for 50+ M365-tenants i Lørenskog. <a href="https://www.linkedin.com/in/terjeotterlei/" style="color:#0f766e;text-decoration:none">LinkedIn</a> · <a href="https://micronet.no/" style="color:#0f766e;text-decoration:none">micronet.no</a> · <a href="/om/" style="color:#0f766e;text-decoration:none">Om data1.no</a></div>\n'
+    '    </div>\n'
+    '  </div>'
+)
+
+
+def _set_article_author_to_ref(data):
+    """Bytt Article.author til kompakt @id-referanse til /om/#terje-otterlei."""
+    if not isinstance(data, dict):
+        return data
+    types = data.get('@type')
+    if types == 'Article' or (isinstance(types, list) and 'Article' in types):
+        author = data.get('author')
+        if isinstance(author, dict) and author.get('name') == 'Terje Otterlei':
+            if author.get('@id') != 'https://data1.no/om/#terje-otterlei':
+                data = {**data, 'author': dict(PERSON_REFERENCE)}
+    if isinstance(data, dict):
+        for k, v in list(data.items()):
+            if k in ('publisher', 'parentOrganization'):
+                continue
+            data[k] = _set_article_author_to_ref(v)
+    elif isinstance(data, list):
+        return [_set_article_author_to_ref(x) for x in data]
+    return data
+
+
+# Match en gammel author-card-blokk med "Micronet" som navn.
+# Avatar-divet kan ha enten inline style eller class="author-avatar".
+OLD_AUTHOR_CARD_RE = re.compile(
+    r'<div\s+class="author-card">\s*'
+    r'<div\s+(?:style="[^"]*"|class="author-avatar")>M</div>\s*'
+    r'<div>\s*'
+    r'<div\s+class="author-name">Micronet</div>\s*'
+    r'<div\s+class="author-meta">[^<]*<a[^>]*>micronet\.no</a>[^<]*</div>\s*'
+    r'</div>\s*'
+    r'</div>',
+    re.DOTALL | re.IGNORECASE,
+)
+
+
+def phase4():
+    """Konsistent forfatter: byline, author-card, Person-schema, Article-ref."""
+    bylines_fixed = 0
+    cards_fixed = 0
+    article_refs = 0
+
+    for fp in html_files():
+        txt = fp.read_text(encoding='utf-8')
+        orig = txt
+
+        # 4.1 Synlig byline
+        txt = re.sub(r'\bAv Micronet\b', 'Av Terje Otterlei', txt)
+        txt = re.sub(r'\bav Micronet\b(?! AS)', 'av Terje Otterlei', txt)
+        txt = re.sub(r'\bBy Micronet\b', 'By Terje Otterlei', txt)
+        if txt != orig:
+            bylines_fixed += 1
+
+        # 4.2 Author-card (kun gamle blokker med "M"-avatar og navn "Micronet")
+        new_txt, n = OLD_AUTHOR_CARD_RE.subn(NEW_AUTHOR_CARD, txt)
+        if n:
+            cards_fixed += 1
+            txt = new_txt
+
+        # 4.3 Article-author → @id-referanse
+        new_txt, n = _modify_jsonld_in_html(txt, _set_article_author_to_ref)
+        if n:
+            article_refs += n
+            txt = new_txt
+
+        if txt != orig:
+            fp.write_text(txt, encoding='utf-8', newline='\n')
+
+    # 4.4 Person-schema på /om/ (legges inn rett før </head> hvis ikke der)
+    om_fp = ROOT / 'om' / 'index.html'
+    om_added = False
+    if om_fp.exists():
+        om_txt = om_fp.read_text(encoding='utf-8')
+        if 'data1.no/om/#terje-otterlei' not in om_txt:
+            inject = f'<script type="application/ld+json">{json.dumps(PERSON_FULL_SCHEMA, ensure_ascii=False, separators=(",", ":"))}</script>\n'
+            new_om, n = re.subn(r'</head>', inject + '</head>', om_txt, count=1, flags=re.I)
+            if n:
+                om_fp.write_text(new_om, encoding='utf-8', newline='\n')
+                om_added = True
+
+    # 4.5 Oppdater Python-generatorer
+    wp = ROOT / 'scripts' / 'weekly_blogpost.py'
+    gen_updated = False
+    if wp.exists():
+        t = wp.read_text(encoding='utf-8')
+        new_t = re.sub(r'\bAv Micronet\b', 'Av Terje Otterlei', t)
+        if new_t != t:
+            wp.write_text(new_t, encoding='utf-8', newline='\n')
+            gen_updated = True
+
+    print(f'Fase 4 ferdig:')
+    print(f'  Bylines fikset i {bylines_fixed} filer')
+    print(f'  Author-cards oppdatert i {cards_fixed} filer')
+    print(f'  Article-author -> @id-ref i {article_refs} JSON-LD blokker')
+    print(f'  Person-schema på /om/: {"lagt til" if om_added else "allerede der"}')
+    print(f'  Generatorer oppdatert: {gen_updated}')
+
+
 def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else 'all'
     if cmd in ('phase1', 'all'):
@@ -378,6 +523,8 @@ def main():
         phase2()
     if cmd in ('phase3', 'all'):
         phase3()
+    if cmd in ('phase4', 'all'):
+        phase4()
 
 
 if __name__ == '__main__':
