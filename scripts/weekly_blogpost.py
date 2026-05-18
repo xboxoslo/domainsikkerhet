@@ -202,7 +202,7 @@ Lenk til konkrete domener med <a href="/?d=DOMENE">DOMENE</a>. Lenk til /trender
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="description" content="{title} — ukentlig DMARC-analyse fra data1.no.">
-<meta name="author" content="Micronet">
+<meta name="author" content="Terje Otterlei">
 <meta name="theme-color" content="#1a202c">
 <link rel="canonical" href="https://data1.no/blogg/{slug}/">
 <meta property="og:type" content="article">

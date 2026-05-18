@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="DKIM-record finnes i DNS, men utgående mail viser dkim=none. Tre vanligste årsaker og fixes.">
 <meta name="keywords" content="dkim not signing, dkim signs outgoing mail, dkim missing in headers">
-<meta name="author" content="Micronet">
+<meta name="author" content="Terje Otterlei">
 <meta name="theme-color" content="#1a202c">
 <link rel="canonical" href="https://data1.no/feil/dkim-not-signing/">
 <meta property="og:type" content="article">
@@ -28,7 +28,7 @@
 .fix-step-body{flex:1}
 .fix-step-body strong{display:block;color:#0f172a;font-size:15px;margin-bottom:4px}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "DKIM signerer ikke utgående e-post — vanlige årsaker", "description": "DKIM-record finnes i DNS, men utgående mail viser dkim=none. Tre vanligste årsaker og fixes.", "datePublished": "2026-05-10", "dateModified": "2026-05-10", "author": {"@type": "Organization", "name": "Micronet", "url": "https://micronet.no/"}, "publisher": {"@type": "Organization", "name": "data1.no", "logo": {"@type": "ImageObject", "url": "https://data1.no/og-image.png"}}, "mainEntityOfPage": "https://data1.no/feil/dkim-not-signing/", "inLanguage": "nb-NO"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DKIM signerer ikke utgående e-post — vanlige årsaker","description":"DKIM-record finnes i DNS, men utgående mail viser dkim=none. Tre vanligste årsaker og fixes.","datePublished":"2026-05-10","dateModified":"2026-05-10","author":{"@type":"Person","name":"Terje Otterlei","jobTitle":"Daglig leder","worksFor":{"@type":"Organization","name":"Micronet AS","url":"https://micronet.no/"},"url":"https://data1.no/om/"},"publisher":{"@type":"Organization","name":"data1.no","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"}},"mainEntityOfPage":"https://data1.no/feil/dkim-not-signing/","inLanguage":"nb-NO"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://data1.no/"}, {"@type": "ListItem", "position": 2, "name": "Feil og fixes", "item": "https://data1.no/feil/"}, {"@type": "ListItem", "position": 3, "name": "DKIM signerer ikke", "item": "https://data1.no/feil/dkim-not-signing/"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "DKIM signerer ikke utgående e-post — vanlige årsaker", "step": [{"@type": "HowToStep", "name": "Aktiver DKIM eksplisitt", "text": "Microsoft Defender eller Google Admin Console — trykk Enable."}, {"@type": "HowToStep", "name": "Slett gamle DKIM-records", "text": "Tidligere selector-records kan blokkere nye."}, {"@type": "HowToStep", "name": "Verifiser med Gmail Show original", "text": "Du skal se DKIM-Signature-headeren og dkim=pass."}]}</script>
 <script src="/_assets/tracker.js" defer></script>

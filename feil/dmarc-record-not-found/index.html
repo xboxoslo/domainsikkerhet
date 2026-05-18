@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Hvis data1.no eller MXToolbox sier 'No DMARC record found' er domenet ditt åpent for spoofing. Slik legger du til DMARC riktig.">
 <meta name="keywords" content="no dmarc record found, dmarc mangler, dmarc oppsett, dmarc dns">
-<meta name="author" content="Micronet">
+<meta name="author" content="Terje Otterlei">
 <meta name="theme-color" content="#1a202c">
 <link rel="canonical" href="https://data1.no/feil/dmarc-record-not-found/">
 <meta property="og:type" content="article">
@@ -28,7 +28,7 @@
 .fix-step-body{flex:1}
 .fix-step-body strong{display:block;color:#0f172a;font-size:15px;margin-bottom:4px}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "DMARC-record mangler — slik fikser du det på 5 minutter", "description": "Hvis data1.no eller MXToolbox sier 'No DMARC record found' er domenet ditt åpent for spoofing. Slik legger du til DMARC riktig.", "datePublished": "2026-05-10", "dateModified": "2026-05-10", "author": {"@type": "Organization", "name": "Micronet", "url": "https://micronet.no/"}, "publisher": {"@type": "Organization", "name": "data1.no", "logo": {"@type": "ImageObject", "url": "https://data1.no/og-image.png"}}, "mainEntityOfPage": "https://data1.no/feil/dmarc-record-not-found/", "inLanguage": "nb-NO"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DMARC-record mangler — slik fikser du det på 5 minutter","description":"Hvis data1.no eller MXToolbox sier 'No DMARC record found' er domenet ditt åpent for spoofing. Slik legger du til DMARC riktig.","datePublished":"2026-05-10","dateModified":"2026-05-10","author":{"@type":"Person","name":"Terje Otterlei","jobTitle":"Daglig leder","worksFor":{"@type":"Organization","name":"Micronet AS","url":"https://micronet.no/"},"url":"https://data1.no/om/"},"publisher":{"@type":"Organization","name":"data1.no","logo":{"@type":"ImageObject","url":"https://data1.no/og-image.png"}},"mainEntityOfPage":"https://data1.no/feil/dmarc-record-not-found/","inLanguage":"nb-NO"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hjem", "item": "https://data1.no/"}, {"@type": "ListItem", "position": 2, "name": "Feil og fixes", "item": "https://data1.no/feil/"}, {"@type": "ListItem", "position": 3, "name": "DMARC mangler", "item": "https://data1.no/feil/dmarc-record-not-found/"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "DMARC-record mangler — slik fikser du det på 5 minutter", "step": [{"@type": "HowToStep", "name": "Logg inn hos DNS-leverandør", "text": "Domeneshop, Cloudflare eller annen DNS-administrasjon."}, {"@type": "HowToStep", "name": "Opprett TXT-record", "text": "Navn: _dmarc. Verdi: v=DMARC1; p=none; rua=mailto:dmarc@dittfirma.no; pct=100; adkim=r; aspf=r;"}, {"@type": "HowToStep", "name": "Verifiser etter 30-60 min", "text": "Sjekk på data1.no at DMARC-recorden er live."}]}</script>
 <script src="/_assets/tracker.js" defer></script>
