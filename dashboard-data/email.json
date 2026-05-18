@@ -1,64 +1,58 @@
 {
-  "lastUpdated": "2026-05-18T03:00:00Z",
+  "lastUpdated": "2026-05-18T21:08:49Z",
   "ownDomains": [
     {
       "domain": "data1.no",
-      "score": 95,
-      "grade": "A+",
-      "dmarc": "v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s; pct=100; rua=mailto:dmarc@data1.no",
+      "score": 80,
+      "grade": "A",
+      "dmarc": "v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s; pct=100; rua=mailto:org_6911b81c738c3638795d360a@rua.easydmarc.com; ruf=mailto:org_6911b81c738c3638795d360a@ruf.easydmarc.com; fo=1",
       "spf": "v=spf1 -all",
-      "dkim": null,
-      "mtaSts": true,
-      "tlsRpt": true,
-      "bimi": true,
-      "lastChecked": "2026-05-18T03:00:00Z"
+      "dkim": "selector1, selector2, google, k1, k2, mandrill, mxvault, default, dkim, s1, s2, mail, protonmail, mailo",
+      "mtaSts": false,
+      "tlsRpt": false,
+      "bimi": false,
+      "lastChecked": "2026-05-18T21:08:49Z"
     },
     {
       "domain": "micronet.no",
-      "score": 88,
-      "grade": "A",
-      "dmarc": "v=DMARC1; p=reject; sp=reject; pct=100; rua=mailto:dmarc@micronet.no",
-      "spf": "v=spf1 include:spf.protection.outlook.com -all",
-      "dkim": "selector1, selector2",
+      "score": 95,
+      "grade": "A+",
+      "dmarc": "v=DMARC1;p=reject;pct=100;rua=mailto:4548c9fd27@rua.easydmarc.eu;ruf=mailto:4548c9fd27@ruf.easydmarc.eu;ri=86400;fo=1;",
+      "spf": "v=spf1 include:_spf.micronet_no._d.easydmarc.pro include:spf.protection.outlook.com include:spf.eu.exclaimer.net ~all",
+      "dkim": "selector1, selector2, k2",
       "mtaSts": true,
-      "tlsRpt": false,
+      "tlsRpt": true,
       "bimi": true,
-      "lastChecked": "2026-05-18T03:00:00Z"
+      "lastChecked": "2026-05-18T21:08:50Z"
     }
   ],
   "trackedDomains": {
     "total": 158,
-    "withReject": 42,
-    "withQuarantine": 28,
-    "withNone": 64,
-    "missing": 24,
-    "rejectPercent": 26.6
+    "withReject": 86,
+    "withQuarantine": 26,
+    "withNone": 34,
+    "missing": 12,
+    "rejectPercent": 54.4
   },
   "weeklyChanges": {
     "improved": [
-      {"domain": "altinn.no", "from": "p=none", "to": "p=quarantine", "scoreDelta": 14},
-      {"domain": "uio.no", "from": "p=none", "to": "p=reject", "scoreDelta": 27},
-      {"domain": "sparebank1.no", "from": "p=quarantine", "to": "p=reject", "scoreDelta": 13},
-      {"domain": "schibsted.com", "from": "p=none", "to": "p=quarantine", "scoreDelta": 14},
-      {"domain": "regjeringen.no", "from": "p=quarantine", "to": "p=reject", "scoreDelta": 13}
+      {
+        "domain": "bi.no",
+        "from": "p=none",
+        "to": "p=quarantine",
+        "scoreDelta": 12
+      }
     ],
-    "regressed": [
-      {"domain": "elkjop.no", "from": "p=reject", "to": "p=none", "scoreDelta": -27},
-      {"domain": "boots.no", "from": "p=quarantine", "to": "p=none", "scoreDelta": -14}
-    ]
+    "regressed": []
   },
   "timeline": [
-    {"week": "2026-W09", "rejectPercent": 21.5},
-    {"week": "2026-W10", "rejectPercent": 22.1},
-    {"week": "2026-W11", "rejectPercent": 22.8},
-    {"week": "2026-W12", "rejectPercent": 23.4},
-    {"week": "2026-W13", "rejectPercent": 23.4},
-    {"week": "2026-W14", "rejectPercent": 23.9},
-    {"week": "2026-W15", "rejectPercent": 24.1},
-    {"week": "2026-W16", "rejectPercent": 24.7},
-    {"week": "2026-W17", "rejectPercent": 24.7},
-    {"week": "2026-W18", "rejectPercent": 25.3},
-    {"week": "2026-W19", "rejectPercent": 25.9},
-    {"week": "2026-W20", "rejectPercent": 26.6}
+    {
+      "week": "2026-W20",
+      "rejectPercent": 54.4
+    },
+    {
+      "week": "2026-W21",
+      "rejectPercent": 54.4
+    }
   ]
 }

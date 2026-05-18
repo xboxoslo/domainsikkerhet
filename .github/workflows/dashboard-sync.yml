@@ -1,0 +1,108 @@
+name: Dashboard data sync
+
+on:
+  schedule:
+    # Daglig kl 06:30 UTC — etter daily-content.yml (kjorer 06:00) er ferdig
+    - cron: '30 6 * * *'
+    # Ukentlig mandag kl 07:00 UTC — for AI-sync
+    - cron: '0 7 * * 1'
+  workflow_dispatch:
+    inputs:
+      jobs:
+        description: 'Hvilke sync-jobs (daily,ai,all)'
+        required: false
+        default: 'all'
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  daily-sync:
+    # Kjorer pa daglig cron + manual + ukentlig (kun en gang per dag i praksis pga commit-skip nedenfor)
+    if: github.event_name != 'workflow_dispatch' || inputs.jobs != 'ai'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.BOT_PAT }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Sync email security (real-time scan av egne + aggregat av tracked)
+        run: python scripts/dashboard_email_sync.py
+
+      - name: Sync competitors (sitemap-skraping)
+        run: python scripts/dashboard_competitors_sync.py
+
+      - name: Sync SEO (Google Search Console)
+        env:
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+        run: python scripts/dashboard_seo_sync.py
+
+      - name: Oppdater meta-tidsstempel
+        run: |
+          python -c "
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          p = Path('dashboard-data/meta.json')
+          d = json.loads(p.read_text(encoding='utf-8'))
+          d['lastUpdated'] = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+          p.write_text(json.dumps(d, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          "
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "data1.no bot"
+          git config user.email "bot@data1.no"
+          if [[ -z $(git status --porcelain dashboard-data/) ]]; then
+            echo "Ingen endringer i dashboard-data/."
+            exit 0
+          fi
+          git add dashboard-data/
+          git commit -m "data: dashboard daglig sync ($(date -u +%Y-%m-%d))" -m "Generert av dashboard-sync.yml [skip ci]"
+          git push
+
+  ai-sync:
+    # Kjorer kun pa ukentlig cron (mandag) + manual med jobs=ai|all
+    if: |
+      (github.event_name == 'schedule' && github.event.schedule == '0 7 * * 1') ||
+      (github.event_name == 'workflow_dispatch' && (inputs.jobs == 'ai' || inputs.jobs == 'all'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.BOT_PAT }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Sync AI-synlighet (20 prompts × 4 modeller)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/dashboard_ai_sync.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "data1.no bot"
+          git config user.email "bot@data1.no"
+          if [[ -z $(git status --porcelain dashboard-data/) ]]; then
+            echo "Ingen endringer."
+            exit 0
+          fi
+          git add dashboard-data/
+          git commit -m "data: dashboard AI-sync uke $(date -u +%V) ($(date -u +%Y-%m-%d))" -m "[skip ci]"
+          git push

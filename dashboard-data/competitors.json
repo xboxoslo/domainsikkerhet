@@ -1,13 +1,13 @@
 {
-  "lastUpdated": "2026-05-18T06:00:00Z",
+  "lastUpdated": "2026-05-18T21:11:02Z",
   "competitors": [
     {
       "name": "data1.no",
       "isOwn": true,
-      "indexedPages": 12,
+      "indexedPages": 196,
       "domainRating": 0,
       "backlinks": 1,
-      "lastArticle": "18. mai 2026",
+      "lastArticle": "18. may 2026",
       "clicksPerMonth": 47
     },
     {
@@ -31,16 +31,16 @@
     {
       "name": "mxtoolbox.com",
       "isOwn": false,
-      "indexedPages": 4200,
+      "indexedPages": 40,
       "domainRating": 84,
       "backlinks": 28400,
-      "lastArticle": "I dag",
+      "lastArticle": "01. may 2026",
       "clicksPerMonth": null
     },
     {
       "name": "easydmarc.com",
       "isOwn": false,
-      "indexedPages": 240,
+      "indexedPages": 3,
       "domainRating": 78,
       "backlinks": 12400,
       "lastArticle": "I dag",
@@ -49,25 +49,25 @@
     {
       "name": "powerdmarc.com",
       "isOwn": false,
-      "indexedPages": 380,
+      "indexedPages": 4,
       "domainRating": 71,
       "backlinks": 8900,
-      "lastArticle": "3 dager",
+      "lastArticle": "18. may 2026",
       "clicksPerMonth": null
     },
     {
       "name": "dmarcian.com",
       "isOwn": false,
-      "indexedPages": 410,
+      "indexedPages": 7,
       "domainRating": 82,
       "backlinks": 18700,
-      "lastArticle": "1 uke",
+      "lastArticle": "16. may 2026",
       "clicksPerMonth": null
     },
     {
       "name": "valimail.com",
       "isOwn": false,
-      "indexedPages": 320,
+      "indexedPages": 0,
       "domainRating": 76,
       "backlinks": 9400,
       "lastArticle": "2 dager",

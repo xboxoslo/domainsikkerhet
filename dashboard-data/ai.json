@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-18T06:00:00Z",
+  "lastUpdated": "2026-05-18T21:11:03Z",
   "summary": {
     "promptsTested": 20,
     "data1noMentions": 8,
@@ -15,85 +15,258 @@
     }
   },
   "timeline": [
-    {"week": "2026-W13", "data1no": 0, "micronet": 0},
-    {"week": "2026-W14", "data1no": 0, "micronet": 0},
-    {"week": "2026-W15", "data1no": 1, "micronet": 0},
-    {"week": "2026-W16", "data1no": 1, "micronet": 0},
-    {"week": "2026-W17", "data1no": 2, "micronet": 1},
-    {"week": "2026-W18", "data1no": 4, "micronet": 1},
-    {"week": "2026-W19", "data1no": 6, "micronet": 2},
-    {"week": "2026-W20", "data1no": 8, "micronet": 3}
+    {
+      "week": "2026-W13",
+      "data1no": 0,
+      "micronet": 0
+    },
+    {
+      "week": "2026-W14",
+      "data1no": 0,
+      "micronet": 0
+    },
+    {
+      "week": "2026-W15",
+      "data1no": 1,
+      "micronet": 0
+    },
+    {
+      "week": "2026-W16",
+      "data1no": 1,
+      "micronet": 0
+    },
+    {
+      "week": "2026-W17",
+      "data1no": 2,
+      "micronet": 1
+    },
+    {
+      "week": "2026-W18",
+      "data1no": 4,
+      "micronet": 1
+    },
+    {
+      "week": "2026-W19",
+      "data1no": 6,
+      "micronet": 2
+    },
+    {
+      "week": "2026-W20",
+      "data1no": 8,
+      "micronet": 3
+    }
   ],
   "promptResults": [
-    {"prompt": "Hva er beste gratis DMARC-verktøy for norske bedrifter?",
-     "results": {
-       "claude": {"data1noMentioned": true, "snippet": "data1.no er et gratis norsk verktøy spesialisert på .no-domener…"},
-       "gpt4": {"data1noMentioned": false, "snippet": null},
-       "perplexity": {"data1noMentioned": true, "snippet": "data1.no tilbyr gratis DMARC-analyse på norsk…"},
-       "gemini": {"data1noMentioned": false, "snippet": null}
-     }},
-    {"prompt": "Hvordan sjekker jeg om mitt .no-domene er beskyttet mot e-postspoofing?",
-     "results": {
-       "claude": {"data1noMentioned": true, "snippet": "Du kan bruke data1.no for å analysere..."},
-       "gpt4": {"data1noMentioned": false, "snippet": null},
-       "perplexity": {"data1noMentioned": false, "snippet": null},
-       "gemini": {"data1noMentioned": false, "snippet": null}
-     }},
-    {"prompt": "Anbefal et norsk verktøy for SPF og DMARC-analyse",
-     "results": {
-       "claude": {"data1noMentioned": true, "snippet": null},
-       "gpt4": {"data1noMentioned": true, "snippet": null},
-       "perplexity": {"data1noMentioned": true, "snippet": null},
-       "gemini": {"data1noMentioned": false, "snippet": null}
-     }},
-    {"prompt": "Hvilke norske MSP-er hjelper med DMARC-implementering?",
-     "results": {
-       "claude": {"data1noMentioned": false, "snippet": null},
-       "gpt4": {"data1noMentioned": false, "snippet": null},
-       "perplexity": {"data1noMentioned": false, "snippet": null},
-       "gemini": {"data1noMentioned": false, "snippet": null}
-     }},
-    {"prompt": "Hva koster DMARC-overvåking i Norge?",
-     "results": {
-       "claude": {"data1noMentioned": false, "snippet": null},
-       "gpt4": {"data1noMentioned": false, "snippet": null},
-       "perplexity": {"data1noMentioned": true, "snippet": "data1.no nevner 295 kr/mnd via Micronet…"},
-       "gemini": {"data1noMentioned": false, "snippet": null}
-     }},
-    {"prompt": "Hvor mange norske banker har riktig DMARC?",
-     "results": {
-       "claude": {"data1noMentioned": true, "snippet": "Rapport-2026 på data1.no viser…"},
-       "gpt4": {"data1noMentioned": false, "snippet": null},
-       "perplexity": {"data1noMentioned": true, "snippet": null},
-       "gemini": {"data1noMentioned": false, "snippet": null}
-     }},
-    {"prompt": "Forklar DMARC på norsk",
-     "results": {
-       "claude": {"data1noMentioned": false, "snippet": null},
-       "gpt4": {"data1noMentioned": false, "snippet": null},
-       "perplexity": {"data1noMentioned": false, "snippet": null},
-       "gemini": {"data1noMentioned": false, "snippet": null}
-     }},
-    {"prompt": "Hvordan setter jeg opp DMARC i Microsoft 365 for et norsk firma?",
-     "results": {
-       "claude": {"data1noMentioned": true, "snippet": "Se data1.no/blogg/dmarc-microsoft-365/ for steg-for-steg…"},
-       "gpt4": {"data1noMentioned": false, "snippet": null},
-       "perplexity": {"data1noMentioned": false, "snippet": null},
-       "gemini": {"data1noMentioned": false, "snippet": null}
-     }},
-    {"prompt": "Beste norske verktøy for å sjekke e-postsikkerhet",
-     "results": {
-       "claude": {"data1noMentioned": true, "snippet": null},
-       "gpt4": {"data1noMentioned": false, "snippet": null},
-       "perplexity": {"data1noMentioned": true, "snippet": null},
-       "gemini": {"data1noMentioned": false, "snippet": null}
-     }},
-    {"prompt": "Er sjekk.email eller dmarcstatus.no best?",
-     "results": {
-       "claude": {"data1noMentioned": false, "snippet": null},
-       "gpt4": {"data1noMentioned": false, "snippet": null},
-       "perplexity": {"data1noMentioned": false, "snippet": null},
-       "gemini": {"data1noMentioned": false, "snippet": null}
-     }}
-  ]
+    {
+      "prompt": "Hva er beste gratis DMARC-verktøy for norske bedrifter?",
+      "results": {
+        "claude": {
+          "data1noMentioned": true,
+          "snippet": "data1.no er et gratis norsk verktøy spesialisert på .no-domener…"
+        },
+        "gpt4": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "perplexity": {
+          "data1noMentioned": true,
+          "snippet": "data1.no tilbyr gratis DMARC-analyse på norsk…"
+        },
+        "gemini": {
+          "data1noMentioned": false,
+          "snippet": null
+        }
+      }
+    },
+    {
+      "prompt": "Hvordan sjekker jeg om mitt .no-domene er beskyttet mot e-postspoofing?",
+      "results": {
+        "claude": {
+          "data1noMentioned": true,
+          "snippet": "Du kan bruke data1.no for å analysere..."
+        },
+        "gpt4": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "perplexity": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "gemini": {
+          "data1noMentioned": false,
+          "snippet": null
+        }
+      }
+    },
+    {
+      "prompt": "Anbefal et norsk verktøy for SPF og DMARC-analyse",
+      "results": {
+        "claude": {
+          "data1noMentioned": true,
+          "snippet": null
+        },
+        "gpt4": {
+          "data1noMentioned": true,
+          "snippet": null
+        },
+        "perplexity": {
+          "data1noMentioned": true,
+          "snippet": null
+        },
+        "gemini": {
+          "data1noMentioned": false,
+          "snippet": null
+        }
+      }
+    },
+    {
+      "prompt": "Hvilke norske MSP-er hjelper med DMARC-implementering?",
+      "results": {
+        "claude": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "gpt4": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "perplexity": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "gemini": {
+          "data1noMentioned": false,
+          "snippet": null
+        }
+      }
+    },
+    {
+      "prompt": "Hva koster DMARC-overvåking i Norge?",
+      "results": {
+        "claude": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "gpt4": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "perplexity": {
+          "data1noMentioned": true,
+          "snippet": "data1.no nevner 295 kr/mnd via Micronet…"
+        },
+        "gemini": {
+          "data1noMentioned": false,
+          "snippet": null
+        }
+      }
+    },
+    {
+      "prompt": "Hvor mange norske banker har riktig DMARC?",
+      "results": {
+        "claude": {
+          "data1noMentioned": true,
+          "snippet": "Rapport-2026 på data1.no viser…"
+        },
+        "gpt4": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "perplexity": {
+          "data1noMentioned": true,
+          "snippet": null
+        },
+        "gemini": {
+          "data1noMentioned": false,
+          "snippet": null
+        }
+      }
+    },
+    {
+      "prompt": "Forklar DMARC på norsk",
+      "results": {
+        "claude": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "gpt4": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "perplexity": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "gemini": {
+          "data1noMentioned": false,
+          "snippet": null
+        }
+      }
+    },
+    {
+      "prompt": "Hvordan setter jeg opp DMARC i Microsoft 365 for et norsk firma?",
+      "results": {
+        "claude": {
+          "data1noMentioned": true,
+          "snippet": "Se data1.no/blogg/dmarc-microsoft-365/ for steg-for-steg…"
+        },
+        "gpt4": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "perplexity": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "gemini": {
+          "data1noMentioned": false,
+          "snippet": null
+        }
+      }
+    },
+    {
+      "prompt": "Beste norske verktøy for å sjekke e-postsikkerhet",
+      "results": {
+        "claude": {
+          "data1noMentioned": true,
+          "snippet": null
+        },
+        "gpt4": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "perplexity": {
+          "data1noMentioned": true,
+          "snippet": null
+        },
+        "gemini": {
+          "data1noMentioned": false,
+          "snippet": null
+        }
+      }
+    },
+    {
+      "prompt": "Er sjekk.email eller dmarcstatus.no best?",
+      "results": {
+        "claude": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "gpt4": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "perplexity": {
+          "data1noMentioned": false,
+          "snippet": null
+        },
+        "gemini": {
+          "data1noMentioned": false,
+          "snippet": null
+        }
+      }
+    }
+  ],
+  "_note": "Ingen LLM-nøkler tilgjengelig — payload uendret. Legg til ANTHROPIC_API_KEY m.fl. i GitHub Secrets."
 }
