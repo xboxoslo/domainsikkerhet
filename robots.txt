@@ -8,8 +8,11 @@
 # Perplexity, Gemini, Google AI Overviews og lignende tjenester.
 
 # === Standard for alle ===
+# Note: Cloudflares Content-Signal-direktiv (search/ai-input/ai-train) er
+# foreslått men ikke i Googles robots.txt-spec ennå — GSC flagger det som
+# "Unknown directive". Vi signaliserer i stedet eksplisitt allow til hver
+# AI-crawler under, som er den kanoniske måten.
 User-agent: *
-Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 Disallow: /cdn-cgi/
 Disallow: /dashboard/
