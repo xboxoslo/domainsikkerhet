@@ -1,0 +1,90 @@
+name: Cloudflare cache settings (respect _headers)
+
+# Setter Browser Cache TTL = 0 ("Respect Existing Headers") på data1.no-sonen,
+# slik at /fonts/* og /_assets/* faktisk får 1-års cache som _headers spesifiserer.
+# Uten denne overstyrer Cloudflares zone-default (4t) det _headers sier.
+#
+# Krever to repository secrets:
+#   - CLOUDFLARE_API_TOKEN  (Zone:Edit på data1.no)
+#   - CLOUDFLARE_ZONE_ID    (data1.no zone-id: 22ea1f388c77f043bb4fe6cc7df5b600)
+#
+# Kjøres manuelt fra Actions-fanen ved behov.
+
+on:
+  workflow_dispatch:
+    inputs:
+      purge_after:
+        description: 'Purge hele Cloudflare-cachen etter at innstillingene er oppdatert'
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+permissions:
+  contents: read
+
+jobs:
+  cache-settings:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    env:
+      CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CF_ZONE: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+
+    steps:
+      - name: Validate secrets present
+        run: |
+          if [ -z "$CF_TOKEN" ] || [ -z "$CF_ZONE" ]; then
+            echo "::error::CLOUDFLARE_API_TOKEN eller CLOUDFLARE_ZONE_ID mangler"
+            exit 1
+          fi
+          echo "Secrets OK, zone $CF_ZONE"
+
+      - name: Show current Browser Cache TTL (before)
+        run: |
+          curl -sS -X GET "https://api.cloudflare.com/client/v4/zones/$CF_ZONE/settings/browser_cache_ttl" \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            -H "Content-Type: application/json" | \
+            python3 -c "import json,sys; d=json.load(sys.stdin); r=d.get('result',{}); print(f\"Before: browser_cache_ttl = {r.get('value')} (editable={r.get('editable')})\")"
+
+      - name: Set Browser Cache TTL to "Respect Existing Headers" (value=0)
+        run: |
+          curl -sS -X PATCH "https://api.cloudflare.com/client/v4/zones/$CF_ZONE/settings/browser_cache_ttl" \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data '{"value":0}' > /tmp/patch.json
+          python3 -c "import json; d=json.load(open('/tmp/patch.json')); print(json.dumps({'success':d.get('success'),'errors':d.get('errors'),'value':d.get('result',{}).get('value')}, indent=2))"
+          grep -q '"success":true' /tmp/patch.json || { echo "::error::Patch failed"; cat /tmp/patch.json; exit 1; }
+
+      - name: Verify Browser Cache TTL (after)
+        run: |
+          curl -sS -X GET "https://api.cloudflare.com/client/v4/zones/$CF_ZONE/settings/browser_cache_ttl" \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            -H "Content-Type: application/json" | \
+            python3 -c "import json,sys; d=json.load(sys.stdin); r=d.get('result',{}); v=r.get('value'); print(f\"After: browser_cache_ttl = {v}\"); exit(0 if v==0 else 1)"
+
+      - name: Purge cache (optional)
+        if: ${{ inputs.purge_after == 'true' }}
+        run: |
+          curl -sS -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE/purge_cache" \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}' > /tmp/purge.json
+          python3 -c "import json; d=json.load(open('/tmp/purge.json')); print(json.dumps({'success':d.get('success'),'errors':d.get('errors')}, indent=2))"
+          grep -q '"success":true' /tmp/purge.json || { echo "::error::Purge failed"; cat /tmp/purge.json; exit 1; }
+
+      - name: Done
+        run: |
+          echo ""
+          echo "✅ Browser Cache TTL satt til 'Respect Existing Headers'"
+          echo ""
+          echo "Verifiser at /fonts/ og /_assets/ nå får riktig cache-header:"
+          echo "  curl -sI https://data1.no/fonts/inter-latin.woff2 | grep -i cache"
+          echo "  curl -sI https://data1.no/_assets/tracker.js | grep -i cache"
+          echo ""
+          echo "Begge skal returnere: cache-control: public, max-age=31536000, immutable"
+          echo ""
+          echo "Re-kjør Google PageSpeed Insights om 1-2 minutter for å bekrefte fiksen."
