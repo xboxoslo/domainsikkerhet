@@ -4,6 +4,10 @@
 /*.woff2
   Cache-Control: public, max-age=31536000, immutable
 
+# Statiske assets med versjon-query (?v=...) er immutable
+/_assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
 # Sider som oppdateres automatisk hver dag/uke — kortere cache så nye AI-poster
 # og trender vises raskt for besøkende.
 /blogg/

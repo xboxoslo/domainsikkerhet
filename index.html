@@ -49,6 +49,8 @@
 <style>
 /* ── DRAMATIC AI HERO — dark navy with glowing AI cube ── */
 body:not(.has-results){background:#020617 !important}
+/* Skjul header-søk på forsiden — hero-feltet erstatter det. Vis igjen etter søk. */
+body:not(.has-results) .header .search-form{display:none !important}
 body:not(.has-results) main.container{background:radial-gradient(ellipse 80% 60% at 50% 20%,rgba(168,85,247,.25) 0%,rgba(15,23,42,0) 50%),radial-gradient(ellipse 60% 50% at 80% 70%,rgba(56,189,248,.2) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 15% 60%,rgba(168,85,247,.18) 0%,transparent 60%),linear-gradient(180deg,#020617 0%,#0c1428 100%);min-height:100vh;position:relative;overflow:hidden;max-width:none;padding:0}
 body:not(.has-results) main.container::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(168,85,247,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.08) 1px,transparent 1px);background-size:48px 48px;mask:radial-gradient(ellipse 100% 80% at 50% 0%,#000 20%,transparent 80%);-webkit-mask:radial-gradient(ellipse 100% 80% at 50% 0%,#000 20%,transparent 80%);pointer-events:none}
 body:not(.has-results) main.container::after{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:1200px;height:800px;background:radial-gradient(ellipse at center,rgba(168,85,247,.3) 0%,rgba(56,189,248,.15) 30%,transparent 70%);pointer-events:none;filter:blur(60px);animation:bg-glow-shift 8s ease-in-out infinite}
@@ -72,11 +74,11 @@ body:not(.has-results) .welcome{position:relative;z-index:2;padding:60px 24px 80
 @keyframes ai-title-glow{0%,100%{background-position:0% 50%;filter:drop-shadow(0 0 20px rgba(168,85,247,.6)) drop-shadow(0 0 40px rgba(56,189,248,.4))}50%{background-position:100% 50%;filter:drop-shadow(0 0 30px rgba(168,85,247,.8)) drop-shadow(0 0 60px rgba(56,189,248,.6))}}
 .welcome-sub{color:#94a3b8 !important;font-size:19px !important;max-width:620px !important;line-height:1.6 !important;margin-bottom:40px !important}
 
-/* SEARCH BOX — glowing dark glass */
-.hero-search-form{background:rgba(15,23,42,.7) !important;backdrop-filter:blur(20px) !important;-webkit-backdrop-filter:blur(20px) !important;border:1px solid rgba(56,189,248,.3) !important;box-shadow:0 0 80px rgba(56,189,248,.15),0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.05) !important}
-.hero-search-form:focus-within{border-color:#38bdf8 !important;box-shadow:0 0 100px rgba(56,189,248,.3),0 0 0 4px rgba(56,189,248,.15) !important}
-.hero-search-input{color:#fff !important;font-weight:500}
-.hero-search-input::placeholder{color:#64748b !important}
+/* SEARCH BOX — bright white card popping against dark hero */
+.hero-search-form{background:#fff !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;border:1px solid rgba(255,255,255,.4) !important;box-shadow:0 0 80px rgba(56,189,248,.25),0 12px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.6) !important}
+.hero-search-form:focus-within{border-color:#38bdf8 !important;box-shadow:0 0 100px rgba(56,189,248,.4),0 0 0 4px rgba(56,189,248,.2),0 12px 40px rgba(0,0,0,.35) !important}
+.hero-search-input{color:#111827 !important;font-weight:500;background:transparent !important}
+.hero-search-input::placeholder{color:#9ca3af !important}
 .hero-search-icon{color:#64748b !important}
 .hero-search-btn{background:linear-gradient(135deg,#06b6d4,#3b82f6) !important;box-shadow:0 4px 20px rgba(56,189,248,.4) !important;font-weight:700 !important}
 .hero-search-btn:hover{background:linear-gradient(135deg,#0891b2,#2563eb) !important;transform:translateY(-2px) !important}
